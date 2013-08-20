@@ -8,8 +8,8 @@ namespace GPPGeneric
 
 class GCCPluginAPI: public PluginAPI
 {
-	void warning(const tree& decl, const std::string& message);
-	void error(const tree& decl, const std::string& message);
+    void warning(const tree& decl, const std::string& message);
+    void error(const tree& decl, const std::string& message);
 };
 
 } // end GPPGeneric

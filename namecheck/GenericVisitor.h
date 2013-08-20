@@ -17,8 +17,6 @@ namespace GPPGeneric
 
 struct GenericVisitor
 {
-	virtual void initialize(PluginAPI* plugin) = 0;
-
     virtual void visitVariableDeclaration(const tree decl, const std::string& name) = 0;
     virtual void visitFunctionDeclaration(const tree decl, const std::string& name) = 0;
     virtual void visitParameterDeclaration(const tree decl, const std::string& name) = 0;

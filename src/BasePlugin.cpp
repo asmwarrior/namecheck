@@ -5,9 +5,14 @@
 namespace GPPGeneric
 {
 
+GenericVisitor* BasePlugin::getVisitor()
+{
+    return this;
+}
+
 void BasePlugin::initialize(PluginAPI* plugin)
 {
-	this->plugin = plugin;
+    this->plugin = plugin;
 }
 
 } // end GPPGeneric

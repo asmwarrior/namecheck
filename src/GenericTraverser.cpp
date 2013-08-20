@@ -41,7 +41,7 @@ void GenericTraverser::traverse(const tree ns) const
     }
 }
 
-void GenericTraverser::traverse(const tree ns, GenericVisitor* visitor) 
+void GenericTraverser::traverse(const tree ns, GenericVisitor* visitor)
 {
     this->visitor = visitor;
     traverse(ns);
@@ -54,7 +54,7 @@ void GenericTraverser::processDeclaration(const tree decl) const
     if (!DECL_IS_BUILTIN(decl))
     {
         int tree_code = TREE_CODE(decl);
-        
+
         if (tree_code == FUNCTION_DECL)
         {
             processFunction(decl);
@@ -62,10 +62,10 @@ void GenericTraverser::processDeclaration(const tree decl) const
         else if (tree_code == TYPE_DECL)
 
         {
-			if (DECL_ARTIFICIAL(decl))
-            	processClass(decl);
+            if (DECL_ARTIFICIAL(decl))
+                processClass(decl);
             else
-            	visitor->visitTypeDeclaration(decl, getName(decl));
+                visitor->visitTypeDeclaration(decl, GenericTraverser::getName(decl));
         }
         else
         {
@@ -79,16 +79,16 @@ void GenericTraverser::processDeclaration(const tree decl) const
     }
 }
 
-const std::string GenericTraverser::getName(const tree decl) const
+const std::string GenericTraverser::getName(const tree decl)
 {
-	const tree id(DECL_NAME(decl));
+    const tree id(DECL_NAME(decl));
     return std::string(id ? IDENTIFIER_POINTER(id) : "<unnamed>");
 }
 
 
 void GenericTraverser::processVariableDeclaration(const tree decl) const
 {
-	visitor->visitVariableDeclaration(decl, getName(decl));
+    visitor->visitVariableDeclaration(decl, GenericTraverser::getName(decl));
 }
 
 void GenericTraverser::processClass(const tree decl) const
@@ -102,37 +102,35 @@ void GenericTraverser::processClass(const tree decl) const
     tree id (DECL_NAME(decl));
     const char* name (IDENTIFIER_POINTER(id));
 
-	visitor->visitClassDeclaration(decl, std::string(name));
+    visitor->visitClassDeclaration(decl, std::string(name));
 
-    declSet set;
- 
     for (tree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
     {
         switch (TREE_CODE (d))
         {
         case TYPE_DECL:
             if(!DECL_SELF_REFERENCE_P(d))
-				if (DECL_ARTIFICIAL(d))
-	            	processClass(d);
-	            else
-	            	visitor->visitTypeDeclaration(d, getName(d));
+                if (DECL_ARTIFICIAL(d))
+                    processClass(d);
+                else
+                    visitor->visitTypeDeclaration(d, GenericTraverser::getName(d));
             break;
-        
+
         case FIELD_DECL:
             if(!DECL_ARTIFICIAL(d))
-                visitor->visitFieldDeclaration(d, getName(d));
+                visitor->visitFieldDeclaration(d, GenericTraverser::getName(d));
             break;
-        
+
         default:
             //set.insert(d);
-            break;  
+            break;
         }
     }
 
     for (tree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
     {
         if (!DECL_ARTIFICIAL(d))
-	        processFunction(d);
+            processFunction(d);
     }
 }
 
@@ -145,13 +143,13 @@ void GenericTraverser::processFunction(const tree decl) const
     const char* name (IDENTIFIER_POINTER(id));
 
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
-    	visitor->visitMethodDeclaration(decl, getName(decl));
+        visitor->visitMethodDeclaration(decl, GenericTraverser::getName(decl));
     else
-    	visitor->visitFunctionDeclaration(decl, getName(decl));
+        visitor->visitFunctionDeclaration(decl, GenericTraverser::getName(decl));
 
     for (tree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
-        visitor->visitParameterDeclaration(d, getName(d));
+        visitor->visitParameterDeclaration(d, GenericTraverser::getName(d));
     }
 
     processBlock(DECL_INITIAL(decl));
@@ -166,9 +164,9 @@ void GenericTraverser::processBlock(const tree decl) const
     {
         processDeclaration(d);
     }
-    
+
     tree subblocks(BLOCK_SUBBLOCKS(decl));
-    if (subblocks != NULL_TREE) 
+    if (subblocks != NULL_TREE)
     {
         processBlock(subblocks);
     }

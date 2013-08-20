@@ -6,7 +6,7 @@ PLUGIN_SOURCE_FILES= src/naming.cpp src/GenericTraverser.cpp src/NamingConventio
                      src/BasePlugin.cpp src/GCCPluginAPI.cpp
 
 PLUGIN_HEADERS= namecheck/*.h \
-				$(GXXPLUGINS_DIR)/include/*.h
+		$(GXXPLUGINS_DIR)/include/*.h
 
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 CXXFLAGS = -I$(GXXPLUGINS_DIR)/include -fPIC -O0 -ggdb3
@@ -16,8 +16,6 @@ CXXFLAGS = -I$(GXXPLUGINS_DIR)/include -fPIC -O0 -ggdb3
 
 naming.so: $(PLUGIN_OBJECT_FILES)
 	$(GXX) -shared $^ -o $@ $(CXXFLAGS)
-
-
 
 .PHONY: clean
 

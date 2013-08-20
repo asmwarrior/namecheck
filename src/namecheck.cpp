@@ -51,9 +51,9 @@ extern "C" void gate_callback(void*, void*)
     int r(0);
 
     GenericTraverser traverser;
-    GenericVisitor* visitor = new NamingConventionPlugin();
+    BasePlugin* plugin = new NamingConventionPlugin();
     PluginAPI* api = new GCCPluginAPI();
-    visitor->initialize(api);
+    plugin->initialize(api);
 
     //
     // Process AST. Issue diagnostics and set r
@@ -61,9 +61,9 @@ extern "C" void gate_callback(void*, void*)
     //
     std::clog << "processing " << main_input_filename << std::endl;
 
-    traverser.traverse(global_namespace, visitor);
+    traverser.traverse(global_namespace, plugin->getVisitor());
     delete api;
-    delete visitor;
+    delete plugin;
 
     exit(r);
 }

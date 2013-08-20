@@ -18,14 +18,14 @@ namespace GPPGeneric
 
 class NamingConventionPlugin : public BasePlugin
 {
-	void visitVariableDeclaration(const tree decl, const std::string& name);
-	void visitFunctionDeclaration(const tree decl, const std::string& name);
-	void visitParameterDeclaration(const tree decl, const std::string& name);
-	void visitTypeDeclaration(const tree decl, const std::string& name);
-	void visitClassDeclaration(const tree decl, const std::string& name);
-	void visitMethodDeclaration(const tree decl, const std::string& name);
-	void visitFieldDeclaration(const tree decl, const std::string& name);
-	void visitNamespaceDeclaration(const tree decl, const std::string& name);
+    void visitVariableDeclaration(const tree decl, const std::string& name);
+    void visitFunctionDeclaration(const tree decl, const std::string& name);
+    void visitParameterDeclaration(const tree decl, const std::string& name);
+    void visitTypeDeclaration(const tree decl, const std::string& name);
+    void visitClassDeclaration(const tree decl, const std::string& name);
+    void visitMethodDeclaration(const tree decl, const std::string& name);
+    void visitFieldDeclaration(const tree decl, const std::string& name);
+    void visitNamespaceDeclaration(const tree decl, const std::string& name);
 };
 
 } // end GPPGeneric
