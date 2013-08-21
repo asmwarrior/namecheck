@@ -1,35 +1,13 @@
-#include <stdlib.h>
-#include <gmp.h>
-
-#include <cstdlib> // Include before GCC poisons
-// some declarations.
-
-extern "C"
-{
-#include "config.h"
-#undef HAVE_DECL_GETOPT
-#define HAVE_DECL_GETOPT 1
-
-#include "gcc-plugin.h"
-#include "plugin-version.h"
-#include "coretypes.h"
-#include "tree.h"
-#include "intl.h"
-
-#include "tm.h"
-
-#include "cp/cp-tree.h"
-#include "c-family/c-common.h"
-#include "c-family/c-pragma.h"
-#include "diagnostic-core.h"
-}
-
-#include <iostream>
-#include <set>
-
 #include "GCCPluginAPI.h"
 #include "NamingConventionPlugin.h"
 #include "GenericTraverser.h"
+
+extern "C"
+{
+#include "cp/cp-tree.h"
+}
+
+#include <iostream>
 
 int plugin_is_GPL_compatible;
 

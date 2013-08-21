@@ -2,31 +2,21 @@
 
 extern "C"
 {
-#include "config.h"
-#undef HAVE_DECL_GETOPT
-#include "gcc-plugin.h"
-#include "plugin-version.h"
-#include "coretypes.h"
-#include "tree.h"
-#include "intl.h"
-
-
-#include "tm.h"
-
 #include "cp/cp-tree.h"
 #include "c-family/c-common.h"
 #include "c-family/c-pragma.h"
 #include "diagnostic-core.h"
 }
 
+#include "GenericTree.h"
 #include <cassert>
 
 namespace GPPGeneric
 {
 
-void GenericTraverser::traverse(const tree ns) const
+void GenericTraverser::traverse(const GenericTree ns) const
 {
-    tree decl;
+    GenericTree decl;
     const cp_binding_level* level(NAMESPACE_LEVEL(ns));
 
     // Traverse declarations.
@@ -42,14 +32,14 @@ void GenericTraverser::traverse(const tree ns) const
     }
 }
 
-void GenericTraverser::traverse(const tree ns, GenericVisitor* visitor)
+void GenericTraverser::traverse(const GenericTree ns, GenericVisitor* visitor)
 {
     this->visitor = visitor;
     traverse(ns);
 }
 
 
-void GenericTraverser::processDeclaration(const tree decl) const
+void GenericTraverser::processDeclaration(const GenericTree decl) const
 {
 
     if (!DECL_IS_BUILTIN(decl))
@@ -80,30 +70,30 @@ void GenericTraverser::processDeclaration(const tree decl) const
     }
 }
 
-const std::string GenericTraverser::getName(const tree decl)
+const std::string GenericTraverser::getName(const GenericTree decl)
 {
-    const tree id(DECL_NAME(decl));
+    const GenericTree id(DECL_NAME(decl));
     return std::string(id ? IDENTIFIER_POINTER(id) : "<unnamed>");
 }
 
 
-void GenericTraverser::processVariableDeclaration(const tree decl) const
+void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
 {
     visitor->visitVariableDeclaration(decl, getName(decl));
 }
 
-void GenericTraverser::processClass(const tree decl) const
+void GenericTraverser::processClass(const GenericTree decl) const
 {
     assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
-    tree type (TREE_TYPE (decl));
+    GenericTree type (TREE_TYPE (decl));
 
-    tree id (DECL_NAME(decl));
+    GenericTree id (DECL_NAME(decl));
     const char* name (IDENTIFIER_POINTER(id));
 
     visitor->visitClassDeclaration(decl, std::string(name));
 
-    for (tree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
+    for (GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
     {
         switch (TREE_CODE (d))
         {
@@ -132,7 +122,7 @@ void GenericTraverser::processClass(const tree decl) const
         }
     }
 
-    for (tree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
+    for (GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
     {
         if (!DECL_ARTIFICIAL(d))
             processFunction(d);
@@ -140,7 +130,7 @@ void GenericTraverser::processClass(const tree decl) const
 }
 
 
-void GenericTraverser::processFunction(const tree decl) const
+void GenericTraverser::processFunction(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == FUNCTION_DECL);
 
@@ -149,7 +139,7 @@ void GenericTraverser::processFunction(const tree decl) const
     else
         visitor->visitFunctionDeclaration(decl, getName(decl));
 
-    for (tree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
+    for (GenericTree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
         visitor->visitParameterDeclaration(d, getName(d));
     }
@@ -158,16 +148,16 @@ void GenericTraverser::processFunction(const tree decl) const
 
 }
 
-void GenericTraverser::processBlock(const tree decl) const
+void GenericTraverser::processBlock(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == BLOCK);
 
-    for (tree d(BLOCK_VARS(decl)); d != 0; d = TREE_CHAIN(d))
+    for (GenericTree d(BLOCK_VARS(decl)); d != 0; d = TREE_CHAIN(d))
     {
         processDeclaration(d);
     }
 
-    tree subblocks(BLOCK_SUBBLOCKS(decl));
+    GenericTree subblocks(BLOCK_SUBBLOCKS(decl));
     if (subblocks != NULL_TREE)
     {
         processBlock(subblocks);
