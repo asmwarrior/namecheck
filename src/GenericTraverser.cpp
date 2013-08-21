@@ -65,7 +65,7 @@ void GenericTraverser::processDeclaration(const tree decl) const
             if (DECL_ARTIFICIAL(decl))
                 processClass(decl);
             else
-                visitor->visitTypeDeclaration(decl, GenericTraverser::getName(decl));
+                visitor->visitTypeDeclaration(decl, getName(decl));
         }
         else
         {
@@ -88,7 +88,7 @@ const std::string GenericTraverser::getName(const tree decl)
 
 void GenericTraverser::processVariableDeclaration(const tree decl) const
 {
-    visitor->visitVariableDeclaration(decl, GenericTraverser::getName(decl));
+    visitor->visitVariableDeclaration(decl, getName(decl));
 }
 
 void GenericTraverser::processClass(const tree decl) const
@@ -113,12 +113,12 @@ void GenericTraverser::processClass(const tree decl) const
                 if (DECL_ARTIFICIAL(d))
                     processClass(d);
                 else
-                    visitor->visitTypeDeclaration(d, GenericTraverser::getName(d));
+                    visitor->visitTypeDeclaration(d, getName(d));
             break;
 
         case FIELD_DECL:
             if(!DECL_ARTIFICIAL(d))
-                visitor->visitFieldDeclaration(d, GenericTraverser::getName(d));
+                visitor->visitFieldDeclaration(d, getName(d));
             break;
 
         default:
@@ -143,13 +143,13 @@ void GenericTraverser::processFunction(const tree decl) const
     const char* name (IDENTIFIER_POINTER(id));
 
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
-        visitor->visitMethodDeclaration(decl, GenericTraverser::getName(decl));
+        visitor->visitMethodDeclaration(decl, getName(decl));
     else
-        visitor->visitFunctionDeclaration(decl, GenericTraverser::getName(decl));
+        visitor->visitFunctionDeclaration(decl, getName(decl));
 
     for (tree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
-        visitor->visitParameterDeclaration(d, GenericTraverser::getName(d));
+        visitor->visitParameterDeclaration(d, getName(d));
     }
 
     processBlock(DECL_INITIAL(decl));

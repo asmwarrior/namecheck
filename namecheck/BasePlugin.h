@@ -6,8 +6,16 @@
 namespace GPPGeneric
 {
 
-class BasePlugin: GenericVisitor
+class BasePlugin: private GenericVisitor
 {
+public:
+    void initialize(PluginAPI* plugin);
+    GenericVisitor* getVisitor();
+
+protected:
+    PluginAPI* plugin;
+
+private:
     virtual void visitVariableDeclaration(const tree decl, const std::string& name) {}
     virtual void visitFunctionDeclaration(const tree decl, const std::string& name) {}
     virtual void visitParameterDeclaration(const tree decl, const std::string& name) {}
@@ -16,12 +24,6 @@ class BasePlugin: GenericVisitor
     virtual void visitMethodDeclaration(const tree decl, const std::string& name) {}
     virtual void visitFieldDeclaration(const tree decl, const std::string& name) {}
     virtual void visitNamespaceDeclaration(const tree decl, const std::string& name) {}
-
-protected:
-    PluginAPI* plugin;
-public:
-    void initialize(PluginAPI* plugin);
-    GenericVisitor* getVisitor();
 };
 
 }

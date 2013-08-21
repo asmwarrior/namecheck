@@ -18,19 +18,10 @@ namespace GPPGeneric
 
 class GenericTraverser
 {
+public:
+    void traverse(const tree ns, GenericVisitor* visitor);
 
 private:
-    struct declComparator
-    {
-        bool operator() (tree x, tree y) const
-        {
-            location_t xl (DECL_SOURCE_LOCATION (x));
-            location_t yl (DECL_SOURCE_LOCATION (y));
-
-            return xl < yl;
-        }
-    };
-
     GenericVisitor* visitor;
 
     static const std::string getName(const tree decl);
@@ -41,9 +32,6 @@ private:
     void processFunction(const tree decl) const;
     void processBlock(const tree decl) const;
     void traverse(const tree ns) const;
-
-public:
-    void traverse(const tree ns, GenericVisitor* visitor);
 };
 
 } // end GPPGeneric
