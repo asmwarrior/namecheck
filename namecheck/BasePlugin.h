@@ -17,6 +17,8 @@ protected:
     PluginAPI* plugin;
 
 private:
+    virtual void visitEnumTypeDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
+    virtual void visitEnumValueDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
     virtual void visitVariableDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
     virtual void visitFunctionDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
     virtual void visitParameterDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}

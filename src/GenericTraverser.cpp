@@ -51,10 +51,11 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
             processFunction(decl);
         }
         else if (tree_code == TYPE_DECL)
-
         {
             if (DECL_ARTIFICIAL(decl))
                 processClass(decl);
+            else if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+                visitor->visitEnumTypeDeclaration(decl, getName(decl));
             else
                 visitor->visitTypeDeclaration(decl, getName(decl));
         }
@@ -79,7 +80,14 @@ const std::string GenericTraverser::getName(const GenericTree decl)
 
 void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
 {
-    visitor->visitVariableDeclaration(decl, getName(decl));
+    if (TREE_CODE(decl) == CONST_DECL)
+    {
+        visitor->visitEnumValueDeclaration(decl, getName(decl));
+    }
+    else
+    {
+        visitor->visitVariableDeclaration(decl, getName(decl));
+    }
 }
 
 void GenericTraverser::processClass(const GenericTree decl) const
