@@ -6,10 +6,12 @@
 
 extern "C"
 {
+#include "config.h"
+#undef HAVE_DECL_GETOPT
+#define HAVE_DECL_GETOPT 1
+
 #include "gcc-plugin.h"
 #include "plugin-version.h"
-#include "config.h"
-#include "system.h"
 #include "coretypes.h"
 #include "tree.h"
 #include "intl.h"
@@ -68,7 +70,7 @@ extern "C" void gate_callback(void*, void*)
     exit(r);
 }
 
-extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
+extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* /* version */)
 {
     int r(0);
 

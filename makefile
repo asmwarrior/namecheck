@@ -9,7 +9,7 @@ PLUGIN_HEADERS= namecheck/*.h \
 		$(GXXPLUGINS_DIR)/include/*.h
 
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
-CXXFLAGS = -I$(GXXPLUGINS_DIR)/include -fPIC -O0 -ggdb3
+CXXFLAGS = -I$(GXXPLUGINS_DIR)/include -fPIC -O0 -ggdb3 -Wall -Wextra -pedantic -ansi
 
 %.o: %.cpp $(PLUGIN_HEADERS)
 	$(GXX) -c -o $@ $< $(CXXFLAGS) -I./namecheck

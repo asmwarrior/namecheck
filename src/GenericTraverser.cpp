@@ -2,13 +2,14 @@
 
 extern "C"
 {
+#include "config.h"
+#undef HAVE_DECL_GETOPT
 #include "gcc-plugin.h"
 #include "plugin-version.h"
-#include "config.h"
-#include "system.h"
 #include "coretypes.h"
 #include "tree.h"
 #include "intl.h"
+
 
 #include "tm.h"
 
@@ -96,8 +97,6 @@ void GenericTraverser::processClass(const tree decl) const
     assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
     tree type (TREE_TYPE (decl));
-    tree biv (TYPE_BINFO (type));
-    size_t biv_size (biv ? BINFO_N_BASE_BINFOS (biv) : 0);
 
     tree id (DECL_NAME(decl));
     const char* name (IDENTIFIER_POINTER(id));
@@ -110,10 +109,16 @@ void GenericTraverser::processClass(const tree decl) const
         {
         case TYPE_DECL:
             if(!DECL_SELF_REFERENCE_P(d))
+            {
                 if (DECL_ARTIFICIAL(d))
+                {
                     processClass(d);
+                }
                 else
+                {
                     visitor->visitTypeDeclaration(d, getName(d));
+                }
+            }
             break;
 
         case FIELD_DECL:
@@ -138,9 +143,6 @@ void GenericTraverser::processClass(const tree decl) const
 void GenericTraverser::processFunction(const tree decl) const
 {
     assert(TREE_CODE(decl) == FUNCTION_DECL);
-
-    const tree id(DECL_NAME(decl));
-    const char* name (IDENTIFIER_POINTER(id));
 
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
         visitor->visitMethodDeclaration(decl, getName(decl));

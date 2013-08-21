@@ -5,6 +5,8 @@
 
 extern "C"
 {
+#include "config.h"
+#undef HAVE_DECL_GETOPT
 #include "gcc-plugin.h"
 #include "tree.h"
 }
