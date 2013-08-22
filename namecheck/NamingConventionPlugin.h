@@ -10,6 +10,8 @@ namespace GPPGeneric
 
 class NamingConventionPlugin : public BasePlugin
 {
+private:
+    virtual void visitStringLiteral(const GenericTree decl, const std::string& name);
     virtual void visitEnumTypeDeclaration(const GenericTree decl, const std::string& name);
     virtual void visitEnumValueDeclaration(const GenericTree decl, const std::string& name);
     virtual void visitVariableDeclaration(const GenericTree decl, const std::string& name);

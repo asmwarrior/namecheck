@@ -11,6 +11,7 @@ namespace GPPGeneric
 
 struct GenericVisitor
 {
+    virtual void visitStringLiteral(const GenericTree decl, const std::string& name) = 0;
     virtual void visitVariableDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitEnumTypeDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitEnumValueDeclaration(const GenericTree decl, const std::string& name) = 0;

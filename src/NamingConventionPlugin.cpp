@@ -23,6 +23,12 @@ using namespace std;
 namespace GPPGeneric
 {
 
+void NamingConventionPlugin::visitStringLiteral(const GenericTree decl, const std::string& name)
+{
+    cerr << "STRING LITERAL: ";
+    plugin->warning(decl, name);
+}
+
 void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree decl, const std::string& name)
 {
     cerr << "ENUM VALUE DECL: ";

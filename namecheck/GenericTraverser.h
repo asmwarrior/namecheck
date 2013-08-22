@@ -18,8 +18,10 @@ private:
 
     static const std::string getName(const GenericTree decl);
 
-    void processDeclaration(const tree GenericTree) const;
+    void processDeclaration(const GenericTree decl) const;
+    void processStatement(const GenericTree decl) const;
     void processVariableDeclaration(const GenericTree decl) const;
+    void processType(const GenericTree decl) const;
     void processClass(const GenericTree decl) const;
     void processFunction(const GenericTree decl) const;
     void processBlock(const GenericTree decl) const;
