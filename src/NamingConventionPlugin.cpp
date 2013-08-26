@@ -71,10 +71,13 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const 
 
 void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const string& name)
 {
-    cerr << "CLASS DECL: ";
+    cerr << "CLASS DECL: "<< name <<"\n";
     if (!regex.correct_class_name(name, errmsg))
-        cerr << errmsg << " in ";
-    plugin->warning(decl, name);
+    {
+        errmsg = errmsg +" in "+ name;
+        plugin->warning(decl, errmsg);
+    }
+    
 }
 
 void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
