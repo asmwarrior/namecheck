@@ -152,7 +152,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
 
     for (GenericTree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
-        if(!DECL_SELF_REFERENCE_P(d))
+        if(!DECL_SELF_REFERENCE_P(d) && (getName(d) != "this"))
         {
             visitor->visitParameterDeclaration(d, getName(d));
         }
