@@ -125,7 +125,7 @@ void GenericTraverser::processClass(const GenericTree decl) const
 
         case FIELD_DECL:
             if(!DECL_ARTIFICIAL(d))
-                visitor->visitFieldDeclaration(d, getName(d));
+                visitor->visitAttributeDeclaration(d, ACCESS_PRIVATE, getName(d));
             break;
 
         default:
@@ -135,7 +135,7 @@ void GenericTraverser::processClass(const GenericTree decl) const
 
     for (GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
     {
-        if (!DECL_ARTIFICIAL(d))
+        if (!DECL_ARTIFICIAL(d) && TREE_CODE(d) == FUNCTION_DECL)
             processFunction(d);
     }
 }
@@ -146,7 +146,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     assert(TREE_CODE(decl) == FUNCTION_DECL);
 
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
-        visitor->visitMethodDeclaration(decl, getName(decl));
+        visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl));
     else
         visitor->visitFunctionDeclaration(decl, getName(decl));
 
@@ -164,15 +164,15 @@ void GenericTraverser::processFunction(const GenericTree decl) const
         // Body of function
         GenericTree stmt_list = TREE_OPERAND(function_decl, 1);
         if (STMT_IS_FULL_EXPR_P(function_decl) && (TREE_CODE(stmt_list) == STATEMENT_LIST))
-        {            
-            /* 
-            // Maybe this inline iterator could work with some workaround. 
+        {
+            /*
+            // Maybe this inline iterator could work with some workaround.
             // Based on tree-iterator.h
 
             for(tree_stmt_iterator it(tsi_start(stmt_list)); tsi_end_p(it); tsi_next(&it))
             {
                 std::cerr << getName(tsi_stmt(it));
-            }    
+            }
             */
 
             for(tree_statement_list_node* it(STATEMENT_LIST_HEAD(stmt_list)); it != NULL; it = it->next)
@@ -195,12 +195,12 @@ void GenericTraverser::processStatement(const GenericTree decl) const
     {
         visitor->visitStringLiteral(decl, std::string(TREE_STRING_POINTER(decl)));
     }
-    
+
     for(int i = 0; i < TREE_OPERAND_LENGTH(decl); ++i)
     {
         processStatement(TREE_OPERAND(decl, i));
     }
-    
+
 }
 
 

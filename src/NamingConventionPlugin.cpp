@@ -69,19 +69,21 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const 
 
 void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const string& name)
 {
-	    cerr << "CLASS DECL: ";
+    cerr << "CLASS DECL: ";
     plugin->warning(decl, name);
 }
 
-void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
 {
-    cerr << "METHOD DECL: ";
+    static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+    cerr << access_label[access] << " METHOD DECL: ";
     plugin->warning(decl, name);
 }
 
-void NamingConventionPlugin::visitFieldDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
 {
-    cerr << "FIELD DECL: ";
+    static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+    cerr << access_label[access] << " FIELD DECL: ";
     plugin->warning(decl, name);
 }
 

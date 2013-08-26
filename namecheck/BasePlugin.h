@@ -24,8 +24,8 @@ private:
     virtual void visitParameterDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
     virtual void visitTypeDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
     virtual void visitClassDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
-    virtual void visitMethodDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
-    virtual void visitFieldDeclaration(const GenericTree /* decl*/, const std::string& /* name */) {}
+    virtual void visitMethodDeclaration(const GenericTree /* decl */, const AccessModifier /*access */, const std::string& /* name */) {}
+    virtual void visitAttributeDeclaration(const GenericTree /* decl */, const AccessModifier /* access */, const std::string& /* name */) {}
     virtual void visitNamespaceDeclaration(const GenericTree /* decl */, const std::string& /* name */) {}
 };
 

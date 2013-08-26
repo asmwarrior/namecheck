@@ -8,6 +8,11 @@
 namespace GPPGeneric
 {
 
+typedef enum {
+    ACCESS_PUBLIC,
+    ACCESS_PROTECTED,
+    ACCESS_PRIVATE
+} AccessModifier;
 
 struct GenericVisitor
 {
@@ -19,8 +24,8 @@ struct GenericVisitor
     virtual void visitParameterDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitTypeDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitClassDeclaration(const GenericTree decl, const std::string& name) = 0;
-    virtual void visitMethodDeclaration(const GenericTree decl, const std::string& name) = 0;
-    virtual void visitFieldDeclaration(const GenericTree decl, const std::string& name) = 0;
+    virtual void visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name) = 0;
+    virtual void visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name) = 0;
     virtual void visitNamespaceDeclaration(const GenericTree decl, const std::string& name) = 0;
 };
 
