@@ -182,8 +182,9 @@ void GenericTraverser::processFunction(const GenericTree decl) const
 
         }
     }
-
-    processBlock(DECL_INITIAL(decl));
+    GenericTree decl_initial = DECL_INITIAL(decl);
+    if (decl_initial != NULL_TREE)
+        processBlock(decl_initial);
 
 }
 
