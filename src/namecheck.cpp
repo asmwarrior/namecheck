@@ -1,5 +1,5 @@
-#include "GCCPluginAPI.h"
 #include "NamingConventionPlugin.h"
+#include "GCCPluginAPI.h"
 #include "GenericTraverser.h"
 
 extern "C"

@@ -1,9 +1,10 @@
 #ifndef GPP_NAMING_CONVENTION_PLUGIN_H
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
+#include <string>
+#include "NamingConventionChecker.h"
 #include "BasePlugin.h"
 #include "GenericTree.h"
-#include <string>
 
 namespace GPPGeneric
 {
@@ -11,6 +12,8 @@ namespace GPPGeneric
 class NamingConventionPlugin : public BasePlugin
 {
 private:
+    std::string errmsg;
+    NamingConventionChecker regex;
     virtual void visitStringLiteral(const GenericTree decl, const std::string& name);
     virtual void visitEnumTypeDeclaration(const GenericTree decl, const std::string& name);
     virtual void visitEnumValueDeclaration(const GenericTree decl, const std::string& name);
