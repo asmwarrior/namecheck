@@ -31,7 +31,12 @@ void GenericTraverser::traverse(const GenericTree ns) const
     // Traverse namespaces.
     for (decl = level->namespaces; decl != 0; decl = TREE_CHAIN(decl))
     {
-        processDeclaration(decl);
+        std::string namespace_name = getName(decl);
+        if (namespace_name != "std" && namespace_name.substr(0,2) != "__")
+        {
+            visitor->visitNamespaceDeclaration(decl, namespace_name);
+            traverse(decl);
+        }
     }
 }
 
@@ -108,6 +113,11 @@ void GenericTraverser::processClass(const GenericTree decl) const
 {
     assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
+
+    // Ignore internal classes
+    if (getName(decl) == "._0" || getName(decl).substr(0,2) == "__")
+        return;
+
     GenericTree type (TREE_TYPE (decl));
 
     visitor->visitClassDeclaration(decl, getName(decl));
@@ -124,8 +134,10 @@ void GenericTraverser::processClass(const GenericTree decl) const
             break;
 
         case FIELD_DECL:
-            if(!DECL_ARTIFICIAL(d))
+            if(!DECL_ARTIFICIAL(d)) 
+            {
                 visitor->visitAttributeDeclaration(d, ACCESS_PRIVATE, getName(d));
+            }
             break;
 
         default:
@@ -136,7 +148,9 @@ void GenericTraverser::processClass(const GenericTree decl) const
     for (GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
     {
         if (!DECL_ARTIFICIAL(d) && TREE_CODE(d) == FUNCTION_DECL)
+        {
             processFunction(d);
+        }
     }
 }
 
@@ -199,7 +213,9 @@ void GenericTraverser::processStatement(const GenericTree decl) const
 
     for(int i = 0; i < TREE_OPERAND_LENGTH(decl); ++i)
     {
-        processStatement(TREE_OPERAND(decl, i));
+        GenericTree operand(TREE_OPERAND(decl, i));
+        if (operand != NULL_TREE)
+            processStatement(operand);
     }
 
 }
