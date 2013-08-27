@@ -136,7 +136,19 @@ void GenericTraverser::processClass(const GenericTree decl) const
         case FIELD_DECL:
             if(!DECL_ARTIFICIAL(d)) 
             {
-                visitor->visitAttributeDeclaration(d, ACCESS_PRIVATE, getName(d));
+                if (TREE_PRIVATE(d))
+                {
+                    visitor->visitAttributeDeclaration(d, ACCESS_PRIVATE, getName(d));
+                }
+                else if(TREE_PROTECTED(d))
+                {
+                    visitor->visitAttributeDeclaration(d, ACCESS_PROTECTED, getName(d));
+                }
+                else
+                {
+                    visitor->visitAttributeDeclaration(d, ACCESS_PUBLIC, getName(d));
+                }
+                
             }
             break;
 
@@ -160,7 +172,21 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     assert(TREE_CODE(decl) == FUNCTION_DECL);
 
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
-        visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl));
+    {
+        if (TREE_PRIVATE(decl))
+        {
+             visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl));
+        }
+        else if(TREE_PROTECTED(decl))
+        {
+            visitor->visitMethodDeclaration(decl, ACCESS_PROTECTED, getName(decl));
+        }
+        else
+        {
+            visitor->visitMethodDeclaration(decl, ACCESS_PUBLIC, getName(decl));
+        }
+    }
+        //visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl));
     else
         visitor->visitFunctionDeclaration(decl, getName(decl));
 

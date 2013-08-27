@@ -82,6 +82,8 @@ void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const
 
 void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
 {
+    static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+    cerr << "Method " << name <<" " << access_label[access]<< "\n";
     if (!regex.correct_method_name(name, errmsg))
     {
         static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
@@ -92,9 +94,12 @@ void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, cons
 
 void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
 {
+    static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+    cerr << "Atribute " << name <<" " << access_label[access]<< "\n";
     if (!regex.correct_variable_name(name, errmsg))
     {    
-        static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+        
+
         errmsg = errmsg + " in " + name + " (" +  access_label[access] + ")";
         plugin->warning(decl, errmsg);
     }
