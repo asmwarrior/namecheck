@@ -18,13 +18,12 @@ public:
 
 
 
-TEST(PluginAPITests, InterfacesTest2)
+TEST(PluginAPITests, ClassNameTest)
 {
     NamingConventionPlugin plugin;
     APIMock api;
-    PluginAPI* apip = &api;
-    GenericTree decl;
-    plugin.initialize(apip);
+    GenericTree decl = NULL;
+    plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))              
       .Times(1);
     plugin.visitClassDeclaration(decl, "marcos");

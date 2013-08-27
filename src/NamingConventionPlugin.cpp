@@ -43,18 +43,20 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, c
 
 void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, const string& name)
 {
-    cerr << "VAR DECL: ";
     if (!regex.correct_variable_name(name, errmsg))
-        cerr << errmsg << " in ";
-    plugin->warning(decl, name);
+    {
+        errmsg = errmsg + " in " + name;
+        plugin->warning(decl, name);
+    }
 }
 
 void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, const string& name)
 {
-    cerr << "FUNC DECL: ";
     if (!regex.correct_method_name(name, errmsg))
-        cerr << errmsg << " in ";
-    plugin->warning(decl, name);
+    {
+        errmsg = errmsg + " in " + name;
+        plugin->warning(decl, name);
+    }
 }
 
 void NamingConventionPlugin::visitParameterDeclaration(const GenericTree decl, const string& name)
@@ -71,41 +73,40 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const 
 
 void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const string& name)
 {
-    cerr << "CLASS DECL: "<< name <<"\n";
     if (!regex.correct_class_name(name, errmsg))
     {
         errmsg = errmsg +" in "+ name;
         plugin->warning(decl, errmsg);
     }
-    
 }
 
 void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
 {
-    cerr << "METHOD DECL: ";
     if (!regex.correct_method_name(name, errmsg))
-        cerr << errmsg << " in ";
-    static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
-    cerr << access_label[access] << " METHOD DECL: ";
-    plugin->warning(decl, name);
+    {
+        static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+        errmsg = errmsg + " in " + name + " (" +  access_label[access] + ")";
+        plugin->warning(decl, errmsg);
+    }
 }
 
 void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
 {
-    cerr << "FIELD DECL: ";
     if (!regex.correct_variable_name(name, errmsg))
-        cerr << errmsg << " in ";
-    static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
-    cerr << access_label[access] << " FIELD DECL: ";
-    plugin->warning(decl, name);
+    {    
+        static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+        errmsg = errmsg + " in " + name + " (" +  access_label[access] + ")";
+        plugin->warning(decl, errmsg);
+    }
 }
 
 void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree decl, const string& name)
 {
-    cerr << "NAMESPACE DECL: ";
     if (!regex.correct_class_name(name, errmsg))
-        cerr << errmsg << " in ";
-    plugin->warning(decl, name);
+    {
+        errmsg = errmsg + " in " + name;
+        plugin->warning(decl, name);
+    }
 }
 
 } // end GPPGeneric
