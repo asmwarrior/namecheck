@@ -74,6 +74,11 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
     }
 }
 
+bool GenericTraverser::isConstant(const GenericTree decl)
+{
+    return CP_TYPE_CONST_P(TREE_TYPE(decl));
+}
+
 const std::string GenericTraverser::getName(const GenericTree decl)
 {
     const GenericTree id(DECL_NAME(decl));
@@ -89,7 +94,7 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
     }
     else
     {
-        visitor->visitVariableDeclaration(decl, getName(decl));
+        visitor->visitVariableDeclaration(decl, getName(decl), isConstant(decl));
         GenericTree stmt = DECL_INITIAL(decl);
         if (stmt != NULL_TREE)
             processStatement(stmt);
@@ -138,17 +143,16 @@ void GenericTraverser::processClass(const GenericTree decl) const
             {
                 if (TREE_PRIVATE(d))
                 {
-                    visitor->visitAttributeDeclaration(d, ACCESS_PRIVATE, getName(d));
+                    visitor->visitAttributeDeclaration(d, ACCESS_PRIVATE, getName(d), isConstant(d));
                 }
                 else if(TREE_PROTECTED(d))
                 {
-                    visitor->visitAttributeDeclaration(d, ACCESS_PROTECTED, getName(d));
+                    visitor->visitAttributeDeclaration(d, ACCESS_PROTECTED, getName(d), isConstant(d));
                 }
                 else
                 {
-                    visitor->visitAttributeDeclaration(d, ACCESS_PUBLIC, getName(d));
+                    visitor->visitAttributeDeclaration(d, ACCESS_PUBLIC, getName(d), isConstant(d));
                 }
-                
             }
             break;
 
@@ -175,15 +179,15 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     {
         if (TREE_PRIVATE(decl))
         {
-             visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl));
+             visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl), isConstant(decl));
         }
         else if(TREE_PROTECTED(decl))
         {
-            visitor->visitMethodDeclaration(decl, ACCESS_PROTECTED, getName(decl));
+            visitor->visitMethodDeclaration(decl, ACCESS_PROTECTED, getName(decl), isConstant(decl));
         }
         else
         {
-            visitor->visitMethodDeclaration(decl, ACCESS_PUBLIC, getName(decl));
+            visitor->visitMethodDeclaration(decl, ACCESS_PUBLIC, getName(decl), isConstant(decl));
         }
     }
         //visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl));
@@ -194,7 +198,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     {
         if(!DECL_SELF_REFERENCE_P(d) && (getName(d) != "this"))
         {
-            visitor->visitParameterDeclaration(d, getName(d));
+            visitor->visitParameterDeclaration(d, getName(d), isConstant(d));
         }
     }
 

@@ -41,8 +41,10 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, c
     plugin->warning(decl, name);
 }
 
-void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, const string& name, bool is_const)
 {
+    if (is_const)
+        cerr << "CONST" << name << endl;
     if (!regex.correct_variable_name(name, errmsg))
     {
         errmsg = errmsg + " in " + name;
@@ -59,10 +61,17 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, co
     }
 }
 
-void NamingConventionPlugin::visitParameterDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitParameterDeclaration(const GenericTree /* decl */, const string& name, bool is_const)
 {
-    cerr << "PARM DECL: ";
-    plugin->warning(decl, name);
+    if (is_const)
+        cerr << "CONST" << name << endl;
+
+    if (!regex.correct_variable_name(name, errmsg))
+    {    
+        static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+        //errmsg = errmsg + " in " + name + " (" +  access_label[access] + ")";
+        //plugin->warning(decl, errmsg);
+    }
 }
 
 void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const string& name)
@@ -80,8 +89,11 @@ void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const
     }
 }
 
-void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
+void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name, bool is_const)
 {
+    if (is_const)
+        cerr << "CONST" << name << endl;
+
     static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
     cerr << "Method " << name <<" " << access_label[access]<< "\n";
     if (!regex.correct_method_name(name, errmsg))
@@ -92,8 +104,11 @@ void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, cons
     }
 }
 
-void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const string& name)
+void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const string& name, bool is_const)
 {
+    if (is_const)
+        cerr << "CONST" << name << endl;
+
     static const char* access_label[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
     cerr << "Atribute " << name <<" " << access_label[access]<< "\n";
     if (!regex.correct_variable_name(name, errmsg))

@@ -32,7 +32,7 @@ bool NamingConventionChecker::correct_class_name(const std::string &s, std::stri
         v.push_back(kMatch_Upper);
         result = generic_checker(s, errmsg, v);
     }
-    return result;    
+    return result;
 }
 
 bool NamingConventionChecker::correct_general_name(const std::string &s, std::string &errmsg)
@@ -72,7 +72,7 @@ bool NamingConventionChecker::correct_variable_name(const std::string &s, std::s
         v.push_back(kMatch_Lower);
         result = generic_checker(s, errmsg, v);
     }
-    return result;    
+    return result;
 }
 
 bool NamingConventionChecker::correct_method_name(const std::string &s, std::string &errmsg)
@@ -84,5 +84,5 @@ bool NamingConventionChecker::correct_method_name(const std::string &s, std::str
         v.push_back(kMatch_Lower);
         result = generic_checker(s, errmsg, v);
     }
-    return result;    
+    return result;
 }

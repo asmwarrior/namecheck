@@ -30,14 +30,7 @@ private:
     };
     bool generic_checker(const std::string &s, std::string &errmsg, std::vector<int> &v);
     std::vector<boost::regex> regexs;
-    std::vector<std::string> errmsgs;  
+    std::vector<std::string> errmsgs;
 };
-
-
-
-
-
-
-
 
 #endif

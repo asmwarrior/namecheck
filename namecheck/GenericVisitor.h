@@ -17,15 +17,15 @@ typedef enum {
 struct GenericVisitor
 {
     virtual void visitStringLiteral(const GenericTree decl, const std::string& name) = 0;
-    virtual void visitVariableDeclaration(const GenericTree decl, const std::string& name) = 0;
+    virtual void visitVariableDeclaration(const GenericTree decl, const std::string& name, bool is_const) = 0;
     virtual void visitEnumTypeDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitEnumValueDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitFunctionDeclaration(const GenericTree decl, const std::string& name) = 0;
-    virtual void visitParameterDeclaration(const GenericTree decl, const std::string& name) = 0;
+    virtual void visitParameterDeclaration(const GenericTree decl, const std::string& name, bool is_const) = 0;
     virtual void visitTypeDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitClassDeclaration(const GenericTree decl, const std::string& name) = 0;
-    virtual void visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name) = 0;
-    virtual void visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name) = 0;
+    virtual void visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name, bool is_const) = 0;
+    virtual void visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name, bool is_const) = 0;
     virtual void visitNamespaceDeclaration(const GenericTree decl, const std::string& name) = 0;
 };
 
