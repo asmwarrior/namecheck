@@ -18,6 +18,7 @@ private:
 
     static const std::string getName(const GenericTree decl);
     static bool isConstant(const GenericTree decl);
+    static const std::string getTypeName(const GenericTree decl);
 
     void processDeclaration(const GenericTree decl) const;
     void processStatement(const GenericTree decl) const;
