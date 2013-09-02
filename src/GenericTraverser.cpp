@@ -25,8 +25,7 @@ void GenericTraverser::traverse(const GenericTree ns) const
     // Traverse declarations.
     for (decl = level->names; decl != 0; decl = TREE_CHAIN(decl))
     {
-        std::string names_name = getName(decl);
-        if (names_name != "std" && names_name.substr(0,2) != "__")
+        
         {
             processDeclaration(decl);
         }
@@ -53,21 +52,23 @@ void GenericTraverser::traverse(const GenericTree ns, GenericVisitor* visitor)
 
 void GenericTraverser::processDeclaration(const GenericTree decl) const
 {
-
-    if (!DECL_IS_BUILTIN(decl))
+    std::string names_name = getName(decl);
+    if (!DECL_IS_BUILTIN(decl) && names_name != "std" && names_name.substr(0,2) != "__")
     {
         int tree_code = TREE_CODE(decl);
 
         if (tree_code == FUNCTION_DECL)
         {
+            //if(DECL_LOCAL_FUNCTION_P(decl))
             processFunction(decl);
         }
         else if (tree_code == TYPE_DECL)
         {
             processType(decl);
         }
-        else 
+        else if (tree_code != TREE_LIST)
         {
+            if (!DECL_ARTIFICIAL(decl))
             processVariableDeclaration(decl);
         }
         /*
@@ -123,20 +124,20 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
     else
     {
         /*si la variable pertenece a una clase , struct o union (es un atributo)*/
-        if (TREE_CODE(DECL_CONTEXT(decl)) == RECORD_TYPE || TREE_CODE(DECL_CONTEXT(decl)) == UNION_TYPE)
+        if (TREE_CODE(CP_DECL_CONTEXT(decl)) == RECORD_TYPE || TREE_CODE(CP_DECL_CONTEXT(decl)) == UNION_TYPE)
         {
             if (TREE_PRIVATE(decl))
-                {
-                    visitor->visitAttributeDeclaration(decl, ACCESS_PRIVATE, getName(decl), isConstant(decl), getTypeName(decl));
-                }
-                else if(TREE_PROTECTED(decl))
-                {
-                    visitor->visitAttributeDeclaration(decl, ACCESS_PROTECTED, getName(decl), isConstant(decl), getTypeName(decl));
-                }
-                else
-                {
-                    visitor->visitAttributeDeclaration(decl, ACCESS_PUBLIC, getName(decl), isConstant(decl), getTypeName(decl));
-                }
+            {
+                visitor->visitAttributeDeclaration(decl, ACCESS_PRIVATE, getName(decl), isConstant(decl), getTypeName(decl));
+            }
+            else if(TREE_PROTECTED(decl))
+            {
+                visitor->visitAttributeDeclaration(decl, ACCESS_PROTECTED, getName(decl), isConstant(decl), getTypeName(decl));
+            }
+            else
+            {
+                visitor->visitAttributeDeclaration(decl, ACCESS_PUBLIC, getName(decl), isConstant(decl), getTypeName(decl));
+            }
         }
         else
         {
@@ -229,29 +230,33 @@ void GenericTraverser::processFunction(const GenericTree decl) const
             visitor->visitParameterDeclaration(d, getName(d), isConstant(d));
         }
     }
-
+    
     GenericTree function_decl(DECL_SAVED_TREE(decl));
-    if ((function_decl != NULL_TREE))
+    
+    if (function_decl != NULL_TREE)
     {
         // Body of function
         GenericTree stmt_list = TREE_OPERAND(function_decl, 1);
-        if (STMT_IS_FULL_EXPR_P(function_decl) && (TREE_CODE(stmt_list) == STATEMENT_LIST))
+        if(stmt_list != NULL_TREE)
         {
-            /*
-            // Maybe this inline iterator could work with some workaround.
-            // Based on tree-iterator.h
-
-            for(tree_stmt_iterator it(tsi_start(stmt_list)); tsi_end_p(it); tsi_next(&it))
+            if (STMT_IS_FULL_EXPR_P(function_decl) && (TREE_CODE(stmt_list) == STATEMENT_LIST))
             {
-                std::cerr << getName(tsi_stmt(it));
-            }
-            */
+                /*
+                // Maybe this inline iterator could work with some workaround.
+                // Based on tree-iterator.h
 
-            for(tree_statement_list_node* it(STATEMENT_LIST_HEAD(stmt_list)); it != NULL; it = it->next)
-            {
+                for(tree_stmt_iterator it(tsi_start(stmt_list)); tsi_end_p(it); tsi_next(&it))
+                {
+                    std::cerr << getName(tsi_stmt(it));
+                }
+                */
+
+                for(tree_statement_list_node* it(STATEMENT_LIST_HEAD(stmt_list)); it != NULL; it = it->next)
+                {
                 processStatement(it->stmt);
-            }
+                }
 
+            }
         }
     }
     GenericTree decl_initial = DECL_INITIAL(decl);
