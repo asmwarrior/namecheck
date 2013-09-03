@@ -8,29 +8,46 @@
 class NamingConventionChecker
 {
 public:
+
     NamingConventionChecker();
-    bool correct_class_name(const std::string &s, std::string &errmsg);
-    bool correct_general_name(const std::string &s, std::string &errmsg);
-    bool correct_variable_name(const std::string &s, std::string &errmsg);
-    bool correct_method_name(const std::string &s, std::string &errmsg);
+    bool correct_typedef_name(const std::string &s, std::string &errmsg) const;
+    bool correct_class_name(const std::string &s, std::string &errmsg) const;
+    bool correct_global_const_name(const std::string &s, std::string &errmsg) const;
+    bool correct_enum_type_name(const std::string &s, std::string &errmsg) const;
+    bool correct_enum_value_name(const std::string &s, std::string &errmsg) const;
+    bool correct_method_name(const std::string &s, std::string &errmsg) const;
+    bool correct_variable_name(const std::string &s, std::string &errmsg) const;
+    bool correct_attribute_name(const std::string &s, std::string &errmsg) const;
+    bool correct_union_name(const std::string &s, std::string &errmsg) const;
+    bool correct_union_value_name(const std::string &s, std::string &errmsg) const;
+    bool correct_namespace_name(const std::string &s, std::string &errmsg) const;
 
 private:
-    enum namerules
+
+    typedef boost::regex Regex;
+    typedef std::vector<Regex> Regexs;
+    typedef std::vector<std::string> ErrorMsgs;
+
+    enum NameRules
     {
-        kMatch_not__Upper,
-        kMatch_not_ED_or_Upper,
-        kMatch_not_is_or_to_Lower,
-        kMatch_not_LC_,
-        kMatch_not_SIG_,
-        kMatch_not_strmemwcsLower,
-        kMatch_not__tEnding,
-        kMatch_Upper,
-        kMatch_Lower,
-        kNameRulesSize
+        MatchTypedefName,
+        MatchClassName,
+        MatchGlobalConstName,
+        MatchEnumTypeName,
+        MatchEnumValueName,
+        MatchMethodName,
+        MatchVariableName,
+        MatchAttributeName,
+        MatchUnionName,
+        MatchUnionValueName,
+        MatchNamespaceName,
+        NameRulesSize
     };
-    bool generic_checker(const std::string &s, std::string &errmsg, std::vector<int> &v);
-    std::vector<boost::regex> regexs;
-    std::vector<std::string> errmsgs;
+
+    bool generic_checker(const std::string &s, const int regex, std::string &errmsg) const;
+
+    Regexs regexs;
+    ErrorMsgs errmsgs;
 };
 
 #endif
