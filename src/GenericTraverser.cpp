@@ -65,7 +65,11 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
         {
             processType(decl);
         }
-        else if (tree_code != TREE_LIST)
+        else if (tree_code == TEMPLATE_DECL)
+        {
+            //TEMPLATES!
+        }
+        else //if (tree_code != TREE_LIST)
         {
             if (!DECL_ARTIFICIAL(decl))
             processVariableDeclaration(decl);
@@ -123,7 +127,7 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
     else
     {
         /*si la variable pertenece a una clase , struct o union (es un atributo)*/
-        if (TREE_CODE(CP_DECL_CONTEXT(decl)) == RECORD_TYPE || TREE_CODE(CP_DECL_CONTEXT(decl)) == UNION_TYPE)
+        if (TREE_CODE(CP_DECL_CONTEXT(decl)) == RECORD_TYPE)
         {
             if (TREE_PRIVATE(decl))
             {
@@ -137,6 +141,10 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
             {
                 visitor->visitAttributeDeclaration(decl, ACCESS_PUBLIC, getName(decl), isConstant(decl), getTypeName(decl));
             }
+        }
+        else if (TREE_CODE(CP_DECL_CONTEXT(decl)) == UNION_TYPE)
+        {
+            visitor->visitUnionValueDeclaration(decl, getName(decl), isConstant(decl), getTypeName(decl));
         }
         else
         {
