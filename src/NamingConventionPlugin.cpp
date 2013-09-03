@@ -23,13 +23,13 @@ using namespace std;
 namespace GPPGeneric
 {
 
-void NamingConventionPlugin::visitStringLiteral(const GenericTree decl, const std::string& name)
+void NamingConventionPlugin::visitStringLiteral(const GenericTree& decl, const std::string& name)
 {
     cerr << "STRING LITERAL: ";
     plugin->warning(decl, name);
 }
 
-void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree decl, const std::string& name)
+void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree& decl, const std::string& name)
 {
     cerr << "ENUM TYPE DECL: ";
     if (!regex.correct_enum_type_name(name, errmsg))
@@ -40,7 +40,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree decl, co
     plugin -> warning(decl, name);
 }
 
-void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, const std::string& name)
+void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree& decl, const std::string& name)
 {
     cerr << "ENUM VALUE DECL: ";
     if (!regex.correct_enum_value_name(name, errmsg))
@@ -50,7 +50,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, c
     }
 }
 
-void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, const string& name, bool is_const, const string& type_name)
+void NamingConventionPlugin::visitVariableDeclaration(const GenericTree& decl, const string& name, bool is_const, const string& type_name)
 {
     if (is_const)
         cerr << "CONST " << name << " " << type_name << endl;
@@ -61,7 +61,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, co
     }
 }
 
-void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree decl, const std::string& name)
+void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree& decl, const std::string& name)
 {
     if (!regex.correct_global_const_name(name, errmsg))
     {
@@ -70,7 +70,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree decl,
     }
 }
 
-void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree& decl, const string& name)
 {
     if (!regex.correct_method_name(name, errmsg))
     {
@@ -79,7 +79,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, co
     }
 }
 
-void NamingConventionPlugin::visitParameterDeclaration(const GenericTree /* decl */, const string& name, bool is_const)
+void NamingConventionPlugin::visitParameterDeclaration(const GenericTree& /* decl */, const string& name, bool is_const)
 {
     if (is_const)
         cerr << "CONST" << name << endl;
@@ -92,7 +92,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const GenericTree /* decl
     }
 }
 
-void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitTypeDeclaration(const GenericTree& decl, const string& name)
 {
     cerr << "TYPE DECL: ";
     if (!regex.correct_typedef_name(name, errmsg))
@@ -102,7 +102,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const 
     }
 }
 
-void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitClassDeclaration(const GenericTree& decl, const string& name)
 {
     cerr << "Class" << name ;
     if (!regex.correct_class_name(name, errmsg))
@@ -112,7 +112,7 @@ void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const
     }
 }
 
-void NamingConventionPlugin::visitStructDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitStructDeclaration(const GenericTree& decl, const string& name)
 {
     cerr << "Struct" << name ;
     if (!regex.correct_class_name(name, errmsg))
@@ -122,7 +122,7 @@ void NamingConventionPlugin::visitStructDeclaration(const GenericTree decl, cons
     }
 }
 
-void NamingConventionPlugin::visitUnionDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitUnionDeclaration(const GenericTree& decl, const string& name)
 {
     cerr << "UNION : " << name ;
     if (!regex.correct_union_name(name, errmsg))
@@ -133,7 +133,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const GenericTree decl, const
 }
 
 
-void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree decl, const std::string& name, bool is_const, const std::string& type_name)
+void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree& decl, const std::string& name, bool is_const, const std::string& type_name)
 {
     cerr << "UNION VALUE : " << name << endl;
     if (!regex.correct_union_value_name(name, errmsg))
@@ -144,7 +144,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree decl, 
 }
 
 
-void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const string& name, bool is_const)
+void NamingConventionPlugin::visitMethodDeclaration(const GenericTree& decl, const AccessModifier access, const string& name, bool is_const)
 {
     if (is_const)
         cerr << "CONST" << name << endl;
@@ -159,7 +159,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, cons
     }
 }
 
-void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const string& name, bool is_const, const string& type_name)
+void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree& decl, const AccessModifier access, const string& name, bool is_const, const string& type_name)
 {
     if (is_const)
         cerr << "CONST" << name << endl;
@@ -173,7 +173,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, c
     }
 }
 
-void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree decl, const string& name)
+void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree& decl, const string& name)
 {
     cerr << "NS" << name << endl;
     if (!regex.correct_class_name(name, errmsg))
