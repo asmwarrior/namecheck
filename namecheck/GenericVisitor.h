@@ -26,9 +26,11 @@ struct GenericVisitor
     virtual void visitClassDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitStructDeclaration(const GenericTree decl, const std::string& name) = 0;
     virtual void visitUnionDeclaration(const GenericTree decl, const std::string& name) = 0;
+    virtual void visitUnionValueDeclaration(const GenericTree decl, const std::string& name, bool is_const, const std::string& type_name) = 0;
     virtual void visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name, bool is_const) = 0;
     virtual void visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const std::string& name, bool is_const, const std::string& type_name) = 0;
     virtual void visitNamespaceDeclaration(const GenericTree decl, const std::string& name) = 0;
+    virtual void visitGlobalConstDeclaration(const GenericTree decl, const std::string& name) = 0;
 };
 
 } // end GPPGeneric
