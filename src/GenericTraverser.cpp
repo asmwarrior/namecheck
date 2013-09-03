@@ -25,7 +25,6 @@ void GenericTraverser::traverse(const GenericTree ns) const
     // Traverse declarations.
     for (decl = level->names; decl != 0; decl = TREE_CHAIN(decl))
     {
-        
         {
             processDeclaration(decl);
         }
@@ -146,8 +145,6 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
             GenericTree stmt = DECL_INITIAL(decl);
             if (stmt != NULL_TREE)
                 processStatement(stmt);
-        
-
     }
 }
 
@@ -155,18 +152,19 @@ void GenericTraverser::processType(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == TYPE_DECL);
 
-    if (DECL_ARTIFICIAL(decl))
-        processClass(decl);
-    else if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+    if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+    {
         visitor->visitEnumTypeDeclaration(decl, getName(decl));
+    }
+    else if(DECL_ARTIFICIAL(decl))
+        processClass(decl);
     else
         visitor->visitTypeDeclaration(decl, getName(decl));
 }
 
-
 void GenericTraverser::processClass(const GenericTree decl) const
 {
-    assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
+   // assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
 
     // Ignore internal classes
@@ -180,14 +178,16 @@ void GenericTraverser::processClass(const GenericTree decl) const
         if(CLASSTYPE_DECLARED_CLASS(type))
             visitor->visitClassDeclaration(decl, getName(decl));
         else
+           
             visitor->visitStructDeclaration(decl, getName(decl));
     }
     else if (TREE_CODE(type) == UNION_TYPE)
         visitor->visitUnionDeclaration(decl, getName(decl));
-
+ 
+    
     for (GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
     {
-        /*one of the nodes in TYPE_FIELDS is the self reference*/
+      /*one of the nodes in TYPE_FIELDS is the self reference*/
         if(!DECL_SELF_REFERENCE_P(d))
             processDeclaration(d);
     }
@@ -231,8 +231,8 @@ void GenericTraverser::processFunction(const GenericTree decl) const
         }
     }
     
+    /*
     GenericTree function_decl(DECL_SAVED_TREE(decl));
-    
     if (function_decl != NULL_TREE)
     {
         // Body of function
@@ -241,6 +241,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
         {
             if (STMT_IS_FULL_EXPR_P(function_decl) && (TREE_CODE(stmt_list) == STATEMENT_LIST))
             {
+     */
                 /*
                 // Maybe this inline iterator could work with some workaround.
                 // Based on tree-iterator.h
@@ -250,7 +251,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
                     std::cerr << getName(tsi_stmt(it));
                 }
                 */
-
+/*
                 for(tree_statement_list_node* it(STATEMENT_LIST_HEAD(stmt_list)); it != NULL; it = it->next)
                 {
                 processStatement(it->stmt);
@@ -259,6 +260,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
             }
         }
     }
+*/
     GenericTree decl_initial = DECL_INITIAL(decl);
     if (decl_initial != NULL_TREE)
         processBlock(decl_initial);
