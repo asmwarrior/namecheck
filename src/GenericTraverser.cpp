@@ -166,7 +166,10 @@ void GenericTraverser::processType(const GenericTree decl) const
 
     if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
     {
-        visitor->visitEnumTypeDeclaration(decl, getName(decl));
+        if (DECL_ARTIFICIAL(decl))
+            visitor->visitEnumTypeDeclaration(decl, getName(decl));
+        else 
+            visitor->visitTypeDeclaration(decl, getName(decl)); 
     }
     else if(DECL_ARTIFICIAL(decl))
         processClass(decl);
