@@ -146,6 +146,10 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
         {
             visitor->visitUnionValueDeclaration(decl, getName(decl), isConstant(decl), getTypeName(decl));
         }
+        else if (CP_DECL_CONTEXT(decl) == global_namespace && isConstant(decl))
+        {
+            visitor->visitGlobalConstDeclaration(decl, getName(decl));
+        }
         else
         {
             visitor->visitVariableDeclaration(decl, getName(decl), isConstant(decl), getTypeName(decl));
@@ -296,16 +300,18 @@ void GenericTraverser::processStatement(const GenericTree decl) const
 void GenericTraverser::processBlock(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == BLOCK);
-
-    for (GenericTree d(BLOCK_VARS(decl)); d != 0; d = TREE_CHAIN(d))
+    for(GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
     {
-        processDeclaration(d);
-    }
+        for (GenericTree d(BLOCK_VARS(block)); d != 0; d = TREE_CHAIN(d))
+        {   
+            processDeclaration(d);
+        }
 
-    GenericTree subblocks(BLOCK_SUBBLOCKS(decl));
-    if (subblocks != NULL_TREE)
-    {
-        processBlock(subblocks);
+        GenericTree subblocks(BLOCK_SUBBLOCKS(block));
+        if (subblocks != NULL_TREE)
+        {
+            processBlock(subblocks);
+        }
     }
 }
 
