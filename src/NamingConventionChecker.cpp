@@ -2,17 +2,17 @@
 
 NamingConventionChecker::NamingConventionChecker() : regexs(NameRulesSize), errmsgs(NameRulesSize)
 {
-    regexs[MatchTypedefName] = "^\\u.*?\\l";
-    regexs[MatchClassName] = "^\\u.*?\\l";
-    regexs[MatchGlobalConstName] = "^\\u[A-Z_]*?\\u";
-    regexs[MatchEnumTypeName] = "^\\u.*?\\l";
-    regexs[MatchEnumValueName] = "^\\u.*?\\l";
-    regexs[MatchMethodName] = "^\\l.*?\\l";
-    regexs[MatchVariableName] = "^\\l.*?\\l";
-    regexs[MatchAttributeName] = "^_\\l.*?\\l";
-    regexs[MatchUnionName] = "^\\u.*?\\l";
-    regexs[MatchUnionValueName] = "^\\l.*?\\l";
-    regexs[MatchNamespaceName] = "^\\u.*?\\l";
+    regexs[MatchTypedefName] = "^\\u.*?\\l$";
+    regexs[MatchClassName] = "^\\u.*?\\l$";
+    regexs[MatchGlobalConstName] = "^\\u[A-Z_]*?\\u$";
+    regexs[MatchEnumTypeName] = "^\\u.*?\\l$";
+    regexs[MatchEnumValueName] = "^\\u.*?\\l$";
+    regexs[MatchMethodName] = "^\\l.*?\\l$";
+    regexs[MatchVariableName] = "^\\l.*?\\l$";
+    regexs[MatchAttributeName] = "^_\\l.*?\\l$";
+    regexs[MatchUnionName] = "^\\u.*?\\l$";
+    regexs[MatchUnionValueName] = "^\\l.*?\\l$";
+    regexs[MatchNamespaceName] = "^\\u.*?\\l$";
 
     errmsgs[MatchTypedefName] = "Typedef names should start with uppercase";
     errmsgs[MatchClassName] = "Class names should start with uppercase";
