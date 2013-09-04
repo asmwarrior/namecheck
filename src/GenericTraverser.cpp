@@ -219,17 +219,24 @@ void GenericTraverser::processFunction(const GenericTree decl) const
 
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
     {
-        if (TREE_PRIVATE(decl))
+        if (!DECL_COPY_CONSTRUCTOR_P(decl)
+            && !DECL_CONSTRUCTOR_P(decl)
+            && !DECL_DESTRUCTOR_P(decl)
+            && !DECL_OVERLOADED_OPERATOR_P(decl)
+            && !DECL_CONV_FN_P(decl))
         {
-             visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl), isConstant(decl));
-        }
-        else if(TREE_PROTECTED(decl))
-        {
-            visitor->visitMethodDeclaration(decl, ACCESS_PROTECTED, getName(decl), isConstant(decl));
-        }
-        else
-        {
-            visitor->visitMethodDeclaration(decl, ACCESS_PUBLIC, getName(decl), isConstant(decl));
+            if (TREE_PRIVATE(decl))
+            {
+                 visitor->visitMethodDeclaration(decl, ACCESS_PRIVATE, getName(decl), isConstant(decl));
+            }
+            else if(TREE_PROTECTED(decl))
+            {
+                visitor->visitMethodDeclaration(decl, ACCESS_PROTECTED, getName(decl), isConstant(decl));
+            }
+            else
+            {
+                visitor->visitMethodDeclaration(decl, ACCESS_PUBLIC, getName(decl), isConstant(decl));
+            }
         }
     }
     else
@@ -237,7 +244,10 @@ void GenericTraverser::processFunction(const GenericTree decl) const
 
     for (GenericTree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
-        if(!DECL_SELF_REFERENCE_P(d) && (getName(d) != "<unnamed>") && (getName(d) != "this"))
+        if(!DECL_SELF_REFERENCE_P(d) 
+            && (getName(d) != "<unnamed>")    
+            && (getName(d) != "this")        
+            && (getName(d) != "__in_chrg") )
         {
             visitor->visitParameterDeclaration(d, getName(d), isConstant(d));
         }
