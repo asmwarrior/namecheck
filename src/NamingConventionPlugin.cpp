@@ -36,7 +36,6 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree& decl, c
         errmsg = errmsg + " in " + name;
         plugin->warning(decl, name);
     }
-    plugin -> warning(decl, name);
 }
 
 void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree& decl, const std::string& name)

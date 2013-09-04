@@ -12,6 +12,7 @@ public:
     NamingConventionChecker();
     bool correct_typedef_name(const std::string &s, std::string &errmsg) const;
     bool correct_class_name(const std::string &s, std::string &errmsg) const;
+    bool correct_struct_name(const std::string &s, std::string &errmsg) const;
     bool correct_global_const_name(const std::string &s, std::string &errmsg) const;
     bool correct_enum_type_name(const std::string &s, std::string &errmsg) const;
     bool correct_enum_value_name(const std::string &s, std::string &errmsg) const;
@@ -27,24 +28,23 @@ private:
     typedef boost::regex Regex;
     typedef std::vector<Regex> Regexs;
     typedef std::vector<std::string> ErrorMsgs;
+    typedef std::vector<int> Rules;
 
     enum NameRules
     {
-        MatchTypedefName,
-        MatchClassName,
-        MatchGlobalConstName,
-        MatchEnumTypeName,
-        MatchEnumValueName,
-        MatchMethodName,
-        MatchVariableName,
-        MatchAttributeName,
-        MatchUnionName,
-        MatchUnionValueName,
-        MatchNamespaceName,
+        MatchStartWithUpper,
+        MatchStartWithLower,
+        MatchStartUnderscore,
+        MatchEndLower,
+        MatchEndUpper,
+        MatchEndLowerRestricted,
+        MatchUpperAndUnderscore,
         NameRulesSize
     };
 
-    bool generic_checker(const std::string &s, const int regex, std::string &errmsg) const;
+    void ruleCamelCase(Rules& rules) const;
+    void ruleCamelBack(Rules& rules) const;
+    bool generic_checker(const std::string &s, const Rules& rules, std::string &errmsg) const;
 
     Regexs regexs;
     ErrorMsgs errmsgs;

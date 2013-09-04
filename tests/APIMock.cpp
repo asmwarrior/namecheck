@@ -26,7 +26,6 @@ TEST(PluginAPITests, ClassNameTest)
     //correct names
     plugin.visitClassDeclaration(decl, "ClassName");
 
-    //incorrect names
     plugin.visitClassDeclaration(decl, "class_name");
     plugin.visitClassDeclaration(decl, "_className");
     plugin.visitClassDeclaration(decl, "_ClassName");
@@ -46,8 +45,10 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     const std::string typeName = "int";
     EXPECT_CALL(api, warning(_,_))
     .Times(11);
+
     //correct variable names
     plugin.visitVariableDeclaration(decl, "amount", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "i", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amoutVisible", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amout_visible", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "isVisible", isConst, typeName);
@@ -65,7 +66,7 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     plugin.visitFunctionDeclaration(decl, "processFile");
     plugin.visitFunctionDeclaration(decl, "calculateScore");
 
-    //incorrect method names
+    // //incorrect method names
     plugin.visitFunctionDeclaration(decl, "Process");
     plugin.visitFunctionDeclaration(decl, "_calculateScore");
     plugin.visitFunctionDeclaration(decl, "PROCESS_FILE");
@@ -86,6 +87,7 @@ TEST(PluginAPITests, AttributeNameTest)
     .Times(3);
     //correct names
     plugin.visitAttributeDeclaration(decl, access, "_amout", isConst, typeName);
+    plugin.visitAttributeDeclaration(decl, access, "_i", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "_amoutOfChar", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "_isCircFigure", isConst, typeName);
 
@@ -107,7 +109,6 @@ TEST(PluginAPITests, GlobalConstNameTest)
     plugin.visitGlobalConstDeclaration(decl, "AMOUT");
     plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT");
 
-    //incorrect names
     plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT_");
     plugin.visitGlobalConstDeclaration(decl, "_amout");
     plugin.visitGlobalConstDeclaration(decl, "Amount");
@@ -121,9 +122,9 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
     GenericTree decl = NULL;
     plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))
-    .Times(9); //two times per enum type
+    .Times(6); //two times per enum type
     //correct enum type names
-    //plugin.visitEnumTypeDeclaration(decl, "EnumType");
+    plugin.visitEnumTypeDeclaration(decl, "EnumType");
 
     //incorrect enum type names
     plugin.visitEnumTypeDeclaration(decl, "COLOR");

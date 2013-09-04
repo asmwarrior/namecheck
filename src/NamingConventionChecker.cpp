@@ -2,90 +2,134 @@
 
 NamingConventionChecker::NamingConventionChecker() : regexs(NameRulesSize), errmsgs(NameRulesSize)
 {
-    regexs[MatchTypedefName] = "^\\u.*?\\l$";
-    regexs[MatchClassName] = "^\\u.*?\\l$";
-    regexs[MatchGlobalConstName] = "^\\u[A-Z_]*?\\u$";
-    regexs[MatchEnumTypeName] = "^\\u.*?\\l$";
-    regexs[MatchEnumValueName] = "^\\u.*?\\l$";
-    regexs[MatchMethodName] = "^\\l.*?\\l$";
-    regexs[MatchVariableName] = "^\\l.*?\\l$";
-    regexs[MatchAttributeName] = "^_\\l.*?\\l$";
-    regexs[MatchUnionName] = "^\\u.*?\\l$";
-    regexs[MatchUnionValueName] = "^\\l.*?\\l$";
-    regexs[MatchNamespaceName] = "^\\u.*?\\l$";
+    regexs[MatchStartWithUpper] = "^\\u.*?";
+    regexs[MatchStartWithLower] = "^\\l.*?";
+    regexs[MatchStartUnderscore] = "^_.*?";
+    regexs[MatchEndLower] = ".*?[^\\u_\\d]\\l?$";
+    regexs[MatchEndUpper] = ".*?\\u$";
+    regexs[MatchEndLowerRestricted] = ".*?\\l$";
+    regexs[MatchUpperAndUnderscore] = "[A-Z_]*?";
 
-    errmsgs[MatchTypedefName] = "Typedef names should start with uppercase";
-    errmsgs[MatchClassName] = "Class names should start with uppercase";
-    errmsgs[MatchGlobalConstName] = "Global const names should start with uppercase and end with uppercase";
-    errmsgs[MatchEnumTypeName] = "Enum type names should start with uppercase";
-    errmsgs[MatchEnumValueName] = "Enum type names should start with uppercase";
-    errmsgs[MatchMethodName] = "Methods names should start with lowercase";
-    errmsgs[MatchVariableName] = "Variables names should start with lowercase";
-    errmsgs[MatchAttributeName] = "Attribute name should start with underscore followed by an lowercase letter";
-    errmsgs[MatchUnionName] = "Union names should start with uppercase";
-    errmsgs[MatchUnionValueName] = "Union value names should start with lowercase";
-    errmsgs[MatchNamespaceName] = "Namespace should start with uppercase";
+    errmsgs[MatchStartWithUpper] = "names should start with uppercase";
+    errmsgs[MatchStartWithLower] = "names should start with lowercase";
+    errmsgs[MatchStartUnderscore] = "names should start with underscore";
+    errmsgs[MatchEndLower] = "names should end with lowercase";
+    errmsgs[MatchEndUpper] = "names should end with uppercase";
+    errmsgs[MatchEndLowerRestricted] = "names should end with lowercase";
+    errmsgs[MatchUpperAndUnderscore] = "names should be written with uppercase and underscore";
 }
 
-bool NamingConventionChecker::generic_checker(const std::string &s, const int regex, std::string &errmsg) const
+
+bool NamingConventionChecker::generic_checker(const std::string &s, const Rules& rules, std::string &errmsg) const
 {
-    const bool result = boost::regex_match(s, regexs[regex]);
-    if(!result)
-        errmsg = errmsgs[regex];
+    bool result(true);
+    size_t i(0);
+    while(result && i != rules.size())
+    {
+        result = boost::regex_match(s, regexs[rules[i]]);
+        if(!result)
+            errmsg = errmsgs[rules[i]];
+        ++i;
+    }
     return result;
+}
+
+void NamingConventionChecker::ruleCamelCase(Rules& rules) const
+{
+    rules.push_back(MatchStartWithUpper);
+    rules.push_back(MatchEndLowerRestricted);
+}
+
+void NamingConventionChecker::ruleCamelBack(Rules& rules) const
+{
+    rules.push_back(MatchStartWithLower);
+    rules.push_back(MatchEndLower);
 }
 
 bool NamingConventionChecker::correct_typedef_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchTypedefName, errmsg);
+    Rules typedefRules;
+    ruleCamelCase(typedefRules);
+    return generic_checker(s, typedefRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_class_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchClassName, errmsg);
+    Rules classRules;
+    ruleCamelCase(classRules);
+    return generic_checker(s, classRules, errmsg);
+}
+
+bool NamingConventionChecker::correct_struct_name(const std::string &s, std::string &errmsg) const
+{
+    Rules structRules;
+    ruleCamelCase(structRules);
+    return generic_checker(s, structRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_global_const_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchGlobalConstName, errmsg);
+    Rules globalConstRules;
+    globalConstRules.push_back(MatchStartWithUpper);
+    globalConstRules.push_back(MatchUpperAndUnderscore);
+    globalConstRules.push_back(MatchEndUpper);
+    return generic_checker(s, globalConstRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_enum_type_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchEnumTypeName, errmsg);
+    Rules enumTypeRules;
+    ruleCamelCase(enumTypeRules);
+    return generic_checker(s, enumTypeRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_enum_value_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchEnumValueName, errmsg);
+    Rules enumValueRules;
+    ruleCamelCase(enumValueRules);
+    return generic_checker(s, enumValueRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_method_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchMethodName, errmsg);
+    Rules methodRules;
+    ruleCamelBack(methodRules);
+    return generic_checker(s, methodRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_variable_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchVariableName, errmsg);
+    Rules varRules;
+    ruleCamelBack(varRules);
+    return generic_checker(s, varRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_attribute_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchAttributeName, errmsg);
+    Rules attributeRules;
+    attributeRules.push_back(MatchStartUnderscore);
+    attributeRules.push_back(MatchEndLower);
+    return generic_checker(s, attributeRules, errmsg);
+    return true;
 }
 
 bool NamingConventionChecker::correct_union_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchUnionName, errmsg);
+    Rules unionRules;
+    ruleCamelCase(unionRules);
+    return generic_checker(s, unionRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_union_value_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchUnionValueName, errmsg);
+    Rules unionValueRules;
+    ruleCamelCase(unionValueRules);
+    return generic_checker(s, unionValueRules, errmsg);
 }
 
 bool NamingConventionChecker::correct_namespace_name(const std::string &s, std::string &errmsg) const
 {
-    return generic_checker(s, MatchNamespaceName, errmsg);
+    Rules namespaceRules;
+    ruleCamelCase(namespaceRules);
+    return generic_checker(s, namespaceRules, errmsg);
 }
