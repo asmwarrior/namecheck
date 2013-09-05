@@ -163,28 +163,25 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
 void GenericTraverser::processType(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == TYPE_DECL);
-
-    if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+    if (getName(decl).substr(0,2) != "._" && getName(decl).substr(0,2) != "__")
     {
-        if (DECL_ARTIFICIAL(decl))
-            visitor->visitEnumTypeDeclaration(decl, getName(decl));
-        else 
-            visitor->visitTypeDeclaration(decl, getName(decl)); 
+        if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+        {
+            if (DECL_ARTIFICIAL(decl))
+                visitor->visitEnumTypeDeclaration(decl, getName(decl));
+            else 
+                visitor->visitTypeDeclaration(decl, getName(decl)); 
+        }
+        else if(DECL_ARTIFICIAL(decl))
+            processClass(decl);
+        else
+            visitor->visitTypeDeclaration(decl, getName(decl));
     }
-    else if(DECL_ARTIFICIAL(decl))
-        processClass(decl);
-    else
-        visitor->visitTypeDeclaration(decl, getName(decl));
 }
 
 void GenericTraverser::processClass(const GenericTree decl) const
 {
    // assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
-
-
-    // Ignore internal classes
-    if (getName(decl) == "._0" || getName(decl).substr(0,2) == "__")
-        return;
 
     GenericTree type(TREE_TYPE (decl));
 
@@ -193,16 +190,14 @@ void GenericTraverser::processClass(const GenericTree decl) const
         if(CLASSTYPE_DECLARED_CLASS(type))
             visitor->visitClassDeclaration(decl, getName(decl));
         else
-           
             visitor->visitStructDeclaration(decl, getName(decl));
     }
     else if (TREE_CODE(type) == UNION_TYPE)
         visitor->visitUnionDeclaration(decl, getName(decl));
  
-    
     for (GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
     {
-      /*one of the nodes in TYPE_FIELDS is the self reference*/
+    /*one of the nodes in TYPE_FIELDS is the self reference*/
         if(!DECL_SELF_REFERENCE_P(d))
             processDeclaration(d);
     }
