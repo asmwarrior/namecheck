@@ -3,6 +3,8 @@ struct Test1t
     /* data */
 };
 
+struct Forward1;
+
 struct Test2t 
 {
     struct Test3t
@@ -12,6 +14,9 @@ struct Test2t
 
     /* data */
 };
+
+struct Forward1
+{};
 
 struct Test4t 
 {

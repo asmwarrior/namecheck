@@ -5,6 +5,10 @@ class Test1t
 
 };
 
+class Test0{
+
+};
+
 class TEST2t
 {
 
