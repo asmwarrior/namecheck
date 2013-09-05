@@ -3,8 +3,8 @@
 class Test1t
 {
 	public:		
-//		Test1t();
-//		~Test1t();
+		Test1t();
+		~Test1t();
 		void myMethod();
 
 		int _lenth;
@@ -29,9 +29,10 @@ class Test2t
 		bool _FREE;	
 };
 
-//Test1t::Test1t() : _name()
-//{}
-//Test1t::~Test1t() {}
+Test1t::Test1t() : _name()
+{}
+
+Test1t::~Test1t() {}
 
 void Test1t::myMethod()
 {

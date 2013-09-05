@@ -1,5 +1,3 @@
-// testear enum
-
 typedef int test0;
 
 typedef void* test1t;

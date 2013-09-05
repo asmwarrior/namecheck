@@ -1,9 +1,9 @@
-struct Test1t /* PASSED */
+struct Test1t 
 {
     /* data */
 };
 
-struct Test2t /* PASSED */
+struct Test2t 
 {
     struct Test3t
     {
@@ -13,7 +13,7 @@ struct Test2t /* PASSED */
     /* data */
 };
 
-struct Test4t /* PASSED */
+struct Test4t 
 {
     struct Test5t
     {
@@ -28,12 +28,12 @@ struct Test4t /* PASSED */
     /* data */
 };
 
-struct Test7t /* FAIL */
+struct Test7t 
 {
     /* data */
 };
 
-struct Test8t /*FAIL*/
+struct Test8t 
 {
     struct Test9t
     {
@@ -43,7 +43,7 @@ struct Test8t /*FAIL*/
 
 };
 
-struct Test10t /* FAIL */
+struct Test10t 
 {
     struct Test11t
     {
@@ -52,7 +52,7 @@ struct Test10t /* FAIL */
     /* data */
 };
 
-struct Test12t /* FAIL */
+struct Test12t 
 {
     struct Test13t
     {
@@ -61,7 +61,7 @@ struct Test12t /* FAIL */
     /* data */
 };
 
-struct Test14t /* FAIL */
+struct Test14t 
 {
     struct Test15t
     {

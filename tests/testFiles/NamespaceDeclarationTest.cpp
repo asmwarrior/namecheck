@@ -1,16 +1,16 @@
 namespace mytest
 {
-	int variavle = 1;
+	int variable = 1;
 }
 
 namespace MytesT
 {
-	int variavle = 1;
+	int variable = 1;
 }
 
 namespace Mytest2
 {
-	int variavle = 1;
+	int variable = 1;
 }
 
 namespace MyTest
