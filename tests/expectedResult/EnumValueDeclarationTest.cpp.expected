@@ -1,0 +1,4 @@
+starting libnamecheck
+processing EnumValueDeclarationTest.cpp
+EnumValueDeclarationTest.cpp:10:2: aviso: Enum value declaration names should start with uppercase in incorrectdos [activado por defecto]
+EnumValueDeclarationTest.cpp:9:2: aviso: Enum value declaration names should start with uppercase in incorrectuno [activado por defecto]
