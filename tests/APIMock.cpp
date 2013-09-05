@@ -84,7 +84,7 @@ TEST(PluginAPITests, AttributeNameTest)
     const AccessModifier access = ACCESS_PUBLIC;
     plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))
-    .Times(3);
+    .Times(5);
     //correct names
     plugin.visitAttributeDeclaration(decl, access, "_amout", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "_i", isConst, typeName);
@@ -93,8 +93,10 @@ TEST(PluginAPITests, AttributeNameTest)
 
     //incorrect names
     plugin.visitAttributeDeclaration(decl, access, "isCircFigure", isConst, typeName);
+    plugin.visitAttributeDeclaration(decl, access, "_S", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "amout_available", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "Amout_available", isConst, typeName);
+    plugin.visitAttributeDeclaration(decl, access, "_Amout_available", isConst, typeName);
 }
 
 TEST(PluginAPITests, GlobalConstNameTest)

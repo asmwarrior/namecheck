@@ -24,6 +24,7 @@ class Test2t
 	public:		
 		void myMethod();
 
+		int _i;
 		int _Lenth;
 		bool _FREE;	
 };

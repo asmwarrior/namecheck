@@ -4,7 +4,7 @@ NamingConventionChecker::NamingConventionChecker() : regexs(NameRulesSize), errm
 {
     regexs[MatchStartWithUpper] = "^\\u.*?";
     regexs[MatchStartWithLower] = "^\\l.*?";
-    regexs[MatchStartUnderscore] = "^_.*?";
+    regexs[MatchStartUnderscore] = "^_\\l.*?";
     regexs[MatchEndLower] = ".*?[^\\u_\\d]\\l?$";
     regexs[MatchEndUpper] = ".*?\\u$";
     regexs[MatchEndLowerRestricted] = ".*?\\l$";
@@ -12,7 +12,7 @@ NamingConventionChecker::NamingConventionChecker() : regexs(NameRulesSize), errm
 
     errmsgs[MatchStartWithUpper] = "names should start with uppercase";
     errmsgs[MatchStartWithLower] = "names should start with lowercase";
-    errmsgs[MatchStartUnderscore] = "names should start with underscore";
+    errmsgs[MatchStartUnderscore] = "names should start with underscore followed by a lowercase";
     errmsgs[MatchEndLower] = "names should end with lowercase";
     errmsgs[MatchEndUpper] = "names should end with uppercase";
     errmsgs[MatchEndLowerRestricted] = "names should end with lowercase";
@@ -110,7 +110,7 @@ bool NamingConventionChecker::correct_attribute_name(const std::string &s, std::
     attributeRules.push_back(MatchStartUnderscore);
     attributeRules.push_back(MatchEndLower);
     return generic_checker(s, attributeRules, errmsg);
-    return true;
+
 }
 
 bool NamingConventionChecker::correct_union_name(const std::string &s, std::string &errmsg) const
