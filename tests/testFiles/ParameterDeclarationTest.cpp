@@ -19,15 +19,17 @@ inline void functiond(void* Test7t, const int* Test8t, int Test9t)
 
 }
 
+void functionf(void* a, const int* b, int c)
+{
+
+}
+
 void functione(void* test10t, const int* test11t, int test12t)
 {
 
 }
 
-void functionf(void* a, const int* b, int c)
-{
 
-}
 
 
 class Container

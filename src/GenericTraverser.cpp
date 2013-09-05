@@ -114,8 +114,14 @@ const std::string GenericTraverser::getTypeName(const GenericTree decl)
         aux = TREE_TYPE(aux);
         type_name = "_ptr" + type_name;
     }
-    type_name = getName(TYPE_NAME(TREE_TYPE(aux))) + type_name;
+    if (TREE_CODE(TREE_TYPE(aux)) == FUNCTION_TYPE)
+        type_name = "func" + type_name;
+    else if (TYPE_NAME(TREE_TYPE(aux)) == 0)
+        type_name = "internal" + type_name;
+    else
+        type_name = getName(TYPE_NAME(TREE_TYPE(aux))) + type_name;
     return type_name;
+
 }
 
 void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
@@ -154,9 +160,9 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
         {
             visitor->visitVariableDeclaration(decl, getName(decl), isConstant(decl), getTypeName(decl));
         }
-            GenericTree stmt = DECL_INITIAL(decl);
+          /*  GenericTree stmt = DECL_INITIAL(decl);
             if (stmt != NULL_TREE)
-                processStatement(stmt);
+                processStatement(stmt);*/
     }
 }
 
@@ -286,7 +292,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
         processBlock(decl_initial);
 }
 
-void GenericTraverser::processStatement(const GenericTree decl) const
+/*void GenericTraverser::processStatement(const GenericTree decl) const
 {
     //std::cerr << tree_code_name[TREE_CODE(decl)] << std::endl;
 
@@ -302,7 +308,7 @@ void GenericTraverser::processStatement(const GenericTree decl) const
             processStatement(operand);
     }
 
-}
+}*/
 
 
 void GenericTraverser::processBlock(const GenericTree decl) const
