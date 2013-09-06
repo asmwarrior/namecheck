@@ -46,8 +46,8 @@ private:
     void ruleCamelBack(Rules& rules) const;
     bool generic_checker(const std::string &s, const Rules& rules, std::string &errmsg) const;
 
-    Regexs regexs;
-    ErrorMsgs errmsgs;
+    Regexs _regexs;
+    ErrorMsgs _errmsgs;
 };
 
 #endif

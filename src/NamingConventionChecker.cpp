@@ -1,22 +1,22 @@
 #include "NamingConventionChecker.h"
 
-NamingConventionChecker::NamingConventionChecker() : regexs(NameRulesSize), errmsgs(NameRulesSize)
+NamingConventionChecker::NamingConventionChecker() : _regexs(NameRulesSize), _errmsgs(NameRulesSize)
 {
-    regexs[MatchStartWithUpper] = "^\\u.*?";
-    regexs[MatchStartWithLower] = "^\\l.*?";
-    regexs[MatchStartUnderscore] = "^_\\l.*?";
-    regexs[MatchEndLower] = ".*?[^\\u_\\d]\\l?$";
-    regexs[MatchEndUpper] = ".*?\\u$";
-    regexs[MatchEndLowerRestricted] = ".*?\\l$";
-    regexs[MatchUpperAndUnderscore] = "[A-Z_]*?";
+    _regexs[MatchStartWithUpper] = "^\\u.*?";
+    _regexs[MatchStartWithLower] = "^\\l.*?";
+    _regexs[MatchStartUnderscore] = "^_\\l.*?";
+    _regexs[MatchEndLower] = ".*?[^\\u_\\d]\\l?$";
+    _regexs[MatchEndUpper] = ".*?\\u$";
+    _regexs[MatchEndLowerRestricted] = ".*?\\l$";
+    _regexs[MatchUpperAndUnderscore] = "[A-Z_]*?";
 
-    errmsgs[MatchStartWithUpper] = "names should start with uppercase";
-    errmsgs[MatchStartWithLower] = "names should start with lowercase";
-    errmsgs[MatchStartUnderscore] = "names should start with underscore followed by a lowercase";
-    errmsgs[MatchEndLower] = "names should end with lowercase";
-    errmsgs[MatchEndUpper] = "names should end with uppercase";
-    errmsgs[MatchEndLowerRestricted] = "names should end with lowercase";
-    errmsgs[MatchUpperAndUnderscore] = "names should be written with uppercase and underscore";
+    _errmsgs[MatchStartWithUpper] = "names should start with uppercase";
+    _errmsgs[MatchStartWithLower] = "names should start with lowercase";
+    _errmsgs[MatchStartUnderscore] = "names should start with underscore followed by a lowercase";
+    _errmsgs[MatchEndLower] = "names should end with lowercase";
+    _errmsgs[MatchEndUpper] = "names should end with uppercase";
+    _errmsgs[MatchEndLowerRestricted] = "names should end with lowercase";
+    _errmsgs[MatchUpperAndUnderscore] = "names should be written with uppercase and underscore";
 }
 
 
@@ -26,9 +26,9 @@ bool NamingConventionChecker::generic_checker(const std::string &s, const Rules&
     size_t i(0);
     while(result && i != rules.size())
     {
-        result = boost::regex_match(s, regexs[rules[i]]);
+        result = boost::regex_match(s, _regexs[rules[i]]);
         if(!result)
-            errmsg = errmsgs[rules[i]];
+            errmsg = _errmsgs[rules[i]];
         ++i;
     }
     return result;
