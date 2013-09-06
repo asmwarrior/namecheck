@@ -22,7 +22,7 @@ extern "C"
 namespace GPPGeneric
 {
 
-const char* NamingConventionPlugin::accessLabel[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+const char* NamingConventionPlugin::_accessLabel[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
 
 void NamingConventionPlugin::visitStringLiteral(const GenericTree& decl, const std::string& name)
 {
@@ -31,129 +31,129 @@ void NamingConventionPlugin::visitStringLiteral(const GenericTree& decl, const s
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_enum_type_name(name, errmsg))
+    if (!_regex.correct_enum_type_name(name, _errmsg))
     {
-        errmsg = "Enum type declaration " + errmsg + " in " + name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Enum type declaration " + _errmsg + " in " + name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_enum_value_name(name, errmsg))
+    if (!_regex.correct_enum_value_name(name, _errmsg))
     {
-        errmsg = "Enum value declaration " + errmsg + " in " + name;
-        plugin -> warning(decl, errmsg);
+        _errmsg = "Enum value declaration " + _errmsg + " in " + name;
+        plugin -> warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitVariableDeclaration(const GenericTree& decl, const std::string& name, bool /*is_const*/, const std::string& /*type_name*/)
 {
-    if (!regex.correct_variable_name(name, errmsg))
+    if (!_regex.correct_variable_name(name, _errmsg))
     {
-        errmsg = "Variable declaration " + errmsg + " in " + name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Variable declaration " + _errmsg + " in " + name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_global_const_name(name, errmsg))
+    if (!_regex.correct_global_const_name(name, _errmsg))
     {
-        errmsg = "Global const declaration " + errmsg + " in " + name;
-        plugin -> warning(decl, errmsg);
+        _errmsg = "Global const declaration " + _errmsg + " in " + name;
+        plugin -> warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_method_name(name, errmsg))
+    if (!_regex.correct_method_name(name, _errmsg))
     {
-        errmsg = "Function declaration " + errmsg + " in " + name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Function declaration " + _errmsg + " in " + name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitParameterDeclaration(const GenericTree& decl, const std::string& name, bool /*is_const*/)
 {
-    if (!regex.correct_variable_name(name, errmsg))
+    if (!_regex.correct_variable_name(name, _errmsg))
     {
-        errmsg = "Parameter declaration " + errmsg + " in " + name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Parameter declaration " + _errmsg + " in " + name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitTypeDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_typedef_name(name, errmsg))
+    if (!_regex.correct_typedef_name(name, _errmsg))
     {
-        errmsg = "Type declaration " + errmsg + " in " + name;
-        plugin -> warning(decl, errmsg);
+        _errmsg = "Type declaration " + _errmsg + " in " + name;
+        plugin -> warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitClassDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_class_name(name, errmsg))
+    if (!_regex.correct_class_name(name, _errmsg))
     {
-        errmsg = "Class declaration " + errmsg +" in "+ name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Class declaration " + _errmsg +" in "+ name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitStructDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_struct_name(name, errmsg))
+    if (!_regex.correct_struct_name(name, _errmsg))
     {
-        errmsg = "Struct declaration " + errmsg +" in "+ name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Struct declaration " + _errmsg +" in "+ name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitUnionDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_union_name(name, errmsg))
+    if (!_regex.correct_union_name(name, _errmsg))
     {
-        errmsg = "Union declaration " + errmsg +" in "+ name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Union declaration " + _errmsg +" in "+ name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
 
 void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree& decl, const std::string& name, bool /*is_const*/, const std::string& /*type_name*/)
 {
-    if (!regex.correct_union_value_name(name, errmsg))
+    if (!_regex.correct_union_value_name(name, _errmsg))
     {
-        errmsg = "Union value declaration " + errmsg + " in " + name;
-        plugin -> warning(decl, errmsg);
+        _errmsg = "Union value declaration " + _errmsg + " in " + name;
+        plugin -> warning(decl, _errmsg);
     }
 }
 
 
 void NamingConventionPlugin::visitMethodDeclaration(const GenericTree& decl, const AccessModifier access, const std::string& name, bool /*is_const*/)
 {
-    if (!regex.correct_method_name(name, errmsg))
+    if (!_regex.correct_method_name(name, _errmsg))
     {
-        errmsg = "Method declaration " + errmsg + " in " + name + " (" +  accessLabel[access] + ")";
-        plugin->warning(decl, errmsg);
+        _errmsg = "Method declaration " + _errmsg + " in " + name + " (" +  _accessLabel[access] + ")";
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree& decl, const AccessModifier access, const std::string& name, bool /*is_const*/, const std::string& /*type_name*/)
 {
-    if (!regex.correct_attribute_name(name, errmsg))
+    if (!_regex.correct_attribute_name(name, _errmsg))
     {
-        errmsg = "Attribute declaration " + errmsg + " in " + name + " (" +  accessLabel[access] + ")";
-        plugin->warning(decl, errmsg);
+        _errmsg = "Attribute declaration " + _errmsg + " in " + name + " (" +  _accessLabel[access] + ")";
+        plugin->warning(decl, _errmsg);
     }
 }
 
 void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree& decl, const std::string& name)
 {
-    if (!regex.correct_namespace_name(name, errmsg))
+    if (!_regex.correct_namespace_name(name, _errmsg))
     {
-        errmsg = "Namespace declaration " + errmsg + " in " + name;
-        plugin->warning(decl, errmsg);
+        _errmsg = "Namespace declaration " + _errmsg + " in " + name;
+        plugin->warning(decl, _errmsg);
     }
 }
 
