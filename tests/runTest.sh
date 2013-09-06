@@ -19,3 +19,22 @@ do
 	rm $cppFile""$retrievedExtension
 done
 rm *.o
+
+#c test
+patheExpectedFolder="../../expectedResult/c/"
+directoryc="testFiles/c/"
+
+cd ../..
+cd $directoryc
+echo "----------------- C code -----------------"
+for cFile in $(ls *.c) ;
+do
+	g++ -fplugin=../../../../../install/libs/libnamecheck.so -c $cFile &> $cFile""$retrievedExtension
+	if diff $cFile""$retrievedExtension $patheExpectedFolder""$cFile""$expectedExtension; then
+	 	echo -e $cFile "\e[1;32m"Test case OK"	\e[0m"
+	else
+		echo -e $cFile "\e[0;31mTest case failed\e[0m"
+	fi
+	rm $cFile""$retrievedExtension
+done
+rm *.o
