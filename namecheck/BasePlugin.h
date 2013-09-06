@@ -14,7 +14,7 @@ public:
     GenericVisitor* getVisitor();
 
 protected:
-    PluginAPI* plugin;
+    PluginAPI* _plugin;
 
 private:
 
