@@ -49,7 +49,7 @@ private:
     bool generic_checker(const std::string &s, const Rules& rules, std::string &errmsg) const;
 
     Regexs _regexs;
-    ErrorMsgs _errmsgs;    
+    ErrorMsgs _errmsgs;
 
     //Rules for declaration
     Rules _typedefRules;
@@ -66,8 +66,8 @@ private:
     Rules _namespaceRules;
 };
 
-#define NAMING_CONVENTION__CHECKER_INLINE_H
+#define NAMING_CONVENTION_CHECKER_INLINE_H
 #include "NamingConventionCheckerInline.h"
-#undef NAMING_CONVENTION__CHECKER_INLINE_H
+#undef NAMING_CONVENTION_CHECKER_INLINE_H
 
 #endif
