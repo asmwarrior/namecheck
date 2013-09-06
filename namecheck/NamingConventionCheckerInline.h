@@ -1,4 +1,4 @@
-#ifndef NAMING_CONVENTION__CHECKER_INLINE_H
+#ifndef NAMING_CONVENTION_CHECKER_INLINE_H
 #error Internal header file
 #endif
 
