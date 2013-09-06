@@ -29,9 +29,9 @@ private:
     virtual void visitAttributeDeclaration(const GenericTree& decl, const AccessModifier access, const std::string& name, bool /*is_const*/, const std::string& /*type_name*/);
     virtual void visitNamespaceDeclaration(const GenericTree& decl, const std::string& name);
 
-    NamingConventionChecker regex;
-    std::string errmsg;
-    static const char* accessLabel[];
+    NamingConventionChecker _regex;
+    std::string _errmsg;
+    static const char* _accessLabel[];
 };
 
 } // end GPPGeneric
