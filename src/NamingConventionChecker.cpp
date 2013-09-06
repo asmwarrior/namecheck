@@ -21,16 +21,16 @@ NamingConventionChecker::NamingConventionChecker() : _regexs(NameRulesSize), _er
 }
 
 void NamingConventionChecker::setRules()
-{    
+{
     ruleCamelCase(_typedefRules);
     ruleCamelCase(_classRules);
     ruleCamelCase(_structRules);
-    ruleGlobalCont(_globalConstRules);    
+    ruleGlobalCont(_globalConstRules);
     ruleCamelCase(_enumTypeRules);
     ruleCamelCase(_enumValueRules);
     ruleCamelBack(_methodRules);
     ruleCamelBack(_varRules);
-    ruleAttribute(_attributeRules);    
+    ruleAttribute(_attributeRules);
     ruleCamelCase(_unionRules);
     ruleCamelCase(_unionValueRules);
     ruleCamelCase(_namespaceRules);
@@ -38,16 +38,13 @@ void NamingConventionChecker::setRules()
 
 bool NamingConventionChecker::generic_checker(const std::string &s, const Rules& rules, std::string &errmsg) const
 {
-    bool result(true);
-    size_t i(0);
-    while(result && i != rules.size())
+    errmsg.clear();
+    for (size_t i(0); errmsg.empty() && i < rules.size(); ++i)
     {
-        result = boost::regex_match(s, _regexs[rules[i]]);
-        if(!result)
+        if(!(boost::regex_match(s, _regexs[rules[i]])))
             errmsg = _errmsgs[rules[i]];
-        ++i;
     }
-    return result;
+    return errmsg.empty();
 }
 
 void NamingConventionChecker::ruleCamelCase(Rules& rules) const
