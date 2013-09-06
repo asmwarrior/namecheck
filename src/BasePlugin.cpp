@@ -12,7 +12,7 @@ GenericVisitor* BasePlugin::getVisitor()
 
 void BasePlugin::initialize(PluginAPI* plugin)
 {
-    this->plugin = plugin;
+    _plugin = plugin;
 }
 
 } // end GPPGeneric
