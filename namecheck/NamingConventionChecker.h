@@ -9,18 +9,18 @@ class NamingConventionChecker
 public:
 
     NamingConventionChecker();
-    inline bool correct_typedef_name(const std::string &s, std::string &errmsg) const;
-    bool correct_class_name(const std::string &s, std::string &errmsg) const;
-    bool correct_struct_name(const std::string &s, std::string &errmsg) const;
-    bool correct_global_const_name(const std::string &s, std::string &errmsg) const;
-    bool correct_enum_type_name(const std::string &s, std::string &errmsg) const;
-    bool correct_enum_value_name(const std::string &s, std::string &errmsg) const;
-    bool correct_method_name(const std::string &s, std::string &errmsg) const;
-    bool correct_variable_name(const std::string &s, std::string &errmsg) const;
-    bool correct_attribute_name(const std::string &s, std::string &errmsg) const;
-    bool correct_union_name(const std::string &s, std::string &errmsg) const;
-    bool correct_union_value_name(const std::string &s, std::string &errmsg) const;
-    bool correct_namespace_name(const std::string &s, std::string &errmsg) const;
+    inline bool correctTypedefName(const std::string& s, std::string& errmsg) const;
+    bool correctClassName(const std::string& s, std::string& errmsg) const;
+    bool correctStructName(const std::string& s, std::string& errmsg) const;
+    bool correctGlobalConstName(const std::string& s, std::string& errmsg) const;
+    bool correctEnumTypeName(const std::string& s, std::string& errmsg) const;
+    bool correctEnumValueName(const std::string& s, std::string& errmsg) const;
+    bool correctMethodName(const std::string& s, std::string& errmsg) const;
+    bool correctVariableName(const std::string& s, std::string& errmsg) const;
+    bool correctAttributeName(const std::string& s, std::string& errmsg) const;
+    bool correctUnionName(const std::string& s, std::string& errmsg) const;
+    bool correctUnionValueName(const std::string& s, std::string& errmsg) const;
+    bool correctNamespaceName(const std::string& s, std::string& errmsg) const;
 
 private:
 
@@ -46,7 +46,7 @@ private:
     void ruleGlobalCont(Rules& rules) const;
     void ruleAttribute(Rules& rules) const;
     void setRules();
-    bool generic_checker(const std::string &s, const Rules& rules, std::string &errmsg) const;
+    bool genericChecker(const std::string& s, const Rules& rules, std::string& errmsg) const;
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;

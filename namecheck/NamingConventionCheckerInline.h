@@ -4,62 +4,62 @@
 
 #include "NamingConventionChecker.h"
 
-inline bool NamingConventionChecker::correct_typedef_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctTypedefName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _typedefRules, errmsg);
+    return genericChecker(s, _typedefRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_class_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctClassName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _classRules, errmsg);
+    return genericChecker(s, _classRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_struct_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctStructName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _structRules, errmsg);
+    return genericChecker(s, _structRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_global_const_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctGlobalConstName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _globalConstRules, errmsg);
+    return genericChecker(s, _globalConstRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_enum_type_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctEnumTypeName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _enumTypeRules, errmsg);
+    return genericChecker(s, _enumTypeRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_enum_value_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctEnumValueName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _enumValueRules, errmsg);
+    return genericChecker(s, _enumValueRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_method_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctMethodName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _methodRules, errmsg);
+    return genericChecker(s, _methodRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_variable_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctVariableName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _varRules, errmsg);
+    return genericChecker(s, _varRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_attribute_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctAttributeName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _attributeRules, errmsg);
+    return genericChecker(s, _attributeRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_union_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctUnionName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _unionRules, errmsg);
+    return genericChecker(s, _unionRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_union_value_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctUnionValueName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _unionValueRules, errmsg);
+    return genericChecker(s, _unionValueRules, errmsg);
 }
 
-inline bool NamingConventionChecker::correct_namespace_name(const std::string &s, std::string &errmsg) const
+inline bool NamingConventionChecker::correctNamespaceName(const std::string& s, std::string& errmsg) const
 {
-    return generic_checker(s, _namespaceRules, errmsg);
+    return genericChecker(s, _namespaceRules, errmsg);
 }
