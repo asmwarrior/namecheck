@@ -33,7 +33,7 @@ void GenericTraverser::traverse(const GenericTree ns) const
     {
         std::string namespace_name;
         getName(decl, namespace_name);
-        if (namespace_name != "std" && namespace_name.substr(0,2) != "__")
+        if (namespace_name != "std" && namespace_name.substr(0, 2) != "__")
         {
             _visitor->visitNamespaceDeclaration(decl, namespace_name);
             traverse(decl);
@@ -52,7 +52,7 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
 {
     std::string names_name;
     getName(decl, names_name);
-    if (!DECL_IS_BUILTIN(decl) && names_name != "std" && names_name.substr(0,2) != "__")
+    if (!DECL_IS_BUILTIN(decl) && names_name != "std" && names_name.substr(0, 2) != "__")
     {
         int tree_code = TREE_CODE(decl);
 
@@ -90,17 +90,17 @@ void GenericTraverser::getTypeName(const GenericTree decl, std::string& return_n
 {
     std::string type_name;
     GenericTree aux(decl);
-    while(TREE_CODE(TREE_TYPE(aux))==ARRAY_TYPE)
+    while (TREE_CODE(TREE_TYPE(aux)) == ARRAY_TYPE)
     {
         aux = TREE_TYPE(aux);
         type_name = "_array" + type_name;
     }
-    while(TREE_CODE(TREE_TYPE(aux))==REFERENCE_TYPE)
+    while (TREE_CODE(TREE_TYPE(aux)) == REFERENCE_TYPE)
     {
         aux = TREE_TYPE(aux);
         type_name = "_ref" + type_name;
     }
-    while(TREE_CODE(TREE_TYPE(aux))==POINTER_TYPE)
+    while (TREE_CODE(TREE_TYPE(aux)) == POINTER_TYPE)
     {
         aux = TREE_TYPE(aux);
         type_name = "_ptr" + type_name;
@@ -110,28 +110,28 @@ void GenericTraverser::getTypeName(const GenericTree decl, std::string& return_n
     else if (TYPE_NAME(TREE_TYPE(aux)) == 0)
         type_name = "internal" + type_name;
     else
-        {
-            getName(TYPE_NAME(TREE_TYPE(aux)), return_name);
-        } 
-    return_name +=type_name;
+    {
+        getName(TYPE_NAME(TREE_TYPE(aux)), return_name);
+    }
+    return_name += type_name;
 }
 
 inline bool GenericTraverser::isReservedDeclaration(const GenericTree decl)
 {
     std::string name;
     getName(decl, name);
-    return (name.substr(0,2) == "._" || name.substr(0,2) == "__");
+    return (name.substr(0, 2) == "._" || name.substr(0, 2) == "__");
 }
 
 AccessModifier GenericTraverser::getAccess(const GenericTree decl)
 {
     AccessModifier ret;
     if (TREE_PRIVATE(decl))
-        ret = ACCESS_PRIVATE;
-    else if(TREE_PROTECTED(decl))
-        ret = ACCESS_PROTECTED;
+        ret = AccessPrivate;
+    else if (TREE_PROTECTED(decl))
+        ret = AccessProtected;
     else
-        ret = ACCESS_PUBLIC;
+        ret = AccessPublic;
     return ret;
 }
 
@@ -177,7 +177,7 @@ void GenericTraverser::processType(const GenericTree decl) const
         {
             processEnumType(decl);
         }
-        else if(DECL_ARTIFICIAL(decl))
+        else if (DECL_ARTIFICIAL(decl))
             processClassStructUnion(decl);
         else
             _visitor->visitTypeDeclaration(decl, name);
@@ -190,25 +190,25 @@ void GenericTraverser::processEnumType(const GenericTree decl) const
     getName(decl, name);
     if (DECL_ARTIFICIAL(decl))
         _visitor->visitEnumTypeDeclaration(decl, name);
-    else 
-        _visitor->visitTypeDeclaration(decl, name); 
+    else
+        _visitor->visitTypeDeclaration(decl, name);
 }
 
 void GenericTraverser::processClassStructUnion(const GenericTree decl) const
 {
     assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
-    GenericTree type(TREE_TYPE (decl));
+    GenericTree type(TREE_TYPE(decl));
     std::string name;
     getName(decl, name);
 
-    if(TREE_CODE(type) == RECORD_TYPE)
+    if (TREE_CODE(type) == RECORD_TYPE)
     {
         processRecordDeclaration(decl);
     }
     else if (TREE_CODE(type) == UNION_TYPE)
         _visitor->visitUnionDeclaration(decl, name);
- 
+
     processAttributes(type);
 
     processMethods(type);
@@ -218,8 +218,8 @@ inline void GenericTraverser::processAttributes(const GenericTree type) const
 {
     for (GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
     {
-    /*one of the nodes in TYPE_FIELDS is the self reference*/
-        if(!DECL_SELF_REFERENCE_P(d))
+        /*one of the nodes in TYPE_FIELDS is the self reference*/
+        if (!DECL_SELF_REFERENCE_P(d))
             processDeclaration(d);
     }
 }
@@ -228,7 +228,7 @@ inline void GenericTraverser::processMethods(const GenericTree type) const
 {
     for (GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
     {
-        if (!DECL_ARTIFICIAL(d) )
+        if (!DECL_ARTIFICIAL(d))
         {
             processDeclaration(d);
         }
@@ -239,7 +239,7 @@ inline void GenericTraverser::processRecordDeclaration(const GenericTree decl) c
 {
     std::string name;
     getName(decl, name);
-    if(CLASSTYPE_DECLARED_CLASS(TREE_TYPE (decl)))
+    if (CLASSTYPE_DECLARED_CLASS(TREE_TYPE(decl)))
         _visitor->visitClassDeclaration(decl, name);
     else
         _visitor->visitStructDeclaration(decl, name);
@@ -253,10 +253,10 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
     {
         if (!DECL_COPY_CONSTRUCTOR_P(decl)
-            && !DECL_CONSTRUCTOR_P(decl)
-            && !DECL_DESTRUCTOR_P(decl)
-            && !DECL_OVERLOADED_OPERATOR_P(decl)
-            && !DECL_CONV_FN_P(decl))
+                && !DECL_CONSTRUCTOR_P(decl)
+                && !DECL_DESTRUCTOR_P(decl)
+                && !DECL_OVERLOADED_OPERATOR_P(decl)
+                && !DECL_CONV_FN_P(decl))
         {
             _visitor->visitMethodDeclaration(decl, getAccess(decl), name, isConstant(decl));
         }
@@ -277,10 +277,10 @@ inline void GenericTraverser::processParameters(const GenericTree decl) const
     for (GenericTree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
         getName(d, name);
-        if(!DECL_SELF_REFERENCE_P(d) 
-            && (name != "<unnamed>")    
-            && (name != "this")        
-            && (name != "__in_chrg") )
+        if (!DECL_SELF_REFERENCE_P(d)
+                && (name != "<unnamed>")
+                && (name != "this")
+                && (name != "__in_chrg"))
         {
             _visitor->visitParameterDeclaration(d, name, isConstant(d));
         }
@@ -290,7 +290,7 @@ inline void GenericTraverser::processParameters(const GenericTree decl) const
 void GenericTraverser::processBlock(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == BLOCK);
-    for(GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
+    for (GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
     {
         processBlockVariables(block);
 
@@ -305,9 +305,9 @@ void GenericTraverser::processBlock(const GenericTree decl) const
 inline void GenericTraverser::processBlockVariables(const GenericTree block) const
 {
     for (GenericTree d(BLOCK_VARS(block)); d != 0; d = TREE_CHAIN(d))
-    {   
+    {
         processDeclaration(d);
-    }   
+    }
 }
 
 

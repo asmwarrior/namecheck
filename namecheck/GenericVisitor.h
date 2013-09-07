@@ -8,10 +8,11 @@
 namespace GPPGeneric
 {
 
-typedef enum {
-    ACCESS_PUBLIC,
-    ACCESS_PROTECTED,
-    ACCESS_PRIVATE
+typedef enum
+{
+    AccessPublic,
+    AccessProtected,
+    AccessPrivate
 } AccessModifier;
 
 struct GenericVisitor

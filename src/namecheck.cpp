@@ -24,7 +24,7 @@ extern "C" void gate_callback(void*, void*)
     // let GCC handle the exit.
     //
     if (!(errorcount || sorrycount))
-    {        
+    {
         GenericTraverser traverser;
         const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin());
         const std::auto_ptr<PluginAPI> api(new GCCPluginAPI());
@@ -32,7 +32,7 @@ extern "C" void gate_callback(void*, void*)
         std::clog << "processing " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
     }
-    exit(EXIT_SUCCESS); 
+    exit(EXIT_SUCCESS);
 }
 
 extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* /* version */)
