@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        namecheck.cpp
+* @author      Francisco Herrero
+* @date        2013-09-06
+* @brief       This is the main file that launches the namecheck plugin
+*/
+
 #include "NamingConventionPlugin.h"
 #include "GCCPluginAPI.h"
 #include "GenericTraverser.h"

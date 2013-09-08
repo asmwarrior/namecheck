@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        NamingConventionChecker.h
+* @author      Fracisco Herrero, Marcos Diaz and Franco Riberi
+* @date        2013-09-06
+* @brief       Header file for namecheck providing NamingConventionChecker class.
+*/
+
 #ifndef NAMING_CONVENTION_CHECKER_H
 #define NAMING_CONVENTION_CHECKER_H
 

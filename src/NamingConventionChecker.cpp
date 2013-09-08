@@ -1,9 +1,20 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        NamingConventionChecker.cpp
+* @author      Marcos Diaz and Franco Riberi
+* @date        2013-09-06
+* @brief       This is an implementation of NamingConventionChecker class
+*/
+
 #include "NamingConventionChecker.h"
 
 NamingConventionChecker::NamingConventionChecker() : _regexs(NameRulesSize), _errmsgs(NameRulesSize)
 {
     _regexs[MatchStartWithUpper] = "^\\u.*?";
-    _regexs[MatchStartWithLower] = "^\\l.*?";
+    _regexs[MatchStartWithLower] = 
+    "^\\l.*?";
     _regexs[MatchStartUnderscore] = "^_\\l.*?";
     _regexs[MatchEndLower] = ".*?[^\\u_\\d]\\l?$";
     _regexs[MatchEndUpper] = ".*?\\u$";

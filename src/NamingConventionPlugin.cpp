@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        NamingConventionPlugin.cpp
+* @author      Marcos Diaz and Franco Riberi
+* @date        2013-09-06
+* @brief       This is an implementation of NamingConventionPlugin class
+*/
+
 #include "NamingConventionPlugin.h"
 #include <string>
 #include <iostream>

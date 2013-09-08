@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        NamingConventionPluginInline.h
+* @author      Francisco Herrero, Marcos Diaz and Franco Riberi
+* @date        2013-09-06
+* @brief       Header file for namecheck providing NamingConventionPlugin class.
+*/
+
 #ifndef GPP_NAMING_CONVENTION_PLUGIN_H
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
