@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        BasePlugin.h
+* @author      Fracisco Herrero and Marcos Diaz
+* @date        2013-09-06
+* @brief       Header file for namecheck providing BasePlugin class.
+*/
+
 #ifndef GPP_BASE_PLUGIN_H
 #define GPP_BASE_PLUGIN_H
 
@@ -10,10 +20,12 @@ namespace GPPGeneric
 class BasePlugin: private GenericVisitor
 {
 public:
+
     void initialize(PluginAPI* plugin);
     GenericVisitor* getVisitor();
 
 protected:
+
     PluginAPI* _plugin;
 
 private:

@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        GenericTraverser.h
+* @author      Fracisco Herrero and Marcos Diaz
+* @date        2013-09-06
+* @brief       Header file for namecheck providing GenericTraverser class.
+*/
+
 #ifndef PLUGIN_MEDIATOR_H
 #define PLUGIN_MEDIATOR_H
 

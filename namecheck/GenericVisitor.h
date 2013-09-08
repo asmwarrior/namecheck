@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        GenericVisitor.h
+* @author      Fracisco Herrero, Marcos Diaz and Franco Riberi
+* @date        2013-09-06
+* @brief       Header file for namecheck providing GenericVisitor struct.
+*/
+
 #ifndef GPP_GENERIC_VISITOR_H
 #define GPP_GENERIC_VISITOR_H
 

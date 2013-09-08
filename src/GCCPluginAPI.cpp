@@ -1,3 +1,13 @@
+/**
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
+*
+* @file        GCCPluginAPI.cpp
+* @author      Francisco Herrero and Marcos Diaz
+* @date        2013-09-06
+* @brief       This is the implementation of GCCPluginAPI interface
+*/
+
 #include "GCCPluginAPI.h"
 #include <iostream>
 
