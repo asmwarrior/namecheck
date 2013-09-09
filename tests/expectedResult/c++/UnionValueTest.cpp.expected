@@ -1,4 +1,4 @@
 starting libnamecheck
 processing UnionValueTest.cpp
-UnionValueTest.cpp:3:6: aviso: Union value declaration names should end with lowercase in Test0 [activado por defecto]
-UnionValueTest.cpp:5:6: aviso: Union value declaration names should start with uppercase in test2t [activado por defecto]
+UnionValueTest.cpp:3:6: warning: Union value declaration names should end with lowercase in Test0 [enabled by default]
+UnionValueTest.cpp:5:6: warning: Union value declaration names should start with uppercase in test2t [enabled by default]

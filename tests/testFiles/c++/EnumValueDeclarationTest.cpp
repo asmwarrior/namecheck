@@ -7,5 +7,5 @@ enum Testcorrect
 enum Testincorrect
 {
 	incorrectuno,
-	incorrectdos
+	incorrectdos,
 };
