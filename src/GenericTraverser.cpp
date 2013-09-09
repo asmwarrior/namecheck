@@ -150,11 +150,8 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
     std::string name;
     std::string type_name;
     getName(decl, name);
-    if (TREE_CODE(decl) == CONST_DECL)
-    {
-        _visitor->visitEnumValueDeclaration(decl, name);
-    }
-    else
+    // Enum Values are Traversed in ProcessEnumValue
+    if (TREE_CODE(decl) != CONST_DECL)
     {
         getTypeName(decl, type_name);
         if (TREE_CODE(CP_DECL_CONTEXT(decl)) == RECORD_TYPE)
@@ -202,6 +199,17 @@ void GenericTraverser::processEnumType(const GenericTree decl) const
         _visitor->visitEnumTypeDeclaration(decl, name);
     else
         _visitor->visitTypeDeclaration(decl, name);
+    processEnumValues(decl);
+}
+
+void GenericTraverser::processEnumValues(const GenericTree decl) const
+{
+    std::string name;
+    for (GenericTree d(TYPE_VALUES(TREE_TYPE(decl))); d != 0; d = TREE_CHAIN(d))
+    {
+        getName(TREE_VALUE(d), name);
+        _visitor->visitEnumValueDeclaration(TREE_VALUE(d), name);
+    }
 }
 
 void GenericTraverser::processClassStructUnion(const GenericTree decl) const

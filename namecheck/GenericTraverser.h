@@ -36,6 +36,7 @@ private:
     void processAttributes(const GenericTree decl) const;
     void processMethods(const GenericTree decl) const;
     void processEnumType(const GenericTree decl) const;
+    void processEnumValues(const GenericTree decl) const;
     void processDeclaration(const GenericTree decl) const;
     void processStatement(const GenericTree decl) const;
     void processVariableDeclaration(const GenericTree decl) const;
