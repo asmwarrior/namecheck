@@ -43,7 +43,7 @@ void GenericTraverser::traverse(const GenericTree ns) const
     {
         std::string namespace_name;
         getName(decl, namespace_name);
-        if (namespace_name != "std" && namespace_name.substr(0, 2) != "__")
+        if (!DECL_IS_BUILTIN(decl) && namespace_name != "std")
         {
             _visitor->visitNamespaceDeclaration(decl, namespace_name);
             traverse(decl);
@@ -62,7 +62,7 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
 {
     std::string names_name;
     getName(decl, names_name);
-    if (!DECL_IS_BUILTIN(decl) && names_name != "std" && names_name.substr(0, 2) != "__")
+    if (!DECL_IS_BUILTIN(decl) && names_name != "std")
     {
         int tree_code = TREE_CODE(decl);
 
@@ -77,6 +77,10 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
         else if (tree_code == TEMPLATE_DECL)
         {
             processDeclaration(DECL_TEMPLATE_RESULT(decl));
+        }
+        else if (tree_code == BLOCK)
+        {
+            processBlock(decl);
         }
         else if (!DECL_ARTIFICIAL(decl))
         {
@@ -130,7 +134,7 @@ inline bool GenericTraverser::isReservedDeclaration(const GenericTree decl)
 {
     std::string name;
     getName(decl, name);
-    return (name.substr(0, 2) == "._" || name.substr(0, 2) == "__");
+    return (name.substr(0, 2) == "._");
 }
 
 AccessModifier GenericTraverser::getAccess(const GenericTree decl)
@@ -284,7 +288,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     processParameters(decl);
 
     GenericTree decl_initial = DECL_INITIAL(decl);
-    if (decl_initial != NULL_TREE)
+    if (decl_initial != NULL_TREE && TREE_CODE(decl_initial) != ERROR_MARK)
         processBlock(decl_initial);
 }
 

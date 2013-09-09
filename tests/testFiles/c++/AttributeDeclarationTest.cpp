@@ -9,6 +9,7 @@ class Test1t
 
 		int _lenth;
 		bool _isFree;	
+		int __asdasdasd;
 
 	protected:
 		int _lengthOfSequence;

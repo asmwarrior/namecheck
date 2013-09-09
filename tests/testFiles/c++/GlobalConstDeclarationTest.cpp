@@ -1,14 +1,14 @@
 const int CORRECT_GLOBAL(1);
 const int Incorrect_global(1);
-namespace prueba
+namespace Prueba
 {
-	const int correct_ns(1);
+	const int correctns(1);
 	const int INCORRECT_NS(2);
 };
 void test()
 {
-	const int correct_func(2);
-	const int INCORRECT_FUNC(2);
+	const int correctfunc(2);
+	const int INCORRECTFUNC(2);
 }
 
 class Test
