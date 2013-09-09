@@ -28,7 +28,7 @@ NamingConventionChecker::NamingConventionChecker() : _regexs(NameRulesSize), _er
     _errmsgs[MatchEndUpper] = "names should end with uppercase";
     _errmsgs[MatchEndLowerRestricted] = "names should end with lowercase";
     _errmsgs[MatchUpperAndUnderscore] = "names should be written with uppercase and underscore";
-    _errmsgs[MatchWithoutUndescore] = "names should not be written using underscore";
+    _errmsgs[MatchWithoutUndescore] = "names should not be written using underscore, only is supported one underscore at the beginning";
     setRules();
 }
 
