@@ -1,6 +1,6 @@
 starting libnamecheck
 processing MethodDeclarationTest.cpp
-MethodDeclarationTest.cpp: En la función ‘void test5t()’:
-MethodDeclarationTest.cpp:18:5: aviso: Function declaration names should start with lowercase in TEST8T [activado por defecto]
-MethodDeclarationTest.cpp:17:6: aviso: Function declaration names should start with lowercase in Test7t [activado por defecto]
-MethodDeclarationTest.cpp:13:14: aviso: Function declaration names should start with lowercase in Test6t [activado por defecto]
+MethodDeclarationTest.cpp: In function ‘void test5t()’:
+MethodDeclarationTest.cpp:18:5: warning: Function declaration names should start with lowercase in TEST8T [enabled by default]
+MethodDeclarationTest.cpp:17:6: warning: Function declaration names should start with lowercase in Test7t [enabled by default]
+MethodDeclarationTest.cpp:13:14: warning: Function declaration names should start with lowercase in Test6t [enabled by default]

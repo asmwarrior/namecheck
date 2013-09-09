@@ -1,10 +1,10 @@
 starting libnamecheck
 processing GlobalConstDeclarationTest.cpp
-GlobalConstDeclarationTest.cpp: En la función ‘void test()’:
-GlobalConstDeclarationTest.cpp:17:12: aviso: Attribute declaration names should start with underscore followed by a lowercase in INCORRECT_CLASS (PRIVATE) [activado por defecto]
-GlobalConstDeclarationTest.cpp:10:12: aviso: Variable declaration names should not be written using underscore, only is supported one underscore at the beginning in correct_func [activado por defecto]
-GlobalConstDeclarationTest.cpp:11:12: aviso: Variable declaration names should start with lowercase in INCORRECT_FUNC [activado por defecto]
-GlobalConstDeclarationTest.cpp:2:11: aviso: Global const declaration names should be written with uppercase and underscore in Incorrect_global [activado por defecto]
-GlobalConstDeclarationTest.cpp:4:1: aviso: Namespace declaration names should start with uppercase in prueba [activado por defecto]
-GlobalConstDeclarationTest.cpp:6:12: aviso: Variable declaration names should start with lowercase in INCORRECT_NS [activado por defecto]
-GlobalConstDeclarationTest.cpp:5:12: aviso: Variable declaration names should not be written using underscore, only is supported one underscore at the beginning in correct_ns [activado por defecto]
+GlobalConstDeclarationTest.cpp: In function ‘void test()’:
+GlobalConstDeclarationTest.cpp:17:12: warning: Attribute declaration names should start with underscore followed by a lowercase in INCORRECT_CLASS (PRIVATE) [enabled by default]
+GlobalConstDeclarationTest.cpp:10:12: warning: Variable declaration names should not be written using underscore, only is supported one underscore at the beginning in correct_func [enabled by default]
+GlobalConstDeclarationTest.cpp:11:12: warning: Variable declaration names should start with lowercase in INCORRECT_FUNC [enabled by default]
+GlobalConstDeclarationTest.cpp:2:11: warning: Global const declaration names should be written with uppercase and underscore in Incorrect_global [enabled by default]
+GlobalConstDeclarationTest.cpp:4:1: warning: Namespace declaration names should start with uppercase in prueba [enabled by default]
+GlobalConstDeclarationTest.cpp:6:12: warning: Variable declaration names should start with lowercase in INCORRECT_NS [enabled by default]
+GlobalConstDeclarationTest.cpp:5:12: warning: Variable declaration names should not be written using underscore, only is supported one underscore at the beginning in correct_ns [enabled by default]
