@@ -9,4 +9,3 @@ enum class Correctenumname : char
     Correctcharenum,
     incorrectcharenum
 };
-
