@@ -1,0 +1,9 @@
+starting libnamecheck
+EnumClassDeclarationTest.cpp:1:1: aviso: los enums con ámbito sólo están disponibles con -std=c++0x o -std=gnu++0x [activado por defecto]
+EnumClassDeclarationTest.cpp:1:32: aviso: los enums con ámbito sólo están disponibles con -std=c++0x o -std=gnu++0x [activado por defecto]
+EnumClassDeclarationTest.cpp:7:1: aviso: los enums con ámbito sólo están disponibles con -std=c++0x o -std=gnu++0x [activado por defecto]
+EnumClassDeclarationTest.cpp:7:30: aviso: los enums con ámbito sólo están disponibles con -std=c++0x o -std=gnu++0x [activado por defecto]
+processing EnumClassDeclarationTest.cpp
+EnumClassDeclarationTest.cpp:10:5: aviso: Enum value declaration names should start with uppercase in incorrectcharenum [activado por defecto]
+EnumClassDeclarationTest.cpp:1:12: aviso: Enum type declaration names should start with uppercase in incorrectenumname [activado por defecto]
+EnumClassDeclarationTest.cpp:4:5: aviso: Enum value declaration names should start with uppercase in incorrectenumvalue [activado por defecto]
