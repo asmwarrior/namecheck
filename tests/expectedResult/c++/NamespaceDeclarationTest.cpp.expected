@@ -1,0 +1,8 @@
+starting libnamecheck
+processing NamespaceDeclarationTest.cpp
+NamespaceDeclarationTest.cpp:45:2: aviso: Namespace declaration names should end with lowercase in TEST1T [activado por defecto]
+NamespaceDeclarationTest.cpp:36:1: aviso: Namespace declaration names should end with lowercase in TEST [activado por defecto]
+NamespaceDeclarationTest.cpp:30:2: aviso: Namespace declaration names should start with uppercase in test2t [activado por defecto]
+NamespaceDeclarationTest.cpp:12:1: aviso: Namespace declaration names should end with lowercase in Mytest2 [activado por defecto]
+NamespaceDeclarationTest.cpp:7:1: aviso: Namespace declaration names should end with lowercase in MytesT [activado por defecto]
+NamespaceDeclarationTest.cpp:2:1: aviso: Namespace declaration names should start with uppercase in mytest [activado por defecto]
