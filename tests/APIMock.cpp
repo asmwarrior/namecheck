@@ -44,13 +44,12 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     const bool isConst = false;
     const std::string typeName = "int";
     EXPECT_CALL(api, warning(_,_))
-    .Times(11);
+    .Times(13);
 
     //correct variable names
     plugin.visitVariableDeclaration(decl, "amount", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "i", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amoutVisible", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "amout_visible", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "isVisible", isConst, typeName);
 
     //incorrect variable names
@@ -60,6 +59,7 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     plugin.visitVariableDeclaration(decl, "amountAvailablE", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "22amout", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amoutVisible2", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "amout_visible", isConst, typeName);
 
     //correct method names
     plugin.visitFunctionDeclaration(decl, "process");
@@ -72,6 +72,7 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     plugin.visitFunctionDeclaration(decl, "PROCESS_FILE");
     plugin.visitFunctionDeclaration(decl, "processFile_");
     plugin.visitFunctionDeclaration(decl, "processFile_2");
+    plugin.visitFunctionDeclaration(decl, "process_file");
 }
 
 TEST(PluginAPITests, AttributeNameTest)
@@ -84,7 +85,7 @@ TEST(PluginAPITests, AttributeNameTest)
     const AccessModifier access = AccessPublic;
     plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))
-    .Times(5);
+    .Times(6);
     //correct names
     plugin.visitAttributeDeclaration(decl, access, "_amout", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "_i", isConst, typeName);
@@ -97,6 +98,7 @@ TEST(PluginAPITests, AttributeNameTest)
     plugin.visitAttributeDeclaration(decl, access, "amout_available", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "Amout_available", isConst, typeName);
     plugin.visitAttributeDeclaration(decl, access, "_Amout_available", isConst, typeName);
+    plugin.visitAttributeDeclaration(decl, access, "_amout_available", isConst, typeName);
 }
 
 TEST(PluginAPITests, GlobalConstNameTest)
@@ -124,7 +126,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
     GenericTree decl = NULL;
     plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))
-    .Times(6); //two times per enum type
+    .Times(7); //two times per enum type
     //correct enum type names
     plugin.visitEnumTypeDeclaration(decl, "EnumType");
 
@@ -137,6 +139,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
     plugin.visitEnumValueDeclaration(decl, "Red");
     plugin.visitEnumValueDeclaration(decl, "Blue");
     plugin.visitEnumValueDeclaration(decl, "BrownAndBlack");
+    plugin.visitEnumValueDeclaration(decl, "Brown_AndB  _lack");
 
     //incorrect enum value names
     plugin.visitEnumValueDeclaration(decl, "THIS_IS_A_ENUM_VALUE");

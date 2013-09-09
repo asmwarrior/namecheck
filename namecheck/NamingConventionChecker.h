@@ -48,6 +48,7 @@ private:
         MatchEndUpper,
         MatchEndLowerRestricted,
         MatchUpperAndUnderscore,
+        MatchWithoutUndescore,
         NameRulesSize
     };
 
