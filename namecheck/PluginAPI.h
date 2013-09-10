@@ -12,7 +12,6 @@
 #define GPP_PLUGIN_API_H
 
 #include "GenericTree.h"
-
 #include <string>
 
 namespace GPPGeneric
