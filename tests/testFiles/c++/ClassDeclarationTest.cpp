@@ -2,7 +2,7 @@ class Test0;
 
 class Test1t 
 {
-
+	Test1t();
 };
 
 class Test0{

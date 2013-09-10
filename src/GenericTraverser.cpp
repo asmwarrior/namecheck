@@ -70,7 +70,7 @@ void GenericTraverser::processDeclaration(const GenericTree decl) const
         }
         else if (tree_code == TEMPLATE_DECL)
         {
-            processDeclaration(DECL_TEMPLATE_RESULT(decl));
+            processTemplateDeclaration(decl);
         }
         else if (tree_code == BLOCK)
         {
@@ -171,6 +171,17 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
     }
 }
 
+void GenericTraverser::processTemplateDeclaration(const GenericTree decl) const
+{
+    processDeclaration(DECL_TEMPLATE_RESULT(decl));
+    GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
+    for(int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
+    {
+        processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
+    }
+
+}
+
 void GenericTraverser::processType(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == TYPE_DECL);
@@ -225,9 +236,17 @@ void GenericTraverser::processClassStructUnion(const GenericTree decl) const
     else if (TREE_CODE(type) == UNION_TYPE)
         _visitor->visitUnionDeclaration(decl, name);
 
-    processAttributes(type);
+    if(TREE_CODE(type) == TEMPLATE_TYPE_PARM || TREE_CODE(type) == TEMPLATE_TEMPLATE_PARM)
+    {
+        if(name != "<unnamed>")
+            _visitor->visitTypeDeclaration(decl, name);
+    }  
+    else
+    {
+        processAttributes(type);
 
-    processMethods(type);
+        processMethods(type);
+    }
 }
 
 inline void GenericTraverser::processAttributes(const GenericTree type) const

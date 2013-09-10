@@ -1,3 +1,4 @@
+
 //Correct
 template <class T>
 class MyPair {
@@ -45,11 +46,11 @@ myType GetMax (myType A, myType B) {
   return (A>B?A:B);
 }
 
-template <class T>
+template <int AA>
 class incorrectclassname
 {
-        T IncorrectArgument;
-        T IncorrectMethod();
+        int IncorrectArgument;
+        int IncorrectMethod();
 };
 
 template<template <class> class TT, class T> 
@@ -58,3 +59,5 @@ class CLayer
     TT<T> weights;    
     TT<int> _connection_matrix;
 };
+
+
