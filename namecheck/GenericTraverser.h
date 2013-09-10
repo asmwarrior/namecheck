@@ -40,6 +40,7 @@ private:
     void processDeclaration(const GenericTree decl) const;
     void processStatement(const GenericTree decl) const;
     void processVariableDeclaration(const GenericTree decl) const;
+    void processTemplateDeclaration(const GenericTree decl) const;
     void processType(const GenericTree decl) const;
     void processClassStructUnion(const GenericTree decl) const;
     void processRecordDeclaration(const GenericTree decl) const;
