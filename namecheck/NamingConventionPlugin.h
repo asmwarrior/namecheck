@@ -23,6 +23,8 @@ class NamingConventionPlugin : public BasePlugin
 {
 private:
 
+    typedef NamingConventionChecker::Result Result;
+
     virtual void visitStringLiteral(const GenericTree& decl, const std::string& name);
     virtual void visitVariableDeclaration(const GenericTree& decl, const std::string& name, bool /*is_const*/, const std::string& /*type_name*/);
     virtual void visitGlobalConstDeclaration(const GenericTree& decl, const std::string& name);
@@ -38,17 +40,12 @@ private:
     virtual void visitMethodDeclaration(const GenericTree& decl, const AccessModifier access, const std::string& name, bool /*is_const*/);
     virtual void visitAttributeDeclaration(const GenericTree& decl, const AccessModifier access, const std::string& name, bool /*is_const*/, const std::string& /*type_name*/);
     virtual void visitNamespaceDeclaration(const GenericTree& decl, const std::string& name);
-    inline void setPluginWarning(const GenericTree& decl, const std::string& name, const std::string& message);
+    void setPluginWarning(const GenericTree& decl, const std::string& message);
 
-    NamingConventionChecker _regex;
-    std::string _errmsg;
+    NamingConventionChecker _regex;    
     static const char* _accessLabel[];
 };
 
 } // end GPPGeneric
-
-#define NAMING_CONVENTION_PLUGIN_INLINE_H
-#include "NamingConventionPluginInline.h"
-#undef NAMING_CONVENTION_PLUGIN_INLINE_H
 
 #endif

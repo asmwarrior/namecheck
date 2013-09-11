@@ -16,21 +16,27 @@
 
 class NamingConventionChecker
 {
-public:
+public:  
+
+    struct Result
+    {
+        bool match;
+        std::string message;
+    };
 
     NamingConventionChecker();
-    inline bool correctTypedefName(const std::string& s, std::string& errmsg) const;
-    bool correctClassName(const std::string& s, std::string& errmsg) const;
-    bool correctStructName(const std::string& s, std::string& errmsg) const;
-    bool correctGlobalConstName(const std::string& s, std::string& errmsg) const;
-    bool correctEnumTypeName(const std::string& s, std::string& errmsg) const;
-    bool correctEnumValueName(const std::string& s, std::string& errmsg) const;
-    bool correctMethodName(const std::string& s, std::string& errmsg) const;
-    bool correctVariableName(const std::string& s, std::string& errmsg) const;
-    bool correctAttributeName(const std::string& s, std::string& errmsg) const;
-    bool correctUnionName(const std::string& s, std::string& errmsg) const;
-    bool correctUnionValueName(const std::string& s, std::string& errmsg) const;
-    bool correctNamespaceName(const std::string& s, std::string& errmsg) const;
+    inline bool correctTypedefName(const std::string& s, Result& result) const;
+    inline bool correctClassName(const std::string& s, Result& result) const;
+    inline bool correctStructName(const std::string& s, Result& result) const;
+    inline bool correctGlobalConstName(const std::string& s, Result& result) const;
+    inline bool correctEnumTypeName(const std::string& s, Result& result) const;
+    inline bool correctEnumValueName(const std::string& s, Result& result) const;
+    inline bool correctMethodName(const std::string& s, Result& result) const;
+    inline bool correctVariableName(const std::string& s, Result& result) const;
+    inline bool correctAttributeName(const std::string& s, Result& result) const;
+    inline bool correctUnionName(const std::string& s, Result& result) const;
+    inline bool correctUnionValueName(const std::string& s, Result& result) const;
+    inline bool correctNamespaceName(const std::string& s, Result& result) const;
 
 private:
 
@@ -57,7 +63,7 @@ private:
     void ruleGlobalCont(Rules& rules) const;
     void ruleAttribute(Rules& rules) const;
     void setRules();
-    bool genericChecker(const std::string& s, const Rules& rules, std::string& errmsg) const;
+    void genericChecker(const std::string& s, const Rules& rules, Result& result) const;
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;

@@ -48,20 +48,20 @@ void NamingConventionChecker::setRules()
     ruleCamelCase(_namespaceRules);
 }
 
-bool NamingConventionChecker::genericChecker(const std::string& s, const Rules& rules, std::string& errmsg) const
+void NamingConventionChecker::genericChecker(const std::string& s, const Rules& rules, Result& result) const
 {
     assert(rules.size() != 0);
-    bool match;
-    size_t i = 0;
+    bool matchWithRule;
+    size_t i(0);
     do
     {
-        match = boost::regex_match(s, _regexs[rules[i]]);
-        if(!match)
-            errmsg = _errmsgs[rules[i]];
+        matchWithRule = boost::regex_match(s, _regexs[rules[i]]); 
         ++i;
     }
-    while(match && i < rules.size());
-    return match;  
+    while(matchWithRule && i < rules.size());
+    result.match = matchWithRule;
+    if(!matchWithRule)        
+        result.message = _errmsgs[rules[i-1]];    
 }
 
 void NamingConventionChecker::ruleCamelCase(Rules& rules) const

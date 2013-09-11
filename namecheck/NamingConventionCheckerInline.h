@@ -14,62 +14,74 @@
 
 #include "NamingConventionChecker.h"
 
-inline bool NamingConventionChecker::correctTypedefName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctTypedefName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _typedefRules, errmsg);
+    genericChecker(s, _typedefRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctClassName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctClassName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _classRules, errmsg);
+    genericChecker(s, _classRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctStructName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctStructName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _structRules, errmsg);
+    genericChecker(s, _structRules, result);
+    return result.match; 
 }
 
-inline bool NamingConventionChecker::correctGlobalConstName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctGlobalConstName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _globalConstRules, errmsg);
+     genericChecker(s, _globalConstRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctEnumTypeName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctEnumTypeName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _enumTypeRules, errmsg);
+    genericChecker(s, _enumTypeRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctEnumValueName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctEnumValueName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _enumValueRules, errmsg);
+    genericChecker(s, _enumValueRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctMethodName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctMethodName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _methodRules, errmsg);
+    genericChecker(s, _methodRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctVariableName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctVariableName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _varRules, errmsg);
+    genericChecker(s, _varRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctAttributeName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctAttributeName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _attributeRules, errmsg);
+    genericChecker(s, _attributeRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctUnionName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctUnionName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _unionRules, errmsg);
+    genericChecker(s, _unionRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctUnionValueName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctUnionValueName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _unionValueRules, errmsg);
+    genericChecker(s, _unionValueRules, result);
+    return result.match;
 }
 
-inline bool NamingConventionChecker::correctNamespaceName(const std::string& s, std::string& errmsg) const
+inline bool NamingConventionChecker::correctNamespaceName(const std::string& s, Result& result) const
 {
-    return genericChecker(s, _namespaceRules, errmsg);
+    genericChecker(s, _namespaceRules, result);
+    return result.match;
 }
