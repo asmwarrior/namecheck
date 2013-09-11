@@ -11,7 +11,11 @@
 #include "GCCPluginAPI.h"
 #include <iostream>
 
+extern "C"
+{
 #include "diagnostic-core.h"
+}
+
 
 namespace GPPGeneric
 {

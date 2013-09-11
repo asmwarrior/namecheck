@@ -3,15 +3,11 @@ processing cbuffer.c
 cbuffer.c: In function ‘CBool cbPopFront(CBHandler, uint8_type*, size_t)’:
 cbuffer.c:144:7: warning: Function declaration names should end with lowercase in cbPopFront1 [enabled by default]
 cbuffer.c:96:7: warning: Function declaration names should end with lowercase in cbPushBack1 [enabled by default]
-In file included from cbuffer.c:21:0:
 cbufferDefs.h:19:12: warning: Attribute declaration names should start with underscore followed by a lowercase in cont (PUBLIC) [enabled by default]
 cbufferDefs.h:20:12: warning: Attribute declaration names should start with underscore followed by a lowercase in readIndex (PUBLIC) [enabled by default]
 cbufferDefs.h:21:12: warning: Attribute declaration names should start with underscore followed by a lowercase in writeIndex (PUBLIC) [enabled by default]
 cbufferDefs.h:22:17: warning: Attribute declaration names should start with underscore followed by a lowercase in maxIndex (PUBLIC) [enabled by default]
 cbufferDefs.h:23:17: warning: Attribute declaration names should start with underscore followed by a lowercase in bufferStart (PUBLIC) [enabled by default]
-In file included from cbuffer.h:19:0,
-                 from cbufferDefs.h:13,
-                 from cbuffer.c:21:
 typeDefs.h:44:29: warning: Type declaration names should start with uppercase in float128_type [enabled by default]
 typeDefs.h:43:29: warning: Type declaration names should start with uppercase in float64_type [enabled by default]
 typeDefs.h:42:29: warning: Type declaration names should start with uppercase in float32_type [enabled by default]

@@ -9,11 +9,14 @@
 */
 
 #include "GenericTraverser.h"
+extern "C"
+{
 #include "tree-iterator.h"
 #include "cp/cp-tree.h"
 #include "c-family/c-common.h"
 #include "c-family/c-pragma.h"
 #include "diagnostic-core.h"
+}
 #include "GenericTree.h"
 #include <cassert>
 #include <iostream>
