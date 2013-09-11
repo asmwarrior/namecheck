@@ -11,7 +11,10 @@
 #include "NamingConventionPlugin.h"
 #include "GCCPluginAPI.h"
 #include "GenericTraverser.h"
+extern "C"
+{
 #include "cp/cp-tree.h"
+}
 #include <memory>
 #include <iostream>
 

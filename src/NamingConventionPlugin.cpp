@@ -11,6 +11,8 @@
 #include "NamingConventionPlugin.h"
 #include <string>
 #include <iostream>
+extern "C"
+{
 #include "gcc-plugin.h"
 #include "plugin-version.h"
 #include "config.h"
@@ -23,6 +25,7 @@
 #include "c-family/c-common.h"
 #include "c-family/c-pragma.h"
 #include "diagnostic-core.h"
+}
 
 namespace GPPGeneric
 {
