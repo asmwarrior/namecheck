@@ -14,74 +14,62 @@
 
 #include "NamingConventionChecker.h"
 
-inline bool NamingConventionChecker::correctTypedefName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectTypedefName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _typedefRules, result);
-    return result.match;
+    genericChecker(declarationName, _typedefRules, result);
 }
 
-inline bool NamingConventionChecker::correctClassName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectClassName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _classRules, result);
-    return result.match;
+    genericChecker(declarationName, _classRules, result);
 }
 
-inline bool NamingConventionChecker::correctStructName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectStructName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _structRules, result);
-    return result.match; 
+    genericChecker(declarationName, _structRules, result);
 }
 
-inline bool NamingConventionChecker::correctGlobalConstName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectGlobalConstName(const std::string& declarationName, Result& result) const
 {
-     genericChecker(s, _globalConstRules, result);
-    return result.match;
+    genericChecker(declarationName, _globalConstRules, result);
 }
 
-inline bool NamingConventionChecker::correctEnumTypeName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectEnumTypeName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _enumTypeRules, result);
-    return result.match;
+    genericChecker(declarationName, _enumTypeRules, result);
 }
 
-inline bool NamingConventionChecker::correctEnumValueName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectEnumValueName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _enumValueRules, result);
-    return result.match;
+    genericChecker(declarationName, _enumValueRules, result);    
 }
 
-inline bool NamingConventionChecker::correctMethodName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectMethodName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _methodRules, result);
-    return result.match;
+    genericChecker(declarationName, _methodRules, result);    
 }
 
-inline bool NamingConventionChecker::correctVariableName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectVariableName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _varRules, result);
-    return result.match;
+    genericChecker(declarationName, _varRules, result);    
 }
 
-inline bool NamingConventionChecker::correctAttributeName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectAttributeName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _attributeRules, result);
-    return result.match;
+    genericChecker(declarationName, _attributeRules, result);    
 }
 
-inline bool NamingConventionChecker::correctUnionName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectUnionName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _unionRules, result);
-    return result.match;
+    genericChecker(declarationName, _unionRules, result);    
 }
 
-inline bool NamingConventionChecker::correctUnionValueName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectUnionValueName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _unionValueRules, result);
-    return result.match;
+    genericChecker(declarationName, _unionValueRules, result);    
 }
 
-inline bool NamingConventionChecker::correctNamespaceName(const std::string& s, Result& result) const
+inline void NamingConventionChecker::checkCorrectNamespaceName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(s, _namespaceRules, result);
-    return result.match;
+    genericChecker(declarationName, _namespaceRules, result);    
 }

@@ -14,29 +14,34 @@
 #include <string>
 #include <boost/regex.hpp>
 
+namespace NamingChecker
+{
+
 class NamingConventionChecker
 {
 public:  
 
+    typedef std::string ErrorMessage;
+
     struct Result
     {
         bool match;
-        std::string message;
+        ErrorMessage message;
     };
 
     NamingConventionChecker();
-    inline bool correctTypedefName(const std::string& s, Result& result) const;
-    inline bool correctClassName(const std::string& s, Result& result) const;
-    inline bool correctStructName(const std::string& s, Result& result) const;
-    inline bool correctGlobalConstName(const std::string& s, Result& result) const;
-    inline bool correctEnumTypeName(const std::string& s, Result& result) const;
-    inline bool correctEnumValueName(const std::string& s, Result& result) const;
-    inline bool correctMethodName(const std::string& s, Result& result) const;
-    inline bool correctVariableName(const std::string& s, Result& result) const;
-    inline bool correctAttributeName(const std::string& s, Result& result) const;
-    inline bool correctUnionName(const std::string& s, Result& result) const;
-    inline bool correctUnionValueName(const std::string& s, Result& result) const;
-    inline bool correctNamespaceName(const std::string& s, Result& result) const;
+    inline void checkCorrectTypedefName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectClassName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectStructName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectGlobalConstName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectEnumTypeName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectEnumValueName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectMethodName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectVariableName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectAttributeName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectUnionName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectUnionValueName(const std::string& declarationName, Result& result) const;
+    inline void checkCorrectNamespaceName(const std::string& declarationName, Result& result) const;
 
 private:
 
@@ -63,7 +68,7 @@ private:
     void ruleGlobalCont(Rules& rules) const;
     void ruleAttribute(Rules& rules) const;
     void setRules();
-    void genericChecker(const std::string& s, const Rules& rules, Result& result) const;
+    void genericChecker(const std::string& declarationName, const Rules& rules, Result& result) const;
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;
@@ -87,4 +92,5 @@ private:
 #include "NamingConventionCheckerInline.h"
 #undef NAMING_CONVENTION_CHECKER_INLINE_H
 
+} //end namespace
 #endif
