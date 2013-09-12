@@ -25,7 +25,7 @@ typedef enum
     AccessPrivate
 } AccessModifier;
 
-typedef std::string DeclarationName; 
+typedef std::string DeclarationName;
 
 struct GenericVisitor
 {

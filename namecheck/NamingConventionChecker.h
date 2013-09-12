@@ -19,7 +19,7 @@ namespace NamingChecker
 
 class NamingConventionChecker
 {
-public:  
+public:
 
     typedef std::string ErrorMessage;
 

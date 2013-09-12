@@ -41,35 +41,35 @@ inline void NamingConventionChecker::checkCorrectEnumTypeName(const std::string&
 
 inline void NamingConventionChecker::checkCorrectEnumValueName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _enumValueRules, result);    
+    genericChecker(declarationName, _enumValueRules, result);
 }
 
 inline void NamingConventionChecker::checkCorrectMethodName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _methodRules, result);    
+    genericChecker(declarationName, _methodRules, result);
 }
 
 inline void NamingConventionChecker::checkCorrectVariableName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _varRules, result);    
+    genericChecker(declarationName, _varRules, result);
 }
 
 inline void NamingConventionChecker::checkCorrectAttributeName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _attributeRules, result);    
+    genericChecker(declarationName, _attributeRules, result);
 }
 
 inline void NamingConventionChecker::checkCorrectUnionName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _unionRules, result);    
+    genericChecker(declarationName, _unionRules, result);
 }
 
 inline void NamingConventionChecker::checkCorrectUnionValueName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _unionValueRules, result);    
+    genericChecker(declarationName, _unionValueRules, result);
 }
 
 inline void NamingConventionChecker::checkCorrectNamespaceName(const std::string& declarationName, Result& result) const
 {
-    genericChecker(declarationName, _namespaceRules, result);    
+    genericChecker(declarationName, _namespaceRules, result);
 }

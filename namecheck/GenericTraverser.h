@@ -21,7 +21,7 @@ namespace GPPGeneric
 class GenericTraverser
 {
 public:
-    #include "GenericTraverserInline.h"
+#include "GenericTraverserInline.h"
 
 private:
     GenericVisitor* _visitor;
