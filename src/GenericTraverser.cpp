@@ -71,9 +71,9 @@ void GenericTraverser::traverse(const GenericTree ns) const
 inline void GenericTraverser::processTemplateDeclaration(const GenericTree decl) const
 {
     processDeclaration(DECL_TEMPLATE_RESULT(decl));
-    
+
     GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
-    for(int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
+    for (int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
     {
         processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
     }
@@ -256,7 +256,7 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
             _visitor->visitUnionValueDeclaration(decl, name, isConstant(decl), type_name);
         }
         else if ((TREE_CODE(CP_DECL_CONTEXT(decl)) == NAMESPACE_DECL)
-                    && isConstant(decl))
+                 && isConstant(decl))
         {
             _visitor->visitGlobalConstDeclaration(decl, name);
         }
@@ -295,11 +295,11 @@ void GenericTraverser::processTypeDeclArtificial(const GenericTree decl) const
 
     unionOrRecord(decl, type, name);
 
-    if(TREE_CODE(type) == TEMPLATE_TYPE_PARM || TREE_CODE(type) == TEMPLATE_TEMPLATE_PARM)
+    if (TREE_CODE(type) == TEMPLATE_TYPE_PARM || TREE_CODE(type) == TEMPLATE_TEMPLATE_PARM)
     {
-        if(name != "<unnamed>")
+        if (name != "<unnamed>")
             _visitor->visitTypeDeclaration(decl, name);
-    }  
+    }
     else
     {
         processAttributes(type);
@@ -310,20 +310,20 @@ void GenericTraverser::processTypeDeclArtificial(const GenericTree decl) const
 
 inline void GenericTraverser::functionOrMethod(const GenericTree decl, std::string& name) const
 {
-       if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
-        {
-            if (!DECL_COPY_CONSTRUCTOR_P(decl)
+    if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
+    {
+        if (!DECL_COPY_CONSTRUCTOR_P(decl)
                 && !DECL_CONSTRUCTOR_P(decl)
                 && !DECL_DESTRUCTOR_P(decl)
                 && !DECL_OVERLOADED_OPERATOR_P(decl)
                 && !DECL_CONV_FN_P(decl))
-            {
-                _visitor->visitMethodDeclaration(decl, getAccess(decl), name, isConstant(decl));
-            }
+        {
+            _visitor->visitMethodDeclaration(decl, getAccess(decl), name, isConstant(decl));
         }
-        else
-            _visitor->visitFunctionDeclaration(decl, name);
-    
+    }
+    else
+        _visitor->visitFunctionDeclaration(decl, name);
+
 }
 
 inline void GenericTraverser::processFunctionBody(const GenericTree decl) const
@@ -338,11 +338,11 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     assert(TREE_CODE(decl) == FUNCTION_DECL);
     std::string name;
     getName(decl, name);
- 
+
     functionOrMethod(decl, name);
     processParameters(decl);
     processFunctionBody(decl);
-    
+
 }
 
 inline void GenericTraverser::processParameters(const GenericTree decl) const

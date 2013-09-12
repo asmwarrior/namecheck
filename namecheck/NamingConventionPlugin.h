@@ -20,9 +20,9 @@ namespace GPPGeneric
 {
 
 class NamingConventionPlugin : public BasePlugin
-{  
+{
 private:
-    
+
     typedef NamingChecker::NamingConventionChecker::Result Result;
 
     virtual void visitStringLiteral(const GenericTree& decl, const DeclarationName& name);
@@ -42,7 +42,7 @@ private:
     virtual void visitNamespaceDeclaration(const GenericTree& decl, const DeclarationName& name);
     void setPluginWarning(const GenericTree& decl, const std::string& message);
 
-    NamingChecker::NamingConventionChecker _regex;    
+    NamingChecker::NamingConventionChecker _regex;
     static const char* _accessLabel[];
 };
 

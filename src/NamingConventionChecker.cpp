@@ -53,16 +53,16 @@ void NamingConventionChecker::setRules()
 
 void NamingConventionChecker::genericChecker(const std::string& declarationName, const Rules& rules, Result& result) const
 {
-    assert(rules.size() != 0);    
+    assert(rules.size() != 0);
     size_t i(0);
     do
     {
-        result.match = boost::regex_match(declarationName, _regexs[rules[i]]); 
+        result.match = boost::regex_match(declarationName, _regexs[rules[i]]);
         ++i;
     }
-    while(result.match && i < rules.size());
-    if(!result.match)        
-        result.message = _errmsgs[rules[i-1]];    
+    while (result.match && i < rules.size());
+    if (!result.match)
+        result.message = _errmsgs[rules[i - 1]];
     else
         result.message.clear();
 }
