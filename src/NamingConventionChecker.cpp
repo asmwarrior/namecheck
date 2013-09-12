@@ -10,6 +10,9 @@
 
 #include "NamingConventionChecker.h"
 
+namespace NamingChecker
+{
+
 NamingConventionChecker::NamingConventionChecker() : _regexs(NameRulesSize), _errmsgs(NameRulesSize)
 {
     _regexs[MatchStartWithUpper] = "^\\u.*?";
@@ -48,20 +51,20 @@ void NamingConventionChecker::setRules()
     ruleCamelCase(_namespaceRules);
 }
 
-void NamingConventionChecker::genericChecker(const std::string& s, const Rules& rules, Result& result) const
+void NamingConventionChecker::genericChecker(const std::string& declarationName, const Rules& rules, Result& result) const
 {
-    assert(rules.size() != 0);
-    bool matchWithRule;
+    assert(rules.size() != 0);    
     size_t i(0);
     do
     {
-        matchWithRule = boost::regex_match(s, _regexs[rules[i]]); 
+        result.match = boost::regex_match(declarationName, _regexs[rules[i]]); 
         ++i;
     }
-    while(matchWithRule && i < rules.size());
-    result.match = matchWithRule;
-    if(!matchWithRule)        
+    while(result.match && i < rules.size());
+    if(!result.match)        
         result.message = _errmsgs[rules[i-1]];    
+    else
+        result.message.clear();
 }
 
 void NamingConventionChecker::ruleCamelCase(Rules& rules) const
@@ -90,4 +93,6 @@ void NamingConventionChecker::ruleAttribute(Rules& rules) const
     rules.push_back(MatchStartUnderscore);
     rules.push_back(MatchWithoutUndescore);
     rules.push_back(MatchEndLower);
+}
+
 }
