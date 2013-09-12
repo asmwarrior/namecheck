@@ -338,11 +338,12 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     assert(TREE_CODE(decl) == FUNCTION_DECL);
     std::string name;
     getName(decl, name);
-
-    functionOrMethod(decl, name);
-    processParameters(decl);
-    processFunctionBody(decl);
-
+    if(name != "__static_initialization_and_destruction_0")
+    {
+        functionOrMethod(decl, name);
+        processParameters(decl);
+        processFunctionBody(decl);
+    }
 }
 
 inline void GenericTraverser::processParameters(const GenericTree decl) const
