@@ -20,12 +20,12 @@ extern "C"
 namespace GPPGeneric
 {
 
-void GCCPluginAPI::warning(const GenericTree& decl, const std::string& message)
+void GCCPluginApi::warning(const GenericTree& decl, const std::string& message)
 {
     warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
 }
 
-void GCCPluginAPI::error(const GenericTree& decl, const std::string& message)
+void GCCPluginApi::error(const GenericTree& decl, const std::string& message)
 {
     error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
 }

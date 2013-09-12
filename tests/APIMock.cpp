@@ -8,7 +8,7 @@
 using ::testing::_;
 using namespace GPPGeneric;
 
-class APIMock : public PluginAPI
+class APIMock : public PluginApi
 {
 public:
     MOCK_METHOD2(warning, void(const GenericTree& decl, const std::string& message));

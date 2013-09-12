@@ -46,9 +46,9 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree& decl, c
 {
     Result enumTypeResult;
     _regex.checkCorrectEnumTypeName(name, enumTypeResult);
-    if (!enumTypeResult.match)
+    if (!enumTypeResult._match)
     {
-        const std::string message = "Enum type declaration " + enumTypeResult.message + " in " + name;
+        const std::string message = "Enum type declaration " + enumTypeResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -57,20 +57,20 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree& decl, 
 {
     Result enumValueResult;
     _regex.checkCorrectEnumTypeName(name, enumValueResult);
-    if (!enumValueResult.match)
+    if (!enumValueResult._match)
     {
-        const std::string message = "Enum value declaration " + enumValueResult.message + " in " + name;
+        const std::string message = "Enum value declaration " + enumValueResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitVariableDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*is_const*/, const std::string& /*type_name*/)
+void NamingConventionPlugin::visitVariableDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Result variableResult;
     _regex.checkCorrectVariableName(name, variableResult);
-    if (!variableResult.match)
+    if (!variableResult._match)
     {
-        const std::string message = "Variable declaration " + variableResult.message + " in " + name;
+        const std::string message = "Variable declaration " + variableResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -79,9 +79,9 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree& decl
 {
     Result globalConstResult;
     _regex.checkCorrectGlobalConstName(name, globalConstResult);
-    if (!globalConstResult.match)
+    if (!globalConstResult._match)
     {
-        const std::string message = "Global const declaration " + globalConstResult.message + " in " + name;
+        const std::string message = "Global const declaration " + globalConstResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -90,20 +90,20 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree& decl, c
 {
     Result functionResult;
     _regex.checkCorrectMethodName(name, functionResult);
-    if (!functionResult.match)
+    if (!functionResult._match)
     {
-        const std::string message = "Function declaration " + functionResult.message + " in " + name;
+        const std::string message = "Function declaration " + functionResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitParameterDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*is_const*/)
+void NamingConventionPlugin::visitParameterDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*isConst*/)
 {
     Result parameterResult;
     _regex.checkCorrectVariableName(name, parameterResult);
-    if (!parameterResult.match)
+    if (!parameterResult._match)
     {
-        const std::string message = "Parameter declaration " + parameterResult.message + " in " + name;
+        const std::string message = "Parameter declaration " + parameterResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -112,9 +112,9 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree& decl, const
 {
     Result typeResult;
     _regex.checkCorrectTypedefName(name, typeResult);
-    if (!typeResult.match)
+    if (!typeResult._match)
     {
-        const std::string message = "Type declaration " + typeResult.message + " in " + name;
+        const std::string message = "Type declaration " + typeResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -123,9 +123,9 @@ void NamingConventionPlugin::visitClassDeclaration(const GenericTree& decl, cons
 {
     Result classResult;
     _regex.checkCorrectClassName(name, classResult);
-    if (!classResult.match)
+    if (!classResult._match)
     {
-        const std::string message = "Class declaration " + classResult.message + " in " + name;
+        const std::string message = "Class declaration " + classResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -134,9 +134,9 @@ void NamingConventionPlugin::visitStructDeclaration(const GenericTree& decl, con
 {
     Result structResult;
     _regex.checkCorrectStructName(name, structResult);
-    if (!structResult.match)
+    if (!structResult._match)
     {
-        const std::string message = "Struct declaration " + structResult.message + " in " + name;
+        const std::string message = "Struct declaration " + structResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -145,42 +145,42 @@ void NamingConventionPlugin::visitUnionDeclaration(const GenericTree& decl, cons
 {
     Result unionResult;
     _regex.checkCorrectUnionName(name, unionResult);
-    if (!unionResult.match)
+    if (!unionResult._match)
     {
-        const std::string message = "Union declaration " + unionResult.message + " in " + name;
+        const std::string message = "Union declaration " + unionResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*is_const*/, const std::string& /*type_name*/)
+void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Result unionValueResult;
     _regex.checkCorrectUnionValueName(name, unionValueResult);
-    if (!unionValueResult.match)
+    if (!unionValueResult._match)
     {
-        const std::string message = "Union value declaration " + unionValueResult.message + " in " + name;
+        const std::string message = "Union value declaration " + unionValueResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitMethodDeclaration(const GenericTree& decl, const AccessModifier access, const DeclarationName& name, bool /*is_const*/)
+void NamingConventionPlugin::visitMethodDeclaration(const GenericTree& decl, const AccessModifier access, const DeclarationName& name, bool /*isConst*/)
 {
     Result methodResult;
     _regex.checkCorrectMethodName(name, methodResult);
-    if (!methodResult.match)
+    if (!methodResult._match)
     {
-        const std::string message = "Method declaration " + methodResult.message + " in " + name + " (" +  _accessLabel[access] + ")";
+        const std::string message = "Method declaration " + methodResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
         setPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree& decl, const AccessModifier access, const DeclarationName& name, bool /*is_const*/, const std::string& /*type_name*/)
+void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree& decl, const AccessModifier access, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Result attributeResult;
     _regex.checkCorrectAttributeName(name, attributeResult);
-    if (!attributeResult.match)
+    if (!attributeResult._match)
     {
-        const std::string message = "Attribute declaration " + attributeResult.message + " in " + name + " (" +  _accessLabel[access] + ")";
+        const std::string message = "Attribute declaration " + attributeResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
         setPluginWarning(decl, message);
     }
 }
@@ -189,9 +189,9 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree& decl, 
 {
     Result namespaceResult;
     _regex.checkCorrectNamespaceName(name, namespaceResult);
-    if (!namespaceResult.match)
+    if (!namespaceResult._match)
     {
-        const std::string message = "Namespace declaration " + namespaceResult.message + " in " + name;
+        const std::string message = "Namespace declaration " + namespaceResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }

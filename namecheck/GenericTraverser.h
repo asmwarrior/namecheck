@@ -28,7 +28,7 @@ private:
 
     static void getName(const GenericTree decl, std::string& name);
     static bool isConstant(const GenericTree decl);
-    static void getTypeName(const GenericTree decl, std::string& type_name);
+    static void getTypeName(const GenericTree decl, std::string& returnName);
     static bool isReservedDeclaration(const GenericTree decl);
     static AccessModifier getAccess(const GenericTree decl);
 
@@ -54,9 +54,9 @@ private:
     void traverse(const GenericTree ns) const;
     void traverseNamespaces(const GenericTree level) const;
     void traverseDeclarations(const GenericTree level) const;
-    static void checkArrayTypeName(GenericTree decl, std::string& type_name);
-    static void checkReferenceTypeName(GenericTree decl, std::string& type_name);
-    static void checkPointerTypeName(GenericTree decl, std::string& type_name);
+    static void checkArrayTypeName(GenericTree decl, std::string& typeName);
+    static void checkReferenceTypeName(GenericTree decl, std::string& typeName);
+    static void checkPointerTypeName(GenericTree decl, std::string& typeName);
 
 };
 

@@ -18,7 +18,7 @@
 namespace GPPGeneric
 {
 
-class GCCPluginAPI: public PluginAPI
+class GCCPluginApi: public PluginApi
 {
     void warning(const GenericTree& decl, const std::string& message);
     void error(const GenericTree& decl, const std::string& message);

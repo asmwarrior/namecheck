@@ -18,17 +18,17 @@ extern "C"
 #include <memory>
 #include <iostream>
 
-int plugin_is_GPL_compatible;
+int plugin_is_GPL_compatible; //not rename
 
 using namespace GPPGeneric;
 
-static struct plugin_info naming_info =
+static struct plugin_info namingInfo =
 {
     "0.1",                        // version
     "Naming Convention Plugin"    // help
 };
 
-extern "C" void gate_callback(void*, void*)
+extern "C" void gateCallback(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
@@ -37,7 +37,7 @@ extern "C" void gate_callback(void*, void*)
     {
         GenericTraverser traverser;
         const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin());
-        const std::auto_ptr<PluginAPI> api(new GCCPluginAPI());
+        const std::auto_ptr<PluginApi> api(new GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
@@ -53,8 +53,8 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* /* versio
     asm_file_name = HOST_BIT_BUCKET;
 
     // Register callbacks.
-    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback, 0);
-    register_callback(info->base_name, PLUGIN_INFO, NULL, &naming_info);
+    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gateCallback, 0);
+    register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 
     return EXIT_SUCCESS;
 }

@@ -21,28 +21,28 @@ class BasePlugin: private GenericVisitor
 {
 public:
 
-    void initialize(PluginAPI* plugin);
+    void initialize(PluginApi* plugin);
     GenericVisitor* getVisitor();
 
 protected:
 
-    PluginAPI* _plugin;
+    PluginApi* _plugin;
 
 private:
 
     virtual void visitStringLiteral(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
-    virtual void visitVariableDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */, bool /* is_const */, const std::string& /*type_name*/) {}
+    virtual void visitVariableDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */, bool /* isConst */, const std::string& /*typeName*/) {}
     virtual void visitEnumTypeDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
     virtual void visitEnumValueDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
     virtual void visitFunctionDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
-    virtual void visitParameterDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */, bool /* is_const */) {}
+    virtual void visitParameterDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */, bool /* isConst */) {}
     virtual void visitTypeDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
     virtual void visitClassDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
     virtual void visitStructDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
     virtual void visitUnionDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
-    virtual void visitUnionValueDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */, bool /* is_const */, const std::string& /*type_name*/) {}
-    virtual void visitMethodDeclaration(const GenericTree& /* decl */, const AccessModifier /* access */, const DeclarationName& /* name */, bool /* is_const */) {}
-    virtual void visitAttributeDeclaration(const GenericTree& /* decl */, const AccessModifier /* access */, const DeclarationName& /* name */, bool /* is_const */, const std::string& /*type_name*/) {}
+    virtual void visitUnionValueDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */, bool /* isConst */, const std::string& /*typeName*/) {}
+    virtual void visitMethodDeclaration(const GenericTree& /* decl */, const AccessModifier /* access */, const DeclarationName& /* name */, bool /* isConst */) {}
+    virtual void visitAttributeDeclaration(const GenericTree& /* decl */, const AccessModifier /* access */, const DeclarationName& /* name */, bool /* isConst */, const std::string& /*typeName*/) {}
     virtual void visitNamespaceDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
     virtual void visitGlobalConstDeclaration(const GenericTree& /* decl */, const DeclarationName& /* name */) {}
 
