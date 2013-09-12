@@ -25,8 +25,8 @@ public:
 
     struct Result
     {
-        bool match;
-        ErrorMessage message;
+        bool _match;
+        ErrorMessage _message;
     };
 
     NamingConventionChecker();

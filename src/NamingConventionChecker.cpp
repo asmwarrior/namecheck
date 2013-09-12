@@ -57,14 +57,14 @@ void NamingConventionChecker::genericChecker(const std::string& declarationName,
     size_t i(0);
     do
     {
-        result.match = boost::regex_match(declarationName, _regexs[rules[i]]);
+        result._match = boost::regex_match(declarationName, _regexs[rules[i]]);
         ++i;
     }
-    while (result.match && i < rules.size());
-    if (!result.match)
-        result.message = _errmsgs[rules[i - 1]];
+    while (result._match && i < rules.size());
+    if (!result._match)
+        result._message = _errmsgs[rules[i - 1]];
     else
-        result.message.clear();
+        result._message.clear();
 }
 
 void NamingConventionChecker::ruleCamelCase(Rules& rules) const
@@ -95,4 +95,4 @@ void NamingConventionChecker::ruleAttribute(Rules& rules) const
     rules.push_back(MatchEndLower);
 }
 
-}
+} //end namespace

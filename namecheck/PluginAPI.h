@@ -17,7 +17,7 @@
 namespace GPPGeneric
 {
 
-struct PluginAPI
+struct PluginApi
 {
     virtual void warning(const GenericTree& decl, const std::string& message) = 0;
     virtual void error(const GenericTree& decl, const std::string& message) = 0;

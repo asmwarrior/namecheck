@@ -20,7 +20,7 @@ GenericVisitor* BasePlugin::getVisitor()
     return this;
 }
 
-void BasePlugin::initialize(PluginAPI* plugin)
+void BasePlugin::initialize(PluginApi* plugin)
 {
     _plugin = plugin;
 }
