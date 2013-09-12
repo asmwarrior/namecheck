@@ -333,19 +333,6 @@ inline void GenericTraverser::processFunctionBody(const GenericTree decl) const
         processBlock(declInitial);
 }
 
-void GenericTraverser::processFunction(const GenericTree decl) const
-{
-    assert(TREE_CODE(decl) == FUNCTION_DECL);
-    std::string name;
-    getName(decl, name);
-    if(name != "__static_initialization_and_destruction_0")
-    {
-        functionOrMethod(decl, name);
-        processParameters(decl);
-        processFunctionBody(decl);
-    }
-}
-
 inline void GenericTraverser::processParameters(const GenericTree decl) const
 {
     std::string name;
@@ -360,6 +347,19 @@ inline void GenericTraverser::processParameters(const GenericTree decl) const
         {
             _visitor->visitParameterDeclaration(d, name, isConstant(d));
         }
+    }
+}
+
+void GenericTraverser::processFunction(const GenericTree decl) const
+{
+    assert(TREE_CODE(decl) == FUNCTION_DECL);
+    std::string name;
+    getName(decl, name);
+    if(name != "__static_initialization_and_destruction_0")
+    {
+        functionOrMethod(decl, name);
+        processParameters(decl);
+        processFunctionBody(decl);
     }
 }
 
