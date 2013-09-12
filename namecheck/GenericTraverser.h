@@ -21,7 +21,7 @@ namespace GPPGeneric
 class GenericTraverser
 {
 public:
-    void traverse(const GenericTree ns, GenericVisitor* visitor);
+    #include "GenericTraverserInline.h"
 
 private:
     GenericVisitor* _visitor;
@@ -42,12 +42,22 @@ private:
     void processVariableDeclaration(const GenericTree decl) const;
     void processTemplateDeclaration(const GenericTree decl) const;
     void processType(const GenericTree decl) const;
-    void processClassStructUnion(const GenericTree decl) const;
+    void unionOrRecord(const GenericTree decl, const GenericTree type, std::string& name) const;
+    void processTypeDeclArtificial(const GenericTree decl) const;
     void processRecordDeclaration(const GenericTree decl) const;
+    void functionOrMethod(const GenericTree decl, std::string& name) const;
     void processFunction(const GenericTree decl) const;
+    void processFunctionBody(const GenericTree decl) const;
+    void processSubblocks(const GenericTree block) const;
     void processBlock(const GenericTree decl) const;
     void processBlockVariables(const GenericTree decl) const;
     void traverse(const GenericTree ns) const;
+    void traverseNamespaces(const GenericTree level) const;
+    void traverseDeclarations(const GenericTree level) const;
+    static void checkArrayTypeName(GenericTree decl, std::string& type_name);
+    static void checkReferenceTypeName(GenericTree decl, std::string& type_name);
+    static void checkPointerTypeName(GenericTree decl, std::string& type_name);
+
 };
 
 } // end GPPGeneric

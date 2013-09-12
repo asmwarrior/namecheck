@@ -2,8 +2,8 @@ const int CORRECT_GLOBAL(1);
 const int Incorrect_global(1);
 namespace Prueba
 {
-	const int correctns(1);
-	const int INCORRECT_NS(2);
+	const int incorrectns(1);
+	const int CORRECT_NS(2);
 };
 void test()
 {
