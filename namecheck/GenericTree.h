@@ -13,6 +13,13 @@
 
 #include <gmp.h>
 
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 7)
+#include "config.h"
+#undef HAVE_DECL_GETOPT
+#define HAVE_DECL_GETOPT 1
+#include "gcc-plugin.h"
+#include "tree.h"
+#else
 extern "C"
 {
 #include "config.h"
@@ -21,6 +28,7 @@ extern "C"
 #include "gcc-plugin.h"
 #include "tree.h"
 }
+#endif
 
 
 namespace GPPGeneric
