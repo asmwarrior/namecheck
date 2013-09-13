@@ -17,6 +17,10 @@
 namespace GPPGeneric
 {
 
+/**
+*  @brief Interface of plugin that makes the warning messages. 
+*
+*/
 struct PluginApi
 {
     virtual void warning(const GenericTree& decl, const std::string& message) = 0;
