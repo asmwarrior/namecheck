@@ -11,10 +11,16 @@
 #include "NamingConventionPlugin.h"
 #include "GCCPluginAPI.h"
 #include "GenericTraverser.h"
+
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 7)
+#include "cp/cp-tree.h"
+#else
 extern "C"
 {
 #include "cp/cp-tree.h"
 }
+#endif
+
 #include <memory>
 #include <iostream>
 
