@@ -26,6 +26,10 @@ extern "C"
 namespace GPPGeneric
 {
 
+/** 
+* @brief A tree node (is a pointer type).
+* 
+*/
 typedef tree GenericTree;
 
 }
