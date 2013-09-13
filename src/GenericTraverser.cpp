@@ -355,7 +355,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     assert(TREE_CODE(decl) == FUNCTION_DECL);
     std::string name;
     getName(decl, name);
-    if(name != "__static_initialization_and_destruction_0")
+    if (name != "__static_initialization_and_destruction_0")
     {
         functionOrMethod(decl, name);
         processParameters(decl);
