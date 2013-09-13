@@ -1,0 +1,10 @@
+Import ('env')
+
+env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.6/plugin/include'])
+
+name = 'namecheck'	
+inc = ['../namecheck']
+src = ['APIMock.cpp', '../src/BasePlugin.cpp', '../src/NamingConventionChecker.cpp', '../src/NamingConventionPlugin.cpp']
+deps = ['gtest_main', 'gmock', 'gtest','boost_regex']
+
+env.CreateTest(name, inc, src, deps)
