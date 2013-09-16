@@ -52,7 +52,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectTypedefName(const std::string& declarationName, Result& result) const;
+    void checkCorrectTypedefName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the class name is correct and return the result.
@@ -60,7 +60,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectClassName(const std::string& declarationName, Result& result) const;
+    void checkCorrectClassName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the struct name is correct and return the result.
@@ -68,7 +68,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectStructName(const std::string& declarationName, Result& result) const;
+    void checkCorrectStructName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the Global constant name is correct and return the result.
@@ -76,7 +76,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectGlobalConstName(const std::string& declarationName, Result& result) const;
+    void checkCorrectGlobalConstName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the enum name is correct and return the result.
@@ -84,7 +84,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectEnumTypeName(const std::string& declarationName, Result& result) const;
+    void checkCorrectEnumTypeName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the enum value name is correct and return the result.
@@ -92,7 +92,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectEnumValueName(const std::string& declarationName, Result& result) const;
+    void checkCorrectEnumValueName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the method name is correct and return the result.
@@ -100,7 +100,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectMethodName(const std::string& declarationName, Result& result) const;
+    void checkCorrectMethodName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the variable name is correct and return the result.
@@ -108,7 +108,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectVariableName(const std::string& declarationName, Result& result) const;
+    void checkCorrectVariableName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the attribute name is correct and return the result.
@@ -116,7 +116,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectAttributeName(const std::string& declarationName, Result& result) const;
+    void checkCorrectAttributeName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the union name is correct and return the result.
@@ -124,7 +124,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectUnionName(const std::string& declarationName, Result& result) const;
+    void checkCorrectUnionName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the union member name is correct and return the result.
@@ -132,7 +132,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectUnionValueName(const std::string& declarationName, Result& result) const;
+    void checkCorrectUnionValueName(const std::string& declarationName, Result& result) const;
 
     /**
     * @brief checks if the namespace name is correct and return the result.
@@ -140,7 +140,7 @@ public:
     * @param declarationName the name to check.
     * @param result the result of the check.
     */
-    inline void checkCorrectNamespaceName(const std::string& declarationName, Result& result) const;
+    void checkCorrectNamespaceName(const std::string& declarationName, Result& result) const;
 
 private:
 

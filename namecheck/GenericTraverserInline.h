@@ -1,11 +1,20 @@
 /**
-* @brief this sets the visitor and traverse the given namespace.
+* Taller Technologies - Software Development Company
+* Copyright 2013 - All rights reserved
 *
-*
-* @param ns this should be the global namespace to process.
-* @param visitor the visitor to set.
+* @file        NamingConventionCheckerInline.h
+* @author      Franco Riberi
+* @date        2013-09-13
+* @brief       Header file for namecheck providing GenericTraverser inline implementation.
 */
-inline void traverse(const GenericTree ns, GenericVisitor* visitor)
+
+#ifndef GENERIC_TRAVERSER_INLINE_H
+#error Internal header file
+#endif
+
+#include "GenericTraverser.h"
+
+inline void GenericTraverser::traverse(const GenericTree ns, GenericVisitor* visitor)
 {
     _visitor = visitor;
     traverse(ns);
