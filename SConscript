@@ -7,10 +7,10 @@ version = version.strip()
 
 if version == "4.6":
 	env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.6/plugin/include/'])
-	deps = ['gcc_4.6_plugin']
+	deps = ['gcc_plugin_4.6']
 else:
 	env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include/'])	
-	deps = ['gcc_4.7_plugin']
+	deps = ['gcc_plugin_4.7']
 
 name = 'namecheck'
 inc = env.Dir('./namecheck')
