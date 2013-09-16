@@ -30,18 +30,18 @@ public:
     };
 
     NamingConventionChecker();
-    inline void checkCorrectTypedefName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectClassName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectStructName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectGlobalConstName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectEnumTypeName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectEnumValueName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectMethodName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectVariableName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectAttributeName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectUnionName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectUnionValueName(const std::string& declarationName, Result& result) const;
-    inline void checkCorrectNamespaceName(const std::string& declarationName, Result& result) const;
+    void checkCorrectTypedefName(const std::string& declarationName, Result& result) const;
+    void checkCorrectClassName(const std::string& declarationName, Result& result) const;
+    void checkCorrectStructName(const std::string& declarationName, Result& result) const;
+    void checkCorrectGlobalConstName(const std::string& declarationName, Result& result) const;
+    void checkCorrectEnumTypeName(const std::string& declarationName, Result& result) const;
+    void checkCorrectEnumValueName(const std::string& declarationName, Result& result) const;
+    void checkCorrectMethodName(const std::string& declarationName, Result& result) const;
+    void checkCorrectVariableName(const std::string& declarationName, Result& result) const;
+    void checkCorrectAttributeName(const std::string& declarationName, Result& result) const;
+    void checkCorrectUnionName(const std::string& declarationName, Result& result) const;
+    void checkCorrectUnionValueName(const std::string& declarationName, Result& result) const;
+    void checkCorrectNamespaceName(const std::string& declarationName, Result& result) const;
 
 private:
 

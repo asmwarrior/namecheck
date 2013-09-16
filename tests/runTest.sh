@@ -49,11 +49,25 @@ echo "----------------- C code -----------------"
 for cFile in $(ls *.c) ;
 do
 	g++ -fplugin=../../../../../install/libs/libnamecheck.so -c $cFile &> $cFile""$retrievedExtension
-	if diff $cFile""$retrievedExtension $pathExpectedFolder""$cFile""$expectedExtension; then
-	 	echo -e $cFile "\e[1;32m"Test case OK"	\e[0m"
+
+	#check gcc version fot test	
+	gcc -dumpversion &> gccVersion
+	echo "4.7" &> versionExpected
+	if diff "./"gccVersion "./"versionExpected; then
+		if diff $cFile""$retrievedExtension $pathExpectedFolder""$cFile""$expectedExtension"Gcc4.7"; then
+	 		echo -e $cFile "\e[1;32m"Test case OK"	\e[0m"
+		else
+			echo -e $cFile "\e[0;31mTest case failed\e[0m"
+		fi
 	else
-		echo -e $cFile "\e[0;31mTest case failed\e[0m"
+		if diff $cFile""$retrievedExtension $pathExpectedFolder""$cFile""$expectedExtension"Gcc4.6"; then
+	 		echo -e $cFile "\e[1;32m"Test case OK"	\e[0m"
+		else
+			echo -e $cFile "\e[0;31mTest case failed\e[0m"
+		fi
 	fi
+	rm gccVersion
+	rm versionExpected
 	rm $cFile""$retrievedExtension
 done
 rm *.o
