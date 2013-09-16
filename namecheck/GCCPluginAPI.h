@@ -25,18 +25,18 @@ namespace GPPGeneric
 class GCCPluginApi: public PluginApi
 {
     /**
-    * @brief gives gcc the error and warning messages
+    * @brief gives gcc the warning message.
     *
-    * check if it is correct according to the checker, if not prints a warning (using the plugin)
+    *
     * @param decl is the tree of the name it is used for the warning message to print the location of the name
     * @param message the message to print
     */
     void warning(const GenericTree& decl, const std::string& message);
 
     /**
-    * @brief gives gcc the error and warning messages
+    * @brief gives gcc the error message.
     *
-    * check if it is correct according to the checker, if not prints a warning (using the plugin)
+    * 
     * @param decl is the tree of the name it is used for the warning message to print the location of the name
     * @param message the message to print
     */
