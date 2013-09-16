@@ -11,10 +11,18 @@
 #include "NamingConventionPlugin.h"
 #include "GCCPluginAPI.h"
 #include "GenericTraverser.h"
-extern "C"
-{
-#include "cp/cp-tree.h"
-}
+
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
+    extern "C"
+    {
+    #include "cp/cp-tree.h"
+    #include "plugin-version.h"
+    }
+#else
+    #include "cp/cp-tree.h"
+    #include "plugin-version.h"
+#endif
+
 #include <memory>
 #include <iostream>
 
@@ -28,7 +36,7 @@ static struct plugin_info namingInfo =
     "Naming Convention Plugin"    // help
 };
 
-extern "C" void gateCallback(void*, void*)
+extern "C" void gate_callback(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
@@ -45,15 +53,18 @@ extern "C" void gateCallback(void*, void*)
     exit(EXIT_SUCCESS);
 }
 
-extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* /* version */)
+extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 {
     std::cerr << "starting " << info->base_name << std::endl;
 
     // Disable assembly output.
     asm_file_name = HOST_BIT_BUCKET;
 
+    if (!plugin_default_version_check(version, &gcc_version))
+        return 1;
+
     // Register callbacks.
-    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gateCallback, 0);
+    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback, 0);
     register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 
     return EXIT_SUCCESS;

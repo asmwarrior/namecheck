@@ -21,7 +21,7 @@ namespace GPPGeneric
 class GenericTraverser
 {
 public:
-#include "GenericTraverserInline.h"
+    void traverse(const GenericTree ns, GenericVisitor* visitor);
 
 private:
     GenericVisitor* _visitor;
@@ -57,8 +57,11 @@ private:
     static void checkArrayTypeName(GenericTree decl, std::string& typeName);
     static void checkReferenceTypeName(GenericTree decl, std::string& typeName);
     static void checkPointerTypeName(GenericTree decl, std::string& typeName);
-
 };
+
+#define GENERIC_TRAVERSER_INLINE_H
+#include "GenericTraverserInline.h"
+#undef GENERIC_TRAVERSER_INLINE_H
 
 } // end GPPGeneric
 

@@ -9,14 +9,23 @@
 */
 
 #include "GenericTraverser.h"
-extern "C"
-{
-#include "tree-iterator.h"
-#include "cp/cp-tree.h"
-#include "c-family/c-common.h"
-#include "c-family/c-pragma.h"
-#include "diagnostic-core.h"
-}
+
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
+    extern "C"
+    {
+    #include "tree-iterator.h"
+    #include "cp/cp-tree.h"
+    #include "c-family/c-common.h"
+    #include "c-family/c-pragma.h"
+    #include "diagnostic-core.h"
+    }
+#else
+    #include "tree-iterator.h"
+    #include "cp/cp-tree.h"
+    #include "c-family/c-common.h"
+    #include "c-family/c-pragma.h"
+    #include "diagnostic-core.h"
+#endif
 #include "GenericTree.h"
 #include <cassert>
 #include <iostream>
@@ -355,7 +364,7 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     assert(TREE_CODE(decl) == FUNCTION_DECL);
     std::string name;
     getName(decl, name);
-    if(name != "__static_initialization_and_destruction_0")
+    if (name != "__static_initialization_and_destruction_0")
     {
         functionOrMethod(decl, name);
         processParameters(decl);
