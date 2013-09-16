@@ -13,21 +13,21 @@
 
 #include <gmp.h>
 
-#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 7)
-#include "config.h"
-#undef HAVE_DECL_GETOPT
-#define HAVE_DECL_GETOPT 1
-#include "gcc-plugin.h"
-#include "tree.h"
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
+	extern "C"
+	{
+	#include "config.h"
+	#undef HAVE_DECL_GETOPT
+	#define HAVE_DECL_GETOPT 1
+	#include "gcc-plugin.h"
+	#include "tree.h"
+	}
 #else
-extern "C"
-{
-#include "config.h"
-#undef HAVE_DECL_GETOPT
-#define HAVE_DECL_GETOPT 1
-#include "gcc-plugin.h"
-#include "tree.h"
-}
+	#include "config.h"
+	#undef HAVE_DECL_GETOPT
+	#define HAVE_DECL_GETOPT 1
+	#include "gcc-plugin.h"
+	#include "tree.h"
 #endif
 
 

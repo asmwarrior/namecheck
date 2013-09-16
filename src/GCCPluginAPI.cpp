@@ -11,13 +11,13 @@
 #include "GCCPluginAPI.h"
 #include <iostream>
 
-#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 7)
-#include "diagnostic-core.h"
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
+	extern "C"
+	{
+	#include "diagnostic-core.h"
+	}
 #else
-extern "C"
-{
-#include "diagnostic-core.h"
-}
+	#include "diagnostic-core.h"
 #endif
 
 namespace GPPGeneric
