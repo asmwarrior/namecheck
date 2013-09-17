@@ -11,8 +11,8 @@
 #ifndef GPP_GENERIC_VISITOR_H
 #define GPP_GENERIC_VISITOR_H
 
-#include "GenericTree.h"
-#include "PluginAPI.h"
+#include "Traverser/GenericTree.h"
+#include "Visitor/PluginAPI.h"
 #include <string>
 
 namespace GPPGeneric

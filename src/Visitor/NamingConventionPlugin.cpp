@@ -8,7 +8,7 @@
 * @brief       This is an implementation of NamingConventionPlugin class
 */
 
-#include "NamingConventionPlugin.h"
+#include "Visitor/NamingConventionPlugin.h"
 #include <string>
 #include <iostream>
 

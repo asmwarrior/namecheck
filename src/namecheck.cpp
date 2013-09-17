@@ -8,9 +8,9 @@
 * @brief       This is the main file that launches the namecheck plugin
 */
 
-#include "NamingConventionPlugin.h"
-#include "GCCPluginAPI.h"
-#include "GenericTraverser.h"
+#include "Visitor/NamingConventionPlugin.h"
+#include "Visitor/GCCPluginAPI.h"
+#include "Traverser/GenericTraverser.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
