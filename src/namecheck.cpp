@@ -10,7 +10,8 @@
 
 #include "Visitor/NamingConventionPlugin.h"
 #include "Visitor/GCCPluginAPI.h"
-#include "Traverser/GenericTraverser.h"
+#include "Traverser/TraverserCppThree.h"
+#include "Traverser/TraverserCppEleven.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
@@ -36,18 +37,35 @@ static struct plugin_info namingInfo =
     "Naming Convention Plugin"    // help
 };
 
-extern "C" void gate_callback(void*, void*)
+extern "C" void gate_callback_cpp_three(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
     //
     if (!(errorcount || sorrycount))
     {
-        GenericTraverser traverser;
+        TraverserCppThree traverser;
         const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin());
         const std::auto_ptr<PluginApi> api(new GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
+        traverser.traverse(global_namespace, plugin->getVisitor());
+    }
+    exit(EXIT_SUCCESS);
+}
+
+extern "C" void gate_callback_cpp_eleven(void*, void*)
+{
+    // If there were errors during compilation,
+    // let GCC handle the exit.
+    //
+    if (!(errorcount || sorrycount))
+    {
+        TraverserCppEleven traverser;
+        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin());
+        const std::auto_ptr<PluginApi> api(new GCCPluginApi());
+        plugin->initialize(api.get());
+        std::clog << "processing with c++11" << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
     }
     exit(EXIT_SUCCESS);
@@ -64,7 +82,11 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
         return 1;
 
     // Register callbacks.
-    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback, 0);
+    if(info->argc == 1 && (strcmp(info->argv->key,"c++0x") || strcmp(info->argv->key, "c++11")))
+        register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
+    else
+        register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
+    
     register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 
     return EXIT_SUCCESS;
