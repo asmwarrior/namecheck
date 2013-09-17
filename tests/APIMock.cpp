@@ -2,8 +2,8 @@
 #include <gmock/gmock.h>
 #define private public
 #define protected public
-#include "NamingConventionPlugin.h"
-#include "PluginAPI.h"
+#include "Visitor/NamingConventionPlugin.h"
+#include "Visitor/PluginAPI.h"
 
 using ::testing::_;
 using namespace GPPGeneric;

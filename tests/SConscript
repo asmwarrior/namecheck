@@ -14,7 +14,7 @@ else:
 
 name = 'namecheck'	
 inc = ['../namecheck']
-src = ['APIMock.cpp', '../src/BasePlugin.cpp', '../src/NamingConventionChecker.cpp', '../src/NamingConventionPlugin.cpp']
+src = ['APIMock.cpp', '../src/Visitor/BasePlugin.cpp', '../src/Visitor/NamingConventionChecker.cpp', '../src/Visitor/NamingConventionPlugin.cpp']
 deps += ['gtest_main', 'gmock', 'gtest','boost_regex']
 
 env.CreateTest(name, inc, src, deps)
