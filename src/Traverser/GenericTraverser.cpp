@@ -8,7 +8,8 @@
 * @brief       This is the implementation of GenericTraverser class
 */
 
-#include "GenericTraverser.h"
+#include "Traverser/GenericTraverser.h"
+#include "Traverser/GenericTree.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
@@ -26,7 +27,7 @@
     #include "c-family/c-pragma.h"
     #include "diagnostic-core.h"
 #endif
-#include "GenericTree.h"
+
 #include <cassert>
 #include <iostream>
 

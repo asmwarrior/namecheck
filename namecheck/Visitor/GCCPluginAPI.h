@@ -11,8 +11,8 @@
 #ifndef GCC_PLUGIN_API
 #define GCC_PLUGIN_API
 
-#include "PluginAPI.h"
-#include "GenericTree.h"
+#include "Visitor/PluginAPI.h"
+#include "Traverser/GenericTree.h"
 #include <string>
 
 namespace GPPGeneric

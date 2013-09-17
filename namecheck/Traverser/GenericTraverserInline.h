@@ -12,7 +12,7 @@
 #error Internal header file
 #endif
 
-#include "GenericTraverser.h"
+#include "Traverser/GenericTraverser.h"
 
 inline void GenericTraverser::traverse(const GenericTree ns, GenericVisitor* visitor)
 {
