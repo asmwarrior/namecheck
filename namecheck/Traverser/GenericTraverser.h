@@ -11,8 +11,8 @@
 #ifndef PLUGIN_MEDIATOR_H
 #define PLUGIN_MEDIATOR_H
 
-#include "GenericVisitor.h"
-#include "GenericTree.h"
+#include "Visitor/GenericVisitor.h"
+#include "Traverser/GenericTree.h"
 #include <string>
 
 namespace GPPGeneric
@@ -25,6 +25,13 @@ namespace GPPGeneric
 class GenericTraverser
 {
 public:
+    /**
+2   * @brief this sets the visitor and traverse the given namespace.
+3   *
+4   *
+5   * @param ns this should be the global namespace to process.
+6   * @param visitor the visitor to set.
+7   */
     void traverse(const GenericTree ns, GenericVisitor* visitor);
 
 private:

@@ -11,7 +11,7 @@
 #ifndef GPP_PLUGIN_API_H
 #define GPP_PLUGIN_API_H
 
-#include "GenericTree.h"
+#include "Traverser/GenericTree.h"
 #include <string>
 
 namespace GPPGeneric

@@ -12,9 +12,9 @@
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
 #include <string>
-#include "NamingConventionChecker.h"
-#include "BasePlugin.h"
-#include "GenericTree.h"
+#include "Visitor/NamingConventionChecker.h"
+#include "Visitor/BasePlugin.h"
+#include "Traverser/GenericTree.h"
 
 namespace GPPGeneric
 {
