@@ -8,7 +8,7 @@
 * @brief       This is an implementation of NamingConventionChecker class
 */
 
-#include "NamingConventionChecker.h"
+#include "Visitor/NamingConventionChecker.h"
 
 namespace NamingChecker
 {

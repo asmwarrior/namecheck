@@ -8,7 +8,7 @@
 * @brief       This is the implementation of GCCPluginAPI interface
 */
 
-#include "GCCPluginAPI.h"
+#include "Visitor/GCCPluginAPI.h"
 #include <iostream>
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)

@@ -12,7 +12,7 @@
 #error Internal header file
 #endif
 
-#include "NamingConventionChecker.h"
+#include "Visitor/NamingConventionChecker.h"
 
 inline void NamingConventionChecker::checkCorrectTypedefName(const std::string& declarationName, Result& result) const
 {
