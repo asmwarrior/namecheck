@@ -12,7 +12,8 @@
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
 #include <string>
-#include "NamingConventionChecker.h"
+#include "Rule.h"
+#include "RulesContainer.h"
 #include "BasePlugin.h"
 #include "GenericTree.h"
 
@@ -21,10 +22,12 @@ namespace GPPGeneric
 
 class NamingConventionPlugin : public BasePlugin
 {
+public:
+    NamingConventionPlugin();
+    
 private:
 
-    typedef NamingChecker::NamingConventionChecker::Result Result;
-
+    typedef NamingChecker::Result Result;    
     virtual void visitStringLiteral(const GenericTree& decl, const DeclarationName& name);
     virtual void visitVariableDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
     virtual void visitGlobalConstDeclaration(const GenericTree& decl, const DeclarationName& name);
@@ -42,8 +45,9 @@ private:
     virtual void visitNamespaceDeclaration(const GenericTree& decl, const DeclarationName& name);
     void setPluginWarning(const GenericTree& decl, const std::string& message);
 
-    NamingChecker::NamingConventionChecker _regex;
+    NamingChecker::RulesContainer _checker;
     static const char* _accessLabel[];
+
 };
 
 } // end GPPGeneric
