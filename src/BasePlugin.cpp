@@ -8,9 +8,8 @@
 * @brief       This is the implementation of BasePlugin interface
 */
 
-#include "BasePlugin.h"
-
 #include <iostream>
+#include "BasePlugin.h"
 
 namespace GPPGeneric
 {
