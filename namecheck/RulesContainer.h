@@ -19,10 +19,17 @@
 namespace NamingChecker
 {
 
+/**
+* @brief Represents a checker of Naming conventions.
+*
+*/
 class RulesContainer
 {
 public:
 
+    /**
+     * @brief Represents the statements to check
+     */
     typedef enum
     {
         ClassDeclaration,
@@ -42,13 +49,38 @@ public:
         CheckCount
     } DeclarationToCheck;
 
+    /**
+     * @brief Represents a configuration file
+     *
+     */
     typedef std::string FileName;
 
+    /**
+     * @brief Constructor of class
+     *
+     */
     RulesContainer();
+
+    /**
+     * @brief Destructor of class
+     *
+     */
     ~RulesContainer();
 
+    /**
+     * @brief This checks a declarationName with all the rules corresponding to statement
+     *
+     * @param decl statement to check
+     * @param declarationName name to check
+     * @param result to fill with the result
+     */
     void check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const;
 
+    /**
+     * @breif This initializes the vector of rules corresponding to each declaration types.
+     * 
+     * @param fileName configuration name file 
+     */
     void load(const FileName& fileName);
 
 private:
@@ -56,6 +88,10 @@ private:
     typedef std::list<Rule*> Rules;
     std::vector<Rules> _rules;
 
+    /**
+     * @brief Rules for known defects
+     *
+     */
     Rule* _upperCamelCaseRule;
     Rule* _lowerCamelCaseRule;
     Rule* _upperUnderscoreRule;

@@ -16,10 +16,18 @@
 namespace NamingChecker
 {
 
+/**
+ * @brief This class represents a lower underscore rule
+ *
+ */
 class LowerUnderscoreRule : public DefaultRules
 {
 public:
 
+	/**
+	 * @brief Constructor of class
+	 *
+	 */
     LowerUnderscoreRule();
 };
 

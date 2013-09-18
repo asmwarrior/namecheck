@@ -16,10 +16,17 @@
 namespace NamingChecker
 {
 
+/**
+ * @brief This class represents a upper camel case rule
+ */
 class UpperCamelCaseRule : public DefaultRules
 {
 public:
 
+	/**
+	 * @brief Constructor of class
+	 *
+	 */
     UpperCamelCaseRule();
 };
 

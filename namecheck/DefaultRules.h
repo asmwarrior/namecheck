@@ -16,10 +16,20 @@
 namespace NamingChecker
 {
 
+/**
+ * @brief Specific Rules
+ *
+ * This class represents a default rules 
+ */
 class DefaultRules : public Rule
 {
 public:
 
+	/**
+	 * @brief Constructor of class
+	 *	
+	 * @param length amount default rules
+	 */
     DefaultRules(const size_t length);
 
 private:
