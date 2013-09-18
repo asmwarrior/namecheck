@@ -14,14 +14,26 @@
 #include "UpperUnderscoreRule.h"
 #include "LowerUnderscoreRule.h"
 
-
 namespace NamingChecker
 {
 
 RulesContainer::RulesContainer() : _rules(CheckCount)
-{}
+{
+	_upperCamelCaseRule = new UpperCamelCaseRule();   
+    _lowerCamelCaseRule = new LowerCamelCaseRule();   
+    _upperUnderscoreRule = new UpperUnderscoreRule();   
+    _lowerUnderscoreRule = new LowerUnderscoreRule();   
+}
 
-void RulesContainer::check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const
+RulesContainer::~RulesContainer() 
+{
+	delete _upperCamelCaseRule;
+	delete _lowerCamelCaseRule;
+    delete _upperUnderscoreRule;
+    delete _lowerUnderscoreRule;
+}
+
+void RulesContainer::check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const 
 {
 	if (_rules[decl].size() != 0)
 	{
@@ -31,35 +43,28 @@ void RulesContainer::check(const DeclarationToCheck& decl, const std::string& de
 			(*it)->checkRule(declarationName, result);
 	        ++it;
 		}
-    	while (result._match && it != _rules[decl].end());
+     	while (result._match && it != _rules[decl].end());
 	}
 }
     
 static const size_t DECLARATION = 0;
 
 void RulesContainer::load(const FileName& fileName)
-{
-
-	//read file and fill _rules	
-	std::auto_ptr<Rule> upperCamelCaseRule(new UpperCamelCaseRule());	
-	std::auto_ptr<Rule> lowerCamelCaseRule(new LowerCamelCaseRule());	
-	std::auto_ptr<Rule> upperUnderscoreRule(new UpperUnderscoreRule());	
-	std::auto_ptr<Rule> lowerUnderscoreRule(new LowerUnderscoreRule());	
-	
-	_rules[ClassDeclaration].push_back(upperCamelCaseRule.get());	
-	_rules[VariableDeclaration].push_back(lowerCamelCaseRule.get());
-	_rules[EnumTypeDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[EnumValueDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[FunctionDeclaration].push_back(lowerCamelCaseRule.get());
-	_rules[ParameterDeclaration].push_back(lowerCamelCaseRule.get());
-	_rules[TypeDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[StructDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[UnionDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[UnionValueDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[MethodDeclaration].push_back(lowerCamelCaseRule.get());
-	_rules[AttributeDeclaration].push_back(lowerUnderscoreRule.get());
-	_rules[NamespaceDeclaration].push_back(upperCamelCaseRule.get());
-	_rules[GlobalConstDeclaration].push_back(upperUnderscoreRule.get());	
+{	
+	_rules[ClassDeclaration].push_back(_upperCamelCaseRule);	
+	_rules[VariableDeclaration].push_back(_lowerCamelCaseRule);
+	_rules[EnumTypeDeclaration].push_back(_upperCamelCaseRule);
+	_rules[EnumValueDeclaration].push_back(_upperCamelCaseRule);
+	_rules[FunctionDeclaration].push_back(_lowerCamelCaseRule);
+	_rules[ParameterDeclaration].push_back(_lowerCamelCaseRule);
+	_rules[TypeDeclaration].push_back(_upperCamelCaseRule);
+	_rules[StructDeclaration].push_back(_upperCamelCaseRule);
+	_rules[UnionDeclaration].push_back(_upperCamelCaseRule);
+	_rules[UnionValueDeclaration].push_back(_upperCamelCaseRule);
+	_rules[MethodDeclaration].push_back(_lowerCamelCaseRule);
+	_rules[AttributeDeclaration].push_back(_lowerUnderscoreRule);
+	_rules[NamespaceDeclaration].push_back(_upperCamelCaseRule);
+	_rules[GlobalConstDeclaration].push_back(_upperUnderscoreRule);	
 }
 
 } // end namespace

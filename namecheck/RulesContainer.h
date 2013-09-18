@@ -11,10 +11,10 @@
 #ifndef RULES_CONTAINER_H
 #define RULES_CONTAINER_H
 
-#include "Rule.h"
+
 #include <vector>
 #include <list>
-#include <string>
+#include "Rule.h"
 
 namespace NamingChecker
 {
@@ -45,6 +45,7 @@ public:
     typedef std::string FileName;
 
     RulesContainer();    
+    ~RulesContainer();    
 
     void check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const;
     
@@ -55,6 +56,10 @@ private:
     typedef std::list<Rule*> Rules;    
     std::vector<Rules> _rules;   
 
+    Rule* _upperCamelCaseRule;
+    Rule* _lowerCamelCaseRule;
+    Rule* _upperUnderscoreRule;
+    Rule* _lowerUnderscoreRule;
 };
 
 } // end namespace

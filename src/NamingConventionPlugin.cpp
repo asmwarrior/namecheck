@@ -64,7 +64,7 @@ void NamingConventionPlugin::visitStringLiteral(const GenericTree& decl, const D
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree& decl, const DeclarationName& name)
 {
-    Result enumTypeResult;
+    Result enumTypeResult;    
     _checker.check(NamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
