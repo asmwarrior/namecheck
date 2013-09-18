@@ -20,16 +20,16 @@ class DefaultRules : public Rule
 {
 public:
 
-    DefaultRules(const size_t length);   
-    
+    DefaultRules(const size_t length);
+
 private:
- 
+
     virtual void checkRule(const std::string& declarationName, Result& result) const;
 
 protected:
 
     typedef std::vector<BoostRegex> Regexs;
-    typedef std::vector<Message> ErrorMsgs; 
+    typedef std::vector<Message> ErrorMsgs;
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;

@@ -15,7 +15,7 @@ namespace NamingChecker
 
 UpperUnderscoreRule::UpperUnderscoreRule() : DefaultRules(3)
 {
-	_regexs[0] = "^\\u.*?";
+    _regexs[0] = "^\\u.*?";
     _regexs[1] = "[\\u_]*?";
     _regexs[2] = ".*?\\u$";
 

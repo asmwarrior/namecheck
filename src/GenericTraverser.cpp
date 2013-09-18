@@ -11,6 +11,7 @@
 #include <cassert>
 #include <iostream>
 #include "GenericTraverser.h"
+#include "GenericTree.h"
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
     {
@@ -27,7 +28,6 @@
     #include "c-family/c-pragma.h"
     #include "diagnostic-core.h"
 #endif
-#include "GenericTree.h"
 
 namespace GPPGeneric
 {

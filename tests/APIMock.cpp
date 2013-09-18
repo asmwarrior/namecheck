@@ -4,6 +4,10 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "NamingConventionPlugin.h"
+#include "UpperCamelCaseRule.h"
+#include "LowerCamelCaseRule.h"
+#include "UpperUnderscoreRule.h"
+#include "LowerUnderscoreRule.h"
 #include "PluginAPI.h"
 
 using ::testing::_;
@@ -103,69 +107,110 @@ TEST(PluginAPITests, AttributeNameTest)
     plugin.visitAttributeDeclaration(decl, access, "_amout_available", isConst, typeName);
 }
 
-// TEST(PluginAPITests, GlobalConstNameTest)
-// {
-//     NamingConventionPlugin plugin;
-//     APIMock api;
-//     GenericTree decl = NULL;
-//     plugin.initialize(&api);
-//     EXPECT_CALL(api, warning(_,_))
-//     .Times(4);
-//     //correct names
-//     plugin.visitGlobalConstDeclaration(decl, "AMOUT");
-//     plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT");
+TEST(PluginAPITests, GlobalConstNameTest)
+{
+    NamingConventionPlugin plugin;
+    APIMock api;
+    GenericTree decl = NULL;
+    plugin.initialize(&api);
+    EXPECT_CALL(api, warning(_,_))
+    .Times(4);
+    //correct names
+    plugin.visitGlobalConstDeclaration(decl, "AMOUT");
+    plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT");
 
-//     plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT_");
-//     plugin.visitGlobalConstDeclaration(decl, "_amout");
-//     plugin.visitGlobalConstDeclaration(decl, "Amount");
-//     plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT_2");
-// }
+    plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT_");
+    plugin.visitGlobalConstDeclaration(decl, "_amout");
+    plugin.visitGlobalConstDeclaration(decl, "Amount");
+    plugin.visitGlobalConstDeclaration(decl, "THIS_IS_A_CONSTANT_2");
+}
 
-// TEST(PluginAPITests, EnumTypeAndValueNamesTest)
-// {
-//     NamingConventionPlugin plugin;
-//     APIMock api;
-//     GenericTree decl = NULL;
-//     plugin.initialize(&api);
-//     EXPECT_CALL(api, warning(_,_))
-//     .Times(7); //two times per enum type
-//     //correct enum type names
-//     plugin.visitEnumTypeDeclaration(decl, "EnumType");
+TEST(PluginAPITests, EnumTypeAndValueNamesTest)
+{
+    NamingConventionPlugin plugin;
+    APIMock api;
+    GenericTree decl = NULL;
+    plugin.initialize(&api);
+    EXPECT_CALL(api, warning(_,_))
+    .Times(7); //two times per enum type
+    //correct enum type names
+    plugin.visitEnumTypeDeclaration(decl, "EnumType");
 
-//     //incorrect enum type names
-//     plugin.visitEnumTypeDeclaration(decl, "COLOR");
-//     plugin.visitEnumTypeDeclaration(decl, "_typeEnum");
-//     plugin.visitEnumTypeDeclaration(decl, "colorType");
+    //incorrect enum type names
+    plugin.visitEnumTypeDeclaration(decl, "COLOR");
+    plugin.visitEnumTypeDeclaration(decl, "_typeEnum");
+    plugin.visitEnumTypeDeclaration(decl, "colorType");
 
-//     //correct enum value names
-//     plugin.visitEnumValueDeclaration(decl, "Red");
-//     plugin.visitEnumValueDeclaration(decl, "Blue");
-//     plugin.visitEnumValueDeclaration(decl, "BrownAndBlack");
-//     plugin.visitEnumValueDeclaration(decl, "Brown_AndB  _lack");
+    //correct enum value names
+    plugin.visitEnumValueDeclaration(decl, "Red");
+    plugin.visitEnumValueDeclaration(decl, "Blue");
+    plugin.visitEnumValueDeclaration(decl, "BrownAndBlack");
+    plugin.visitEnumValueDeclaration(decl, "Brown_AndB  _lack");
 
-//     //incorrect enum value names
-//     plugin.visitEnumValueDeclaration(decl, "THIS_IS_A_ENUM_VALUE");
-//     plugin.visitEnumValueDeclaration(decl, "_Value");
-//     plugin.visitEnumValueDeclaration(decl, "value");
-// }
+    //incorrect enum value names
+    plugin.visitEnumValueDeclaration(decl, "THIS_IS_A_ENUM_VALUE");
+    plugin.visitEnumValueDeclaration(decl, "_Value");
+    plugin.visitEnumValueDeclaration(decl, "value");
+}
 
-// TEST(PluginAPITests, TypedefNamesTest)
-// {
-//     NamingConventionPlugin plugin;
-//     APIMock api;
-//     GenericTree decl = NULL;
-//     plugin.initialize(&api);
-//     EXPECT_CALL(api, warning(_,_))
-//     .Times(6);
-//     //correct names
-//     plugin.visitTypeDeclaration(decl, "Regexs");
-//     plugin.visitTypeDeclaration(decl, "GenericBackends");
+TEST(PluginAPITests, TypedefNamesTest)
+{
+    NamingConventionPlugin plugin;
+    APIMock api;
+    GenericTree decl = NULL;
+    plugin.initialize(&api);
+    EXPECT_CALL(api, warning(_,_))
+    .Times(6);
+    //correct names
+    plugin.visitTypeDeclaration(decl, "Regexs");
+    plugin.visitTypeDeclaration(decl, "GenericBackends");
 
-//     //incorrect names
-//     plugin.visitTypeDeclaration(decl, "REGEXS");
-//     plugin.visitTypeDeclaration(decl, "_REGEXS");
-//     plugin.visitTypeDeclaration(decl, "_Regexs");
-//     plugin.visitTypeDeclaration(decl, "regexs");
-//     plugin.visitTypeDeclaration(decl, "regexs_");
-//     plugin.visitTypeDeclaration(decl, "Regexs_");
-// }
+    //incorrect names
+    plugin.visitTypeDeclaration(decl, "REGEXS");
+    plugin.visitTypeDeclaration(decl, "_REGEXS");
+    plugin.visitTypeDeclaration(decl, "_Regexs");
+    plugin.visitTypeDeclaration(decl, "regexs");
+    plugin.visitTypeDeclaration(decl, "regexs_");
+    plugin.visitTypeDeclaration(decl, "Regexs_");
+}
+
+
+TEST(RulesTest, UpperCamelCase)
+{
+   NamingChecker::UpperCamelCaseRule upperCamelCase;
+   NamingChecker::Result res;
+   upperCamelCase.checkRule("MyClassExample", res);
+   EXPECT_EQ(res._match, true);
+   upperCamelCase.checkRule("myClass", res);
+   EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, LowerCamelCase)
+{
+   NamingChecker::LowerCamelCaseRule lowerCamelCase;
+   NamingChecker::Result res;
+   lowerCamelCase.checkRule("pushInside", res);
+   EXPECT_EQ(res._match, true);
+   lowerCamelCase.checkRule("push_inside", res);
+   EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, UpperUnderscore)
+{
+   NamingChecker::UpperUnderscoreRule upperUnderscore;
+   NamingChecker::Result res;
+   upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
+   EXPECT_EQ(res._match, true);
+   upperUnderscore.checkRule("this_is_my_const", res);
+   EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, LowerUnderscore)
+{
+   NamingChecker::LowerUnderscoreRule lowerUnderscore;
+   NamingChecker::Result res;
+   lowerUnderscore.checkRule("_regex", res);
+   EXPECT_EQ(res._match, true);
+   lowerUnderscore.checkRule("specificRegex", res);
+   EXPECT_EQ(res._match, false);
+}

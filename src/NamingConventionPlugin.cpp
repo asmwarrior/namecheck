@@ -64,7 +64,7 @@ void NamingConventionPlugin::visitStringLiteral(const GenericTree& decl, const D
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree& decl, const DeclarationName& name)
 {
-    Result enumTypeResult;    
+    Result enumTypeResult;
     _checker.check(NamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
@@ -120,7 +120,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree& decl, c
 void NamingConventionPlugin::visitParameterDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*isConst*/)
 {
     Result parameterResult;
-    _checker.check(NamingChecker::RulesContainer::ParameterDeclaration ,name, parameterResult);
+    _checker.check(NamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
         const std::string message = "Parameter declaration " + parameterResult._message + " in " + name;

@@ -39,22 +39,22 @@ public:
         AttributeDeclaration,
         NamespaceDeclaration,
         GlobalConstDeclaration,
-        CheckCount    
+        CheckCount
     } DeclarationToCheck;
-    
+
     typedef std::string FileName;
 
-    RulesContainer();    
-    ~RulesContainer();    
+    RulesContainer();
+    ~RulesContainer();
 
     void check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const;
-    
+
     void load(const FileName& fileName);
 
 private:
 
-    typedef std::list<Rule*> Rules;    
-    std::vector<Rules> _rules;   
+    typedef std::list<Rule*> Rules;
+    std::vector<Rules> _rules;
 
     Rule* _upperCamelCaseRule;
     Rule* _lowerCamelCaseRule;

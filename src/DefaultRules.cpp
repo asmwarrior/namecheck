@@ -27,7 +27,7 @@ void DefaultRules::checkRule(const std::string& declarationName, Result& result)
     }
     while (result._match && i < _regexs.size());
     if (!result._match)
-        result._message = _errmsgs[i - 1]; 
+        result._message = _errmsgs[i - 1];
     else
         result._message.clear();
 }

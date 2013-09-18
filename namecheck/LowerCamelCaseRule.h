@@ -16,10 +16,10 @@
 namespace NamingChecker
 {
 
-class LowerCamelCaseRule : public DefaultRules	
+class LowerCamelCaseRule : public DefaultRules
 {
 public:
-    
+
     LowerCamelCaseRule();
 };
 

@@ -16,18 +16,18 @@
 namespace NamingChecker
 {
 
-typedef boost::regex BoostRegex;    
+typedef boost::regex BoostRegex;
 typedef std::string Message;
 
 struct Result
 {
-	bool _match;
-	Message _message;
+    bool _match;
+    Message _message;
 };
 
 struct Rule
 {
-    virtual void checkRule(const std::string& declarationName, Result& result) const = 0;    
+    virtual void checkRule(const std::string& declarationName, Result& result) const = 0;
 };
 
 } //end namespace

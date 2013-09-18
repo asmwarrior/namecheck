@@ -22,7 +22,7 @@ private:
 
     virtual void checkRule(const std::string& declarationName, Result& result) const;
 
-	BoostRegex _regex;
+    BoostRegex _regex;
     Message _errmsg;
 };
 

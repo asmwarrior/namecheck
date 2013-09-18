@@ -24,10 +24,10 @@ class NamingConventionPlugin : public BasePlugin
 {
 public:
     NamingConventionPlugin();
-    
+
 private:
 
-    typedef NamingChecker::Result Result;    
+    typedef NamingChecker::Result Result;
     virtual void visitStringLiteral(const GenericTree& decl, const DeclarationName& name);
     virtual void visitVariableDeclaration(const GenericTree& decl, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
     virtual void visitGlobalConstDeclaration(const GenericTree& decl, const DeclarationName& name);

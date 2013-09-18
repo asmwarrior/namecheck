@@ -15,7 +15,7 @@ namespace NamingChecker
 
 LowerCamelCaseRule::LowerCamelCaseRule() : DefaultRules(3)
 {
-	_regexs[0] = "^\\l.*?";
+    _regexs[0] = "^\\l.*?";
     _regexs[1] = "^_?[\\l\\u\\d]*$";
     _regexs[2] = ".*?[^\\u_\\d]\\l?$";
 
