@@ -23,7 +23,7 @@ public:
 
 TEST(PluginAPITests, ClassNameTest)
 {
-    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -43,7 +43,7 @@ TEST(PluginAPITests, ClassNameTest)
 
 TEST(PluginAPITests, VariableAndMethodsNamesTest)
 {
-    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -83,7 +83,7 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
 
 TEST(PluginAPITests, AttributeNameTest)
 {
-    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     const bool isConst = false;
@@ -110,7 +110,7 @@ TEST(PluginAPITests, AttributeNameTest)
 
 TEST(PluginAPITests, GlobalConstNameTest)
 {
-    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -128,7 +128,7 @@ TEST(PluginAPITests, GlobalConstNameTest)
 
 TEST(PluginAPITests, EnumTypeAndValueNamesTest)
 {
-    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -156,7 +156,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
 
 TEST(PluginAPITests, TypedefNamesTest)
 {
-    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
