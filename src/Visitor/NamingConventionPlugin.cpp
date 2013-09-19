@@ -46,9 +46,9 @@
 namespace GPPGeneric
 {
 
-NamingConventionPlugin::NamingConventionPlugin()
+NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
 {
-    _checker.load("pathFile");
+    _checker.load(pathFile.c_str());
 }
 
 inline void NamingConventionPlugin::setPluginWarning(const GenericTree decl, const DeclarationName& message)

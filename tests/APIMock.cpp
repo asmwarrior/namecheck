@@ -22,7 +22,7 @@ public:
 
 TEST(PluginAPITests, ClassNameTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -42,7 +42,7 @@ TEST(PluginAPITests, ClassNameTest)
 
 TEST(PluginAPITests, VariableAndMethodsNamesTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -82,7 +82,7 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
 
 TEST(PluginAPITests, AttributeNameTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     const bool isConst = false;
@@ -109,7 +109,7 @@ TEST(PluginAPITests, AttributeNameTest)
 
 TEST(PluginAPITests, GlobalConstNameTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -127,7 +127,7 @@ TEST(PluginAPITests, GlobalConstNameTest)
 
 TEST(PluginAPITests, EnumTypeAndValueNamesTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -155,7 +155,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
 
 TEST(PluginAPITests, TypedefNamesTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/exampleconffile/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
