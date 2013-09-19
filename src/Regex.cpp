@@ -14,6 +14,9 @@
 namespace NamingChecker
 {
 
+Regex::Regex(std::string reg, std::string msg): _regex(reg), _errmsg(msg)
+{}
+
 void Regex::checkRule(const std::string& declarationName, Result& result) const
 {
     result._match = boost::regex_match(declarationName, _regex);
