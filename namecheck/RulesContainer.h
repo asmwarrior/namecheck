@@ -79,13 +79,18 @@ public:
     void check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const;
 
     /**
-     * @breif This initializes the vector of rules corresponding to each declaration types.
+     * @brief This initializes the vector of rules corresponding to each declaration types.
      * 
      * @param fileName configuration name file 
      */
     void load(const FileName& fileName);
 
 private:
+    /**
+     * @brief This initializes process the vector corresponding to a line in the config file.
+     * 
+     * @param fileLine the vector representing the line of the file to process 
+     */
     void process(const StringVector& fileLine);
     DeclarationMap _declarationMap;
     typedef std::list<Rule*> Rules;    
