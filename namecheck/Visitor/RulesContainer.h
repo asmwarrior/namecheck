@@ -16,6 +16,7 @@
 #include <list>
 #include <string>
 #include "Visitor/Rule.h"
+#include "Visitor/Exceptions.h"
 
 namespace NamingChecker
 {

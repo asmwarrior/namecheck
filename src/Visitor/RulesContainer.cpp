@@ -16,7 +16,6 @@
 #include "Visitor/LowerCamelCaseRule.h"
 #include "Visitor/UpperUnderscoreRule.h"
 #include "Visitor/LowerUnderscoreRule.h"
-#include "Visitor/Exceptions.h"
 
 using mili::operator>>;
 
