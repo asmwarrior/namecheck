@@ -49,7 +49,7 @@ struct Rule
  	 * @param result to fill with the result
  	 */
     virtual void checkRule(const std::string& declarationName, Result& result) const = 0;
-    virtual ~Rule(){delete this;}    
+    virtual ~Rule(){}    
 };
 
 } //end namespace

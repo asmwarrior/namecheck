@@ -112,7 +112,8 @@ void RulesContainer::process(const StringVector& fileLine)
 void RulesContainer::load(const FileName& fileName)
 {   
     std::ifstream ifs;
-    ifs.open(fileName.c_str());
+    ifs.open("/home/diaz/fudepan-build/projects/namecheck/exampleconffile/conffile.csv");
+    // ifs.open(fileName.c_str());
     if(!ifs)
         std::cerr << "aaaaaaaaaaaaaaaaaaaa"  << std::endl;
 
