@@ -15,7 +15,7 @@ else:
 name = 'namecheck'	
 inc = ['../namecheck']
 src = ['APIMock.cpp', '../src/BasePlugin.cpp', '../src/RulesContainer.cpp', '../src/NamingConventionPlugin.cpp']
-src += ['../src/UpperUnderscoreRule.cpp', '../src/UpperCamelCaseRule.cpp', '../src/LowerUnderscoreRule.cpp', '../src/LowerCamelCaseRule.cpp', '../src/DefaultRules.cpp']
-deps += ['gtest_main', 'gmock', 'gtest','boost_regex']
+src += ['../src/UpperUnderscoreRule.cpp', '../src/UpperCamelCaseRule.cpp', '../src/LowerUnderscoreRule.cpp', '../src/LowerCamelCaseRule.cpp', '../src/DefaultRules.cpp', '../src/Regex.cpp']
+deps += ['gtest_main', 'gmock', 'gtest','boost_regex', 'mili']
 
 env.CreateTest(name, inc, src, deps)
