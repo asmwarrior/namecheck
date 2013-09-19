@@ -31,6 +31,7 @@ int plugin_is_GPL_compatible; //not rename
 
 using namespace GPPGeneric;
 
+std::string pathFile;
 static struct plugin_info namingInfo =
 {
     "0.1",                        // version
@@ -45,7 +46,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
     if (!(errorcount || sorrycount))
     {
         TraverserCppThree traverser;
-        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin());
+        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin(pathFile));
         const std::auto_ptr<PluginApi> api(new GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
@@ -62,7 +63,7 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     if (!(errorcount || sorrycount))
     {
         TraverserCppEleven traverser;
-        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin());
+        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin(pathFile));
         const std::auto_ptr<PluginApi> api(new GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing with c++11" << main_input_filename << std::endl;
@@ -81,12 +82,21 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     if (!plugin_default_version_check(version, &gcc_version))
         return 1;
 
-    // Register callbacks.
-    if(info->argc == 1 && (strcmp(info->argv->key,"c++0x") || strcmp(info->argv->key, "c++11")))
-        register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
-    else
-        register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
+    if((info->argc == 1) && !(strcmp(info->argv->key, "path")))
+    {
+        pathFile = info->argv->value;
+    }
+
     
+
+
+    //implement this when trying to execute the plugin with c++0x or c++03
+    // if(info->argc == 1 && (strcmp(info->argv->key,"c++0x") || strcmp(info->argv->key, "c++11")))
+    //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
+    // else
+    //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
+    
+    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
     register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 
     return EXIT_SUCCESS;
