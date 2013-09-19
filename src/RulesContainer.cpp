@@ -9,7 +9,6 @@
 */
 #include <fstream>
 #include <mili/mili.h>
-#include "mili/stream_utils.h"
 
 #include "RulesContainer.h"
 #include "Regex.h"
@@ -18,12 +17,28 @@
 #include "UpperUnderscoreRule.h"
 #include "LowerUnderscoreRule.h"
 
+using mili::operator>>;
 
 namespace NamingChecker
 {
 
 RulesContainer::RulesContainer() : _rules(CheckCount)
-{}
+{
+    _declarationMap["ClassDeclaration"] = ClassDeclaration;
+    _declarationMap["VariableDeclaration"] = VariableDeclaration;
+    _declarationMap["EnumTypeDeclaration"] = EnumTypeDeclaration;
+    _declarationMap["EnumValueDeclaration"] = EnumValueDeclaration;
+    _declarationMap["FunctionDeclaration"] = FunctionDeclaration;
+    _declarationMap["ParameterDeclaration"] = ParameterDeclaration;
+    _declarationMap["TypeDeclaration"] = TypeDeclaration;
+    _declarationMap["StructDeclaration"] = StructDeclaration;
+    _declarationMap["UnionDeclaration"] = UnionDeclaration;
+    _declarationMap["UnionValueDeclaration"] = UnionValueDeclaration;
+    _declarationMap["MethodDeclaration"] = MethodDeclaration;
+    _declarationMap["AttributeDeclaration"] = AttributeDeclaration;
+    _declarationMap["NamespaceDeclaration"] = NamespaceDeclaration;
+    _declarationMap["GlobalConstDeclaration"] = GlobalConstDeclaration;
+}
 
 
 RulesContainer::~RulesContainer() 
@@ -97,13 +112,18 @@ void RulesContainer::process(const StringVector& fileLine)
 
 void RulesContainer::load(const FileName& fileName)
 {   
-    std::ifstream ifs(fileName.c_str());
+    std::ifstream ifs;
+    ifs.open("/home/diaz/fudepan-build/install/libs/conffile.csv");
+    if(!ifs)
+        std::cerr << "aaaaaaaaaaaaaaaaaaaa"  << std::endl;
+    // std::ifstream ifs(fileName.c_str());
 
     StringVector fileLine;
 
-    while (ifs >> fileLine)  /* PROVIDED BY MiLi */
+    while (ifs >> mili::Separator(fileLine, ','))  /* PROVIDED BY MiLi */
     {
         process(fileLine);
+        fileLine.clear();
     }
 }
 

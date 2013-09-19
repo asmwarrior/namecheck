@@ -28,7 +28,7 @@ struct Result
 struct Rule
 {
     virtual void checkRule(const std::string& declarationName, Result& result) const = 0;
-    virtual ~Rule();    
+    virtual ~Rule(){delete this;}    
 };
 
 } //end namespace
