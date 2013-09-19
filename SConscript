@@ -17,5 +17,5 @@ inc = env.Dir('./namecheck')
 ext_inc = []
 src = env.Glob('src/*.cpp')
 	
-deps += ['boost_regex']
+deps += ['boost_regex', 'mili']
 env.CreateSharedLibrary(name, inc, ext_inc, src, deps)

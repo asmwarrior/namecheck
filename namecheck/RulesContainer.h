@@ -14,6 +14,7 @@
 
 #include <vector>
 #include <list>
+#include <string>
 #include "Rule.h"
 
 namespace NamingChecker
@@ -42,8 +43,9 @@ public:
         CheckCount    
     } DeclarationToCheck;
     
+    typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
     typedef std::string FileName;
-
+    typedef std::vector<std::string> StringVector;
     RulesContainer();    
     ~RulesContainer();    
 
@@ -52,14 +54,10 @@ public:
     void load(const FileName& fileName);
 
 private:
-
+    void process(const StringVector& fileLine);
+    DeclarationMap _declarationMap;
     typedef std::list<Rule*> Rules;    
     std::vector<Rules> _rules;   
-
-    Rule* _upperCamelCaseRule;
-    Rule* _lowerCamelCaseRule;
-    Rule* _upperUnderscoreRule;
-    Rule* _lowerUnderscoreRule;
 };
 
 } // end namespace
