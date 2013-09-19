@@ -16,6 +16,7 @@
 #include "Visitor/LowerCamelCaseRule.h"
 #include "Visitor/UpperUnderscoreRule.h"
 #include "Visitor/LowerUnderscoreRule.h"
+#include "Visitor/Exceptions.h"
 
 using mili::operator>>;
 
@@ -113,12 +114,9 @@ void RulesContainer::load(const FileName& fileName)
 {   
     std::ifstream ifs;
     ifs.open(fileName.c_str());
-    // ifs.open(fileName.c_str());
-    if(!ifs)
-        std::cerr << "aaaaaaaaaaaaaaaaaaaa"  << std::endl;
-
+    mili::assert_throw<FileNotFound>(ifs);    
+    
     StringVector fileLine;
-
     while (ifs >> mili::Separator(fileLine, ','))  /* PROVIDED BY MiLi */
     {
         process(fileLine);
