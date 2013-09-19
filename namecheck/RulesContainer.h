@@ -14,6 +14,7 @@
 
 #include <vector>
 #include <list>
+#include <string>
 #include "Rule.h"
 
 namespace NamingChecker
@@ -46,20 +47,21 @@ public:
         AttributeDeclaration,
         NamespaceDeclaration,
         GlobalConstDeclaration,
-        CheckCount
+        CheckCount    
     } DeclarationToCheck;
-
-    /**
+   
+    typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
+	 /**
      * @brief Represents a configuration file
      *
      */
     typedef std::string FileName;
-
-    /**
+    typedef std::vector<std::string> StringVector;
+	/**
      * @brief Constructor of class
      *
      */
-    RulesContainer();
+    RulesContainer();     
 
     /**
      * @brief Destructor of class
@@ -84,18 +86,10 @@ public:
     void load(const FileName& fileName);
 
 private:
-
-    typedef std::list<Rule*> Rules;
-    std::vector<Rules> _rules;
-
-    /**
-     * @brief Rules for known defects
-     *
-     */
-    Rule* _upperCamelCaseRule;
-    Rule* _lowerCamelCaseRule;
-    Rule* _upperUnderscoreRule;
-    Rule* _lowerUnderscoreRule;
+    void process(const StringVector& fileLine);
+    DeclarationMap _declarationMap;
+    typedef std::list<Rule*> Rules;    
+    std::vector<Rules> _rules;   
 };
 
 } // end namespace
