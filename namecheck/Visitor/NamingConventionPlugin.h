@@ -12,7 +12,8 @@
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
 #include <string>
-#include "Visitor/NamingConventionChecker.h"
+#include "Visitor/Rule.h"
+#include "Visitor/RulesContainer.h"
 #include "Visitor/BasePlugin.h"
 #include "Traverser/GenericTree.h"
 
@@ -21,9 +22,12 @@ namespace GPPGeneric
 
 class NamingConventionPlugin : public BasePlugin
 {
+public:
+    NamingConventionPlugin();
+
 private:
 
-    typedef NamingChecker::NamingConventionChecker::Result Result;
+    typedef NamingChecker::Result Result;
 
     /**
     * @brief check String Literals
@@ -173,7 +177,7 @@ private:
     * 
     * This is the object that checks the naming conventions
     */
-    NamingChecker::NamingConventionChecker _regex;
+     NamingChecker::RulesContainer _checker;
 
     /** 
     * @brief Names of access visibility

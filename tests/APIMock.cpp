@@ -1,8 +1,13 @@
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #define private public
 #define protected public
+
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include "Visitor/NamingConventionPlugin.h"
+#include "Visitor/UpperCamelCaseRule.h"
+#include "Visitor/LowerCamelCaseRule.h"
+#include "Visitor/UpperUnderscoreRule.h"
+#include "Visitor/LowerUnderscoreRule.h"
 #include "Visitor/PluginAPI.h"
 
 using ::testing::_;
@@ -167,4 +172,45 @@ TEST(PluginAPITests, TypedefNamesTest)
     plugin.visitTypeDeclaration(decl, "regexs");
     plugin.visitTypeDeclaration(decl, "regexs_");
     plugin.visitTypeDeclaration(decl, "Regexs_");
+}
+
+
+TEST(RulesTest, UpperCamelCase)
+{
+   NamingChecker::UpperCamelCaseRule upperCamelCase;
+   NamingChecker::Result res;
+   upperCamelCase.checkRule("MyClassExample", res);
+   EXPECT_EQ(res._match, true);
+   upperCamelCase.checkRule("myClass", res);
+   EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, LowerCamelCase)
+{
+   NamingChecker::LowerCamelCaseRule lowerCamelCase;
+   NamingChecker::Result res;
+   lowerCamelCase.checkRule("pushInside", res);
+   EXPECT_EQ(res._match, true);
+   lowerCamelCase.checkRule("push_inside", res);
+   EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, UpperUnderscore)
+{
+   NamingChecker::UpperUnderscoreRule upperUnderscore;
+   NamingChecker::Result res;
+   upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
+   EXPECT_EQ(res._match, true);
+   upperUnderscore.checkRule("this_is_my_const", res);
+   EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, LowerUnderscore)
+{
+   NamingChecker::LowerUnderscoreRule lowerUnderscore;
+   NamingChecker::Result res;
+   lowerUnderscore.checkRule("_regex", res);
+   EXPECT_EQ(res._match, true);
+   lowerUnderscore.checkRule("specificRegex", res);
+   EXPECT_EQ(res._match, false);
 }

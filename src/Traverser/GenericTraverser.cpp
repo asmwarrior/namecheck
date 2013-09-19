@@ -8,9 +8,10 @@
 * @brief       This is the implementation of GenericTraverser class
 */
 
+#include <cassert>
+#include <iostream>
 #include "Traverser/GenericTraverser.h"
 #include "Traverser/GenericTree.h"
-
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
     {
@@ -27,9 +28,6 @@
     #include "c-family/c-pragma.h"
     #include "diagnostic-core.h"
 #endif
-
-#include <cassert>
-#include <iostream>
 
 namespace GPPGeneric
 {
