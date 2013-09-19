@@ -12,6 +12,7 @@
 
 using ::testing::_;
 using namespace GPPGeneric;
+using namespace NamingChecker;
 
 class APIMock : public PluginApi
 {
@@ -177,40 +178,47 @@ TEST(PluginAPITests, TypedefNamesTest)
 
 TEST(RulesTest, UpperCamelCase)
 {
-   NamingChecker::UpperCamelCaseRule upperCamelCase;
-   NamingChecker::Result res;
-   upperCamelCase.checkRule("MyClassExample", res);
-   EXPECT_EQ(res._match, true);
-   upperCamelCase.checkRule("myClass", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::UpperCamelCaseRule upperCamelCase;
+    NamingChecker::Result res;
+    upperCamelCase.checkRule("MyClassExample", res);
+    EXPECT_EQ(res._match, true);
+    upperCamelCase.checkRule("myClass", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, LowerCamelCase)
 {
-   NamingChecker::LowerCamelCaseRule lowerCamelCase;
-   NamingChecker::Result res;
-   lowerCamelCase.checkRule("pushInside", res);
-   EXPECT_EQ(res._match, true);
-   lowerCamelCase.checkRule("push_inside", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::LowerCamelCaseRule lowerCamelCase;
+    NamingChecker::Result res;
+    lowerCamelCase.checkRule("pushInside", res);
+    EXPECT_EQ(res._match, true);
+    lowerCamelCase.checkRule("push_inside", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, UpperUnderscore)
 {
-   NamingChecker::UpperUnderscoreRule upperUnderscore;
-   NamingChecker::Result res;
-   upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
-   EXPECT_EQ(res._match, true);
-   upperUnderscore.checkRule("this_is_my_const", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::UpperUnderscoreRule upperUnderscore;
+    NamingChecker::Result res;
+    upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
+    EXPECT_EQ(res._match, true);
+    upperUnderscore.checkRule("this_is_my_const", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, LowerUnderscore)
 {
-   NamingChecker::LowerUnderscoreRule lowerUnderscore;
-   NamingChecker::Result res;
-   lowerUnderscore.checkRule("_regex", res);
-   EXPECT_EQ(res._match, true);
-   lowerUnderscore.checkRule("specificRegex", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::LowerUnderscoreRule lowerUnderscore;
+    NamingChecker::Result res;
+    lowerUnderscore.checkRule("_regex", res);
+    EXPECT_EQ(res._match, true);
+    lowerUnderscore.checkRule("specificRegex", res);
+    EXPECT_EQ(res._match, false);
+}
+
+TEST(ConfigurationTest, invalidPathFile)
+{
+    NamingChecker::RulesContainer rulesContainer;
+    const std::string invalifPathFile = "../../configurate.csv";
+    EXPECT_THROW(rulesContainer.load(invalifPathFile.c_str()), FileNotFound);  
 }

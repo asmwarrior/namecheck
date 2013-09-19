@@ -29,8 +29,6 @@
 
 int plugin_is_GPL_compatible; //not rename
 
-using namespace GPPGeneric;
-
 std::string pathFile;
 static struct plugin_info namingInfo =
 {
@@ -45,9 +43,9 @@ extern "C" void gate_callback_cpp_three(void*, void*)
     //
     if (!(errorcount || sorrycount))
     {
-        TraverserCppThree traverser;
-        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin(pathFile));
-        const std::auto_ptr<PluginApi> api(new GCCPluginApi());
+        GPPGeneric::TraverserCppThree traverser;
+        const std::auto_ptr<GPPGeneric::BasePlugin> plugin(new GPPGeneric::NamingConventionPlugin(pathFile));
+        const std::auto_ptr<GPPGeneric::PluginApi> api(new GPPGeneric::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
@@ -62,11 +60,11 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     //
     if (!(errorcount || sorrycount))
     {
-        TraverserCppEleven traverser;
-        const std::auto_ptr<BasePlugin> plugin(new NamingConventionPlugin(pathFile));
-        const std::auto_ptr<PluginApi> api(new GCCPluginApi());
+        GPPGeneric::TraverserCppEleven traverser;
+        const std::auto_ptr<GPPGeneric::BasePlugin> plugin(new GPPGeneric::NamingConventionPlugin(pathFile.c_str()));
+        const std::auto_ptr<GPPGeneric::PluginApi> api(new GPPGeneric::GCCPluginApi());
         plugin->initialize(api.get());
-        std::clog << "processing with c++11" << main_input_filename << std::endl;
+        std::clog << "processing with c++11 " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
     }
     exit(EXIT_SUCCESS);
