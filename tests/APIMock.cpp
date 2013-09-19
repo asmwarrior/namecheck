@@ -3,12 +3,12 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "NamingConventionPlugin.h"
-#include "UpperCamelCaseRule.h"
-#include "LowerCamelCaseRule.h"
-#include "UpperUnderscoreRule.h"
-#include "LowerUnderscoreRule.h"
-#include "PluginAPI.h"
+#include "Visitor/NamingConventionPlugin.h"
+#include "Visitor/UpperCamelCaseRule.h"
+#include "Visitor/LowerCamelCaseRule.h"
+#include "Visitor/UpperUnderscoreRule.h"
+#include "Visitor/LowerUnderscoreRule.h"
+#include "Visitor/PluginAPI.h"
 
 using ::testing::_;
 using namespace GPPGeneric;
