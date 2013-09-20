@@ -105,9 +105,38 @@ void RulesContainer::process(const StringVector& fileLine)
             break;
         }
         default : 
-            break;
+            throw InvalidRuleType();
     }
 
+}
+
+void RulesContainer::deleteWhiteSpace(std::string& line)
+{
+    std::string auxLine = line;
+    line.clear();    
+    for (size_t i(0); i < auxLine.size(); ++i)
+    {
+        if (auxLine[i] != ' ')
+            line += auxLine[i]; 
+    }
+}
+
+static const size_t REGEX_SIZE = 4;
+static const size_t DEFAULT_SIZE = 2;
+static const size_t DECLARATION_NAME = 0;
+static const size_t RULE_TYPE = 1;
+static const std::string REGEX = "0";
+
+void RulesContainer::checkLine(StringVector line)
+{
+    deleteWhiteSpace(line[RULE_TYPE]);
+    if(line[RULE_TYPE] == REGEX) 
+        mili::assert_throw<InvalidFormatFile>(line.size() == REGEX_SIZE);
+    else
+        mili::assert_throw<InvalidFormatFile>(line.size() == DEFAULT_SIZE);
+    
+    if(_declarationMap.find(line[DECLARATION_NAME]) == _declarationMap.end())    
+        throw InvalidDeclaration();
 }
 
 void RulesContainer::load(const FileName& fileName)
@@ -117,11 +146,14 @@ void RulesContainer::load(const FileName& fileName)
     mili::assert_throw<FileNotFound>(ifs);    
     
     StringVector fileLine;
-    while (ifs >> mili::Separator(fileLine, ','))  /* PROVIDED BY MiLi */
+    ifs >> mili::Separator(fileLine, ',');
+    do
     {
+        checkLine(fileLine);
         process(fileLine);
         fileLine.clear();
     }
+    while (ifs >> mili::Separator(fileLine, ','));
 }
 
 } // end namespace

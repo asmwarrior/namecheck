@@ -28,6 +28,12 @@ public:
 
 //File exceptions
 DEFINE_SPECIFIC_EXCEPTION_TEXT(FileNotFound, NamecheckExceptionHierarchy, "The configuration file not found.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidFormatFile, NamecheckExceptionHierarchy, "The configuration file does not have the appropriate format.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(NotDefinedRegex, NamecheckExceptionHierarchy, "Should define a regex.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(NotDefinedErrorMessage, NamecheckExceptionHierarchy, "Should define a error message.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidRegex, NamecheckExceptionHierarchy, "Invalid regex defined.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidDeclaration, NamecheckExceptionHierarchy, "Invalid name declaration.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidRuleType, NamecheckExceptionHierarchy, "Rule type invalid.");
 
 } // end namespace
 #endif
