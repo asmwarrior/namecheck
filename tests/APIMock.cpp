@@ -9,6 +9,7 @@
 #include "Visitor/UpperUnderscoreRule.h"
 #include "Visitor/LowerUnderscoreRule.h"
 #include "Visitor/PluginAPI.h"
+#include "Visitor/Regex.h"
 
 using ::testing::_;
 using namespace GPPGeneric;
@@ -146,7 +147,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
     plugin.visitEnumValueDeclaration(decl, "Red");
     plugin.visitEnumValueDeclaration(decl, "Blue");
     plugin.visitEnumValueDeclaration(decl, "BrownAndBlack");
-    plugin.visitEnumValueDeclaration(decl, "Brown_AndB  _lack");
+    plugin.visitEnumValueDeclaration(decl, "Brown_AndB_lack");
 
     //incorrect enum value names
     plugin.visitEnumValueDeclaration(decl, "THIS_IS_A_ENUM_VALUE");
@@ -175,6 +176,27 @@ TEST(PluginAPITests, TypedefNamesTest)
     plugin.visitTypeDeclaration(decl, "Regexs_");
 }
 
+TEST(PluginAPITests, OtherTest)
+{
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/OtherRulesTest/confFile.csv");
+    APIMock api;
+    GenericTree decl = NULL;
+    plugin.initialize(&api);
+    EXPECT_CALL(api, warning(_,_))
+    .Times(6);
+    //correct names
+    plugin.visitClassDeclaration(decl, "ClassName");
+    
+
+    plugin.visitClassDeclaration(decl, "class_name");
+    plugin.visitClassDeclaration(decl, "_className");
+    plugin.visitClassDeclaration(decl, "_ClassName");
+    plugin.visitClassDeclaration(decl, "isclassname");
+    plugin.visitClassDeclaration(decl, "toclassname");
+    plugin.visitClassDeclaration(decl, "classNAME");
+    plugin.visitClassDeclaration(decl, "ClassName");
+    plugin.visitClassDeclaration(decl, "ClsdfG");
+}
 
 TEST(RulesTest, UpperCamelCase)
 {
@@ -214,6 +236,17 @@ TEST(RulesTest, LowerUnderscore)
     EXPECT_EQ(res._match, true);
     lowerUnderscore.checkRule("specificRegex", res);
     EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, Regex)
+{
+    NamingChecker::Regex regex("^\\u.*?", "errmsg");
+    NamingChecker::Result res;
+    regex.checkRule("regex", res);
+    EXPECT_EQ(res._match, false);
+    EXPECT_EQ(res._message, "errmsg");
+    regex.checkRule("Regex", res);
+    EXPECT_EQ(res._match, true);
 }
 
 TEST(ConfigurationTest, invalidPathFile)
