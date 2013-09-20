@@ -24,7 +24,7 @@ namespace NamingChecker
 class Regex : public Rule
 {
 public:
-	Regex(std::string, std::string);	
+	Regex(const std::string&, const std::string&);	
 private:
 
     virtual void checkRule(const std::string& declarationName, Result& result) const;

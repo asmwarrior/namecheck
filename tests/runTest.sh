@@ -4,13 +4,13 @@
 expectedExtension=".expected"
 retrievedExtension=".retrieved"
 pathExpectedFolderCPP="../../expectedResult/c++/"
-directoryCPP="testFiles/c++/"
+directoryCPP="DefaultRulesTest/testFiles/c++/"
 
 cd $directoryCPP
  echo "---------------- C++ code ----------------"
  for cppFile in $(ls *.cpp);
  do 	
-	g++ -fplugin=../../../../../install/libs/libnamecheck.so -c $cppFile -fplugin-arg-libnamecheck-path=../../../exampleconffile/conffile.csv &> $cppFile""$retrievedExtension	
+	g++ -fplugin=../../../../../../install/libs/libnamecheck.so -c $cppFile -fplugin-arg-libnamecheck-path=../../conffile.csv &> $cppFile""$retrievedExtension	
 	if diff $cppFile""$retrievedExtension $pathExpectedFolderCPP""$cppFile""$expectedExtension; then
 	 	echo -e $cppFile "\e[1;32m"Test case OK"	\e[0m"
 	else
@@ -32,7 +32,7 @@ for cpp11File in $(ls *.cpp);
 do	
 	
  	if [ $cpp11File = $enumClassDeclaration ]; then
-		g++ -fplugin=../../../../../install/libs/libnamecheck.so -c $cpp11File -fplugin-arg-libnamecheck-path=../../../exampleconffile/conffile.csv &> $cpp11File""$retrievedExtension --std=c++0x	
+		g++ -fplugin=../../../../../../install/libs/libnamecheck.so -c $cpp11File -fplugin-arg-libnamecheck-path=../../conffile.csv &> $cpp11File""$retrievedExtension --std=c++0x	
 		if diff $cpp11File""$retrievedExtension $pathExpectedFolderCPlusPlus""$cpp11File""$expectedExtension; then
 	 		echo -e $cpp11File "\e[1;32m"Test case OK"	\e[0m"
 		else
@@ -46,7 +46,7 @@ do
 		echo "4.7" &> versionExpected
 		if diff "./"gccVersion "./"versionExpected; then
 			
-			g++ -fplugin=../../../../../install/libs/libnamecheck.so -c $cpp11File -fplugin-arg-libnamecheck-path=../../../exampleconffile/conffile.csv &> $cpp11File""$retrievedExtension --std=c++0x	
+			g++ -fplugin=../../../../../../install/libs/libnamecheck.so -c $cpp11File -fplugin-arg-libnamecheck-path=../../conffile.csv &> $cpp11File""$retrievedExtension --std=c++0x	
 			if diff $cpp11File""$retrievedExtension $pathExpectedFolderCPlusPlus""$cpp11File""$expectedExtension; then
 	 			echo -e $cpp11File "\e[1;32m"Test case OK"	\e[0m"
 			else
@@ -71,7 +71,7 @@ cd $directoryc
 echo "----------------- C code -----------------"
 for cFile in $(ls *.c) ;
 do
-	g++ -fplugin=../../../../../install/libs/libnamecheck.so -c $cFile -fplugin-arg-libnamecheck-path=../../../exampleconffile/conffile.csv &> $cFile""$retrievedExtension
+	g++ -fplugin=../../../../../../install/libs/libnamecheck.so -c $cFile -fplugin-arg-libnamecheck-path=../../conffile.csv &> $cFile""$retrievedExtension
 
 	#check gcc version for test	
 	gcc -dumpversion &> gccVersion

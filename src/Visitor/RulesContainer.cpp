@@ -78,6 +78,7 @@ void RulesContainer::process(const StringVector& fileLine)
         {
             Rule* reg = new Regex(fileLine[2], fileLine[3]);
             _rules[_declarationMap[fileLine[0]]].push_back(reg);
+            break;
         }
         case '1':
         {
