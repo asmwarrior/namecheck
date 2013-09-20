@@ -1,6 +1,7 @@
 #define private public
 #define protected public
 
+#include <fstream>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "Visitor/NamingConventionPlugin.h"
@@ -187,7 +188,6 @@ TEST(PluginAPITests, OtherTest)
     //correct names
     plugin.visitClassDeclaration(decl, "ClassName");
     
-
     plugin.visitClassDeclaration(decl, "class_name");
     plugin.visitClassDeclaration(decl, "_className");
     plugin.visitClassDeclaration(decl, "_ClassName");
@@ -254,4 +254,73 @@ TEST(ConfigurationTest, invalidPathFile)
     NamingChecker::RulesContainer rulesContainer;
     const std::string invalifPathFile = "../../configurate.csv";
     EXPECT_THROW(rulesContainer.load(invalifPathFile.c_str()), FileNotFound);  
+}
+
+TEST(ConfigurationTest, invalidFormatFile)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "This is a error file \n";    
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, notDefinedRegex)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "ClassDeclaration,1\n";    
+    file << "StructDeclaration,0\n";    
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, notDefinedErrorMessage)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "ClassDeclaration,1\n";    
+    file << "StructDeclaration, 0, ^\\u.* \n";    
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
+    unlink(confFile.c_str());
+}
+
+// TEST(ConfigurationTest, InvalidRegex)
+// {
+//     const std::string confFile = "obsoleteConfFile.csv";
+//     std::ofstream file(confFile.c_str());
+//     file << "ClassDeclaration,1\n";    
+//     file << "StructDeclaration,0,66t6tt,My error message \n";    
+//     file.close();
+//     NamingChecker::RulesContainer rulesContainer;
+//     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidRegex);
+//     unlink(confFile.c_str());
+// }
+
+TEST(ConfigurationTest, InvalidDeclaration)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "class declaration, 1 \n";        
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidDeclaration);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, InvalidRuleType)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "ClassDeclaration,  6 \n";        
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidRuleType);
+    unlink(confFile.c_str());
 }

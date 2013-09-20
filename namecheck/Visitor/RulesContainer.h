@@ -93,6 +93,21 @@ private:
      * @param fileLine the vector representing the line of the file to process 
      */
     void process(const StringVector& fileLine);
+
+    /**
+     * @brief Check line data
+     *
+     * @param line input line from file     
+     */
+    void checkLine(StringVector line);
+
+    /**
+     * @bried Delete white space of line
+     *
+     *  @param line input string
+     */
+    void deleteWhiteSpace(std::string& line);
+
     DeclarationMap _declarationMap;
     typedef std::list<Rule*> Rules;    
     std::vector<Rules> _rules;   
