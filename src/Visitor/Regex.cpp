@@ -14,7 +14,7 @@
 namespace NamingChecker
 {
 
-Regex::Regex(std::string reg, std::string msg): _regex(reg), _errmsg(msg)
+Regex::Regex(const std::string& reg, const std::string& msg): _regex(reg), _errmsg(msg)
 {}
 
 void Regex::checkRule(const std::string& declarationName, Result& result) const

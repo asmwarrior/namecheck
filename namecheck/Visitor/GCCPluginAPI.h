@@ -31,7 +31,7 @@ class GCCPluginApi: public PluginApi
     * @param decl is the tree of the name it is used for the warning message to print the location of the name
     * @param message the message to print
     */
-    void warning(const GenericTree& decl, const std::string& message);
+    virtual void warning(const GenericTree& decl, const std::string& message);
 
     /**
     * @brief gives gcc the error message.
@@ -40,7 +40,7 @@ class GCCPluginApi: public PluginApi
     * @param decl is the tree of the name it is used for the warning message to print the location of the name
     * @param message the message to print
     */
-    void error(const GenericTree& decl, const std::string& message);
+    virtual void error(const GenericTree& decl, const std::string& message);
 };
 
 } // end GPPGeneric

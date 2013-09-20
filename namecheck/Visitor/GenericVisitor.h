@@ -23,12 +23,12 @@ namespace GPPGeneric
 *
 *
 */
-typedef enum
+enum AccessModifier
 {
     AccessPublic,
     AccessProtected,
     AccessPrivate
-} AccessModifier;
+};
 
 typedef std::string DeclarationName;
 

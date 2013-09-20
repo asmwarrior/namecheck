@@ -44,17 +44,13 @@ RulesContainer::~RulesContainer()
 {
     for(int i=0; i < CheckCount; ++i)
     {
-        for(Rules::iterator it = _rules[i].begin(); it != _rules[i].end(); ++it)
-        {
-            delete (*it);
-            *it = NULL;
-        }
+        mili::delete_container(_rules[i]);
     }
 }
 
 void RulesContainer::check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const
 {
-    if (_rules[decl].size() != 0)
+    if (!_rules[decl].empty())
     {
         Rules::const_iterator it = _rules[decl].begin();
         do
@@ -71,35 +67,35 @@ static const size_t DECLARATION = 0;
 
 void RulesContainer::process(const StringVector& fileLine)
 {
-    const char *cstr = fileLine[1].c_str();
+    const char* const cstr = fileLine[1].c_str();
     switch(cstr[0])
     {
         case '0':
         {
-            Rule* reg = new Regex(fileLine[2], fileLine[3]);
+            Rule* const reg = new Regex(fileLine[2], fileLine[3]);
             _rules[_declarationMap[fileLine[0]]].push_back(reg);
         }
         case '1':
         {
-            Rule* ucc = new UpperCamelCaseRule();
+            Rule* const ucc = new UpperCamelCaseRule();
             _rules[_declarationMap[fileLine[0]]].push_back(ucc);
             break;
         }
         case '2':
         {
-            Rule* lcc = new LowerCamelCaseRule();
+            Rule* const lcc = new LowerCamelCaseRule();
             _rules[_declarationMap[fileLine[0]]].push_back(lcc);
             break;
         }
         case '3':
         {
-            Rule* uu = new UpperUnderscoreRule();
+            Rule* const uu = new UpperUnderscoreRule();
             _rules[_declarationMap[fileLine[0]]].push_back(uu);
             break;
         }
         case '4':
         {
-            Rule* lu = new LowerUnderscoreRule();
+            Rule* const lu = new LowerUnderscoreRule();
             _rules[_declarationMap[fileLine[0]]].push_back(lu);
             break;
         }

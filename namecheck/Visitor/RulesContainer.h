@@ -31,7 +31,7 @@ public:
     /**
      * @brief Represents the statements to check
      */
-    typedef enum
+    enum DeclarationToCheck
     {
         ClassDeclaration,
         VariableDeclaration,
@@ -48,7 +48,7 @@ public:
         NamespaceDeclaration,
         GlobalConstDeclaration,
         CheckCount    
-    } DeclarationToCheck;
+    };
    
     typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
 	 /**

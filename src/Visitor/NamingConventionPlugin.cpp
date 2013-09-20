@@ -69,7 +69,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree decl, co
     _checker.check(NamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
-        const std::string message = "Enum type declaration " + enumTypeResult._message + " in " + name;
+        const std::string message = std::string("Enum type declaration ") + enumTypeResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -80,7 +80,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, c
     _checker.check(NamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
     if (!enumValueResult._match)
     {
-        const std::string message = "Enum value declaration " + enumValueResult._message + " in " + name;
+        const std::string message = std::string("Enum value declaration ") + enumValueResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -91,7 +91,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, co
     _checker.check(NamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
     if (!variableResult._match)
     {
-        const std::string message = "Variable declaration " + variableResult._message + " in " + name;
+        const std::string message = std::string("Variable declaration ") + variableResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -102,7 +102,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree decl,
     _checker.check(NamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
     if (!globalConstResult._match)
     {
-        const std::string message = "Global const declaration " + globalConstResult._message + " in " + name;
+        const std::string message = std::string("Global const declaration ") + globalConstResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -113,7 +113,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, co
     _checker.check(NamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
-        const std::string message = "Function declaration " + functionResult._message + " in " + name;
+        const std::string message = std::string("Function declaration ") + functionResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -124,7 +124,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const GenericTree decl, c
     _checker.check(NamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
-        const std::string message = "Parameter declaration " + parameterResult._message + " in " + name;
+        const std::string message = std::string("Parameter declaration ") + parameterResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -135,7 +135,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const 
     _checker.check(NamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
-        const std::string message = "Type declaration " + typeResult._message + " in " + name;
+        const std::string message = std::string("Type declaration ") + typeResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -146,7 +146,7 @@ void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const
     _checker.check(NamingChecker::RulesContainer::ClassDeclaration, name, classResult);
     if (!classResult._match)
     {
-        const std::string message = "Class declaration " + classResult._message + " in " + name;
+        const std::string message = std::string("Class declaration ")+ classResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -157,7 +157,7 @@ void NamingConventionPlugin::visitStructDeclaration(const GenericTree decl, cons
     _checker.check(NamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
-        const std::string message = "Struct declaration " + structResult._message + " in " + name;
+        const std::string message = std::string("Struct declaration ") + structResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -168,7 +168,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const GenericTree decl, const
     _checker.check(NamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
     if (!unionResult._match)
     {
-        const std::string message = "Union declaration " + unionResult._message + " in " + name;
+        const std::string message = std::string("Union declaration ") + unionResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -179,7 +179,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree decl, 
     _checker.check(NamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
     if (!unionValueResult._match)
     {
-        const std::string message = "Union value declaration " + unionValueResult._message + " in " + name;
+        const std::string message = std::string("Union value declaration ") + unionValueResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }
@@ -190,7 +190,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, cons
     _checker.check(NamingChecker::RulesContainer::MethodDeclaration, name, methodResult);
     if (!methodResult._match)
     {
-        const std::string message = "Method declaration " + methodResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
+        const std::string message = std::string("Method declaration ") + methodResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
         setPluginWarning(decl, message);
     }
 }
@@ -201,7 +201,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, c
     _checker.check(NamingChecker::RulesContainer::AttributeDeclaration, name, attributeResult);
     if (!attributeResult._match)
     {
-        const std::string message = "Attribute declaration " + attributeResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
+        const std::string message = std::string("Attribute declaration ") + attributeResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
         setPluginWarning(decl, message);
     }
 }
@@ -212,7 +212,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree decl, c
     _checker.check(NamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const std::string message = "Namespace declaration " + namespaceResult._message + " in " + name;
+        const std::string message = std::string("Namespace declaration ") + namespaceResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }

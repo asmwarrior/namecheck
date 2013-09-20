@@ -32,6 +32,25 @@
 namespace GPPGeneric
 {
 
+inline bool GenericTraverser::isReservedDeclaration(const GenericTree decl)
+{
+    std::string name;
+    getName(decl, name);
+    return (name.substr(0, 2) == "._");
+}
+
+inline AccessModifier GenericTraverser::getAccess(const GenericTree decl)
+{
+    AccessModifier ret;
+    if (TREE_PRIVATE(decl))
+        ret = AccessPrivate;
+    else if (TREE_PROTECTED(decl))
+        ret = AccessProtected;
+    else
+        ret = AccessPublic;
+    return ret;
+}
+
 inline bool GenericTraverser::isConstant(const GenericTree decl)
 {
     return CP_TYPE_CONST_P(TREE_TYPE(decl));
@@ -40,52 +59,7 @@ inline bool GenericTraverser::isConstant(const GenericTree decl)
 inline void GenericTraverser::getName(const GenericTree decl, std::string& name)
 {
     const GenericTree id(DECL_NAME(decl));
-    name = (id ? IDENTIFIER_POINTER(id) : "<unnamed>");
-}
-
-inline void GenericTraverser::traverseDeclarations(const GenericTree ns) const
-{
-    const cp_binding_level* level(NAMESPACE_LEVEL(ns));
-    for (GenericTree decl(level->names); decl != 0; decl = TREE_CHAIN(decl))
-    {
-        processDeclaration(decl);
-    }
-}
-
-inline void GenericTraverser::traverseNamespaces(const GenericTree ns) const
-{
-    const cp_binding_level* level(NAMESPACE_LEVEL(ns));
-    for (GenericTree decl = level->namespaces; decl != 0; decl = TREE_CHAIN(decl))
-    {
-        std::string namespaceName;
-        getName(decl, namespaceName);
-        if (!DECL_IS_BUILTIN(decl) && namespaceName != "std")
-        {
-            _visitor->visitNamespaceDeclaration(decl, namespaceName);
-            traverse(decl);
-        }
-    }
-}
-
-void GenericTraverser::traverse(const GenericTree ns) const
-{
-    // Traverse declarations.
-    traverseDeclarations(ns);
-
-    // Traverse namespaces.
-    traverseNamespaces(ns);
-}
-
-inline void GenericTraverser::processTemplateDeclaration(const GenericTree decl) const
-{
-    processDeclaration(DECL_TEMPLATE_RESULT(decl));
-
-    GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
-    for (int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
-    {
-        processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
-    }
-
+    name = id ? IDENTIFIER_POINTER(id) : "<unnamed>";
 }
 
 inline void GenericTraverser::checkArrayTypeName(GenericTree decl, std::string& typeName)
@@ -115,7 +89,7 @@ inline void GenericTraverser::checkPointerTypeName(GenericTree decl, std::string
     }
 }
 
-void GenericTraverser::getTypeName(const GenericTree decl, std::string& returnName)
+inline void GenericTraverser::getTypeName(const GenericTree decl, std::string& returnName)
 {
     std::string typeName;
     GenericTree aux(decl);
@@ -135,118 +109,7 @@ void GenericTraverser::getTypeName(const GenericTree decl, std::string& returnNa
     returnName += typeName;
 }
 
-inline bool GenericTraverser::isReservedDeclaration(const GenericTree decl)
-{
-    std::string name;
-    getName(decl, name);
-    return (name.substr(0, 2) == "._");
-}
-
-inline AccessModifier GenericTraverser::getAccess(const GenericTree decl)
-{
-    AccessModifier ret;
-    if (TREE_PRIVATE(decl))
-        ret = AccessPrivate;
-    else if (TREE_PROTECTED(decl))
-        ret = AccessProtected;
-    else
-        ret = AccessPublic;
-    return ret;
-}
-
-inline void GenericTraverser::processEnumValues(const GenericTree decl) const
-{
-    std::string name;
-    for (GenericTree d(TYPE_VALUES(TREE_TYPE(decl))); d != 0; d = TREE_CHAIN(d))
-    {
-        getName(TREE_VALUE(d), name);
-        _visitor->visitEnumValueDeclaration(TREE_VALUE(d), name);
-    }
-}
-
-inline void GenericTraverser::processEnumType(const GenericTree decl) const
-{
-    std::string name;
-    getName(decl, name);
-    if (DECL_ARTIFICIAL(decl))
-        _visitor->visitEnumTypeDeclaration(decl, name);
-    else
-        _visitor->visitTypeDeclaration(decl, name);
-    processEnumValues(decl);
-}
-
-inline void GenericTraverser::processAttributes(const GenericTree type) const
-{
-    for (GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
-    {
-        /*one of the nodes in TYPE_FIELDS is the self reference*/
-        if (!DECL_SELF_REFERENCE_P(d))
-            processDeclaration(d);
-    }
-}
-
-inline void GenericTraverser::processMethods(const GenericTree type) const
-{
-    for (GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
-    {
-        if (!DECL_ARTIFICIAL(d))
-        {
-            processDeclaration(d);
-        }
-    }
-}
-
-inline void GenericTraverser::processRecordDeclaration(const GenericTree decl) const
-{
-    std::string name;
-    getName(decl, name);
-    if (CLASSTYPE_DECLARED_CLASS(TREE_TYPE(decl)))
-        _visitor->visitClassDeclaration(decl, name);
-    else
-        _visitor->visitStructDeclaration(decl, name);
-}
-
-
-inline void GenericTraverser::unionOrRecord(const GenericTree decl, const GenericTree type, std::string& name) const
-{
-    if (TREE_CODE(type) == RECORD_TYPE)
-    {
-        processRecordDeclaration(decl);
-    }
-    else if (TREE_CODE(type) == UNION_TYPE)
-        _visitor->visitUnionDeclaration(decl, name);
-}
-
-void GenericTraverser::processDeclaration(const GenericTree decl) const
-{
-    if (!DECL_IS_BUILTIN(decl))
-    {
-        const int treeCode = TREE_CODE(decl);
-
-        if (treeCode == FUNCTION_DECL)
-        {
-            processFunction(decl);
-        }
-        else if (treeCode == TYPE_DECL)
-        {
-            processType(decl);
-        }
-        else if (treeCode == TEMPLATE_DECL)
-        {
-            processTemplateDeclaration(decl);
-        }
-        else if (treeCode == BLOCK)
-        {
-            processBlock(decl);
-        }
-        else if (!DECL_ARTIFICIAL(decl))
-        {
-            processVariableDeclaration(decl);
-        }
-    }
-}
-
-void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
+inline void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
 {
     std::string name;
     std::string typeName;
@@ -275,25 +138,60 @@ void GenericTraverser::processVariableDeclaration(const GenericTree decl) const
     }
 }
 
-void GenericTraverser::processType(const GenericTree decl) const
+inline void GenericTraverser::processTemplateDeclaration(const GenericTree decl) const
 {
-    assert(TREE_CODE(decl) == TYPE_DECL);
-    std::string name;
-    getName(decl, name);
-    if (!isReservedDeclaration(decl))
+    processDeclaration(DECL_TEMPLATE_RESULT(decl));
+
+    GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
+    for (int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
     {
-        if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+        processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
+    }
+
+}
+
+inline void GenericTraverser::processMethods(const GenericTree type) const
+{
+    for (GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
+    {
+        if (!DECL_ARTIFICIAL(d))
         {
-            processEnumType(decl);
+            processDeclaration(d);
         }
-        else if (DECL_ARTIFICIAL(decl))
-            processTypeDeclArtificial(decl);
-        else
-            _visitor->visitTypeDeclaration(decl, name);
     }
 }
 
-void GenericTraverser::processTypeDeclArtificial(const GenericTree decl) const
+inline void GenericTraverser::processAttributes(const GenericTree type) const
+{
+    for (GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
+    {
+        /*one of the nodes in TYPE_FIELDS is the self reference*/
+        if (!DECL_SELF_REFERENCE_P(d))
+            processDeclaration(d);
+    }
+}
+
+inline void GenericTraverser::processRecordDeclaration(const GenericTree decl) const
+{
+    std::string name;
+    getName(decl, name);
+    if (CLASSTYPE_DECLARED_CLASS(TREE_TYPE(decl)))
+        _visitor->visitClassDeclaration(decl, name);
+    else
+        _visitor->visitStructDeclaration(decl, name);
+}
+
+inline void GenericTraverser::unionOrRecord(const GenericTree decl, const GenericTree type, std::string& name) const
+{
+    if (TREE_CODE(type) == RECORD_TYPE)
+    {
+        processRecordDeclaration(decl);
+    }
+    else if (TREE_CODE(type) == UNION_TYPE)
+        _visitor->visitUnionDeclaration(decl, name);
+}
+
+inline void GenericTraverser::processTypeDeclArtificial(const GenericTree decl) const
 {
     assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
@@ -313,6 +211,73 @@ void GenericTraverser::processTypeDeclArtificial(const GenericTree decl) const
         processAttributes(type);
 
         processMethods(type);
+    }
+}
+
+inline void GenericTraverser::processEnumValues(const GenericTree decl) const
+{
+    std::string name;
+    for (GenericTree d(TYPE_VALUES(TREE_TYPE(decl))); d != 0; d = TREE_CHAIN(d))
+    {
+        getName(TREE_VALUE(d), name);
+        _visitor->visitEnumValueDeclaration(TREE_VALUE(d), name);
+    }
+}
+
+inline void GenericTraverser::processEnumType(const GenericTree decl) const
+{
+    std::string name;
+    getName(decl, name);
+    if (DECL_ARTIFICIAL(decl))
+        _visitor->visitEnumTypeDeclaration(decl, name);
+    else
+        _visitor->visitTypeDeclaration(decl, name);
+    processEnumValues(decl);
+}
+
+inline void GenericTraverser::processType(const GenericTree decl) const
+{
+    assert(TREE_CODE(decl) == TYPE_DECL);
+    std::string name;
+    getName(decl, name);
+    if (!isReservedDeclaration(decl))
+    {
+        if (TREE_CODE(TREE_TYPE(decl)) == ENUMERAL_TYPE)
+        {
+            processEnumType(decl);
+        }
+        else if (DECL_ARTIFICIAL(decl))
+            processTypeDeclArtificial(decl);
+        else
+            _visitor->visitTypeDeclaration(decl, name);
+    }
+}
+
+inline void GenericTraverser::processSubblocks(const GenericTree block) const
+{
+    GenericTree subblocks(BLOCK_SUBBLOCKS(block));
+    if (subblocks != NULL_TREE)
+    {
+        processBlock(subblocks);
+    }
+}
+
+inline void GenericTraverser::processBlockVariables(const GenericTree block) const
+{
+    for (GenericTree d(BLOCK_VARS(block)); d != 0; d = TREE_CHAIN(d))
+    {
+        processDeclaration(d);
+    }
+}
+
+inline void GenericTraverser::processBlock(const GenericTree decl) const
+{
+    assert(TREE_CODE(decl) == BLOCK);
+    for (GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
+    {
+        processBlockVariables(block);
+
+        processSubblocks(block);
     }
 }
 
@@ -358,7 +323,7 @@ inline void GenericTraverser::processParameters(const GenericTree decl) const
     }
 }
 
-void GenericTraverser::processFunction(const GenericTree decl) const
+inline void GenericTraverser::processFunction(const GenericTree decl) const
 {
     assert(TREE_CODE(decl) == FUNCTION_DECL);
     std::string name;
@@ -371,32 +336,66 @@ void GenericTraverser::processFunction(const GenericTree decl) const
     }
 }
 
-inline void GenericTraverser::processBlockVariables(const GenericTree block) const
+inline void GenericTraverser::processDeclaration(const GenericTree decl) const
 {
-    for (GenericTree d(BLOCK_VARS(block)); d != 0; d = TREE_CHAIN(d))
+    if (!DECL_IS_BUILTIN(decl))
     {
-        processDeclaration(d);
+        const int treeCode = TREE_CODE(decl);
+
+        if (treeCode == FUNCTION_DECL)
+        {
+            processFunction(decl);
+        }
+        else if (treeCode == TYPE_DECL)
+        {
+            processType(decl);
+        }
+        else if (treeCode == TEMPLATE_DECL)
+        {
+            processTemplateDeclaration(decl);
+        }
+        else if (treeCode == BLOCK)
+        {
+            processBlock(decl);
+        }
+        else if (!DECL_ARTIFICIAL(decl))
+        {
+            processVariableDeclaration(decl);
+        }
     }
 }
 
-inline void GenericTraverser::processSubblocks(const GenericTree block) const
+inline void GenericTraverser::traverseDeclarations(const GenericTree ns) const
 {
-    GenericTree subblocks(BLOCK_SUBBLOCKS(block));
-    if (subblocks != NULL_TREE)
+    const cp_binding_level* level(NAMESPACE_LEVEL(ns));
+    for (GenericTree decl(level->names); decl != 0; decl = TREE_CHAIN(decl))
     {
-        processBlock(subblocks);
+        processDeclaration(decl);
     }
 }
 
-void GenericTraverser::processBlock(const GenericTree decl) const
+inline void GenericTraverser::traverseNamespaces(const GenericTree ns) const
 {
-    assert(TREE_CODE(decl) == BLOCK);
-    for (GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
+    const cp_binding_level* const level(NAMESPACE_LEVEL(ns));
+    for (GenericTree decl = level->namespaces; decl != 0; decl = TREE_CHAIN(decl))
     {
-        processBlockVariables(block);
-
-        processSubblocks(block);
+        std::string namespaceName;
+        getName(decl, namespaceName);
+        if (!DECL_IS_BUILTIN(decl) && namespaceName != "std")
+        {
+            _visitor->visitNamespaceDeclaration(decl, namespaceName);
+            traverse(decl);
+        }
     }
+}
+
+void GenericTraverser::traverse(const GenericTree ns) const
+{
+    // Traverse declarations.
+    traverseDeclarations(ns);
+
+    // Traverse namespaces.
+    traverseNamespaces(ns);
 }
 
 } // end GPPGeneric
