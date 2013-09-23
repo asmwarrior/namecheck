@@ -8,6 +8,8 @@
 * @brief       This is the main file that launches the namecheck plugin
 */
 
+#include <libintl.h>
+#include <locale.h>
 #include "Visitor/NamingConventionPlugin.h"
 #include "Visitor/GCCPluginAPI.h"
 #include "Traverser/TraverserCppThree.h"
@@ -35,6 +37,16 @@ static struct plugin_info namingInfo =
     "0.1",                        // version
     "Naming Convention Plugin"    // help
 };
+
+/**
+ * @brief Set data for gettext. For more infomation, see Linux man page
+ */
+void initGettext()
+{
+    setlocale(LC_ALL, "");
+    bindtextdomain("namecheck", "/usr/share/locale");
+    textdomain("namecheck");
+}
 
 extern "C" void gate_callback_cpp_three(void*, void*)
 {
@@ -84,16 +96,13 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     {
         pathFile = info->argv->value;
     }
-
-    
-
-
+ 
     //implement this when trying to execute the plugin with c++0x or c++03
     // if(info->argc == 1 && (strcmp(info->argv->key,"c++0x") || strcmp(info->argv->key, "c++11")))
     //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
     // else
     //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
-    
+    initGettext();
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
     register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 

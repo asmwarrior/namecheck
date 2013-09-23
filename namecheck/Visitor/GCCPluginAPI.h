@@ -13,7 +13,6 @@
 
 #include "Visitor/PluginAPI.h"
 #include "Traverser/GenericTree.h"
-#include <string>
 
 namespace GPPGeneric
 {
