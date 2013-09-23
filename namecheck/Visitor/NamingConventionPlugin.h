@@ -165,6 +165,15 @@ private:
     virtual void visitNamespaceDeclaration(const GenericTree decl, const DeclarationName& name);
 
     /**
+    * @brief checks Template Type Parameter Declarations
+    *
+    * check if it is correct according to the checker, if not prints a warning (using the plugin)
+    * @param decl is the tree of the name it is used for the warning message to print the location of the name
+    * @param name the name to check
+    */
+    virtual void visitTemplateTypeParameterDeclaration(const GenericTree decl, const DeclarationName& name);
+
+    /**
     * @brief calls the warning message maker of the plugin
     *
     * @param decl is the tree of the name it is used for the warning message to print the location of the name

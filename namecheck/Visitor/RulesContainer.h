@@ -48,6 +48,7 @@ public:
         AttributeDeclaration,
         NamespaceDeclaration,
         GlobalConstDeclaration,
+        TemplateTypeParameterDeclaration,
         CheckCount    
     };
    

@@ -54,6 +54,7 @@ struct GenericVisitor
     virtual void visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
     virtual void visitNamespaceDeclaration(const GenericTree decl, const DeclarationName& name) = 0;
     virtual void visitGlobalConstDeclaration(const GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitTemplateTypeParameterDeclaration(const GenericTree decl, const DeclarationName& name) = 0;
 };
 
 } // end GPPGeneric

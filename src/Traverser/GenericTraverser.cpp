@@ -204,7 +204,7 @@ inline void GenericTraverser::processTypeDeclArtificial(const GenericTree decl) 
     if (TREE_CODE(type) == TEMPLATE_TYPE_PARM || TREE_CODE(type) == TEMPLATE_TEMPLATE_PARM)
     {
         if (name != "<unnamed>")
-            _visitor->visitTypeDeclaration(decl, name);
+            _visitor->visitTemplateTypeParameterDeclaration(decl, name);
     }
     else
     {

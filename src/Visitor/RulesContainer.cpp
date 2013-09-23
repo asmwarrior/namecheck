@@ -38,6 +38,7 @@ RulesContainer::RulesContainer() : _rules(CheckCount)
     _declarationMap["AttributeDeclaration"] = AttributeDeclaration;
     _declarationMap["NamespaceDeclaration"] = NamespaceDeclaration;
     _declarationMap["GlobalConstDeclaration"] = GlobalConstDeclaration;
+    _declarationMap["TemplateTypeParameterDeclaration"] = TemplateTypeParameterDeclaration;
 }
 
 RulesContainer::~RulesContainer()

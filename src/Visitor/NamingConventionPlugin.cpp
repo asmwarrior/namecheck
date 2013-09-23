@@ -217,4 +217,15 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree decl, c
     }
 }
 
+void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const GenericTree decl, const DeclarationName& name)
+{
+    Result namespaceResult;
+    _checker.check(NamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
+    if (!namespaceResult._match)
+    {
+        const std::string message = std::string("Template's parameters declaration ") + namespaceResult._message + " in " + name;
+        setPluginWarning(decl, message);
+    }
+}
+
 } // end GPPGeneric
