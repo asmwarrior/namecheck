@@ -87,6 +87,19 @@ public:
     void load(const FileName& fileName);
 
 private:
+
+    /**
+    * @brief Represents rule types
+    */
+    enum RuleType
+    {
+        SpecificRegex = '0',
+        UpCamelCaseRule,
+        LowCamelCaseRule,
+        UpUnderscoreRule,
+        LowUnderscoreRule
+    };
+
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
      * 
@@ -99,18 +112,12 @@ private:
      *
      * @param line input line from file     
      */
-    void checkLine(StringVector line);
-
-    /**
-     * @bried Delete white space of line
-     *
-     *  @param line input string
-     */
-    void deleteWhiteSpace(std::string& line);
+    void checkLine(StringVector line);    
 
     DeclarationMap _declarationMap;
     typedef std::list<Rule*> Rules;    
     std::vector<Rules> _rules;   
+
 };
 
 } // end namespace
