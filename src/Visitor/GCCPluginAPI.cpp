@@ -8,14 +8,17 @@
 * @brief       This is the implementation of GCCPluginAPI interface
 */
 
-#include "GCCPluginAPI.h"
 #include <iostream>
+#include "Visitor/GCCPluginAPI.h"
 
-extern "C"
-{
-#include "diagnostic-core.h"
-}
-
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
+	extern "C"
+	{
+	#include "diagnostic-core.h"
+	}
+#else
+	#include "diagnostic-core.h"
+#endif
 
 namespace GPPGeneric
 {
