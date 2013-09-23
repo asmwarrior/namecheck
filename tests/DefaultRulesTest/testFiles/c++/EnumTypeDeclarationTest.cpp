@@ -1,0 +1,7 @@
+enum Correct{
+
+};
+
+enum incorrect{
+
+};
