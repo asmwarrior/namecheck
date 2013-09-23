@@ -1,6 +1,7 @@
 #define private public
 #define protected public
 
+#include <fstream>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "Visitor/NamingConventionPlugin.h"
@@ -8,10 +9,13 @@
 #include "Visitor/LowerCamelCaseRule.h"
 #include "Visitor/UpperUnderscoreRule.h"
 #include "Visitor/LowerUnderscoreRule.h"
+#include "Visitor/RulesContainer.h"
 #include "Visitor/PluginAPI.h"
+#include "Visitor/Regex.h"
 
 using ::testing::_;
 using namespace GPPGeneric;
+using namespace NamingChecker;
 
 class APIMock : public PluginApi
 {
@@ -22,7 +26,7 @@ public:
 
 TEST(PluginAPITests, ClassNameTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -42,7 +46,7 @@ TEST(PluginAPITests, ClassNameTest)
 
 TEST(PluginAPITests, VariableAndMethodsNamesTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -82,7 +86,7 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
 
 TEST(PluginAPITests, AttributeNameTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     const bool isConst = false;
@@ -109,7 +113,7 @@ TEST(PluginAPITests, AttributeNameTest)
 
 TEST(PluginAPITests, GlobalConstNameTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -127,7 +131,7 @@ TEST(PluginAPITests, GlobalConstNameTest)
 
 TEST(PluginAPITests, EnumTypeAndValueNamesTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -145,7 +149,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
     plugin.visitEnumValueDeclaration(decl, "Red");
     plugin.visitEnumValueDeclaration(decl, "Blue");
     plugin.visitEnumValueDeclaration(decl, "BrownAndBlack");
-    plugin.visitEnumValueDeclaration(decl, "Brown_AndB  _lack");
+    plugin.visitEnumValueDeclaration(decl, "Brown_AndB_lack");
 
     //incorrect enum value names
     plugin.visitEnumValueDeclaration(decl, "THIS_IS_A_ENUM_VALUE");
@@ -155,7 +159,7 @@ TEST(PluginAPITests, EnumTypeAndValueNamesTest)
 
 TEST(PluginAPITests, TypedefNamesTest)
 {
-    NamingConventionPlugin plugin;
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/DefaultRulesTest/conffile.csv");
     APIMock api;
     GenericTree decl = NULL;
     plugin.initialize(&api);
@@ -174,43 +178,138 @@ TEST(PluginAPITests, TypedefNamesTest)
     plugin.visitTypeDeclaration(decl, "Regexs_");
 }
 
+TEST(PluginAPITests, OtherTest)
+{
+    NamingConventionPlugin plugin("../../../projects/namecheck/tests/OtherRulesTest/confFile.csv");
+    APIMock api;
+    GenericTree decl = NULL;
+    plugin.initialize(&api);
+    EXPECT_CALL(api, warning(_,_))
+    .Times(6);
+    //correct names
+    plugin.visitClassDeclaration(decl, "ClassName");
+    
+    plugin.visitClassDeclaration(decl, "class_name");
+    plugin.visitClassDeclaration(decl, "_className");
+    plugin.visitClassDeclaration(decl, "_ClassName");
+    plugin.visitClassDeclaration(decl, "isclassname");
+    plugin.visitClassDeclaration(decl, "toclassname");
+    plugin.visitClassDeclaration(decl, "classNAME");
+    plugin.visitClassDeclaration(decl, "ClassName");
+    plugin.visitClassDeclaration(decl, "ClsdfG");
+}
 
 TEST(RulesTest, UpperCamelCase)
 {
-   NamingChecker::UpperCamelCaseRule upperCamelCase;
-   NamingChecker::Result res;
-   upperCamelCase.checkRule("MyClassExample", res);
-   EXPECT_EQ(res._match, true);
-   upperCamelCase.checkRule("myClass", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::UpperCamelCaseRule upperCamelCase;
+    NamingChecker::Result res;
+    upperCamelCase.checkRule("MyClassExample", res);
+    EXPECT_EQ(res._match, true);
+    upperCamelCase.checkRule("myClass", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, LowerCamelCase)
 {
-   NamingChecker::LowerCamelCaseRule lowerCamelCase;
-   NamingChecker::Result res;
-   lowerCamelCase.checkRule("pushInside", res);
-   EXPECT_EQ(res._match, true);
-   lowerCamelCase.checkRule("push_inside", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::LowerCamelCaseRule lowerCamelCase;
+    NamingChecker::Result res;
+    lowerCamelCase.checkRule("pushInside", res);
+    EXPECT_EQ(res._match, true);
+    lowerCamelCase.checkRule("push_inside", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, UpperUnderscore)
 {
-   NamingChecker::UpperUnderscoreRule upperUnderscore;
-   NamingChecker::Result res;
-   upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
-   EXPECT_EQ(res._match, true);
-   upperUnderscore.checkRule("this_is_my_const", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::UpperUnderscoreRule upperUnderscore;
+    NamingChecker::Result res;
+    upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
+    EXPECT_EQ(res._match, true);
+    upperUnderscore.checkRule("this_is_my_const", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, LowerUnderscore)
 {
-   NamingChecker::LowerUnderscoreRule lowerUnderscore;
-   NamingChecker::Result res;
-   lowerUnderscore.checkRule("_regex", res);
-   EXPECT_EQ(res._match, true);
-   lowerUnderscore.checkRule("specificRegex", res);
-   EXPECT_EQ(res._match, false);
+    NamingChecker::LowerUnderscoreRule lowerUnderscore;
+    NamingChecker::Result res;
+    lowerUnderscore.checkRule("_regex", res);
+    EXPECT_EQ(res._match, true);
+    lowerUnderscore.checkRule("specificRegex", res);
+    EXPECT_EQ(res._match, false);
+}
+
+TEST(RulesTest, Regex)
+{
+    NamingChecker::Regex regex("^\\u.*?", "errmsg");
+    NamingChecker::Result res;
+    regex.checkRule("regex", res);
+    EXPECT_EQ(res._match, false);
+    EXPECT_EQ(res._message, "errmsg");
+    regex.checkRule("Regex", res);
+    EXPECT_EQ(res._match, true);
+}
+
+TEST(ConfigurationTest, invalidPathFile)
+{
+    NamingChecker::RulesContainer rulesContainer;
+    const std::string invalifPathFile = "../../configurate.csv";
+    EXPECT_THROW(rulesContainer.load(invalifPathFile.c_str()), FileNotFound);  
+}
+
+TEST(ConfigurationTest, invalidFormatFile)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "This is a error file \n";    
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, notDefinedRegex)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "ClassDeclaration,1\n";    
+    file << "StructDeclaration,0\n";    
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, notDefinedErrorMessage)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "ClassDeclaration,1\n";    
+    file << "StructDeclaration,0,^\\u.*\n";    
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, InvalidDeclaration)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "class declaration,1\n";        
+    file.close();
+    NamingChecker::RulesContainer rulesContainer; 
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidDeclaration);
+    unlink(confFile.c_str());
+}
+
+TEST(ConfigurationTest, InvalidRuleType)
+{
+    const std::string confFile = "obsoleteConfFile.csv";
+    std::ofstream file(confFile.c_str());
+    file << "ClassDeclaration,6\n";        
+    file.close();
+    NamingChecker::RulesContainer rulesContainer;
+    EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidRuleType);
+    unlink(confFile.c_str());
 }
