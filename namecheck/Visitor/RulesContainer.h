@@ -16,6 +16,7 @@
 #include <list>
 #include <string>
 #include "Visitor/Rule.h"
+#include "Visitor/Exceptions.h"
 
 namespace NamingChecker
 {
@@ -86,15 +87,37 @@ public:
     void load(const FileName& fileName);
 
 private:
+
+    /**
+    * @brief Represents rule types
+    */
+    enum RuleType
+    {
+        SpecificRegex = '0',
+        UpCamelCaseRule,
+        LowCamelCaseRule,
+        UpUnderscoreRule,
+        LowUnderscoreRule
+    };
+
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
      * 
      * @param fileLine the vector representing the line of the file to process 
      */
     void process(const StringVector& fileLine);
+
+    /**
+     * @brief Check line data
+     *
+     * @param line input line from file     
+     */
+    void checkLine(StringVector line);    
+
     DeclarationMap _declarationMap;
     typedef std::list<Rule*> Rules;    
     std::vector<Rules> _rules;   
+
 };
 
 } // end namespace

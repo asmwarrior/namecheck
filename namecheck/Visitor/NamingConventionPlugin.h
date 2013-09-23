@@ -23,7 +23,7 @@ namespace GPPGeneric
 class NamingConventionPlugin : public BasePlugin
 {
 public:
-    NamingConventionPlugin();
+    NamingConventionPlugin(const std::string& pathFile);
 
 private:
 
