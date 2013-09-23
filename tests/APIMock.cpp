@@ -9,6 +9,7 @@
 #include "Visitor/LowerCamelCaseRule.h"
 #include "Visitor/UpperUnderscoreRule.h"
 #include "Visitor/LowerUnderscoreRule.h"
+#include "Visitor/RulesContainer.h"
 #include "Visitor/PluginAPI.h"
 #include "Visitor/Regex.h"
 
@@ -284,32 +285,20 @@ TEST(ConfigurationTest, notDefinedErrorMessage)
     const std::string confFile = "obsoleteConfFile.csv";
     std::ofstream file(confFile.c_str());
     file << "ClassDeclaration,1\n";    
-    file << "StructDeclaration, 0, ^\\u.* \n";    
+    file << "StructDeclaration,0,^\\u.*\n";    
     file.close();
     NamingChecker::RulesContainer rulesContainer;
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
     unlink(confFile.c_str());
 }
 
-// TEST(ConfigurationTest, InvalidRegex)
-// {
-//     const std::string confFile = "obsoleteConfFile.csv";
-//     std::ofstream file(confFile.c_str());
-//     file << "ClassDeclaration,1\n";    
-//     file << "StructDeclaration,0,66t6tt,My error message \n";    
-//     file.close();
-//     NamingChecker::RulesContainer rulesContainer;
-//     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidRegex);
-//     unlink(confFile.c_str());
-// }
-
 TEST(ConfigurationTest, InvalidDeclaration)
 {
     const std::string confFile = "obsoleteConfFile.csv";
     std::ofstream file(confFile.c_str());
-    file << "class declaration, 1 \n";        
+    file << "class declaration,1\n";        
     file.close();
-    NamingChecker::RulesContainer rulesContainer;
+    NamingChecker::RulesContainer rulesContainer; 
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidDeclaration);
     unlink(confFile.c_str());
 }
@@ -318,7 +307,7 @@ TEST(ConfigurationTest, InvalidRuleType)
 {
     const std::string confFile = "obsoleteConfFile.csv";
     std::ofstream file(confFile.c_str());
-    file << "ClassDeclaration,  6 \n";        
+    file << "ClassDeclaration,6\n";        
     file.close();
     NamingChecker::RulesContainer rulesContainer;
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidRuleType);
