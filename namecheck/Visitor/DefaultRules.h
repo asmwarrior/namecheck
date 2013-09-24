@@ -28,12 +28,14 @@ private:
     virtual void checkRule(const std::string& declarationName, Result& result) const;
 
 protected:
+
     /**
      * @brief Constructor of class
      *  
      * @param length amount default rules
      */
     DefaultRules(const size_t length);
+    
     typedef std::vector<BoostRegex> Regexs;
     typedef std::vector<Message> ErrorMsgs;
 

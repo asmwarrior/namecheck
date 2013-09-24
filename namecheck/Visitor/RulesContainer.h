@@ -98,7 +98,8 @@ private:
         UpCamelCaseRule,
         LowCamelCaseRule,
         UpUnderscoreRule,
-        LowUnderscoreRule
+        LowUnderscoreRule,
+        ReservNameRule
     };
 
     /**
