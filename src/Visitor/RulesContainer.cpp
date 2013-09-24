@@ -16,7 +16,8 @@
 #include "Visitor/LowerCamelCaseRule.h"
 #include "Visitor/UpperUnderscoreRule.h"
 #include "Visitor/LowerUnderscoreRule.h"
-
+#include "Visitor/ReservedNameRule.h"
+                
 using mili::operator>>;
 
 namespace NamingChecker
@@ -117,13 +118,19 @@ void RulesContainer::process(const StringVector& fileLine)
             _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lu);
             break;
         }
+        case ReservNameRule:
+        {
+            Rule* rn = new ReservedNameRule();
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rn);
+            break;
+        }
         default : 
             throw InvalidRuleType();
     }
 }
 
 void RulesContainer::load(const FileName& fileName)
-{   
+{       
     std::ifstream ifs;
     ifs.open(fileName.c_str());
     mili::assert_throw<FileNotFound>(ifs);    
