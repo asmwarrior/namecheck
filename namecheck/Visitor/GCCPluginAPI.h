@@ -12,7 +12,6 @@
 #define GCC_PLUGIN_API
 
 #include "Visitor/PluginAPI.h"
-#include "Traverser/GenericTree.h"
 
 namespace GPPGeneric
 {

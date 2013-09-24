@@ -12,7 +12,6 @@
 #define GPP_BASE_PLUGIN_H
 
 #include "Visitor/GenericVisitor.h"
-#include "Traverser/GenericTree.h"
 
 namespace GPPGeneric
 {

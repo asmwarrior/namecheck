@@ -15,7 +15,6 @@
 #include "Visitor/Rule.h"
 #include "Visitor/RulesContainer.h"
 #include "Visitor/BasePlugin.h"
-#include "Traverser/GenericTree.h"
 
 namespace GPPGeneric
 {
