@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        RegexCollection.cpp
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       This is an implementation of RegexCollection class
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        RegexCollection.cpp
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       This is an implementation of RegexCollection class
+ */
 
 #include "namecheck/RegexCollection.h"
 

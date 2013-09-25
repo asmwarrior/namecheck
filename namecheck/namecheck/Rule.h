@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        Rule.h
-* @author      Franco Riberi
-* @date        2013-09-16
-* @brief       Header file for namecheck providing Rule interface.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        Rule.h
+ * @author      Franco Riberi
+ * @date        2013-09-16
+ * @brief       Header file for namecheck providing Rule interface.
+ */
 
 #ifndef RULE_H
 #define RULE_H
@@ -22,8 +22,8 @@ namespace NamingChecker
 typedef std::string Message;
 
 /**
- *  @brief The result of a check. 
- *  
+ *  @brief The result of a check.
+ *
  *  This has the result of a name check in a bool, it also has the error message in case the name is wrong
  */
 struct Result
@@ -37,14 +37,19 @@ struct Result
  */
 struct Rule
 {
-	/**
- 	 * @brief Checks if declarationName is correct and return the result.
- 	 * 
- 	 * @param declarationName the name to check 
- 	 * @param result to fill with the result
- 	 */
+    /**
+     * @brief Checks if declarationName is correct and return the result.
+     *
+     * @param declarationName the name to check
+     * @param result to fill with the result
+     */
     virtual void checkRule(const std::string& declarationName, Result& result) const = 0;
-    virtual ~Rule(){}    
+
+    /**
+     * @brief Destructor of class
+     *
+     */
+    virtual ~Rule() {}
 };
 
 } //end namespace

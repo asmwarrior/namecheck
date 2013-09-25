@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        Regex.cpp
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       This is the implementation of Regex interface
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        Regex.cpp
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       This is the implementation of Regex interface
+ */
 
 #include <iostream>
 #include "namecheck/Regex.h"
