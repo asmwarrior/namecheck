@@ -94,3 +94,22 @@ do
 	rm $cFile""$retrievedExtension
 done
 rm *.o
+
+#c++ main test
+pathExpectedFolderCPP="../../expectedResult/c++main/"
+directoryCPP="testFiles/c++main/"
+
+cd ../..
+cd $directoryCPP
+ echo "---------------- C++ main code ----------------"
+ for cppFile in $(ls *.cpp);
+ do 	
+	g++ -fplugin=../../../../../../install/libs/libnamecheck.so -c $cppFile -fplugin-arg-libnamecheck-path=../../conffile.csv &> $cppFile""$retrievedExtension	
+	if diff $cppFile""$retrievedExtension $pathExpectedFolderCPP""$cppFile""$expectedExtension; then
+	 	echo -e $cppFile "\e[1;32m"Test case OK"	\e[0m"
+	else
+		echo -e $cppFile "\e[0;31mTest case failed\e[0m"
+	fi
+	rm $cppFile""$retrievedExtension
+done
+rm *.o
