@@ -13,7 +13,7 @@
 namespace NamingChecker
 {
 
-UpperCamelCaseRule::UpperCamelCaseRule() : DefaultRules(3)
+UpperCamelCaseRule::UpperCamelCaseRule() : RegexCollection(3)
 {
     _regexs[0] = "^\\u.*?";
     _regexs[1] = "^_?[\\l\\u\\d]*$";

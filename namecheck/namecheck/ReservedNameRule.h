@@ -11,7 +11,7 @@
 #ifndef RESERVED_NAME_RULE_H
 #define RESERVED_NAME_RULE_H
 
-#include "DefaultRules.h"
+#include "RegexCollection.h"
 
 namespace NamingChecker
 {
@@ -20,7 +20,7 @@ namespace NamingChecker
  * @brief This class represents a reserved name rule
  *
  */
-class ReservedNameRule : public DefaultRules
+class ReservedNameRule : public RegexCollection
 {
 public:
 

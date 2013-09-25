@@ -13,7 +13,7 @@
 namespace NamingChecker
 {
 
-ReservedNameRule::ReservedNameRule() : DefaultRules(MatchAmount)
+ReservedNameRule::ReservedNameRule() : RegexCollection(MatchAmount)
 {
     _regexs[MatchNotUnderscoreUpper] = "^_\\u.*?";
     _regexs[MatchNotEDOrUpper] = "^E(\\d|\\u).*?";

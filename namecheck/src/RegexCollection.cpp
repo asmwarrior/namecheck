@@ -2,21 +2,21 @@
 * Taller Technologies - Software Development Company
 * Copyright 2013 - All rights reserved
 *
-* @file        DefaultRules.cpp
+* @file        RegexCollection.cpp
 * @author      Franco Riberi
 * @date        2013-09-17
-* @brief       This is an implementation of DefaultRules class
+* @brief       This is an implementation of RegexCollection class
 */
 
-#include "namecheck/DefaultRules.h"
+#include "namecheck/RegexCollection.h"
 
 namespace NamingChecker
 {
 
-DefaultRules::DefaultRules(const size_t length) : _regexs(length), _errmsgs(length)
+RegexCollection::RegexCollection(const size_t length) : _regexs(length), _errmsgs(length)
 {}
 
-void DefaultRules::checkRule(const std::string& declarationName, Result& result) const
+void RegexCollection::checkRule(const std::string& declarationName, Result& result) const
 {
     assert(_regexs.size() != 0);
     size_t i(0);

@@ -2,10 +2,10 @@
 * Taller Technologies - Software Development Company
 * Copyright 2013 - All rights reserved
 *
-* @file        DefaultRules.h
+* @file        RegexCollection.h
 * @author      Franco Riberi
 * @date        2013-09-17
-* @brief       Header file for namecheck providing DefaultRules class.
+* @brief       Header file for namecheck providing RegexCollection class.
 */
 
 #ifndef DEFAULT_RULES_H
@@ -21,7 +21,7 @@ namespace NamingChecker
  *
  * This class represents a default rules 
  */
-class DefaultRules : public Rule
+class RegexCollection : public Rule
 {
 private:
 
@@ -34,7 +34,7 @@ protected:
      *  
      * @param length amount default rules
      */
-    DefaultRules(const size_t length);
+    RegexCollection(const size_t length);
     
     typedef std::vector<BoostRegex> Regexs;
     typedef std::vector<Message> ErrorMsgs;
