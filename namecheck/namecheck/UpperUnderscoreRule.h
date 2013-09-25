@@ -11,7 +11,7 @@
 #ifndef UPPER_UNDERSCORE_RULE_H
 #define UPPER_UNDERSCORE_RULE_H
 
-#include "DefaultRules.h"
+#include "RegexCollection.h"
 
 namespace NamingChecker
 {
@@ -20,7 +20,7 @@ namespace NamingChecker
  * @brief This class represents a upper underscore rule
  *
  */
-class UpperUnderscoreRule : public DefaultRules
+class UpperUnderscoreRule : public RegexCollection
 {
 public:
 

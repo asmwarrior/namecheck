@@ -13,7 +13,7 @@
 namespace NamingChecker
 {
 
-LowerUnderscoreRule::LowerUnderscoreRule() : DefaultRules(3)
+LowerUnderscoreRule::LowerUnderscoreRule() : RegexCollection(3)
 {
     _regexs[0] = "^_\\l.*?";
     _regexs[1] = "^_?[\\l\\u\\d]*$";
