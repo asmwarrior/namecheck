@@ -4,14 +4,14 @@
 #include <fstream>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "Visitor/NamingConventionPlugin.h"
-#include "Visitor/UpperCamelCaseRule.h"
-#include "Visitor/LowerCamelCaseRule.h"
-#include "Visitor/UpperUnderscoreRule.h"
-#include "Visitor/LowerUnderscoreRule.h"
-#include "Visitor/RulesContainer.h"
-#include "Visitor/PluginAPI.h"
-#include "Visitor/Regex.h"
+#include "namecheck/NamingConventionPlugin.h"
+#include "namecheck/UpperCamelCaseRule.h"
+#include "namecheck/LowerCamelCaseRule.h"
+#include "namecheck/UpperUnderscoreRule.h"
+#include "namecheck/LowerUnderscoreRule.h"
+#include "namecheck/RulesContainer.h"
+#include "namecheck/PluginAPI.h"
+#include "namecheck/Regex.h"
 
 using ::testing::_;
 using namespace GPPGeneric;
