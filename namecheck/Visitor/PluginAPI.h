@@ -11,15 +11,34 @@
 #ifndef GPP_PLUGIN_API_H
 #define GPP_PLUGIN_API_H
 
-#include "GenericTree.h"
+#include "Traverser/GenericTree.h"
 #include <string>
 
 namespace GPPGeneric
 {
 
+/**
+*  @brief Interface of plugin that makes the warning messages. 
+*
+*/
 struct PluginApi
 {
+	/**
+    * @brief gives the warning message.
+    *
+    *
+    * @param decl is the tree of the name it is used for the warning message to print the location of the name
+    * @param message the message to print
+    */
     virtual void warning(const GenericTree& decl, const std::string& message) = 0;
+
+    /**
+    * @brief gives the error message.
+    *
+    *
+    * @param decl is the tree of the name it is used for the error message to print the location of the name
+    * @param message the message to print
+    */
     virtual void error(const GenericTree& decl, const std::string& message) = 0;
 };
 
