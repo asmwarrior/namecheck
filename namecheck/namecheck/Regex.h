@@ -11,6 +11,7 @@
 #ifndef REGEX_H
 #define REGEX_H
 
+#include <boost/regex.hpp>
 #include "Rule.h"
 
 namespace NamingChecker
@@ -34,7 +35,7 @@ private:
     /**
      * @brief Represent a specific regex
      */
-    BoostRegex _regex;
+    boost::regex _regex;
 
     /**
      * @brief Represent a error message

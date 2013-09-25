@@ -36,7 +36,7 @@ protected:
      */
     RegexCollection(const size_t length);
     
-    typedef std::vector<BoostRegex> Regexs;
+    typedef std::vector<boost::regex> Regexs;
     typedef std::vector<Message> ErrorMsgs;
 
     Regexs _regexs;
