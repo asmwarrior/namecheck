@@ -14,7 +14,9 @@
 #include <traverser/GenericTree.h>
 #include <string>
 
-namespace GPPGeneric
+using namespace GPPGeneric;
+
+namespace NamingCheck
 {
 
 /**

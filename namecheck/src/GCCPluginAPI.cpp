@@ -22,8 +22,11 @@
 	#include "diagnostic-core.h"
 #endif
 
-namespace GPPGeneric
+namespace NamingChecker
 {
+
+//using namespace GPPGeneric;
+
 void GCCPluginApi::warning(const GenericTree& decl, const std::string& message)
 {	
     warning_at(DECL_SOURCE_LOCATION(decl), 0, gettext(message.c_str()));

@@ -11,8 +11,10 @@
 #include <iostream>
 #include "namecheck/BasePlugin.h"
 
-namespace GPPGeneric
+namespace NamingChecker
 {
+
+//using namespace GPPGeneric;
 
 GenericVisitor* BasePlugin::getVisitor()
 {

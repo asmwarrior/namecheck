@@ -16,8 +16,10 @@
 #include "RulesContainer.h"
 #include "BasePlugin.h"
 
-namespace GPPGeneric
+namespace NamingCheck
 {
+
+using namespace GPPGeneric;
 
 class NamingConventionPlugin : public BasePlugin
 {

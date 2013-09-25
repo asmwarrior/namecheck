@@ -43,8 +43,10 @@
     #include "diagnostic-core.h"
 #endif
 
-namespace GPPGeneric
+namespace NamingChecker
 {
+
+//using namespace GPPGeneric;
 
 NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
 {
