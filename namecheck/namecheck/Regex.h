@@ -37,16 +37,16 @@ private:
     virtual void checkRule(const std::string& declarationName, Result& result) const;
 
     virtual ~Regex() {}
-    
+
     /**
      * @brief Represent a specific regex
      */
-    boost::regex _regex;
+    const boost::regex _regex;
 
     /**
      * @brief Represent a error message
      */
-    Message _errmsg;
+    const Message _errmsg;
 };
 
 } //end namespace
