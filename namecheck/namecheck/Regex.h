@@ -36,6 +36,8 @@ private:
 
     virtual void checkRule(const std::string& declarationName, Result& result) const;
 
+    virtual ~Regex() {}
+    
     /**
      * @brief Represent a specific regex
      */
