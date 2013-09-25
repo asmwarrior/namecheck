@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        UpperUnderscoreRule.cpp
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing UpperUnderscoreRule class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        UpperUnderscoreRule.cpp
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing UpperUnderscoreRule class.
+ */
 
 #include "namecheck/UpperUnderscoreRule.h"
 
@@ -23,6 +23,5 @@ UpperUnderscoreRule::UpperUnderscoreRule() : RegexCollection(3)
     _errmsgs[1] = "names should be written with uppercase and underscore";
     _errmsgs[2] = "names should end with uppercase";
 }
-
 
 } //end namespace

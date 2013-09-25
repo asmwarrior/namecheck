@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        LowerCamelCaseRule.cpp
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing LowerCamelCaseRule class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        LowerCamelCaseRule.cpp
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing LowerCamelCaseRule class.
+ */
 
 #include "namecheck/LowerCamelCaseRule.h"
 

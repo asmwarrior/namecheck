@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        LowerUnderscoreRule.cpp
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing LowerUnderscoreRule class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        LowerUnderscoreRule.cpp
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing LowerUnderscoreRule class.
+ */
 
 #include "namecheck/ReservedNameRule.h"
 
@@ -21,7 +21,7 @@ ReservedNameRule::ReservedNameRule() : RegexCollection(MatchAmount)
     _regexs[MatchNotLCUnderscore] = "^LC_\\u.*?";
     _regexs[MatchNotSIGUnderscore] = "^SIG_?\\u.*?";
     _regexs[MatchNotStrMemWcsLower] = "^(str|mem|wcs)\\l.*?";
-    _regexs[MatchNotUnderscoretEnding] = ".*?_t$";       	
+    _regexs[MatchNotUnderscoretEnding] = ".*?_t$";
 
     _errmsgs[MatchNotUnderscoreUpper] = "Names should not start with _ and an Uppercase";
     _errmsgs[MatchNotEDOrUpper] = "Names beginning with a capital ‘E’ followed by a digit or uppercase letter may be used for additional error code names";

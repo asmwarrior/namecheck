@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        RulesContainer.h
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing RulesContainer class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        RulesContainer.h
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing RulesContainer class.
+ */
 
 #ifndef RULES_CONTAINER_H
 #define RULES_CONTAINER_H
@@ -22,9 +22,9 @@ namespace NamingChecker
 {
 
 /**
-* @brief Represents a checker of Naming conventions.
-*
-*/
+ * @brief Represents a checker of Naming conventions.
+ *
+ */
 class RulesContainer
 {
 public:
@@ -49,21 +49,23 @@ public:
         NamespaceDeclaration,
         GlobalConstDeclaration,
         TemplateTypeParameterDeclaration,
-        CheckCount    
+        CheckCount
     };
-   
+
     typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
-	 /**
-     * @brief Represents a configuration file
-     *
-     */
+
+    /**
+    * @brief Represents a configuration file
+    *
+    */
     typedef std::string FileName;
     typedef std::vector<std::string> StringVector;
-	/**
+
+    /**
      * @brief Constructor of class
      *
      */
-    RulesContainer();     
+    RulesContainer();
 
     /**
      * @brief Destructor of class
@@ -82,16 +84,16 @@ public:
 
     /**
      * @brief This initializes the vector of rules corresponding to each declaration types.
-     * 
-     * @param fileName configuration name file 
+     *
+     * @param fileName configuration name file
      */
     void load(const FileName& fileName);
 
 private:
 
     /**
-    * @brief Represents rule types
-    */
+     * @brief Represents rule types
+     */
     enum RuleType
     {
         SpecificRegex = '0',
@@ -104,21 +106,21 @@ private:
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
-     * 
-     * @param fileLine the vector representing the line of the file to process 
+     *
+     * @param fileLine the vector representing the line of the file to process
      */
     void process(const StringVector& fileLine);
 
     /**
      * @brief Check line data
      *
-     * @param line input line from file     
+     * @param line input line from file
      */
-    void checkLine(StringVector line);    
+    void checkLine(StringVector line);
 
     DeclarationMap _declarationMap;
-    typedef std::list<Rule*> Rules;    
-    std::vector<Rules> _rules;   
+    typedef std::list<Rule*> Rules;
+    std::vector<Rules> _rules;
 
 };
 

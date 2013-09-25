@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        RegexCollection.h
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing RegexCollection class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        RegexCollection.h
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing RegexCollection class.
+ */
 
 #ifndef DEFAULT_RULES_H
 #define DEFAULT_RULES_H
@@ -19,7 +19,7 @@ namespace NamingChecker
 /**
  * @brief Specific Rules
  *
- * This class represents a default rules 
+ * This class represents a default rules
  */
 class RegexCollection : public Rule
 {
@@ -31,11 +31,11 @@ protected:
 
     /**
      * @brief Constructor of class
-     *  
+     *
      * @param length amount default rules
      */
     RegexCollection(const size_t length);
-    
+
     typedef std::vector<boost::regex> Regexs;
     typedef std::vector<Message> ErrorMsgs;
 

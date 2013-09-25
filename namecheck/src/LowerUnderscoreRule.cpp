@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        LowerUnderscoreRule.cpp
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing LowerUnderscoreRule class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        LowerUnderscoreRule.cpp
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing LowerUnderscoreRule class.
+ */
 
 #include "namecheck/LowerUnderscoreRule.h"
 

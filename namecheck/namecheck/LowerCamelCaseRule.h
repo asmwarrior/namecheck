@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        LowerCamelCaseRule.h
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing LowerCamelCaseRule class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        LowerCamelCaseRule.h
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing LowerCamelCaseRule class.
+ */
 
 #ifndef LOWER_CAMEL_CASE_RULE_H
 #define LOWER_CAMEL_CASE_RULE_H
@@ -24,10 +24,10 @@ class LowerCamelCaseRule : public RegexCollection
 {
 public:
 
-	/**
-	 * @brief Constructor of class
-	 *
-	 */
+    /**
+     * @brief Constructor of class
+     *
+     */
     LowerCamelCaseRule();
 };
 

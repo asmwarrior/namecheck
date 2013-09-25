@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        Exceptions.h
-* @author      Franco Riberi
-* @date        2013-09-19
-* @brief       Header file for namecheck providing Exception handler.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        Exceptions.h
+ * @author      Franco Riberi
+ * @date        2013-09-19
+ * @brief       Header file for namecheck providing Exception handler.
+ */
 
 #ifndef NAMECHECK_EXCEPTIONS_H
 #define NAMECHECK_EXCEPTIONS_H

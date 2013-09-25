@@ -1,49 +1,49 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        NamingConventionPlugin.cpp
-* @author      Marcos Diaz and Franco Riberi
-* @date        2013-09-06
-* @brief       This is an implementation of NamingConventionPlugin class
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        NamingConventionPlugin.cpp
+ * @author      Marcos Diaz and Franco Riberi
+ * @date        2013-09-06
+ * @brief       This is an implementation of NamingConventionPlugin class
+ */
 
 #include <string>
 #include <iostream>
 #include "namecheck/NamingConventionPlugin.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
-    extern "C"
-    {
-    #include "gcc-plugin.h"
-    #include "plugin-version.h"
-    #include "config.h"
-    #include "system.h"
-    #include "coretypes.h"
-    #include "tree.h"
-    #include "intl.h"
-    #include "tm.h"
-    #include "cp/cp-tree.h"
-    #include "c-family/c-common.h"
-    #include "c-family/c-pragma.h"
-    #include "diagnostic-core.h"
-    }
+extern "C"
+{
+#include "gcc-plugin.h"
+#include "plugin-version.h"
+#include "config.h"
+#include "system.h"
+#include "coretypes.h"
+#include "tree.h"
+#include "intl.h"
+#include "tm.h"
+#include "cp/cp-tree.h"
+#include "c-family/c-common.h"
+#include "c-family/c-pragma.h"
+#include "diagnostic-core.h"
+}
 #else
-    #include "gcc-plugin.h"
-    #include "plugin-version.h"
-    #include "config.h"
-    #include "system.h"
-    #include "coretypes.h"
-    #include "tree.h"
-    #include "intl.h"
-    #include "tm.h"
-    #include "cp/cp-tree.h"
-    #include "c-family/c-common.h"
-    #include "c-family/c-pragma.h"
-    #include "diagnostic-core.h"
+#include "gcc-plugin.h"
+#include "plugin-version.h"
+#include "config.h"
+#include "system.h"
+#include "coretypes.h"
+#include "tree.h"
+#include "intl.h"
+#include "tm.h"
+#include "cp/cp-tree.h"
+#include "c-family/c-common.h"
+#include "c-family/c-pragma.h"
+#include "diagnostic-core.h"
 #endif
 
-namespace GPPGeneric
+namespace NamingChecker
 {
 
 NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
@@ -51,19 +51,19 @@ NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
     _checker.load(pathFile.c_str());
 }
 
-inline void NamingConventionPlugin::setPluginWarning(const GenericTree decl, const DeclarationName& message)
+inline void NamingConventionPlugin::setPluginWarning(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& message)
 {
     _plugin->warning(decl, message);
 }
 
 const char* NamingConventionPlugin::_accessLabel[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
 
-void NamingConventionPlugin::visitStringLiteral(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitStringLiteral(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     _plugin->warning(decl, name);
 }
 
-void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitEnumTypeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result enumTypeResult;
     _checker.check(NamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
@@ -74,7 +74,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const GenericTree decl, co
     }
 }
 
-void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitEnumValueDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result enumValueResult;
     _checker.check(NamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
@@ -85,7 +85,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GenericTree decl, c
     }
 }
 
-void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitVariableDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Result variableResult;
     _checker.check(NamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
@@ -96,7 +96,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const GenericTree decl, co
     }
 }
 
-void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitGlobalConstDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result globalConstResult;
     _checker.check(NamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
@@ -107,7 +107,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const GenericTree decl,
     }
 }
 
-void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitFunctionDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result functionResult;
     _checker.check(NamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
@@ -118,7 +118,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GenericTree decl, co
     }
 }
 
-void NamingConventionPlugin::visitParameterDeclaration(const GenericTree decl, const DeclarationName& name, bool /*isConst*/)
+void NamingConventionPlugin::visitParameterDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/)
 {
     Result parameterResult;
     _checker.check(NamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
@@ -129,7 +129,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const GenericTree decl, c
     }
 }
 
-void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitTypeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result typeResult;
     _checker.check(NamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
@@ -140,7 +140,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const GenericTree decl, const 
     }
 }
 
-void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitClassDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result classResult;
     _checker.check(NamingChecker::RulesContainer::ClassDeclaration, name, classResult);
@@ -151,7 +151,7 @@ void NamingConventionPlugin::visitClassDeclaration(const GenericTree decl, const
     }
 }
 
-void NamingConventionPlugin::visitStructDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitStructDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result structResult;
     _checker.check(NamingChecker::RulesContainer::StructDeclaration, name, structResult);
@@ -162,7 +162,7 @@ void NamingConventionPlugin::visitStructDeclaration(const GenericTree decl, cons
     }
 }
 
-void NamingConventionPlugin::visitUnionDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitUnionDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result unionResult;
     _checker.check(NamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
@@ -173,7 +173,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const GenericTree decl, const
     }
 }
 
-void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree decl, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitUnionValueDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Result unionValueResult;
     _checker.check(NamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
@@ -184,7 +184,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const GenericTree decl, 
     }
 }
 
-void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, const AccessModifier access, const DeclarationName& name, bool /*isConst*/)
+void NamingConventionPlugin::visitMethodDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/)
 {
     Result methodResult;
     _checker.check(NamingChecker::RulesContainer::MethodDeclaration, name, methodResult);
@@ -195,7 +195,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const GenericTree decl, cons
     }
 }
 
-void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, const AccessModifier access, const DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitAttributeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Result attributeResult;
     _checker.check(NamingChecker::RulesContainer::AttributeDeclaration, name, attributeResult);
@@ -206,7 +206,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const GenericTree decl, c
     }
 }
 
-void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitNamespaceDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result namespaceResult;
     _checker.check(NamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
@@ -217,7 +217,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const GenericTree decl, c
     }
 }
 
-void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const GenericTree decl, const DeclarationName& name)
+void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
     Result namespaceResult;
     _checker.check(NamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
@@ -228,4 +228,4 @@ void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const Generic
     }
 }
 
-} // end GPPGeneric
+} // end namespace

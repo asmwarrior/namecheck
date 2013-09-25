@@ -1,12 +1,12 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        Regex.h
-* @author      Franco Riberi
-* @date        2013-09-17
-* @brief       Header file for namecheck providing Regex class.
-*/
+ * Taller Technologies - Software Development Company
+ * Copyright 2013 - All rights reserved
+ *
+ * @file        Regex.h
+ * @author      Franco Riberi
+ * @date        2013-09-17
+ * @brief       Header file for namecheck providing Regex class.
+ */
 
 #ifndef REGEX_H
 #define REGEX_H
@@ -26,8 +26,12 @@ class Regex : public Rule
 {
 public:
 
-	Regex(const std::string& reg, const std::string& msg);	
-    
+    /**
+     * @brief Constructor of class
+     *
+     */
+    Regex(const std::string& reg, const std::string& msg);
+
 private:
 
     virtual void checkRule(const std::string& declarationName, Result& result) const;
