@@ -14,7 +14,9 @@
 #include <traverser/GenericVisitor.h>
 #include "PluginAPI.h"
 
-namespace GPPGeneric
+using namespace GPPGeneric;
+
+namespace NamingChecker
 {
 
 /**

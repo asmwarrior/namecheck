@@ -13,8 +13,10 @@
 
 #include "PluginAPI.h"
 
-namespace GPPGeneric
+namespace NamingChecker
 {
+
+using namespace GPPGeneric;
 
 /**
 *  @brief The Api for error and warning messages for GCC. 
