@@ -17,11 +17,6 @@ namespace NamingChecker
 {
 
 /**
- * @brief Represents a regular expression
- */
-typedef boost::regex BoostRegex;
-
-/**
  * @brief Represents a output message
  */
 typedef std::string Message;
