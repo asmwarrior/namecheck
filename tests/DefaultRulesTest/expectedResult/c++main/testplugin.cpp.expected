@@ -1,0 +1,11 @@
+starting libnamecheck
+processing testplugin.cpp
+testplugin.cpp:83:12: warning: Attribute declaration names should start with underscore followed by a lowercase in hola (PUBLIC) [enabled by default]
+testplugin.cpp:84:9: warning: Attribute declaration names should start with underscore followed by a lowercase in quetal (PUBLIC) [enabled by default]
+testplugin.cpp:71:6: warning: Union value declaration names should start with uppercase in asd [enabled by default]
+testplugin.cpp:72:10: warning: Union value declaration names should start with uppercase in asdf [enabled by default]
+testplugin.cpp:61:13: warning: Attribute declaration names should start with underscore followed by a lowercase in bb (PUBLIC) [enabled by default]
+testplugin.cpp:63:7: warning: Attribute declaration names should start with underscore followed by a lowercase in cc (PROTECTED) [enabled by default]
+testplugin.cpp:65:6: warning: Attribute declaration names should start with underscore followed by a lowercase in aa (PRIVATE) [enabled by default]
+testplugin.cpp:87:19: warning: Namespace declaration names should end with lowercase in ASSDASD [enabled by default]
+testplugin.cpp:88:15: warning: Namespace declaration names should end with lowercase in AAAA [enabled by default]

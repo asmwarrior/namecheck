@@ -1,6 +1,5 @@
 starting libnamecheck
 processing TemplateDeclarationTest.cpp
-TemplateDeclarationTest.cpp: In function ‘int main()’:
 TemplateDeclarationTest.cpp:59:11: warning: Attribute declaration names should start with underscore followed by a lowercase in weights (PRIVATE) [enabled by default]
 TemplateDeclarationTest.cpp:60:13: warning: Attribute declaration names should not be written using underscore, only is supported one underscore at the beginning in _connection_matrix (PRIVATE) [enabled by default]
 TemplateDeclarationTest.cpp:56:33: warning: Type declaration names should end with lowercase in TT [enabled by default]
