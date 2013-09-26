@@ -33,8 +33,6 @@
  */
 
 #include <iostream>
-#include <locale.h>
-#include <libintl.h>
 #include "traverser/GCCPluginAPI.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
@@ -51,12 +49,12 @@ namespace NamingChecker
 
 void GCCPluginApi::warning(const GPPGeneric::GenericTree& decl, const std::string& message)
 {
-    warning_at(DECL_SOURCE_LOCATION(decl), 0, gettext(message.c_str()));
+    warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
 }
 
 void GCCPluginApi::error(const GPPGeneric::GenericTree& decl, const std::string& message)
 {
-    error_at(DECL_SOURCE_LOCATION(decl), 0,  gettext(message.c_str()));
+    error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
 }
 
 } // end namespace

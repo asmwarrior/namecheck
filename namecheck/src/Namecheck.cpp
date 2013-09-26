@@ -29,8 +29,6 @@
  *
  */
 
-#include <libintl.h>
-#include <locale.h>
 #include "namecheck/NamingConventionPlugin.h"
 #include "traverser/GCCPluginAPI.h"
 #include <traverser/TraverserCppThree.h>
@@ -68,16 +66,6 @@ enum PluginArguments
     ConfigurationFile,
     NumberOfArguments
 };
-
-/**
- * @brief Set data for gettext. For more infomation, see Linux man page
- */
-void initGettext()
-{
-    setlocale(LC_ALL, "");
-    bindtextdomain("namecheck", "/usr/share/locale");
-    textdomain("namecheck");
-}
 
 extern "C" void gate_callback_cpp_three(void*, void*)
 {
@@ -134,7 +122,6 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
     // else
     //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
-    initGettext();
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
     register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 
