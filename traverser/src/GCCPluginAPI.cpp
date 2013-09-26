@@ -8,34 +8,34 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Source file for namecheck providing GCCPluginAPI implementation.
+ * Contents: Source file for traverser providing GCCPluginAPI implementation.
  *
- * System:   namecheck: Naming Convention Checker
+ * System:   traverser: Naming Convention Checker
  * Language: C++
  *
  * @date September 06, 2013
  *
- * This file is part of namecheck
+ * This file is part of traverser.
  *
- * namecheck is free software: you can redistribute it and/or modify
+ * traverser is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * namecheck is distributed in the hope that it will be useful,
+ * traverser is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with namecheck.  If not, see <http://www.gnu.org/licenses/>.
+ * along with traverser.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
 #include <iostream>
 #include <locale.h>
 #include <libintl.h>
-#include "namecheck/GCCPluginAPI.h"
+#include "traverser/GCCPluginAPI.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
 	extern "C"
