@@ -131,7 +131,7 @@ private:
      * @param rule corresponds a specific rule 
      * @return specific rule
      */
-    Rule* factoryRule(const RuleType& rule, const StringVector& fileLine);    
+    Rule* rulesFactory(const RuleType& rule, const StringVector& fileLine);    
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
