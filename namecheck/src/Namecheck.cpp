@@ -32,7 +32,7 @@
 #include <libintl.h>
 #include <locale.h>
 #include "namecheck/NamingConventionPlugin.h"
-#include "namecheck/GCCPluginAPI.h"
+#include "traverser/GCCPluginAPI.h"
 #include <traverser/TraverserCppThree.h>
 #include <traverser/TraverserCppEleven.h>
 
