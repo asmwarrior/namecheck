@@ -79,15 +79,15 @@ void initGettext()
     textdomain("namecheck");
 }
 
-static const size_t AMOUT_ERROR = 0;
-static const size_t AMOUT_WARNNING = 0;
+static const size_t AMOUNT_ERROR = 0;
+static const size_t AMOUNT_WARNNING = 0;
 
 extern "C" void gate_callback_cpp_three(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
     //    
-    if ((errorcount == AMOUT_ERROR) && (sorrycount == AMOUT_WARNNING))
+    if ((errorcount == AMOUNT_ERROR) && (sorrycount == AMOUNT_WARNNING))
     {
         GPPGeneric::TraverserCppThree traverser;
         const std::auto_ptr<NamingChecker::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
@@ -105,7 +105,7 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     // If there were errors during compilation,
     // let GCC handle the exit.
     //        
-    if ((errorcount == AMOUT_ERROR) && (sorrycount == AMOUT_WARNNING))
+    if ((errorcount == AMOUNT_ERROR) && (sorrycount == AMOUNT_WARNNING))
     {
         GPPGeneric::TraverserCppEleven traverser;
         const std::auto_ptr<NamingChecker::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
