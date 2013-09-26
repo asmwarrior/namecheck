@@ -126,6 +126,14 @@ private:
     };
 
     /**
+     * @brief Create a specific rule
+     *
+     * @param rule corresponds a specific rule 
+     * @return specific rule
+     */
+    Rule* factoryRule(const RuleType& rule, const StringVector& fileLine);    
+
+    /**
      * @brief This initializes process the vector corresponding to a line in the config file.
      *
      * @param fileLine the vector representing the line of the file to process

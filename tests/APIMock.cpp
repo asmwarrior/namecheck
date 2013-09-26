@@ -58,17 +58,17 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     //correct variable names
     plugin.visitVariableDeclaration(decl, "amount", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "i", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "amoutVisible", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "amountVisible", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "isVisible", isConst, typeName);
 
     //incorrect variable names
-    plugin.visitVariableDeclaration(decl, "Amout", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "_amout", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "AMOUT", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "Amount", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "_amount", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "AMOUNT", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amountAvailablE", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "22amout", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "amoutVisible2", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "amout_visible", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "22amount", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "amountVisible2", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "amount_visible", isConst, typeName);
 
     //correct method names
     plugin.visitFunctionDeclaration(decl, "process");

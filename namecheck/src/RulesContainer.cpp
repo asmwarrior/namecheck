@@ -30,8 +30,8 @@
  */
 
 #include <fstream>
-#include <mili/mili.h>
 #include <sstream>
+#include <mili/mili.h>
 #include "namecheck/RulesContainer.h"
 #include "namecheck/Regex.h"
 #include "namecheck/UpperCamelCaseRule.h"
@@ -103,50 +103,53 @@ void RulesContainer::checkLine(const StringVector& line)
     mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
 }
 
-void RulesContainer::process(const StringVector& fileLine)
-{    
-    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);
-    switch (ruleType)
+Rule* RulesContainer::factoryRule(const RuleType& rule, const StringVector& fileLine)
+{
+    Rule* ret;
+    switch (rule)
     {
         case SpecificRegex:
         {
-            Rule* const reg = new Regex(fileLine[SPECIFIC_REGEX], fileLine[ERROR_MESSAGE]);
-            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(reg);
+            ret = new Regex(fileLine[SPECIFIC_REGEX], fileLine[ERROR_MESSAGE]);            
             break;
         }
         case UpCamelCaseRule:
         {
-            Rule* const ucc = new UpperCamelCaseRule();
-            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(ucc);
+            ret = new UpperCamelCaseRule();
             break;
         }
         case LowCamelCaseRule:
         {
-            Rule* const lcc = new LowerCamelCaseRule();
-            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lcc);
+            ret = new LowerCamelCaseRule();
             break;
         }
         case UpUnderscoreRule:
         {
-            Rule* const uu = new UpperUnderscoreRule();
-            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(uu);
+            ret = new UpperUnderscoreRule();            
             break;
         }
         case LowUnderscoreRule:
         {
-            Rule* const lu = new LowerUnderscoreRule();
-            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lu);
+            ret = new LowerUnderscoreRule();
             break;
         }
         case ReservNameRule:
         {
-            Rule* const rn = new ReservedNameRule();
-            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rn);
+            ret = new ReservedNameRule();
             break;
         }
         default :
             throw InvalidRuleType();
     }
+    return ret;
+}
+
+void RulesContainer::process(const StringVector& fileLine)
+{    
+    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
+    const RuleType specificRule = RuleType(ruleType);
+    Rule* const rule = factoryRule(specificRule, fileLine);
+    _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }
 
 void RulesContainer::load(const FileName& fileName)
