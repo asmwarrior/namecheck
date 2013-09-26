@@ -1,12 +1,36 @@
-/**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        GenericTraverser.cpp
-* @author      Francisco Herrero and Marcos Diaz
-* @date        2013-09-06
-* @brief       This is the implementation of GenericTraverser class
-*/
+/*
+ * @file     GenericTraverser.cpp
+ * @brief    This is the implementation of GenericTraverser interface.
+ *
+ * @author   Francisco Herrero
+ * @email    francisco.herrero AT tallertechnologies.com
+ *
+ * @author   Marcos Diaz
+ * @email    marcos.diaz AT tallertechnologies.com
+ *
+ * Contents: Source file for traverser providing GenericTraverser implementation.
+ *
+ * System:   traverser 
+ * Language: C++
+ *
+ * @date September 06, 2013
+ *
+ * This file is part of traverser.
+ *
+ * traverser is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * traverser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with traverser.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 #include <cassert>
 #include <iostream>
@@ -15,11 +39,11 @@
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
     {
-    #include "tree-iterator.h"
-    #include "cp/cp-tree.h"
-    #include "c-family/c-common.h"
-    #include "c-family/c-pragma.h"
-    #include "diagnostic-core.h"
+        #include "tree-iterator.h"
+        #include "cp/cp-tree.h"
+        #include "c-family/c-common.h"
+        #include "c-family/c-pragma.h"
+        #include "diagnostic-core.h"
     }
 #else
     #include "tree-iterator.h"
