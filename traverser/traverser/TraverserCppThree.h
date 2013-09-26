@@ -42,7 +42,6 @@ class TraverserCppThree : public GenericTraverser
 
 };
 
-
 } // end GPPGeneric
 
 #endif

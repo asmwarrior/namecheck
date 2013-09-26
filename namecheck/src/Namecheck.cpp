@@ -50,13 +50,23 @@
 #include <memory>
 #include <iostream>
 
-int plugin_is_GPL_compatible; //not rename
+int plugin_is_GPL_compatible; //don't rename
 
 std::string pathFile;
+
 static struct plugin_info namingInfo =
 {
     "0.1",                        // version
     "Naming Convention Plugin"    // help
+};
+
+/**
+ * @brief Represents the arguments of the plugin
+ */
+enum PluginArguments
+{
+    ConfigurationFile,
+    NumberOfArguments
 };
 
 /**
@@ -69,12 +79,15 @@ void initGettext()
     textdomain("namecheck");
 }
 
+static const size_t AMOUT_ERROR = 0;
+static const size_t AMOUT_WARNNING = 0;
+
 extern "C" void gate_callback_cpp_three(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
-    //
-    if (!(errorcount || sorrycount))
+    //    
+    if ((errorcount == AMOUT_ERROR) && (sorrycount == AMOUT_WARNNING))
     {
         GPPGeneric::TraverserCppThree traverser;
         const std::auto_ptr<NamingChecker::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
@@ -88,10 +101,11 @@ extern "C" void gate_callback_cpp_three(void*, void*)
 
 extern "C" void gate_callback_cpp_eleven(void*, void*)
 {
+
     // If there were errors during compilation,
     // let GCC handle the exit.
-    //
-    if (!(errorcount || sorrycount))
+    //        
+    if ((errorcount == AMOUT_ERROR) && (sorrycount == AMOUT_WARNNING))
     {
         GPPGeneric::TraverserCppEleven traverser;
         const std::auto_ptr<NamingChecker::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
@@ -103,6 +117,8 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     exit(EXIT_SUCCESS);
 }
 
+static const size_t EXPECTED = 0;
+
 extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 {
     std::cerr << "starting " << info->base_name << std::endl;
@@ -111,12 +127,10 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     asm_file_name = HOST_BIT_BUCKET;
 
     if (!plugin_default_version_check(version, &gcc_version))
-        return 1;
+        return EXIT_FAILURE;
 
-    if ((info->argc == 1) && !(strcmp(info->argv->key, "path")))
-    {
-        pathFile = info->argv->value;
-    }
+    if ((info->argc == 1) && (strcmp(info->argv[ConfigurationFile].key, "path")) == EXPECTED)
+        pathFile = info->argv[ConfigurationFile].value;
 
     //implement this when trying to execute the plugin with c++0x or c++03
     // if(info->argc == 1 && (strcmp(info->argv->key,"c++0x") || strcmp(info->argv->key, "c++11")))

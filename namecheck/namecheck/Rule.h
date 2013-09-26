@@ -38,33 +38,44 @@ namespace NamingChecker
 {
 
 /**
+ * @brief Represents a declaration name
+ */
+typedef std::string DeclName;
+    
+/**
+ * @brief Represents type of regex
+ */
+typedef boost::regex RegexType;
+
+/**
  * @brief Represents a output message
  */
 typedef std::string Message;
-
-/**
- *  @brief The result of a check.
- *
- *  This has the result of a name check in a bool, it also has the error message in case the name is wrong
- */
-struct Result
-{
-    bool _match;
-    Message _message;
-};
 
 /**
  * Interface for a rule
  */
 struct Rule
 {
+
+    /**
+     *  @brief The result of a check.
+     *
+     *  This has the result of a name check in a bool, it also has the error message in case the name is wrong
+     */
+    struct Result
+    {
+        bool _match;
+        Message _message;
+    };
+
     /**
      * @brief Checks if declarationName is correct and return the result.
      *
      * @param declarationName the name to check
      * @param result to fill with the result
      */
-    virtual void checkRule(const std::string& declarationName, Result& result) const = 0;
+    virtual void checkRule(const DeclName& declarationName, Result& result) const = 0;
 
     /**
      * @brief Destructor of class

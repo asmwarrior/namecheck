@@ -92,7 +92,7 @@ void NamingConventionPlugin::visitStringLiteral(const GPPGeneric::GenericTree de
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result enumTypeResult;
+    Rule::Result enumTypeResult;
     _checker.check(NamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
@@ -103,7 +103,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const GPPGeneric::GenericT
 
 void NamingConventionPlugin::visitEnumValueDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result enumValueResult;
+    Rule::Result enumValueResult;
     _checker.check(NamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
     if (!enumValueResult._match)
     {
@@ -114,7 +114,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const GPPGeneric::Generic
 
 void NamingConventionPlugin::visitVariableDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
-    Result variableResult;
+    Rule::Result variableResult;
     _checker.check(NamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
     if (!variableResult._match)
     {
@@ -125,7 +125,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const GPPGeneric::GenericT
 
 void NamingConventionPlugin::visitGlobalConstDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result globalConstResult;
+    Rule::Result globalConstResult;
     _checker.check(NamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
     if (!globalConstResult._match)
     {
@@ -136,7 +136,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const GPPGeneric::Gener
 
 void NamingConventionPlugin::visitFunctionDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result functionResult;
+    Rule::Result functionResult;
     _checker.check(NamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
@@ -147,7 +147,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const GPPGeneric::GenericT
 
 void NamingConventionPlugin::visitParameterDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/)
 {
-    Result parameterResult;
+    Rule::Result parameterResult;
     _checker.check(NamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
@@ -158,7 +158,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const GPPGeneric::Generic
 
 void NamingConventionPlugin::visitTypeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result typeResult;
+    Rule::Result typeResult;
     _checker.check(NamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
@@ -169,7 +169,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const GPPGeneric::GenericTree 
 
 void NamingConventionPlugin::visitClassDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result classResult;
+    Rule::Result classResult;
     _checker.check(NamingChecker::RulesContainer::ClassDeclaration, name, classResult);
     if (!classResult._match)
     {
@@ -180,7 +180,7 @@ void NamingConventionPlugin::visitClassDeclaration(const GPPGeneric::GenericTree
 
 void NamingConventionPlugin::visitStructDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result structResult;
+    Rule::Result structResult;
     _checker.check(NamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
@@ -191,7 +191,7 @@ void NamingConventionPlugin::visitStructDeclaration(const GPPGeneric::GenericTre
 
 void NamingConventionPlugin::visitUnionDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result unionResult;
+    Rule::Result unionResult;
     _checker.check(NamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
     if (!unionResult._match)
     {
@@ -202,7 +202,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const GPPGeneric::GenericTree
 
 void NamingConventionPlugin::visitUnionValueDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
-    Result unionValueResult;
+    Rule::Result unionValueResult;
     _checker.check(NamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
     if (!unionValueResult._match)
     {
@@ -213,7 +213,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const GPPGeneric::Generi
 
 void NamingConventionPlugin::visitMethodDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/)
 {
-    Result methodResult;
+    Rule::Result methodResult;
     _checker.check(NamingChecker::RulesContainer::MethodDeclaration, name, methodResult);
     if (!methodResult._match)
     {
@@ -224,7 +224,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const GPPGeneric::GenericTre
 
 void NamingConventionPlugin::visitAttributeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
-    Result attributeResult;
+    Rule::Result attributeResult;
     _checker.check(NamingChecker::RulesContainer::AttributeDeclaration, name, attributeResult);
     if (!attributeResult._match)
     {
@@ -235,7 +235,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const GPPGeneric::Generic
 
 void NamingConventionPlugin::visitNamespaceDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result namespaceResult;
+    Rule::Result namespaceResult;
     _checker.check(NamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
@@ -246,7 +246,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const GPPGeneric::Generic
 
 void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    Result namespaceResult;
+    Rule::Result namespaceResult;
     _checker.check(NamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {

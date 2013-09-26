@@ -1,6 +1,6 @@
 /**
  * @file     GCCPluginAPI.h
- * @brief    Provides the API for error and warning messages for GCC.
+ * @brief    Provides the API for communication from the plugin to gcc.
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -41,7 +41,7 @@ namespace NamingChecker
 {
 
 /**
- * @brief The Api for error and warning messages for GCC.
+ * @brief The API for communication from the plugin to gcc.
  *
  */
 class GCCPluginApi: public PluginApi
