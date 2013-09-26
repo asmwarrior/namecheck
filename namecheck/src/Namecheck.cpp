@@ -1,11 +1,32 @@
-/**
- * Taller Technologies - Software Development Company
- * Copyright 2013 - All rights reserved
+/*
+ * @file     Namecheck.cpp
+ * @brief    This is the main file that launches the namecheck plugin.
  *
- * @file        namecheck.cpp
- * @author      Francisco Herrero
- * @date        2013-09-06
- * @brief       This is the main file that launches the namecheck plugin
+ * @author   Francisco Herrero
+ * @email    francisco.herrero AT tallertechnologies.com
+ *
+ * Contents: Source file for namecheck providing main file that launches the plugin.
+ *
+ * System:   namecheck: Naming Convention Checker
+ * Language: C++
+ *
+ * @date September 06, 2013
+ *
+ * This file is part of namecheck
+ *
+ * namecheck is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * namecheck is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with namecheck.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include <libintl.h>
@@ -16,14 +37,14 @@
 #include <traverser/TraverserCppEleven.h>
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
-extern "C"
-{
-#include "cp/cp-tree.h"
-#include "plugin-version.h"
-}
+    extern "C"
+    {
+        #include "cp/cp-tree.h"
+        #include "plugin-version.h"
+    }
 #else
-#include "cp/cp-tree.h"
-#include "plugin-version.h"
+    #include "cp/cp-tree.h"
+    #include "plugin-version.h"
 #endif
 
 #include <memory>

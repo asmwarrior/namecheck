@@ -1,11 +1,38 @@
-/**
- * Taller Technologies - Software Development Company
- * Copyright 2013 - All rights reserved
+/*
+ * @file     NamingConventionPlugin.cpp
+ * @brief    This is the implementation of NamingConventionPlugin interface.
  *
- * @file        NamingConventionPlugin.cpp
- * @author      Marcos Diaz and Franco Riberi
- * @date        2013-09-06
- * @brief       This is an implementation of NamingConventionPlugin class
+ * @author   Francisco Herrero
+ * @email    francisco.herrero AT tallertechnologies.com
+ *
+ * @author   Marcos Diaz
+ * @email    marcos.diaz AT tallertechnologies.com
+ *
+ * @author   Franco Riberi
+ * @email    franco.riberi AT tallertechnologies.com
+ *
+ * Contents: Source file for namecheck providing NamingConventionPlugin implementation.
+ *
+ * System:   namecheck: Naming Convention Checker
+ * Language: C++
+ *
+ * @date September 06, 2013
+ *
+ * This file is part of namecheck
+ *
+ * namecheck is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * namecheck is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with namecheck.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
 #include <string>
@@ -13,34 +40,34 @@
 #include "namecheck/NamingConventionPlugin.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
-extern "C"
-{
-#include "gcc-plugin.h"
-#include "plugin-version.h"
-#include "config.h"
-#include "system.h"
-#include "coretypes.h"
-#include "tree.h"
-#include "intl.h"
-#include "tm.h"
-#include "cp/cp-tree.h"
-#include "c-family/c-common.h"
-#include "c-family/c-pragma.h"
-#include "diagnostic-core.h"
-}
+    extern "C"
+    {
+        #include "gcc-plugin.h"
+        #include "plugin-version.h"
+        #include "config.h"
+        #include "system.h"
+        #include "coretypes.h"
+        #include "tree.h"
+        #include "intl.h"
+        #include "tm.h"
+        #include "cp/cp-tree.h"
+        #include "c-family/c-common.h"
+        #include "c-family/c-pragma.h"
+        #include "diagnostic-core.h"
+    }
 #else
-#include "gcc-plugin.h"
-#include "plugin-version.h"
-#include "config.h"
-#include "system.h"
-#include "coretypes.h"
-#include "tree.h"
-#include "intl.h"
-#include "tm.h"
-#include "cp/cp-tree.h"
-#include "c-family/c-common.h"
-#include "c-family/c-pragma.h"
-#include "diagnostic-core.h"
+    #include "gcc-plugin.h"
+    #include "plugin-version.h"
+    #include "config.h"
+    #include "system.h"
+    #include "coretypes.h"
+    #include "tree.h"
+    #include "intl.h"
+    #include "tm.h"
+    #include "cp/cp-tree.h"
+    #include "c-family/c-common.h"
+    #include "c-family/c-pragma.h"
+    #include "diagnostic-core.h"
 #endif
 
 namespace NamingChecker

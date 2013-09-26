@@ -1,12 +1,39 @@
 /**
-* Taller Technologies - Software Development Company
-* Copyright 2013 - All rights reserved
-*
-* @file        GenericVisitor.h
-* @author      Fracisco Herrero, Marcos Diaz and Franco Riberi
-* @date        2013-09-06
-* @brief       Header file for namecheck providing GenericVisitor struct.
-*/
+ * @file     GenericVisitor.h
+ * @brief    Provide an interface for exploring the statements of AST
+ *
+ * @author   Francisco Herrero
+ * @email    francisco.herrero AT tallertechnologies.com
+ *
+ * @author   Marcos Diaz
+ * @email    marcos.diaz AT tallertechnologies.com
+ *
+ * @author   Franco Riberi
+ * @email    franco.riberi AT tallertechnologies.com
+ *
+ * Contents: Header file for traverser providing GenericVisitor struct.
+ *
+ * System:    traverser
+ * Language:  C++
+ *
+ * @date      September 06, 2013
+ *
+ * This file is part of traverser.
+ *
+ * traverser is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * traverser is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with traverser. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 
 #ifndef GPP_GENERIC_VISITOR_H
 #define GPP_GENERIC_VISITOR_H
@@ -17,7 +44,7 @@
 namespace GPPGeneric
 {
 
-/** 
+/**
 * @brief This has the three possible Access states of a member.
 *
 *
@@ -32,7 +59,7 @@ enum AccessModifier
 typedef std::string DeclarationName;
 
 /**
-*  @brief The interface for the visitor of the traverser 
+*  @brief The interface for the visitor of the traverser
 *
 *
 */
