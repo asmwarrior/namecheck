@@ -42,7 +42,6 @@ class TraverserCppEleven : public GenericTraverser
 
 };
 
-
 } // end GPPGeneric
 
 #endif

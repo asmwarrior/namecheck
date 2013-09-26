@@ -202,7 +202,7 @@ TEST(PluginAPITests, OtherTest)
 TEST(RulesTest, UpperCamelCase)
 {
     NamingChecker::UpperCamelCaseRule upperCamelCase;
-    NamingChecker::Result res;
+    NamingChecker::Rule::Result res;
     upperCamelCase.checkRule("MyClassExample", res);
     EXPECT_EQ(res._match, true);
     upperCamelCase.checkRule("myClass", res);
@@ -212,7 +212,7 @@ TEST(RulesTest, UpperCamelCase)
 TEST(RulesTest, LowerCamelCase)
 {
     NamingChecker::LowerCamelCaseRule lowerCamelCase;
-    NamingChecker::Result res;
+    NamingChecker::Rule::Result res;
     lowerCamelCase.checkRule("pushInside", res);
     EXPECT_EQ(res._match, true);
     lowerCamelCase.checkRule("push_inside", res);
@@ -222,7 +222,7 @@ TEST(RulesTest, LowerCamelCase)
 TEST(RulesTest, UpperUnderscore)
 {
     NamingChecker::UpperUnderscoreRule upperUnderscore;
-    NamingChecker::Result res;
+    NamingChecker::Rule::Result res;
     upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
     EXPECT_EQ(res._match, true);
     upperUnderscore.checkRule("this_is_my_const", res);
@@ -232,7 +232,7 @@ TEST(RulesTest, UpperUnderscore)
 TEST(RulesTest, LowerUnderscore)
 {
     NamingChecker::LowerUnderscoreRule lowerUnderscore;
-    NamingChecker::Result res;
+    NamingChecker::Rule::Result res;
     lowerUnderscore.checkRule("_regex", res);
     EXPECT_EQ(res._match, true);
     lowerUnderscore.checkRule("specificRegex", res);
@@ -242,7 +242,7 @@ TEST(RulesTest, LowerUnderscore)
 TEST(RulesTest, Regex)
 {
     NamingChecker::Regex regex("^\\u.*?", "errmsg");
-    NamingChecker::Result res;
+    NamingChecker::Rule::Result res;
     regex.checkRule("regex", res);
     EXPECT_EQ(res._match, false);
     EXPECT_EQ(res._message, "errmsg");

@@ -101,7 +101,7 @@ public:
      * @param declarationName name to check
      * @param result to fill with the result
      */
-    void check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const;
+    void check(const DeclarationToCheck& decl, const DeclName& declarationName, Rule::Result& result) const;
 
     /**
      * @brief This initializes the vector of rules corresponding to each declaration types.
@@ -117,7 +117,7 @@ private:
      */
     enum RuleType
     {
-        SpecificRegex = '0',
+        SpecificRegex,
         UpCamelCaseRule,
         LowCamelCaseRule,
         UpUnderscoreRule,
@@ -137,7 +137,7 @@ private:
      *
      * @param line input line from file
      */
-    void checkLine(StringVector line);
+    void checkLine(const StringVector& line);
 
     DeclarationMap _declarationMap;
     typedef std::list<Rule*> Rules;

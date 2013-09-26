@@ -33,7 +33,6 @@
 #ifndef REGEX_H
 #define REGEX_H
 
-#include <boost/regex.hpp>
 #include "Rule.h"
 
 namespace NamingChecker
@@ -59,11 +58,11 @@ private:
     virtual void checkRule(const std::string& declarationName, Result& result) const;
 
     virtual ~Regex() {}
-
+    
     /**
      * @brief Represent a specific regex
      */
-    const boost::regex _regex;
+    const RegexType _regex;
 
     /**
      * @brief Represent a error message

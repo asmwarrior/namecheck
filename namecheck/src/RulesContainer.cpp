@@ -31,7 +31,7 @@
 
 #include <fstream>
 #include <mili/mili.h>
-
+#include <sstream>
 #include "namecheck/RulesContainer.h"
 #include "namecheck/Regex.h"
 #include "namecheck/UpperCamelCaseRule.h"
@@ -66,13 +66,13 @@ RulesContainer::RulesContainer() : _rules(CheckCount)
 
 RulesContainer::~RulesContainer()
 {
-    for (int i = 0; i < CheckCount; ++i)
+    for (size_t i(0); i < CheckCount; ++i)
     {
         mili::delete_container(_rules[i]);
     }
 }
 
-void RulesContainer::check(const DeclarationToCheck& decl, const std::string& declarationName, Result& result) const
+void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& declarationName, Rule::Result& result) const
 {
     if (!_rules[decl].empty())
     {
@@ -94,58 +94,56 @@ static const size_t SPECIFIC_REGEX = 2;
 static const size_t ERROR_MESSAGE = 3;
 static const std::string REGEX = "0";
 
-void RulesContainer::checkLine(StringVector line)
+void RulesContainer::checkLine(const StringVector& line)
 {
     if (line[RULE_TYPE] == REGEX)
         mili::assert_throw<InvalidFormatFile>(line.size() == REGEX_SIZE);
     else
         mili::assert_throw<InvalidFormatFile>(line.size() == DEFAULT_SIZE);
-
-    if (_declarationMap.find(line[DECLARATION_NAME]) == _declarationMap.end())
-        throw InvalidDeclaration();
+    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
 }
 
 void RulesContainer::process(const StringVector& fileLine)
-{
-    const char* cstr = fileLine[RULE_TYPE].c_str();
-    switch (cstr[0])
+{    
+    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);
+    switch (ruleType)
     {
         case SpecificRegex:
-            {
-                Rule* reg = new Regex(fileLine[SPECIFIC_REGEX], fileLine[ERROR_MESSAGE]);
-                _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(reg);
-                break;
-            }
+        {
+            Rule* const reg = new Regex(fileLine[SPECIFIC_REGEX], fileLine[ERROR_MESSAGE]);
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(reg);
+            break;
+        }
         case UpCamelCaseRule:
-            {
-                Rule* ucc = new UpperCamelCaseRule();
-                _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(ucc);
-                break;
-            }
+        {
+            Rule* const ucc = new UpperCamelCaseRule();
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(ucc);
+            break;
+        }
         case LowCamelCaseRule:
-            {
-                Rule* lcc = new LowerCamelCaseRule();
-                _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lcc);
-                break;
-            }
+        {
+            Rule* const lcc = new LowerCamelCaseRule();
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lcc);
+            break;
+        }
         case UpUnderscoreRule:
-            {
-                Rule* uu = new UpperUnderscoreRule();
-                _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(uu);
-                break;
-            }
+        {
+            Rule* const uu = new UpperUnderscoreRule();
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(uu);
+            break;
+        }
         case LowUnderscoreRule:
-            {
-                Rule* lu = new LowerUnderscoreRule();
-                _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lu);
-                break;
-            }
+        {
+            Rule* const lu = new LowerUnderscoreRule();
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(lu);
+            break;
+        }
         case ReservNameRule:
-            {
-                Rule* rn = new ReservedNameRule();
-                _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rn);
-                break;
-            }
+        {
+            Rule* const rn = new ReservedNameRule();
+            _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rn);
+            break;
+        }
         default :
             throw InvalidRuleType();
     }
@@ -158,14 +156,12 @@ void RulesContainer::load(const FileName& fileName)
     mili::assert_throw<FileNotFound>(ifs);
 
     StringVector fileLine;
-    ifs >> mili::Separator(fileLine, ',');
-    do
+    while (ifs >> mili::Separator(fileLine, ','))
     {
         checkLine(fileLine);
         process(fileLine);
         fileLine.clear();
     }
-    while (ifs >> mili::Separator(fileLine, ','));
 }
 
 } // end namespace
