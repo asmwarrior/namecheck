@@ -10,7 +10,7 @@
  *
  * Contents: Header file for traverser providing GCCPluginAPI interface.
  *
- * System:    traverser: Naming Convention Checker
+ * System:    traverser
  * Language:  C++
  *
  * @date      September 06, 2013
@@ -37,7 +37,7 @@
 
 #include "PluginAPI.h"
 
-namespace NamingChecker
+namespace GPPGeneric
 {
 
 /**
@@ -52,7 +52,7 @@ class GCCPluginApi: public PluginApi
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void warning(const GPPGeneric::GenericTree& decl, const std::string& message);
+    virtual void warning(const GenericTree& decl, const std::string& message);
 
     /**
      * @brief gives gcc the error message.
@@ -60,7 +60,7 @@ class GCCPluginApi: public PluginApi
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void error(const GPPGeneric::GenericTree& decl, const std::string& message);
+    virtual void error(const GenericTree& decl, const std::string& message);
 };
 
 } // end namespace
