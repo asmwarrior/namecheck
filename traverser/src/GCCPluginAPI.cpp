@@ -10,7 +10,7 @@
  *
  * Contents: Source file for traverser providing GCCPluginAPI implementation.
  *
- * System:   traverser: Naming Convention Checker
+ * System:   traverser
  * Language: C++
  *
  * @date September 06, 2013
@@ -24,11 +24,11 @@
  *
  * traverser is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with traverser.  If not, see <http://www.gnu.org/licenses/>.
+ * along with traverser. If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -44,15 +44,15 @@
 	#include "diagnostic-core.h"
 #endif
 
-namespace NamingChecker
+namespace GPPGeneric
 {
 
-void GCCPluginApi::warning(const GPPGeneric::GenericTree& decl, const std::string& message)
+void GCCPluginApi::warning(const GenericTree& decl, const std::string& message)
 {
     warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
 }
 
-void GCCPluginApi::error(const GPPGeneric::GenericTree& decl, const std::string& message)
+void GCCPluginApi::error(const GenericTree& decl, const std::string& message)
 {
     error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
 }
