@@ -8,8 +8,6 @@ PLUGIN_SOURCE_FILES= src/BasePlugin.cpp src/GCCPluginAPI.cpp \
 INCPATH= -I./ \
          -I$(GXXPLUGINS_DIR)/include/
 
-PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
-
 CXXFLAGS = -fPIC -O0 -ggdb3 -Wall -Wextra -pedantic -ansi $(INCPATH)
 
 traverser.so: $(PLUGIN_SOURCE_FILES)

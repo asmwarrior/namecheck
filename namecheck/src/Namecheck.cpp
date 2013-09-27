@@ -30,7 +30,7 @@
  */
 
 #include "namecheck/NamingConventionPlugin.h"
-#include "traverser/GCCPluginAPI.h"
+#include "api/GCCPluginAPI.h"
 #include <traverser/TraverserCppThree.h>
 #include <traverser/TraverserCppEleven.h>
 
@@ -76,7 +76,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
     {
         GPPGeneric::TraverserCppThree traverser;
         const std::auto_ptr<GPPGeneric::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
-        const std::auto_ptr<GPPGeneric::PluginApi> api(new GPPGeneric::GCCPluginApi());
+        const std::auto_ptr<Api::PluginApi> api(new Api::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
@@ -94,7 +94,7 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     {
         GPPGeneric::TraverserCppEleven traverser;
         const std::auto_ptr<GPPGeneric::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
-        const std::auto_ptr<GPPGeneric::PluginApi> api(new GPPGeneric::GCCPluginApi());
+        const std::auto_ptr<Api::PluginApi> api(new Api::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing with c++11 " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());

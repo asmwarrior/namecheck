@@ -57,8 +57,12 @@ RulesContainer::RulesContainer() : _rules(CheckCount)
     _declarationMap["StructDeclaration"] = StructDeclaration;
     _declarationMap["UnionDeclaration"] = UnionDeclaration;
     _declarationMap["UnionValueDeclaration"] = UnionValueDeclaration;
-    _declarationMap["MethodDeclaration"] = MethodDeclaration;
-    _declarationMap["AttributeDeclaration"] = AttributeDeclaration;
+    _declarationMap["PublicMethodDeclaration"] = PublicMethodDeclaration;
+    _declarationMap["PrivateMethodDeclaration"] = PrivateMethodDeclaration;
+    _declarationMap["ProtectedMethodDeclaration"] = ProtectedMethodDeclaration;
+    _declarationMap["PublicAttributeDeclaration"] = PublicAttributeDeclaration;
+    _declarationMap["PrivateAttributeDeclaration"] = PrivateAttributeDeclaration;
+    _declarationMap["ProtectedAttributeDeclaration"] = ProtectedAttributeDeclaration;
     _declarationMap["NamespaceDeclaration"] = NamespaceDeclaration;
     _declarationMap["GlobalConstDeclaration"] = GlobalConstDeclaration;
     _declarationMap["TemplateTypeParameterDeclaration"] = TemplateTypeParameterDeclaration;
