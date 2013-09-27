@@ -1,0 +1,21 @@
+Import ('env')
+
+import subprocess as sp
+proc = sp.Popen('gcc -dumpversion', shell=True, stdout=sp.PIPE)
+version = proc.stdout.read()
+version = version.strip()
+
+if version == "4.6":
+	env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.6/plugin/include/'])
+	deps = ['gcc_plugin']
+else:
+	env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include/'])	
+	deps = ['gcc_plugin_4.7']
+
+name = 'namecheck'	
+inc = ['../namecheck']
+src = ['APIMock.cpp', '../namecheck/src/BasePlugin.cpp', '../namecheck/src/RulesContainer.cpp', '../namecheck/src/NamingConventionPlugin.cpp', '../namecheck/src/ReservedNameRule.cpp']
+src += ['../namecheck/src/UpperUnderscoreRule.cpp', '../namecheck/src/UpperCamelCaseRule.cpp', '../namecheck/src/LowerUnderscoreRule.cpp', '../namecheck/src/LowerCamelCaseRule.cpp', '../namecheck/src/RegexCollection.cpp', '../namecheck/src/Regex.cpp']
+deps += ['gtest_main', 'gmock', 'gtest','boost_regex', 'mili']
+
+env.CreateTest(name, inc, src, deps)
