@@ -83,7 +83,7 @@ inline void NamingConventionPlugin::setPluginWarning(const GPPGeneric::GenericTr
     _plugin->warning(decl, message);
 }
 
-const char* NamingConventionPlugin::_accessLabel[] = {"PUBLIC", "PROTECTED", "PRIVATE"};
+const std::string NamingConventionPlugin::_accessLabel[] = {"Public", "Protected", "Private"};
 
 void NamingConventionPlugin::visitStringLiteral(const GPPGeneric::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
@@ -214,10 +214,28 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const GPPGeneric::Generi
 void NamingConventionPlugin::visitMethodDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/)
 {
     Rule::Result methodResult;
-    _checker.check(NamingChecker::RulesContainer::MethodDeclaration, name, methodResult);
+    switch(access)
+    {
+        case  GPPGeneric::AccessPublic:
+        {
+            _checker.check(NamingChecker::RulesContainer::PublicMethodDeclaration, name, methodResult);
+            break;
+        }
+        case  GPPGeneric::AccessProtected:
+        {
+            _checker.check(NamingChecker::RulesContainer::ProtectedMethodDeclaration, name, methodResult);
+            break;
+        }
+        case  GPPGeneric::AccessPrivate:
+        {
+            _checker.check(NamingChecker::RulesContainer::PrivateMethodDeclaration, name, methodResult);
+            break;
+        }
+        default: break;
+    }
     if (!methodResult._match)
     {
-        const std::string message = "Method declaration " + methodResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
+        const std::string message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
         setPluginWarning(decl, message);
     }
 }
@@ -225,10 +243,28 @@ void NamingConventionPlugin::visitMethodDeclaration(const GPPGeneric::GenericTre
 void NamingConventionPlugin::visitAttributeDeclaration(const GPPGeneric::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     Rule::Result attributeResult;
-    _checker.check(NamingChecker::RulesContainer::AttributeDeclaration, name, attributeResult);
+    switch(access)
+    {
+        case  GPPGeneric::AccessPublic:
+        {
+            _checker.check(NamingChecker::RulesContainer::PublicAttributeDeclaration, name, attributeResult);
+            break;
+        }
+        case  GPPGeneric::AccessProtected:
+        {
+            _checker.check(NamingChecker::RulesContainer::ProtectedAttributeDeclaration, name, attributeResult);
+            break;
+        }
+        case  GPPGeneric::AccessPrivate:
+        {
+            _checker.check(NamingChecker::RulesContainer::PrivateAttributeDeclaration, name, attributeResult);
+            break;
+        }
+        default: break;
+    }
     if (!attributeResult._match)
     {
-        const std::string message = "Attribute declaration " + attributeResult._message + " in " + name + " (" +  _accessLabel[access] + ")";
+        const std::string message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
         setPluginWarning(decl, message);
     }
 }

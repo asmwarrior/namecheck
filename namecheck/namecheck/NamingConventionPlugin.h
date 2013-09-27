@@ -223,7 +223,7 @@ private:
      * @brief Names of access visibility
      *
      */
-    static const char* _accessLabel[];
+    static const std::string _accessLabel[];
 };
 
 } // end namespace
