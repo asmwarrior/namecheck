@@ -12,9 +12,8 @@ else:
 	env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include/'])	
 	deps = ['gcc_plugin_4.7']
 
-name = 'traverser'
-inc = env.Dir('traverser')
+name = 'api'
+inc = env.Dir('api')
 ext_inc = []
 src = env.Glob('src/*.cpp')
-deps += ['api']	
 env.CreateSharedLibrary(name, inc, ext_inc, src, deps)

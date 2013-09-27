@@ -8,36 +8,36 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Header file for traverser providing GCCPluginAPI interface.
+ * Contents: Header file for api providing GCCPluginAPI interface.
  *
- * System:    traverser: Naming Convention Checker
+ * System:    api
  * Language:  C++
  *
  * @date      September 06, 2013
  *
- * This file is part of traverser.
+ * This file is part of api.
  *
- * traverser is free software: you can redistribute it and/or modify
+ * api is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * traverser is distributed in the hope that it will be useful,
+ * api is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with traverser. If not, see <http://www.gnu.org/licenses/>.
+ * along with api. If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
-#ifndef GCC_PLUGIN_API
-#define GCC_PLUGIN_API
+#ifndef GCC_PLUGIN_API_H
+#define GCC_PLUGIN_API_H
 
 #include "PluginAPI.h"
 
-namespace NamingChecker
+namespace Api
 {
 
 /**
@@ -52,7 +52,7 @@ class GCCPluginApi: public PluginApi
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void warning(const GPPGeneric::GenericTree& decl, const std::string& message);
+    virtual void warning(const GenericTree& decl, const std::string& message);
 
     /**
      * @brief gives gcc the error message.
@@ -60,7 +60,7 @@ class GCCPluginApi: public PluginApi
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void error(const GPPGeneric::GenericTree& decl, const std::string& message);
+    virtual void error(const GenericTree& decl, const std::string& message);
 };
 
 } // end namespace

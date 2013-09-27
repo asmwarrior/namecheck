@@ -10,12 +10,13 @@
 #include "namecheck/UpperUnderscoreRule.h"
 #include "namecheck/LowerUnderscoreRule.h"
 #include "namecheck/RulesContainer.h"
-#include "namecheck/PluginAPI.h"
 #include "namecheck/Regex.h"
+#include "api/PluginAPI.h"
 
 using ::testing::_;
 using namespace GPPGeneric;
 using namespace NamingChecker;
+using namespace Api;
 
 class APIMock : public PluginApi
 {

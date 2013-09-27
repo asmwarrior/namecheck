@@ -107,7 +107,7 @@ void RulesContainer::checkLine(const StringVector& line)
     mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
 }
 
-Rule* RulesContainer::factoryRule(const RuleType& rule, const StringVector& fileLine)
+Rule* RulesContainer::rulesFactory(const RuleType& rule, const StringVector& fileLine)
 {
     Rule* ret;
     switch (rule)
@@ -152,7 +152,7 @@ void RulesContainer::process(const StringVector& fileLine)
 {    
     const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
     const RuleType specificRule = RuleType(ruleType);
-    Rule* const rule = factoryRule(specificRule, fileLine);
+    Rule* const rule = rulesFactory(specificRule, fileLine);
     _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }
 
