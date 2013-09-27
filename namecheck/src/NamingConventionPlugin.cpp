@@ -217,21 +217,14 @@ void NamingConventionPlugin::visitMethodDeclaration(const GPPGeneric::GenericTre
     switch(access)
     {
         case  GPPGeneric::AccessPublic:
-        {
             _checker.check(NamingChecker::RulesContainer::PublicMethodDeclaration, name, methodResult);
             break;
-        }
         case  GPPGeneric::AccessProtected:
-        {
             _checker.check(NamingChecker::RulesContainer::ProtectedMethodDeclaration, name, methodResult);
             break;
-        }
         case  GPPGeneric::AccessPrivate:
-        {
             _checker.check(NamingChecker::RulesContainer::PrivateMethodDeclaration, name, methodResult);
             break;
-        }
-        default: break;
     }
     if (!methodResult._match)
     {
@@ -246,21 +239,14 @@ void NamingConventionPlugin::visitAttributeDeclaration(const GPPGeneric::Generic
     switch(access)
     {
         case  GPPGeneric::AccessPublic:
-        {
             _checker.check(NamingChecker::RulesContainer::PublicAttributeDeclaration, name, attributeResult);
             break;
-        }
         case  GPPGeneric::AccessProtected:
-        {
             _checker.check(NamingChecker::RulesContainer::ProtectedAttributeDeclaration, name, attributeResult);
             break;
-        }
         case  GPPGeneric::AccessPrivate:
-        {
             _checker.check(NamingChecker::RulesContainer::PrivateAttributeDeclaration, name, attributeResult);
             break;
-        }
-        default: break;
     }
     if (!attributeResult._match)
     {
