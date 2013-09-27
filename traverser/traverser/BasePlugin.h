@@ -10,35 +10,35 @@
  *
  * Contents: Header file for BasePlugin
  *
- * System:    namecheck: Naming Convention Checker
+ * System:    traverser
  * Language:  C++
  *
  * @date      September 06, 2013
  *
- * This file is part of namecheck.
+ * This file is part of traverser.
  *
- * namecheck is free software: you can redistribute it and/or modify
+ * traverser is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * namecheck is distributed in the hope that it will be useful,
+ * traverser is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with namecheck. If not, see <http://www.gnu.org/licenses/>.
+ * along with traverser. If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
 #ifndef GPP_BASE_PLUGIN_H
 #define GPP_BASE_PLUGIN_H
 
-#include <traverser/GenericVisitor.h>
+#include "GenericVisitor.h"
 #include "PluginAPI.h"
 
-namespace NamingChecker
+namespace GPPGeneric
 {
 
 /**
@@ -47,7 +47,7 @@ namespace NamingChecker
  * This class add to the vistor's interface the initialization method, the _plugin attribute and a method to get
  * the visitor.
  */
-class BasePlugin: private GPPGeneric::GenericVisitor
+class BasePlugin: private GenericVisitor
 {
 public:
 
@@ -64,7 +64,7 @@ public:
      * The visitor is this class. But it could change.
      * @return The visitor (in this case a pointer to this).
      */
-    GPPGeneric::GenericVisitor* getVisitor();
+    GenericVisitor* getVisitor();
 
 protected:
 

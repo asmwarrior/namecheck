@@ -42,12 +42,12 @@
 #include <string>
 #include "Rule.h"
 #include "RulesContainer.h"
-#include "BasePlugin.h"
+#include "traverser/BasePlugin.h"
 
 namespace NamingChecker
 {
 
-class NamingConventionPlugin : public BasePlugin
+class NamingConventionPlugin : public GPPGeneric::BasePlugin
 {
 public:
 

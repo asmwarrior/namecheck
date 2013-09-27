@@ -38,8 +38,8 @@
 #ifndef GPP_GENERIC_VISITOR_H
 #define GPP_GENERIC_VISITOR_H
 
-#include "GenericTree.h"
 #include <string>
+#include "GenericTree.h"
 
 namespace GPPGeneric
 {
