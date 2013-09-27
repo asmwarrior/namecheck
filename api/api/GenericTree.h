@@ -1,6 +1,6 @@
 /**
  * @file     GenericTree.h
- * @brief    This file contains all the definitions needed in traverser
+ * @brief    This file contains all the definitions needed in api
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -8,27 +8,27 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Header file for traverser providing GenericTree type.
+ * Contents: Header file for api providing GenericTree type.
  *
- * System:    traverser
+ * System:    api
  * Language:  C++
  *
  * @date      September 13, 2013
  *
- * This file is part of traverser.
+ * This file is part of api.
  *
- * traverser is free software: you can redistribute it and/or modify
+ * api is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * traverser is distributed in the hope that it will be useful,
+ * api is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with traverser. If not, see <http://www.gnu.org/licenses/>.
+ * along with api. If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -55,7 +55,7 @@ extern "C"
 #endif
 
 
-namespace GPPGeneric
+namespace Api
 {
 
 /**
