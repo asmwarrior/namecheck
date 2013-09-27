@@ -36,7 +36,7 @@
 #define GPP_BASE_PLUGIN_H
 
 #include "GenericVisitor.h"
-#include "PluginAPI.h"
+#include "api/PluginAPI.h"
 
 namespace GPPGeneric
 {
@@ -56,7 +56,7 @@ public:
      *
      * @param plugin this is the pointer to the plugin that is going to be set.
      */
-    void initialize(PluginApi* plugin);
+    void initialize(Api::PluginApi* plugin);
 
     /**
      * @brief this gets the visitor.
@@ -72,7 +72,7 @@ protected:
      * @brief This is the plugin for the warnings and error messages.
      *
      */
-    PluginApi* _plugin;
+    Api::PluginApi* _plugin;
 
 };
 
