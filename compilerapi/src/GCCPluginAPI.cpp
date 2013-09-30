@@ -1,6 +1,6 @@
-/**
- * @file     GenericTree.h
- * @brief    This file contains all the definitions needed in api
+/*
+ * @file     GCCPluginAPI.cpp
+ * @brief    This is the implementation of GCCPluginAPI interface.
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -8,12 +8,12 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Header file for api providing GenericTree type.
+ * Contents: Source file for api providing GCCPluginAPI implementation.
  *
- * System:    api
- * Language:  C++
+ * System:   api
+ * Language: C++
  *
- * @date      September 13, 2013
+ * @date September 06, 2013
  *
  * This file is part of api.
  *
@@ -32,38 +32,29 @@
  *
  */
 
-#ifndef GCC_GENERIC_TREE_H
-#define GCC_GENERIC_TREE_H
-
-#include <gmp.h>
+#include <iostream>
+#include "compilerapi/GCCPluginAPI.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
 	extern "C"
 	{
-		#include "config.h"
-		#undef HAVE_DECL_GETOPT
-		#define HAVE_DECL_GETOPT 1
-		#include "gcc-plugin.h"
-		#include "tree.h"
+		#include "diagnostic-core.h"
 	}
 #else
-	#include "config.h"
-	#undef HAVE_DECL_GETOPT
-	#define HAVE_DECL_GETOPT 1
-	#include "gcc-plugin.h"
-	#include "tree.h"
+	#include "diagnostic-core.h"
 #endif
 
-
-namespace Api
+namespace NSCompilerApi
 {
 
-/**
-* @brief A tree node (is a pointer type).
-*
-*/
-typedef tree GenericTree;
-
+void GCCPluginApi::warning(const GenericTree& decl, const Message& message) const
+{
+    warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
 }
 
-#endif
+void GCCPluginApi::error(const GenericTree& decl, const Message& message) const
+{
+    error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
+}
+
+} // end namespace

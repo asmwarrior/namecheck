@@ -12,8 +12,8 @@ else:
 	env.Append(CXXFLAGS=['-I/usr/lib/gcc/x86_64-linux-gnu/4.7/plugin/include/'])	
 	deps = ['gcc_plugin_4.7']
 
-name = 'api'
-inc = env.Dir('api')
+name = 'compilerapi'
+inc = env.Dir('compilerapi')
 ext_inc = []
 src = env.Glob('src/*.cpp')
 env.CreateSharedLibrary(name, inc, ext_inc, src, deps)

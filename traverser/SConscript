@@ -16,5 +16,5 @@ name = 'traverser'
 inc = env.Dir('traverser')
 ext_inc = []
 src = env.Glob('src/*.cpp')
-deps += ['api']	
+deps += ['compilerapi']	
 env.CreateSharedLibrary(name, inc, ext_inc, src, deps)

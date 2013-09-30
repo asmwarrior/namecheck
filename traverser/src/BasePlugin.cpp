@@ -35,7 +35,7 @@
 #include <iostream>
 #include "traverser/BasePlugin.h"
 
-namespace GPPGeneric
+namespace NSGppGeneric
 {
 
 GenericVisitor* BasePlugin::getVisitor()
@@ -43,7 +43,7 @@ GenericVisitor* BasePlugin::getVisitor()
     return this;
 }
 
-void BasePlugin::initialize(Api::PluginApi* api)
+void BasePlugin::initialize(NSCompilerApi::PluginApi* api)
 {
     _api = api;
 }

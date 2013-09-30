@@ -34,7 +34,7 @@
 
 #include "GenericTraverser.h"
 
-namespace GPPGeneric
+namespace NSGppGeneric
 {
 
 class TraverserCppThree : public GenericTraverser
@@ -42,6 +42,6 @@ class TraverserCppThree : public GenericTraverser
 
 };
 
-} // end GPPGeneric
+} // end namespace
 
 #endif

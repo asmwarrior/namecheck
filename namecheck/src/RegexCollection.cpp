@@ -31,7 +31,7 @@
 
 #include "namecheck/RegexCollection.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 RegexCollection::RegexCollection(const size_t length) : _regexs(length), _errmsgs(length)

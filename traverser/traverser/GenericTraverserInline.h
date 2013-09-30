@@ -35,7 +35,7 @@
 
 #include "GenericTraverser.h"
 
-inline void GenericTraverser::traverse(const Api::GenericTree ns, GenericVisitor* visitor)
+inline void GenericTraverser::traverse(const NSCompilerApi::GenericTree ns, GenericVisitor* visitor)
 {
     _visitor = visitor;
     traverse(ns);

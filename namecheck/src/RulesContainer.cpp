@@ -42,7 +42,7 @@
 
 using mili::operator>>;
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 RulesContainer::RulesContainer() : _rules(CheckCount)

@@ -35,7 +35,7 @@
 
 #include "Rule.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**
