@@ -10,7 +10,7 @@ INCPATH= -I./ \
 
 LD_LIBRARY_PATH= -L../api/api.so 
 
-CXXFLAGS = -fPIC -O0 -ggdb3 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH)
+CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH)
 
 traverser.so: $(PLUGIN_SOURCE_FILES) $(api)
 	 $(GXX) $^ -shared -o $@ $(CXXFLAGS)

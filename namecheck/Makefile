@@ -17,7 +17,7 @@ LD_LIBRARY_PATH= -L../traverser/traverser.so \
 
 LDFLAGS=-lboost_regex 
 
-CXXFLAGS = -fPIC -O0 -ggdb3 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH) $(LDFLAGS)
+CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH) $(LDFLAGS)
 
 compile: namecheck.so traverser api 
 

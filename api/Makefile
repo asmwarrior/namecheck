@@ -7,7 +7,7 @@ PLUGIN_SOURCE_FILES= src/GCCPluginAPI.cpp
 INCPATH= -I./ \
          -I$(GXXPLUGINS_DIR)/include/
 
-CXXFLAGS = -fPIC -O0 -ggdb3 -Wall -Wextra -pedantic -ansi $(INCPATH)
+CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH)
 
 api.so: $(PLUGIN_SOURCE_FILES)
 	 $(GXX) $^ -shared -o $@ $(CXXFLAGS)
