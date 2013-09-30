@@ -9,20 +9,21 @@ PLUGIN_SOURCE_FILES= src/LowerCamelCaseRule.cpp src/LowerUnderscoreRule.cpp src/
 INCPATH= -I./ \
          -I$(GXXPLUGINS_DIR)/include/ \
          -I./mili/ \
-         -I../traverser/ \
-         -I../api/
+		 -I../traverser/ \
+		 -I../api/
 
-LD_LIBRARY_PATH= -L../api/ -lapi \
-				 -L../traverser/ -ltraverser
+LD_LIBRARY_PATH= -L. \
+			     -L../traverser \
+			     -L../api
 
 LDFLAGS=-lboost_regex 
 
-CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH) $(LDFLAGS)
+CXXFLAGS = -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS) -ltraverser -lapi 
 
 compile: api traverser libnamecheck.so 
 
 libnamecheck.so: $(PLUGIN_SOURCE_FILES) 
-	$(GXX) $^ -shared -o $@ $(CXXFLAGS) 	
+	$(GXX) $^ -o $@ -shared $(CXXFLAGS) 	
 
 traverser:
 	$(MAKE) -C ../traverser
