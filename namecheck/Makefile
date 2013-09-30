@@ -12,16 +12,16 @@ INCPATH= -I./ \
          -I../traverser/ \
          -I../api/
 
-LD_LIBRARY_PATH= -L../traverser/traverser.so \
- 				 -L../api/api.so 
+LD_LIBRARY_PATH= -L../api/ -lapi \
+				 -L../traverser/ -ltraverser
 
 LDFLAGS=-lboost_regex 
 
 CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH) $(LDFLAGS)
 
-compile: namecheck.so traverser api 
+compile: api traverser libnamecheck.so 
 
-namecheck.so: $(PLUGIN_SOURCE_FILES) 
+libnamecheck.so: $(PLUGIN_SOURCE_FILES) 
 	$(GXX) $^ -shared -o $@ $(CXXFLAGS) 	
 
 traverser:
@@ -33,6 +33,6 @@ api:
 .PHONY: clean
 
 clean: 
-	rm -f namecheck.so
-	rm -f ../traverser/traverser.so
-	rm -f ../api/api.so
+	rm -f libnamecheck.so
+	rm -f ../traverser/libtraverser.so
+	rm -f ../api/libapi.so
