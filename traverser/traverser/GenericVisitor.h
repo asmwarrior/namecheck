@@ -44,18 +44,6 @@
 namespace NSGppGeneric
 {
 
-/**
-* @brief This has the three possible Access states of a member.
-*
-*
-*/
-enum AccessModifier
-{
-    AccessPublic,
-    AccessProtected,
-    AccessPrivate
-};
-
 typedef std::string DeclarationName;
 
 /**
@@ -63,9 +51,20 @@ typedef std::string DeclarationName;
 *
 *
 */
-struct GenericVisitor
+struct IGenericVisitor
 {
-    virtual GenericVisitor* getVisitor() = 0;
+    /**
+     * @brief This has the three possible Access states of a member.
+     *
+     */
+    enum AccessModifier
+    {
+        AccessPublic,
+        AccessProtected,
+        AccessPrivate
+    };
+
+    virtual IGenericVisitor* getVisitor() = 0;
     virtual void visitStringLiteral(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
     virtual void visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
     virtual void visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;

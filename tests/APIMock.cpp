@@ -92,7 +92,7 @@ TEST(PluginAPITests, AttributeNameTest)
     GenericTree decl = NULL;
     const bool isConst = false;
     const std::string typeName = "std::string";
-    const AccessModifier access = AccessPublic;
+    const IGenericVisitor::AccessModifier access = IGenericVisitor::AccessPublic;
     plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))
     .Times(7);

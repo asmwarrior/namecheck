@@ -175,7 +175,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/);
+    virtual void visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/);
 
     /**
      * @brief checks Variable Declarations
@@ -184,7 +184,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
+    virtual void visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
 
     /**
      * @brief checks Variable Declarations
@@ -210,7 +210,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print in the warning
      */
-    void setPluginWarning(const NSCompilerApi::GenericTree decl, const std::string& message);
+    void logPluginWarning(const NSCompilerApi::GenericTree decl, const std::string& message) const;
 
     /**
      * @brief Checker of naming conventions

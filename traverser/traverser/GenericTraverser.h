@@ -58,14 +58,14 @@ public:
      * @param ns this should be the global namespace to process.
      * @param visitor the visitor to set.
      */
-    void traverse(const NSCompilerApi::GenericTree ns, GenericVisitor* visitor);
+    void traverse(const NSCompilerApi::GenericTree ns, IGenericVisitor* visitor);
 
 private:
     /**
      *  @brief the visitor which will visit every type.
      *
      */
-    GenericVisitor* _visitor;
+    IGenericVisitor* _visitor;
 
     /**
      * @brief this returns the name declared for this node.
@@ -102,7 +102,7 @@ private:
      *
      * @param decl the tree node corresponding to the declaration from which we will get the visibility.
      */
-    static AccessModifier getAccess(const NSCompilerApi::GenericTree decl);
+    static IGenericVisitor::AccessModifier getAccess(const NSCompilerApi::GenericTree decl);
 
     /**
      * @brief this process and traverses the Parameters of a function or method

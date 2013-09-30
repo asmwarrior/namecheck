@@ -77,12 +77,15 @@ public:
         CheckCount
     };
 
+    /**
+     * @brief Match between string and declaration to check
+     */
     typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
 
     /**
-    * @brief Represents a configuration file
-    *
-    */
+     * @brief Represents a configuration file
+     *
+     */
     typedef std::string FileName;
     typedef std::vector<std::string> StringVector;
 
@@ -135,7 +138,7 @@ private:
      * @param rule corresponds a specific rule 
      * @return specific rule
      */
-    IRule* rulesFactory(const RuleType& rule, const StringVector& fileLine);    
+    IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);    
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
@@ -155,6 +158,16 @@ private:
     typedef std::list<IRule*> Rules;
     std::vector<Rules> _rules;
 
+    /**
+     * @brief To avoid magic numbers 
+     */
+    static const size_t REGEX_SIZE = 4;
+    static const size_t DEFAULT_SIZE = 2;
+    static const size_t DECLARATION_NAME = 0;
+    static const size_t RULE_TYPE = 1;
+    static const size_t SPECIFIC_REGEX = 2;
+    static const size_t ERROR_MESSAGE = 3;
+    static const std::string REGEX;
 };
 
 } // end namespace
