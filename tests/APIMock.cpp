@@ -21,8 +21,8 @@ using namespace Api;
 class APIMock : public PluginApi
 {
 public:
-    MOCK_METHOD2(warning, void(const GenericTree& decl, const Message& message));
-    MOCK_METHOD2(error, void(const GenericTree& decl, const Message& message));
+    MOCK_CONST_METHOD2(warning, void(const GenericTree& decl, const Message& message));
+    MOCK_CONST_METHOD2(error, void(const GenericTree& decl, const Message& message));
 };
 
 TEST(PluginAPITests, ClassNameTest)
