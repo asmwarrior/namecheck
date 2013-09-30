@@ -8,12 +8,14 @@ INCPATH= -I./ \
 		 -I$(GXXPLUGINS_DIR)/include/ \
 		 -I../api/
 
-LD_LIBRARY_PATH= -L../api/api.so 
+LD_LIBRARY_PATH= -L../api/ 
 
-CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH)
+CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH) $(LD_LIBRARY_PATH) -lapi
 
-traverser.so: $(PLUGIN_SOURCE_FILES) $(api)
-	 $(GXX) $^ -shared -o $@ $(CXXFLAGS)
+compile: api libtraverser.so
+
+libtraverser.so: $(PLUGIN_SOURCE_FILES)
+	 $(GXX) $^ -shared -o $@ $(CXXFLAGS) 
 
 api: 
 	$(MAKE) -C ../api
@@ -22,5 +24,5 @@ api:
 	clean
 
 clean: 
-	rm -f traverser.so
-	$(MAKE) -C ../api/make clean
+	rm -f libtraverser.so
+	rm -f ../api/libapi.so

@@ -9,11 +9,11 @@ INCPATH= -I./ \
 
 CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH)
 
-api.so: $(PLUGIN_SOURCE_FILES)
-	 $(GXX) $^ -shared -o $@ $(CXXFLAGS)
+libapi.so: $(PLUGIN_SOURCE_FILES)
+	 $(GXX) $^ -shared -c $(CXXFLAGS) -o $@	
 
 .PHONY: 
 	clean
 
 clean: 
-	rm -f api.so
+	rm -f libapi.so
