@@ -58,7 +58,7 @@ struct PluginApi
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void warning(const GenericTree& decl, const Message& message) = 0;
+    virtual void warning(const GenericTree& decl, const Message& message) const = 0;
 
     /**
      * @brief gives the error message.
@@ -66,7 +66,7 @@ struct PluginApi
      * @param decl is the tree of the name it is used for the error message to print the location of the name
      * @param message the message to print
      */
-    virtual void error(const GenericTree& decl, const Message& message) = 0;
+    virtual void error(const GenericTree& decl, const Message& message) const = 0;
 };
 
 } // end namespace
