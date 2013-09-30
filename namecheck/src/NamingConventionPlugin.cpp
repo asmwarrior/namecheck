@@ -78,7 +78,7 @@ NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
     _checker.load(pathFile.c_str());
 }
 
-inline void NamingConventionPlugin::setPluginWarning(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& message)
+inline void NamingConventionPlugin::logPluginWarning(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& message) const
 {
     _api->warning(decl, message);
 }
@@ -87,7 +87,7 @@ const std::string NamingConventionPlugin::_accessLabel[] = {"Public", "Protected
 
 void NamingConventionPlugin::visitStringLiteral(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    _api->warning(decl, name);
+    logPluginWarning(decl, name);
 }
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
@@ -97,7 +97,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::Gener
     if (!enumTypeResult._match)
     {
         const std::string message = "Enum type declaration " + enumTypeResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -108,7 +108,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const NSCompilerApi::Gene
     if (!enumValueResult._match)
     {
         const std::string message = "Enum value declaration " + enumValueResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -119,7 +119,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const NSCompilerApi::Gener
     if (!variableResult._match)
     {
         const std::string message = "Variable declaration " + variableResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -130,7 +130,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const NSCompilerApi::Ge
     if (!globalConstResult._match)
     {
         const std::string message = "Global const declaration " + globalConstResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -141,7 +141,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const NSCompilerApi::Gener
     if (!functionResult._match)
     {
         const std::string message = "Function declaration " + functionResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -152,7 +152,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const NSCompilerApi::Gene
     if (!parameterResult._match)
     {
         const std::string message = "Parameter declaration " + parameterResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -163,7 +163,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const NSCompilerApi::GenericTr
     if (!typeResult._match)
     {
         const std::string message = "Type declaration " + typeResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -174,7 +174,7 @@ void NamingConventionPlugin::visitClassDeclaration(const NSCompilerApi::GenericT
     if (!classResult._match)
     {
         const std::string message = "Class declaration " + classResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -185,7 +185,7 @@ void NamingConventionPlugin::visitStructDeclaration(const NSCompilerApi::Generic
     if (!structResult._match)
     {
         const std::string message = "Struct declaration " + structResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -196,7 +196,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const NSCompilerApi::GenericT
     if (!unionResult._match)
     {
         const std::string message = "Union declaration " + unionResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -207,51 +207,51 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::Gen
     if (!unionValueResult._match)
     {
         const std::string message = "Union value declaration " + unionValueResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/)
+void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/)
 {
     IRule::Result methodResult;
     switch(access)
     {
-        case  NSGppGeneric::AccessPublic:
+        case  NSGppGeneric::IGenericVisitor::AccessPublic:
             _checker.check(NSNamingChecker::RulesContainer::PublicMethodDeclaration, name, methodResult);
             break;
-        case  NSGppGeneric::AccessProtected:
+        case  NSGppGeneric::IGenericVisitor::AccessProtected:
             _checker.check(NSNamingChecker::RulesContainer::ProtectedMethodDeclaration, name, methodResult);
             break;
-        case  NSGppGeneric::AccessPrivate:
+        case  NSGppGeneric::IGenericVisitor::AccessPrivate:
             _checker.check(NSNamingChecker::RulesContainer::PrivateMethodDeclaration, name, methodResult);
             break;
     }
     if (!methodResult._match)
     {
         const std::string message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     IRule::Result attributeResult;
     switch(access)
     {
-        case  NSGppGeneric::AccessPublic:
+        case  NSGppGeneric::IGenericVisitor::AccessPublic:
             _checker.check(NSNamingChecker::RulesContainer::PublicAttributeDeclaration, name, attributeResult);
             break;
-        case  NSGppGeneric::AccessProtected:
+        case  NSGppGeneric::IGenericVisitor::AccessProtected:
             _checker.check(NSNamingChecker::RulesContainer::ProtectedAttributeDeclaration, name, attributeResult);
             break;
-        case  NSGppGeneric::AccessPrivate:
+        case  NSGppGeneric::IGenericVisitor::AccessPrivate:
             _checker.check(NSNamingChecker::RulesContainer::PrivateAttributeDeclaration, name, attributeResult);
             break;
     }
     if (!attributeResult._match)
     {
         const std::string message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -262,7 +262,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const NSCompilerApi::Gene
     if (!namespaceResult._match)
     {
         const std::string message = "Namespace declaration " + namespaceResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 
@@ -273,7 +273,7 @@ void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const NSCompi
     if (!namespaceResult._match)
     {
         const std::string message = "Template's parameters declaration " + namespaceResult._message + " in " + name;
-        setPluginWarning(decl, message);
+        logPluginWarning(decl, message);
     }
 }
 

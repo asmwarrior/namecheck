@@ -63,15 +63,15 @@ inline bool GenericTraverser::isReservedDeclaration(const NSCompilerApi::Generic
     return (name.substr(0, 2) == "._");
 }
 
-inline AccessModifier GenericTraverser::getAccess(const NSCompilerApi::GenericTree decl)
+inline IGenericVisitor::AccessModifier GenericTraverser::getAccess(const NSCompilerApi::GenericTree decl)
 {
-    AccessModifier ret;
+    IGenericVisitor::AccessModifier ret;
     if (TREE_PRIVATE(decl))
-        ret = AccessPrivate;
+        ret = IGenericVisitor::AccessPrivate;
     else if (TREE_PROTECTED(decl))
-        ret = AccessProtected;
+        ret = IGenericVisitor::AccessProtected;
     else
-        ret = AccessPublic;
+        ret = IGenericVisitor::AccessPublic;
     return ret;
 }
 

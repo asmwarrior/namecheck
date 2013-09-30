@@ -38,7 +38,7 @@
 namespace NSGppGeneric
 {
 
-GenericVisitor* BasePlugin::getVisitor()
+IGenericVisitor* BasePlugin::getVisitor()
 {
     return this;
 }

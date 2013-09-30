@@ -47,7 +47,7 @@ namespace NSGppGeneric
  * This class add to the vistor's interface the initialization method, the _plugin attribute and a method to get
  * the visitor.
  */
-class BasePlugin: private GenericVisitor
+class BasePlugin: private IGenericVisitor
 {
 public:
 
@@ -64,7 +64,7 @@ public:
      * The visitor is this class. But it could change.
      * @return The visitor (in this case a pointer to this).
      */
-    virtual GenericVisitor* getVisitor();
+    virtual IGenericVisitor* getVisitor();
 
 protected:
 

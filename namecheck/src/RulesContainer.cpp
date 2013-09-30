@@ -45,6 +45,8 @@ using mili::operator>>;
 namespace NSNamingChecker
 {
 
+const std::string RulesContainer::REGEX = "0";
+
 RulesContainer::RulesContainer() : _rules(CheckCount)
 {
     _declarationMap["ClassDeclaration"] = ClassDeclaration;
@@ -90,14 +92,6 @@ void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& decla
     }
 }
 
-static const size_t REGEX_SIZE = 4;
-static const size_t DEFAULT_SIZE = 2;
-static const size_t DECLARATION_NAME = 0;
-static const size_t RULE_TYPE = 1;
-static const size_t SPECIFIC_REGEX = 2;
-static const size_t ERROR_MESSAGE = 3;
-static const std::string REGEX = "0";
-
 void RulesContainer::checkLine(const StringVector& line)
 {
     if (line[RULE_TYPE] == REGEX)
@@ -107,7 +101,7 @@ void RulesContainer::checkLine(const StringVector& line)
     mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
 }
 
-IRule* RulesContainer::rulesFactory(const RuleType& rule, const StringVector& fileLine)
+IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& fileLine)
 {
     IRule* ret;
     switch (rule)
@@ -152,7 +146,7 @@ void RulesContainer::process(const StringVector& fileLine)
 {    
     const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
     const RuleType specificRule = RuleType(ruleType);
-    IRule* const rule = rulesFactory(specificRule, fileLine);
+    IRule* const rule = createNewRule(specificRule, fileLine);
     _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }
 
