@@ -39,7 +39,7 @@
 #include "Rule.h"
 #include "Exceptions.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**

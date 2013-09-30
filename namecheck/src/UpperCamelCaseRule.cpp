@@ -32,7 +32,7 @@
 
 #include "namecheck/UpperCamelCaseRule.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 UpperCamelCaseRule::UpperCamelCaseRule() : RegexCollection(3)

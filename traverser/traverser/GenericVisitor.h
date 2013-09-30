@@ -39,9 +39,9 @@
 #define GPP_GENERIC_VISITOR_H
 
 #include <string>
-#include "api/GenericTree.h"
+#include "compilerapi/GenericTree.h"
 
-namespace GPPGeneric
+namespace NSGppGeneric
 {
 
 /**
@@ -66,24 +66,24 @@ typedef std::string DeclarationName;
 struct GenericVisitor
 {
     virtual GenericVisitor* getVisitor() = 0;
-    virtual void visitStringLiteral(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitVariableDeclaration(const Api::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
-    virtual void visitEnumTypeDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitEnumValueDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitFunctionDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitParameterDeclaration(const Api::GenericTree decl, const DeclarationName& name, bool isConst) = 0;
-    virtual void visitTypeDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitClassDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitStructDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitUnionDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitUnionValueDeclaration(const Api::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
-    virtual void visitMethodDeclaration(const Api::GenericTree decl, const AccessModifier access, const DeclarationName& name, bool isConst) = 0;
-    virtual void visitAttributeDeclaration(const Api::GenericTree decl, const AccessModifier access, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
-    virtual void visitNamespaceDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitGlobalConstDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
-    virtual void visitTemplateTypeParameterDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitStringLiteral(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
+    virtual void visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitEnumValueDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitFunctionDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitParameterDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name, bool isConst) = 0;
+    virtual void visitTypeDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitClassDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitStructDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitUnionDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitUnionValueDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
+    virtual void visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const AccessModifier access, const DeclarationName& name, bool isConst) = 0;
+    virtual void visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const AccessModifier access, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
+    virtual void visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitGlobalConstDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
+    virtual void visitTemplateTypeParameterDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
 };
 
-} // end GPPGeneric
+} // end namespace
 
 #endif

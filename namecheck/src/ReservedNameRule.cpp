@@ -32,7 +32,7 @@
 
 #include "namecheck/ReservedNameRule.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 ReservedNameRule::ReservedNameRule() : RegexCollection(MatchAmount)

@@ -1,6 +1,6 @@
 /**
- * @file     GCCPluginAPI.h
- * @brief    Provides the API for communication from the plugin to gcc.
+ * @file     PluginAPI.h
+ * @brief    Provides the interface of plugin that makes the warning messages.
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -8,7 +8,7 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Header file for api providing GCCPluginAPI interface.
+ * Contents: Header file for api providing PluginAPI interface.
  *
  * System:    api
  * Language:  C++
@@ -32,35 +32,41 @@
  *
  */
 
-#ifndef GCC_PLUGIN_API_H
-#define GCC_PLUGIN_API_H
+#ifndef PLUGIN_API_H
+#define PLUGIN_API_H
 
-#include "PluginAPI.h"
+#include <string>
+#include "GenericTree.h"
 
-namespace Api
+namespace NSCompilerApi
 {
 
 /**
- * @brief The API for communication from the plugin to gcc.
+ * @brief Interface of plugin that makes the warning messages.
  *
  */
-class GCCPluginApi: public PluginApi
+struct PluginApi
 {
     /**
-     * @brief gives gcc the warning message.
-     *
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
-     * @param message the message to print
+     * @brief Represent a message to print
      */
-    virtual void warning(const GenericTree& decl, const Message& message) const;
+    typedef std::string Message;
 
     /**
-     * @brief gives gcc the error message.
+     * @brief gives the warning message.
      *
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void error(const GenericTree& decl, const Message& message) const;
+    virtual void warning(const GenericTree& decl, const Message& message) const = 0;
+
+    /**
+     * @brief gives the error message.
+     *
+     * @param decl is the tree of the name it is used for the error message to print the location of the name
+     * @param message the message to print
+     */
+    virtual void error(const GenericTree& decl, const Message& message) const = 0;
 };
 
 } // end namespace

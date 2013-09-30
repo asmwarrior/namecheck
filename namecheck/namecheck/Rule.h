@@ -34,7 +34,7 @@
 
 #include <boost/regex.hpp>
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**

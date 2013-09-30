@@ -38,9 +38,9 @@
 
 #include <string>
 #include "GenericVisitor.h"
-#include "api/GenericTree.h"
+#include "compilerapi/GenericTree.h"
 
-namespace GPPGeneric
+namespace NSGppGeneric
 {
 
 /**
@@ -58,7 +58,7 @@ public:
      * @param ns this should be the global namespace to process.
      * @param visitor the visitor to set.
      */
-    void traverse(const Api::GenericTree ns, GenericVisitor* visitor);
+    void traverse(const NSCompilerApi::GenericTree ns, GenericVisitor* visitor);
 
 private:
     /**
@@ -73,14 +73,14 @@ private:
      * @param decl the tree node corresponding to the declaration from which we will get the name
      * @param name the name that will be returned
      */
-    static void getName(const Api::GenericTree decl, std::string& name);
+    static void getName(const NSCompilerApi::GenericTree decl, std::string& name);
 
     /**
      * @brief this will return true if the node represents something declared as constant.
      *
      * @param decl the tree node corresponding to the declaration from which we will get if it is declared constant or not.
      */
-    static bool isConstant(const Api::GenericTree decl);
+    static bool isConstant(const NSCompilerApi::GenericTree decl);
 
     /**
      * @brief this gets the name of the type declared for a variable.
@@ -88,56 +88,56 @@ private:
      * @param decl the tree node corresponding to the declaration from which we will get the type name.
      * @param returnName the name of the type returned
      */
-    static void getTypeName(const Api::GenericTree decl, std::string& returnName);
+    static void getTypeName(const NSCompilerApi::GenericTree decl, std::string& returnName);
 
     /**
      * @brief this returns true if the node has a name that we dont want to process.
      *
      * @param decl the tree node corresponding to the declaration from which we will get the name to check.
      */
-    static bool isReservedDeclaration(const Api::GenericTree decl);
+    static bool isReservedDeclaration(const NSCompilerApi::GenericTree decl);
 
     /**
      * @brief this returns the visibility of a method or attribute (public, private or protected).
      *
      * @param decl the tree node corresponding to the declaration from which we will get the visibility.
      */
-    static AccessModifier getAccess(const Api::GenericTree decl);
+    static AccessModifier getAccess(const NSCompilerApi::GenericTree decl);
 
     /**
      * @brief this process and traverses the Parameters of a function or method
      *
      * @param decl the tree node corresponding to the function or method declaration we want to process.
      */
-    void processParameters(const Api::GenericTree decl) const;
+    void processParameters(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and traverses the attributes of a class ,struct or union
      *
      * @param decl the tree node corresponding to the class, struct or union declaration we want to process.
      */
-    void processAttributes(const Api::GenericTree decl) const;
+    void processAttributes(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and traverses the methods of a class ,struct or union
      *
      * @param decl the tree node corresponding to the class, struct or union declaration we want to process.
      */
-    void processMethods(const Api::GenericTree decl) const;
+    void processMethods(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and check an enum declaration or a typedef of an enum
      *
      * @param decl the tree node corresponding to the enum declaration we want to process.
      */
-    void processEnumType(const Api::GenericTree decl) const;
+    void processEnumType(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and traverses the values of an enum
      *
      * @param decl the tree node corresponding to the enum declaration we want to process.
      */
-    void processEnumValues(const Api::GenericTree decl) const;
+    void processEnumValues(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and traverses any declaration
@@ -146,7 +146,7 @@ private:
      * It's called many times from the other methods.
      * @param decl the tree node corresponding to the declaration we want to process.
      */
-    void processDeclaration(const Api::GenericTree decl) const;
+    void processDeclaration(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process statements, not declarations
@@ -154,7 +154,7 @@ private:
      * Not yet implemented.
      * @param decl the tree node corresponding to the statement we want to process.
      */
-    void processStatement(const Api::GenericTree decl) const;
+    void processStatement(const NSCompilerApi::GenericTree decl) const;
 
     /**
     * @brief this process and traverses any Variable declaration
@@ -164,7 +164,7 @@ private:
     * variables.
     * @param decl the tree node corresponding to the variable declaration we want to process.
     */
-    void processVariableDeclaration(const Api::GenericTree decl) const;
+    void processVariableDeclaration(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and traverses a Template declaration
@@ -172,7 +172,7 @@ private:
      * First, this check the class or function templatized, and then checks the templates parameters.
      * @param decl the tree node corresponding to the template declaration we want to process.
      */
-    void processTemplateDeclaration(const Api::GenericTree decl) const;
+    void processTemplateDeclaration(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process and traverses a Type declaration
@@ -181,7 +181,7 @@ private:
      * compiler and includes class, struct and union declaration), and common typedefs.
      * @param decl the tree node corresponding to the type declaration we want to process.
      */
-    void processType(const Api::GenericTree decl) const;
+    void processType(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this separates between a Record declaration(struct or class), and a Union declaration
@@ -189,7 +189,7 @@ private:
      * @param decl the tree node corresponding to the union or record we want to process.
      * @param name the name declared.
      */
-    void unionOrRecord(const Api::GenericTree decl, const Api::GenericTree type, std::string& name) const;
+    void unionOrRecord(const NSCompilerApi::GenericTree decl, const NSCompilerApi::GenericTree type, std::string& name) const;
 
     /**
      * @brief this process and traverses an artificial Type declaration
@@ -199,14 +199,14 @@ private:
      * and methods
      * @param decl the tree node corresponding to the union or record we want to process.
      */
-    void processTypeDeclArtificial(const Api::GenericTree decl) const;
+    void processTypeDeclArtificial(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this separates between a struct or class declaration and visits it.
      *
      * @param decl the tree node corresponding to the record declaration we want to process.
      */
-    void processRecordDeclaration(const Api::GenericTree decl) const;
+    void processRecordDeclaration(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this separates between a function or method declaration and visits it.
@@ -214,7 +214,7 @@ private:
      * @param decl the tree node corresponding to the function or method declaration we want to process.
      * @param name the name declared
      */
-    void functionOrMethod(const Api::GenericTree decl, std::string& name) const;
+    void functionOrMethod(const NSCompilerApi::GenericTree decl, std::string& name) const;
 
     /**
      * @brief this processes and traverses a function or method
@@ -222,56 +222,56 @@ private:
      * first we separate if its a function or method, then we process its parameters and its body.
      * @param decl the tree node corresponding to the function declaration we want to process.
      */
-    void processFunction(const Api::GenericTree decl) const;
+    void processFunction(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process the body of a function taking the declarations inside of it.
      *
      * @param decl the tree node corresponding to the function declaration we want to process.
      */
-    void processFunctionBody(const Api::GenericTree decl) const;
+    void processFunctionBody(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this takes the subblocks of a block and process them.
      *
      * @param block the tree node corresponding to the block we want to process.
      */
-    void processSubblocks(const Api::GenericTree block) const;
+    void processSubblocks(const NSCompilerApi::GenericTree block) const;
 
     /**
      * @brief this process the block, the declarations inside them and the subblocks.
      *
      * @param decl the tree node corresponding to the block we want to process.
      */
-    void processBlock(const Api::GenericTree decl) const;
+    void processBlock(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this process the declarations inside a block.
      *
      * @param decl the tree node corresponding to the block we want to process.
      */
-    void processBlockVariables(const Api::GenericTree decl) const;
+    void processBlockVariables(const NSCompilerApi::GenericTree decl) const;
 
     /**
      * @brief this traverse the given namespace and separates the declaration of namespaces and the other declarations inside it
      *
      * @param decl the tree node corresponding to the namespace we want to process.
      */
-    void traverse(const Api::GenericTree ns) const;
+    void traverse(const NSCompilerApi::GenericTree ns) const;
 
     /**
      * @brief this process the namespace's name and traverses it.
      *
      * @param decl the tree node corresponding to the namespace we want to process.
      */
-    void traverseNamespaces(const Api::GenericTree level) const;
+    void traverseNamespaces(const NSCompilerApi::GenericTree level) const;
 
     /**
      * @brief this takes the declarations in a namespace and process them.
      *
      * @param decl the tree node corresponding to the namespace we want to process.
      */
-    void traverseDeclarations(const Api::GenericTree level) const;
+    void traverseDeclarations(const NSCompilerApi::GenericTree level) const;
 
     /**
      * @brief this checks if the declaration is of an array and add to the typename "_array", as many times
@@ -280,7 +280,7 @@ private:
      * @param decl the tree node corresponding to the declaration we want to process.
      * @param typeName the type name it could modify.
      */
-    static void checkArrayTypeName(Api::GenericTree decl, std::string& typeName);
+    static void checkArrayTypeName(NSCompilerApi::GenericTree decl, std::string& typeName);
 
     /**
      * @brief this checks if the declaration is a reference and add to the typename "_ref".
@@ -288,7 +288,7 @@ private:
      * @param decl the tree node corresponding to the declaration we want to process.
      * @param typeName the type name it could modify.
      */
-    static void checkReferenceTypeName(Api::GenericTree decl, std::string& typeName);
+    static void checkReferenceTypeName(NSCompilerApi::GenericTree decl, std::string& typeName);
 
     /**
      * @brief this checks if the declaration is of pointer and add to the typename "_ptr", as many times
@@ -297,13 +297,13 @@ private:
      * @param decl the tree node corresponding to the declaration we want to process.
      * @param typeName the type name it could modify.
      */
-    static void checkPointerTypeName(Api::GenericTree decl, std::string& typeName);
+    static void checkPointerTypeName(NSCompilerApi::GenericTree decl, std::string& typeName);
 };
 
 #define GENERIC_TRAVERSER_INLINE_H
 #include "GenericTraverserInline.h"
 #undef GENERIC_TRAVERSER_INLINE_H
 
-} // end GPPGeneric
+} // end namespace
 
 #endif

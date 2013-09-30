@@ -1,6 +1,6 @@
 /**
- * @file     PluginAPI.h
- * @brief    Provides the interface of plugin that makes the warning messages.
+ * @file     GCCPluginAPI.h
+ * @brief    Provides the API for communication from the plugin to gcc.
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -8,7 +8,7 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Header file for api providing PluginAPI interface.
+ * Contents: Header file for api providing GCCPluginAPI interface.
  *
  * System:    api
  * Language:  C++
@@ -32,41 +32,35 @@
  *
  */
 
-#ifndef PLUGIN_API_H
-#define PLUGIN_API_H
+#ifndef GCC_PLUGIN_API_H
+#define GCC_PLUGIN_API_H
 
-#include <string>
-#include "GenericTree.h"
+#include "PluginAPI.h"
 
-namespace Api
+namespace NSCompilerApi
 {
 
 /**
- * @brief Interface of plugin that makes the warning messages.
+ * @brief The API for communication from the plugin to gcc.
  *
  */
-struct PluginApi
+class GCCPluginApi: public PluginApi
 {
     /**
-     * @brief Represent a message to print
-     */
-    typedef std::string Message;
-
-    /**
-     * @brief gives the warning message.
+     * @brief gives gcc the warning message.
      *
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void warning(const GenericTree& decl, const Message& message) const = 0;
+    virtual void warning(const GenericTree& decl, const Message& message) const;
 
     /**
-     * @brief gives the error message.
+     * @brief gives gcc the error message.
      *
-     * @param decl is the tree of the name it is used for the error message to print the location of the name
+     * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print
      */
-    virtual void error(const GenericTree& decl, const Message& message) const = 0;
+    virtual void error(const GenericTree& decl, const Message& message) const;
 };
 
 } // end namespace

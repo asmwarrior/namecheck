@@ -33,7 +33,7 @@
 #include <iostream>
 #include "namecheck/Regex.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 Regex::Regex(const std::string& reg, const std::string& msg): _regex(reg), _errmsg(msg)

@@ -34,7 +34,7 @@
 
 #include <mili/mili.h>
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 struct NamecheckExceptionHierarchy {};

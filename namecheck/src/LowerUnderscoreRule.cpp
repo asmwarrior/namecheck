@@ -32,7 +32,7 @@
 
 #include "namecheck/LowerUnderscoreRule.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 LowerUnderscoreRule::LowerUnderscoreRule() : RegexCollection(3)
