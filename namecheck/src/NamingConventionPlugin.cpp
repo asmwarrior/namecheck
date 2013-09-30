@@ -80,14 +80,14 @@ NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
 
 inline void NamingConventionPlugin::setPluginWarning(const Api::GenericTree decl, const GPPGeneric::DeclarationName& message)
 {
-    _plugin->warning(decl, message);
+    _api->warning(decl, message);
 }
 
 const std::string NamingConventionPlugin::_accessLabel[] = {"Public", "Protected", "Private"};
 
 void NamingConventionPlugin::visitStringLiteral(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    _plugin->warning(decl, name);
+    _api->warning(decl, name);
 }
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name)

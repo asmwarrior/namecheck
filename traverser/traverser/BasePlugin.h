@@ -54,9 +54,9 @@ public:
     /**
      * @brief this sets the _plugin .
      *
-     * @param plugin this is the pointer to the plugin that is going to be set.
+     * @param api this is the pointer to the pluginAPI that is going to be set.
      */
-    void initialize(Api::PluginApi* plugin);
+    void initialize(Api::PluginApi* api);
 
     /**
      * @brief this gets the visitor.
@@ -64,15 +64,15 @@ public:
      * The visitor is this class. But it could change.
      * @return The visitor (in this case a pointer to this).
      */
-    GenericVisitor* getVisitor();
+    virtual GenericVisitor* getVisitor();
 
 protected:
 
     /**
-     * @brief This is the plugin for the warnings and error messages.
+     * @brief This is the api for the warnings and error messages.
      *
      */
-    Api::PluginApi* _plugin;
+    Api::PluginApi* _api;
 
 };
 

@@ -43,9 +43,9 @@ GenericVisitor* BasePlugin::getVisitor()
     return this;
 }
 
-void BasePlugin::initialize(Api::PluginApi* plugin)
+void BasePlugin::initialize(Api::PluginApi* api)
 {
-    _plugin = plugin;
+    _api = api;
 }
 
 } // end namespace
