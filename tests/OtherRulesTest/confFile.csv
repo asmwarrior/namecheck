@@ -1,0 +1,19 @@
+ClassDeclaration,0,^\u.*?,CLASS START WITH UPPERCASE
+VariableDeclaration,2
+EnumTypeDeclaration,1
+EnumValueDeclaration,1
+FunctionDeclaration,2
+ParameterDeclaration,2
+TypeDeclaration,1
+StructDeclaration,1
+UnionDeclaration,1
+UnionValueDeclaration,1
+PublicMethodDeclaration,2
+PrivateMethodDeclaration,2
+ProtectedMethodDeclaration,2
+PublicAttributeDeclaration,4
+PrivateAttributeDeclaration,4
+ProtectedAttributeDeclaration,4
+NamespaceDeclaration,1
+GlobalConstDeclaration,3
+TemplateTypeParameterDeclaration,1
