@@ -92,7 +92,7 @@ void NamingConventionPlugin::visitStringLiteral(const NSCompilerApi::GenericTree
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result enumTypeResult;
+    IRule::Result enumTypeResult;
     _checker.check(NSNamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
@@ -103,7 +103,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::Gener
 
 void NamingConventionPlugin::visitEnumValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result enumValueResult;
+    IRule::Result enumValueResult;
     _checker.check(NSNamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
     if (!enumValueResult._match)
     {
@@ -114,7 +114,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const NSCompilerApi::Gene
 
 void NamingConventionPlugin::visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
-    Rule::Result variableResult;
+    IRule::Result variableResult;
     _checker.check(NSNamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
     if (!variableResult._match)
     {
@@ -125,7 +125,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const NSCompilerApi::Gener
 
 void NamingConventionPlugin::visitGlobalConstDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result globalConstResult;
+    IRule::Result globalConstResult;
     _checker.check(NSNamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
     if (!globalConstResult._match)
     {
@@ -136,7 +136,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const NSCompilerApi::Ge
 
 void NamingConventionPlugin::visitFunctionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result functionResult;
+    IRule::Result functionResult;
     _checker.check(NSNamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
@@ -147,7 +147,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const NSCompilerApi::Gener
 
 void NamingConventionPlugin::visitParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name, bool /*isConst*/)
 {
-    Rule::Result parameterResult;
+    IRule::Result parameterResult;
     _checker.check(NSNamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
@@ -158,7 +158,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const NSCompilerApi::Gene
 
 void NamingConventionPlugin::visitTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result typeResult;
+    IRule::Result typeResult;
     _checker.check(NSNamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
@@ -169,7 +169,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const NSCompilerApi::GenericTr
 
 void NamingConventionPlugin::visitClassDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result classResult;
+    IRule::Result classResult;
     _checker.check(NSNamingChecker::RulesContainer::ClassDeclaration, name, classResult);
     if (!classResult._match)
     {
@@ -180,7 +180,7 @@ void NamingConventionPlugin::visitClassDeclaration(const NSCompilerApi::GenericT
 
 void NamingConventionPlugin::visitStructDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result structResult;
+    IRule::Result structResult;
     _checker.check(NSNamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
@@ -191,7 +191,7 @@ void NamingConventionPlugin::visitStructDeclaration(const NSCompilerApi::Generic
 
 void NamingConventionPlugin::visitUnionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result unionResult;
+    IRule::Result unionResult;
     _checker.check(NSNamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
     if (!unionResult._match)
     {
@@ -202,7 +202,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const NSCompilerApi::GenericT
 
 void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
-    Rule::Result unionValueResult;
+    IRule::Result unionValueResult;
     _checker.check(NSNamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
     if (!unionValueResult._match)
     {
@@ -213,7 +213,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::Gen
 
 void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/)
 {
-    Rule::Result methodResult;
+    IRule::Result methodResult;
     switch(access)
     {
         case  NSGppGeneric::AccessPublic:
@@ -235,7 +235,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::Generic
 
 void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
-    Rule::Result attributeResult;
+    IRule::Result attributeResult;
     switch(access)
     {
         case  NSGppGeneric::AccessPublic:
@@ -257,7 +257,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::Gene
 
 void NamingConventionPlugin::visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result namespaceResult;
+    IRule::Result namespaceResult;
     _checker.check(NSNamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
@@ -268,7 +268,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const NSCompilerApi::Gene
 
 void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
 {
-    Rule::Result namespaceResult;
+    IRule::Result namespaceResult;
     _checker.check(NSNamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {

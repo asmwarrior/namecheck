@@ -203,7 +203,7 @@ TEST(PluginAPITests, OtherTest)
 TEST(RulesTest, UpperCamelCase)
 {
     NSNamingChecker::UpperCamelCaseRule upperCamelCase;
-    NSNamingChecker::Rule::Result res;
+    NSNamingChecker::IRule::Result res;
     upperCamelCase.checkRule("MyClassExample", res);
     EXPECT_EQ(res._match, true);
     upperCamelCase.checkRule("myClass", res);
@@ -213,7 +213,7 @@ TEST(RulesTest, UpperCamelCase)
 TEST(RulesTest, LowerCamelCase)
 {
     NSNamingChecker::LowerCamelCaseRule lowerCamelCase;
-    NSNamingChecker::Rule::Result res;
+    NSNamingChecker::IRule::Result res;
     lowerCamelCase.checkRule("pushInside", res);
     EXPECT_EQ(res._match, true);
     lowerCamelCase.checkRule("push_inside", res);
@@ -223,7 +223,7 @@ TEST(RulesTest, LowerCamelCase)
 TEST(RulesTest, UpperUnderscore)
 {
     NSNamingChecker::UpperUnderscoreRule upperUnderscore;
-    NSNamingChecker::Rule::Result res;
+    NSNamingChecker::IRule::Result res;
     upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
     EXPECT_EQ(res._match, true);
     upperUnderscore.checkRule("this_is_my_const", res);
@@ -233,7 +233,7 @@ TEST(RulesTest, UpperUnderscore)
 TEST(RulesTest, LowerUnderscore)
 {
     NSNamingChecker::LowerUnderscoreRule lowerUnderscore;
-    NSNamingChecker::Rule::Result res;
+    NSNamingChecker::IRule::Result res;
     lowerUnderscore.checkRule("_regex", res);
     EXPECT_EQ(res._match, true);
     lowerUnderscore.checkRule("specificRegex", res);
@@ -242,8 +242,8 @@ TEST(RulesTest, LowerUnderscore)
 
 TEST(RulesTest, Regex)
 {
-    NSNamingChecker::Regex regex("^\\u.*?", "errmsg");
-    NSNamingChecker::Rule::Result res;
+    NSNamingChecker::Regex regex(RegexType("^\\u.*?"), "errmsg");
+    NSNamingChecker::IRule::Result res;
     regex.checkRule("regex", res);
     EXPECT_EQ(res._match, false);
     EXPECT_EQ(res._message, "errmsg");

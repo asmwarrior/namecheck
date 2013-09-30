@@ -55,7 +55,7 @@ typedef std::string Message;
 /**
  * Interface for a rule
  */
-struct Rule
+struct IRule
 {
 
     /**
@@ -81,7 +81,7 @@ struct Rule
      * @brief Destructor of class
      *
      */
-    virtual ~Rule() {}
+    virtual ~IRule() {}
 };
 
 } //end namespace

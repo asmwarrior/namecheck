@@ -42,12 +42,8 @@ namespace NSNamingChecker
  *
  * This class represents a default rules
  */
-class RegexCollection : public Rule
+class RegexCollection : public IRule
 {
-private:
-
-    virtual void checkRule(const std::string& declarationName, Result& result) const;
-
 protected:
 
     /**
@@ -62,6 +58,10 @@ protected:
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;
+
+private:
+
+    virtual void checkRule(const DeclName& declarationName, Result& result) const;   
 };
 
 } //end namespace

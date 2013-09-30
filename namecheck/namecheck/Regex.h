@@ -43,7 +43,7 @@ namespace NSNamingChecker
  *
  * This class represents a regex which is a specific rule
  */
-class Regex : public Rule
+class Regex : public IRule
 {
 public:
 
@@ -51,13 +51,11 @@ public:
      * @brief Constructor of class
      *
      */
-    Regex(const std::string& reg, const std::string& msg);
+    Regex(const RegexType& regexType, const Message& msg);
 
 private:
 
-    virtual void checkRule(const std::string& declarationName, Result& result) const;
-
-    virtual ~Regex() {}
+    virtual void checkRule(const DeclName& declarationName, Result& result) const;
     
     /**
      * @brief Represent a specific regex
