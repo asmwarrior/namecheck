@@ -76,7 +76,7 @@ RulesContainer::~RulesContainer()
     }
 }
 
-void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& declarationName, Rule::Result& result) const
+void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& declarationName, IRule::Result& result) const
 {
     if (!_rules[decl].empty())
     {
@@ -107,14 +107,14 @@ void RulesContainer::checkLine(const StringVector& line)
     mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
 }
 
-Rule* RulesContainer::rulesFactory(const RuleType& rule, const StringVector& fileLine)
+IRule* RulesContainer::rulesFactory(const RuleType& rule, const StringVector& fileLine)
 {
-    Rule* ret;
+    IRule* ret;
     switch (rule)
     {
         case SpecificRegex:
         {
-            ret = new Regex(fileLine[SPECIFIC_REGEX], fileLine[ERROR_MESSAGE]);            
+            ret = new Regex(RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);            
             break;
         }
         case UpCamelCaseRule:
@@ -152,7 +152,7 @@ void RulesContainer::process(const StringVector& fileLine)
 {    
     const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
     const RuleType specificRule = RuleType(ruleType);
-    Rule* const rule = rulesFactory(specificRule, fileLine);
+    IRule* const rule = rulesFactory(specificRule, fileLine);
     _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }
 

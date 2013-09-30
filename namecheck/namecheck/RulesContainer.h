@@ -105,7 +105,7 @@ public:
      * @param declarationName name to check
      * @param result to fill with the result
      */
-    void check(const DeclarationToCheck& decl, const DeclName& declarationName, Rule::Result& result) const;
+    void check(const DeclarationToCheck& decl, const DeclName& declarationName, IRule::Result& result) const;
 
     /**
      * @brief This initializes the vector of rules corresponding to each declaration types.
@@ -135,7 +135,7 @@ private:
      * @param rule corresponds a specific rule 
      * @return specific rule
      */
-    Rule* rulesFactory(const RuleType& rule, const StringVector& fileLine);    
+    IRule* rulesFactory(const RuleType& rule, const StringVector& fileLine);    
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
@@ -152,7 +152,7 @@ private:
     void checkLine(const StringVector& line);
 
     DeclarationMap _declarationMap;
-    typedef std::list<Rule*> Rules;
+    typedef std::list<IRule*> Rules;
     std::vector<Rules> _rules;
 
 };
