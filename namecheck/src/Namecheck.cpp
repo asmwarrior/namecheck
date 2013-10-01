@@ -48,8 +48,9 @@
 #endif
 
 /**
- * Please, don't delete or rename. This variable is used by GCC
- * to identify the plugin is GPL licensed
+ * Please, don't delete or rename. Assert that this plugin is a
+ * GPL-compatible license. If this symbol does not exist, the 
+ * compiler will emit a fatal error.
  */
 int plugin_is_GPL_compatible;
 
@@ -108,10 +109,19 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     exit(EXIT_SUCCESS);
 }
 
+/**
+ * @brief This fucion is called right after the plugin is loaded. 
+ *
+ * Is responsible for registering all the callbacks required by the 
+ * plugin and do any other required initialization.
+ *
+ * @param info plugin invocation information
+ * @param version GCC version
+ */
 extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 {
     size_t ret = EXIT_SUCCESS;
-    std::cerr << "starting " << info->base_name << std::endl;
+    std::cout << "starting " << info->base_name << std::endl;
 
     // Disable assembly output.
     asm_file_name = HOST_BIT_BUCKET;
@@ -123,7 +133,7 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
         pathFile = info->argv[ConfigurationFile].value;
 
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
-    register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
+    register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);    
 
     return ret;
 }
