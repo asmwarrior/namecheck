@@ -44,7 +44,7 @@ namespace NSCompilerApi
  * @brief The API for communication from the plugin to gcc.
  *
  */
-class GCCPluginApi: public PluginApi
+class GCCPluginApi: public IPluginApi
 {
     /**
      * @brief gives gcc the warning message.

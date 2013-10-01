@@ -56,7 +56,7 @@ public:
      *
      * @param api this is the pointer to the pluginAPI that is going to be set.
      */
-    virtual void initialize(NSCompilerApi::PluginApi* api);
+    virtual void initialize(NSCompilerApi::IPluginApi* api);
 
     /**
      * @brief this gets the visitor.
@@ -72,7 +72,7 @@ protected:
      * @brief This is the api for the warnings and error messages.
      *
      */
-    NSCompilerApi::PluginApi* _api;
+    NSCompilerApi::IPluginApi* _api;
 
 };
 

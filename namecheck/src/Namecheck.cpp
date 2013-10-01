@@ -82,7 +82,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
     {
         NSGppGeneric::TraverserCppThree traverser;
         const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(pathFile.c_str()));
-        const std::auto_ptr<NSCompilerApi::PluginApi> api(new NSCompilerApi::GCCPluginApi());
+        const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
@@ -100,7 +100,7 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     {
         NSGppGeneric::TraverserCppEleven traverser;
         const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(pathFile.c_str()));
-        const std::auto_ptr<NSCompilerApi::PluginApi> api(new NSCompilerApi::GCCPluginApi());
+        const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing with c++11 " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin->getVisitor());
