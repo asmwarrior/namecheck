@@ -33,25 +33,21 @@
 #define RULE_H
 
 #include <boost/regex.hpp>
+#include "compilerapi/PluginAPI.h"
 
 namespace NSNamingChecker
 {
-
-/**
- * @brief Represents type of regex
- */
-typedef boost::regex RegexType;
-
-/**
- * @brief Represents a output message
- */
-typedef std::string Message;
 
 /**
  * Interface for a rule
  */
 struct IRule
 {
+
+    /**
+     * @brief Represents type of regex
+     */
+    typedef boost::regex RegexType;
 
     /**
      * @brief Represents a declaration name
@@ -66,7 +62,7 @@ struct IRule
     struct Result
     {
         bool _match;
-        Message _message;
+        NSCompilerApi::IPluginApi::Message _message;
     };
 
     /**

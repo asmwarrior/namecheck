@@ -33,7 +33,7 @@
 #define DEFAULT_RULES_H
 
 #include "Rule.h"
-
+ 
 namespace NSNamingChecker
 {
 
@@ -54,7 +54,7 @@ protected:
     RegexCollection(const size_t length);
 
     typedef std::vector<RegexType> Regexs;
-    typedef std::vector<Message> ErrorMsgs;
+    typedef std::vector<NSCompilerApi::IPluginApi::Message> ErrorMsgs;
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;

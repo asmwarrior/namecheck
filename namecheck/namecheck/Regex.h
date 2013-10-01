@@ -51,7 +51,7 @@ public:
      * @brief Constructor of class
      *
      */
-    Regex(const RegexType& regexType, const Message& msg);
+    Regex(const RegexType& regexType, const NSCompilerApi::IPluginApi::Message& msg);
 
 private:
 
@@ -65,7 +65,7 @@ private:
     /**
      * @brief Represent a error message
      */
-    const Message _errmsg;
+    const NSCompilerApi::IPluginApi::Message _errmsg;
 };
 
 } //end namespace

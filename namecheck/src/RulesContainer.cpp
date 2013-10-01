@@ -108,7 +108,7 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
     {
         case SpecificRegex:
             {
-                ret = new Regex(RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);
+                ret = new Regex(IRule::RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);
                 break;
             }
         case UpCamelCaseRule:
