@@ -52,6 +52,16 @@ class GenericTraverser
 public:
 
     /**
+     * @Represent a traverser of the AST for C++03.
+     */
+    typedef GenericTraverser TraverserCppThree;
+
+    /**
+     * @Represent a traverser of the AST for C++0x.
+     */
+    typedef GenericTraverser TraverserCppEleven;
+
+    /**
      * @brief this sets the visitor and traverse the given namespace.
      *
      *
