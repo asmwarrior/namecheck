@@ -36,12 +36,7 @@
 
 namespace NSNamingChecker
 {
-
-/**
- * @brief Represents a declaration name
- */
-typedef std::string DeclName;
-    
+  
 /**
  * @brief Represents type of regex
  */
@@ -57,6 +52,11 @@ typedef std::string Message;
  */
 struct IRule
 {
+
+    /**
+     * @brief Represents a declaration name
+     */
+    typedef std::string DeclName;
 
     /**
      *  @brief The result of a check.

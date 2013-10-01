@@ -78,7 +78,7 @@ RulesContainer::~RulesContainer()
     }
 }
 
-void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& declarationName, IRule::Result& result) const
+void RulesContainer::check(const DeclarationToCheck& decl, const IRule::DeclName& declarationName, IRule::Result& result) const
 {
     if (!_rules[decl].empty())
     {
@@ -137,7 +137,7 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
             break;
         }
         default :
-            throw InvalidRuleType();
+            throw InvalidRuleType("The rule invalid is: " + rule);
     }
     return ret;
 }
@@ -146,6 +146,7 @@ void RulesContainer::process(const StringVector& fileLine)
 {    
     const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
     const RuleType specificRule = RuleType(ruleType);
+    
     IRule* const rule = createNewRule(specificRule, fileLine);
     _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }

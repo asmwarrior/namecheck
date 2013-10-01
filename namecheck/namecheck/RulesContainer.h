@@ -108,7 +108,7 @@ public:
      * @param declarationName name to check
      * @param result to fill with the result
      */
-    void check(const DeclarationToCheck& decl, const DeclName& declarationName, IRule::Result& result) const;
+    void check(const DeclarationToCheck& decl, const IRule::DeclName& declarationName, IRule::Result& result) const;
 
     /**
      * @brief This initializes the vector of rules corresponding to each declaration types.
@@ -138,7 +138,7 @@ private:
      * @param rule corresponds a specific rule 
      * @return specific rule
      */
-    IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);    
+    static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);    
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.

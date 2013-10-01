@@ -29,10 +29,12 @@
  *
  */
 
+#include <memory>
+#include <iostream>
 #include "namecheck/NamingConventionPlugin.h"
 #include "compilerapi/GCCPluginAPI.h"
-#include <traverser/TraverserCppThree.h>
-#include <traverser/TraverserCppEleven.h>
+#include "traverser/TraverserCppThree.h"
+#include "traverser/TraverserCppEleven.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
@@ -45,17 +47,18 @@
     #include "plugin-version.h"
 #endif
 
-#include <memory>
-#include <iostream>
-
-int plugin_is_GPL_compatible; //don't rename. 
+/**
+ * Please, don't delete or rename. This variable is used by GCC
+ * to identify the plugin is GPL licensed
+ */
+int plugin_is_GPL_compatible; 
 
 namespace NSNamingChecker
 {
 
 std::string pathFile;
 
-struct plugin_info namingInfo =
+static struct plugin_info namingInfo =
 {
     "0.1",                        // version
     "Naming Convention Plugin"    // help
@@ -105,8 +108,6 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
     exit(EXIT_SUCCESS);
 }
 
-static const size_t EXPECTED = 0;
-
 extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 {
     size_t ret = EXIT_SUCCESS;
@@ -118,7 +119,7 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     if (!plugin_default_version_check(version, &gcc_version))
         ret = EXIT_FAILURE;
 
-    if ((info->argc == 1) && (strcmp(info->argv[ConfigurationFile].key, "path")) == EXPECTED)
+    if ((info->argc == 1) && (strcmp(info->argv[ConfigurationFile].key, "path")) == 0)
         pathFile = info->argv[ConfigurationFile].value;
 
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
