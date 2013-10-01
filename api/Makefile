@@ -4,16 +4,24 @@ GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
 
 PLUGIN_SOURCE_FILES= src/GCCPluginAPI.cpp 
 
-INCPATH= -I./ \
-         -I$(GXXPLUGINS_DIR)/include/
+PLUGIN_HEADERS= api/*.h \
+                $(GXXPLUGINS_DIR)/include/*.h
 
-CXXFLAGS = -fPIC -O0 -Wall -Wextra -pedantic -ansi $(INCPATH)
+PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 
-libapi.so: $(PLUGIN_SOURCE_FILES)
-	 $(GXX) $^ -shared $(CXXFLAGS) -o $@	
+INCPATH= -I$(GXXPLUGINS_DIR)/include/
+
+CXXFLAGS = $(INCPATH) -fPIC -O0 -Wall -Wextra -pedantic -ansi 
+
+%.o: %.cpp $(PLUGIN_HEADERS)
+	$(GXX) -c -o $@ $< $(CXXFLAGS) -I./
+
+libapi.so: $(PLUGIN_OBJECT_FILES)
+	$(GXX) -shared $^ -o $@ $(CXXFLAGS) 	
 
 .PHONY: 
 	clean
 
 clean: 
+	rm -f src/*.o
 	rm -f libapi.so
