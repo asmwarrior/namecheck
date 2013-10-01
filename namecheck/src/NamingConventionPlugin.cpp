@@ -38,6 +38,7 @@
 #include <string>
 #include <iostream>
 #include "namecheck/NamingConventionPlugin.h"
+#include "compilerapi/PluginAPI.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
@@ -78,140 +79,140 @@ NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
     _checker.load(pathFile.c_str());
 }
 
-inline void NamingConventionPlugin::logPluginWarning(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& message) const
+inline void NamingConventionPlugin::logPluginWarning(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& message) const
 {
     _api->warning(decl, message);
 }
 
 const std::string NamingConventionPlugin::_accessLabel[] = {"Public", "Protected", "Private"};
 
-void NamingConventionPlugin::visitStringLiteral(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitStringLiteral(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     logPluginWarning(decl, name);
 }
 
-void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result enumTypeResult;
     _checker.check(NSNamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
-        const std::string message = "Enum type declaration " + enumTypeResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Enum type declaration " + enumTypeResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitEnumValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitEnumValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result enumValueResult;
     _checker.check(NSNamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
     if (!enumValueResult._match)
     {
-        const std::string message = "Enum value declaration " + enumValueResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Enum value declaration " + enumValueResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     IRule::Result variableResult;
     _checker.check(NSNamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
     if (!variableResult._match)
     {
-        const std::string message = "Variable declaration " + variableResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Variable declaration " + variableResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitGlobalConstDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitGlobalConstDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result globalConstResult;
     _checker.check(NSNamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
     if (!globalConstResult._match)
     {
-        const std::string message = "Global const declaration " + globalConstResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Global const declaration " + globalConstResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitFunctionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitFunctionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result functionResult;
     _checker.check(NSNamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
-        const std::string message = "Function declaration " + functionResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Function declaration " + functionResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name, bool /*isConst*/)
+void NamingConventionPlugin::visitParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/)
 {
     IRule::Result parameterResult;
     _checker.check(NSNamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
-        const std::string message = "Parameter declaration " + parameterResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Parameter declaration " + parameterResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result typeResult;
     _checker.check(NSNamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
-        const std::string message = "Type declaration " + typeResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Type declaration " + typeResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitClassDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitClassDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result classResult;
     _checker.check(NSNamingChecker::RulesContainer::ClassDeclaration, name, classResult);
     if (!classResult._match)
     {
-        const std::string message = "Class declaration " + classResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Class declaration " + classResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitStructDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitStructDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result structResult;
     _checker.check(NSNamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
-        const std::string message = "Struct declaration " + structResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Struct declaration " + structResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitUnionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitUnionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result unionResult;
     _checker.check(NSNamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
     if (!unionResult._match)
     {
-        const std::string message = "Union declaration " + unionResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Union declaration " + unionResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     IRule::Result unionValueResult;
     _checker.check(NSNamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
     if (!unionValueResult._match)
     {
-        const std::string message = "Union value declaration " + unionValueResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Union value declaration " + unionValueResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/)
+void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/)
 {
     IRule::Result methodResult;
     switch(access)
@@ -228,12 +229,12 @@ void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::Generic
     }
     if (!methodResult._match)
     {
-        const std::string message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
+        const NSCompilerApi::PluginApi::Message message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
+void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     IRule::Result attributeResult;
     switch(access)
@@ -250,29 +251,29 @@ void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::Gene
     }
     if (!attributeResult._match)
     {
-        const std::string message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result namespaceResult;
     _checker.check(NSNamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const std::string message = "Namespace declaration " + namespaceResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Namespace declaration " + namespaceResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
 
-void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::DeclarationName& name)
+void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name)
 {
     IRule::Result namespaceResult;
     _checker.check(NSNamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const std::string message = "Template's parameters declaration " + namespaceResult._message + " in " + name;
+        const NSCompilerApi::PluginApi::Message message = "Template's parameters declaration " + namespaceResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }

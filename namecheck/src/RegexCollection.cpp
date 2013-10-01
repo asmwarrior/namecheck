@@ -37,7 +37,7 @@ namespace NSNamingChecker
 RegexCollection::RegexCollection(const size_t length) : _regexs(length), _errmsgs(length)
 {}
 
-void RegexCollection::checkRule(const std::string& declarationName, Result& result) const
+void RegexCollection::checkRule(const DeclName& declarationName, Result& result) const
 {
     assert(_regexs.size() != 0);
     size_t i(0);

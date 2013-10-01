@@ -44,15 +44,14 @@
 namespace NSGppGeneric
 {
 
-typedef std::string DeclarationName;
-
 /**
-*  @brief The interface for the visitor of the traverser
-*
-*
-*/
+ *  @brief The interface for the visitor of the traverser
+ *
+ */
 struct IGenericVisitor
 {
+    typedef std::string DeclarationName;
+        
     /**
      * @brief This has the three possible Access states of a member.
      *
@@ -64,7 +63,6 @@ struct IGenericVisitor
         AccessPrivate
     };
 
-    virtual IGenericVisitor* getVisitor() = 0;
     virtual void visitStringLiteral(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
     virtual void visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
     virtual void visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const DeclarationName& name) = 0;
