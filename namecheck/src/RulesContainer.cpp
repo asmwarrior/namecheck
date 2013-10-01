@@ -106,36 +106,24 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
     IRule* ret;
     switch (rule)
     {
-        case SpecificRegex:
-        {
+        case SpecificRegex:        
             ret = new Regex(IRule::RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);
             break;
-        }
         case UpCamelCaseRule:
-        {
             ret = new UpperCamelCaseRule();
             break;
-        }
         case LowCamelCaseRule:
-        {
             ret = new LowerCamelCaseRule();
             break;
-        }
         case UpUnderscoreRule:
-        {
             ret = new UpperUnderscoreRule();
             break;
-        }
         case LowUnderscoreRule:
-        {
             ret = new LowerUnderscoreRule();
             break;
-        }
         case ReservNameRule:
-        {
             ret = new ReservedNameRule();
             break;
-        }
         default:
             throw InvalidRuleType("The rule invalid is: " + rule);
     }
