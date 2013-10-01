@@ -1,4 +1,7 @@
-SHELL=/bin/sh
+ifneq (,)
+    This makefile requires GNU Make.
+endif
+
 GXX=/usr/bin/g++
 GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
 
