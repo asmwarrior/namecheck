@@ -33,7 +33,7 @@
 #define DEFAULT_RULES_H
 
 #include "Rule.h"
- 
+
 namespace NSNamingChecker
 {
 
