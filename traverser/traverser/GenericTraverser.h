@@ -43,23 +43,25 @@
 namespace NSGppGeneric
 {
 
+class GenericTraverser;
+
+/**
+ * @Represent a traverser of the AST for C++03.
+ */
+typedef GenericTraverser TraverserCppThree;
+
+/**
+ * @Represent a traverser of the AST for C++0x.
+ */
+typedef GenericTraverser TraverserCppEleven;
+
 /**
  * @brief A class that traverses the AST tree.
  *
  */
 class GenericTraverser
 {
-public:
-
-    /**
-     * @Represent a traverser of the AST for C++03.
-     */
-    typedef GenericTraverser TraverserCppThree;
-
-    /**
-     * @Represent a traverser of the AST for C++0x.
-     */
-    typedef GenericTraverser TraverserCppEleven;
+public:    
 
     /**
      * @brief this sets the visitor and traverse the given namespace.

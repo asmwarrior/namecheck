@@ -33,8 +33,7 @@
 #include <iostream>
 #include "namecheck/NamingConventionPlugin.h"
 #include "compilerapi/GCCPluginAPI.h"
-#include "traverser/TraverserCppThree.h"
-#include "traverser/TraverserCppEleven.h"
+#include "traverser/GenericTraverser.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
