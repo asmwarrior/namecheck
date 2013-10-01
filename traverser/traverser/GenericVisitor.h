@@ -51,7 +51,7 @@ namespace NSGppGeneric
 struct IGenericVisitor
 {
     typedef std::string DeclarationName;
-        
+
     /**
      * @brief This has the three possible Access states of a member.
      *

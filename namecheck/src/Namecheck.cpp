@@ -51,7 +51,7 @@
  * Please, don't delete or rename. This variable is used by GCC
  * to identify the plugin is GPL licensed
  */
-int plugin_is_GPL_compatible; 
+int plugin_is_GPL_compatible;
 
 namespace NSNamingChecker
 {
@@ -77,7 +77,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
-    //    
+    //
     if (errorcount == 0 && sorrycount == 0)
     {
         NSGppGeneric::TraverserCppThree traverser;
@@ -95,7 +95,7 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
 
     // If there were errors during compilation,
     // let GCC handle the exit.
-    //        
+    //
     if (errorcount == 0 && sorrycount == 0)
     {
         NSGppGeneric::TraverserCppEleven traverser;

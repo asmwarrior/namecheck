@@ -56,7 +56,7 @@ public:
 private:
 
     virtual void checkRule(const DeclName& declarationName, Result& result) const;
-    
+
     /**
      * @brief Represent a specific regex
      */

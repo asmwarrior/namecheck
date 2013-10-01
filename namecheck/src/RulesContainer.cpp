@@ -98,7 +98,7 @@ void RulesContainer::checkLine(const StringVector& line)
         mili::assert_throw<InvalidFormatFile>(line.size() == REGEX_SIZE);
     else
         mili::assert_throw<InvalidFormatFile>(line.size() == DEFAULT_SIZE);
-    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
+    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());
 }
 
 IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& fileLine)
@@ -107,35 +107,35 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
     switch (rule)
     {
         case SpecificRegex:
-        {
-            ret = new Regex(RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);            
-            break;
-        }
+            {
+                ret = new Regex(RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);
+                break;
+            }
         case UpCamelCaseRule:
-        {
-            ret = new UpperCamelCaseRule();
-            break;
-        }
+            {
+                ret = new UpperCamelCaseRule();
+                break;
+            }
         case LowCamelCaseRule:
-        {
-            ret = new LowerCamelCaseRule();
-            break;
-        }
+            {
+                ret = new LowerCamelCaseRule();
+                break;
+            }
         case UpUnderscoreRule:
-        {
-            ret = new UpperUnderscoreRule();            
-            break;
-        }
+            {
+                ret = new UpperUnderscoreRule();
+                break;
+            }
         case LowUnderscoreRule:
-        {
-            ret = new LowerUnderscoreRule();
-            break;
-        }
+            {
+                ret = new LowerUnderscoreRule();
+                break;
+            }
         case ReservNameRule:
-        {
-            ret = new ReservedNameRule();
-            break;
-        }
+            {
+                ret = new ReservedNameRule();
+                break;
+            }
         default :
             throw InvalidRuleType("The rule invalid is: " + rule);
     }
@@ -143,10 +143,10 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
 }
 
 void RulesContainer::process(const StringVector& fileLine)
-{    
-    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
+{
+    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);
     const RuleType specificRule = RuleType(ruleType);
-    
+
     IRule* const rule = createNewRule(specificRule, fileLine);
     _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }

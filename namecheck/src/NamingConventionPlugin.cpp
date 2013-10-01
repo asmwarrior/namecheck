@@ -215,7 +215,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::Gen
 void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/)
 {
     IRule::Result methodResult;
-    switch(access)
+    switch (access)
     {
         case  NSGppGeneric::IGenericVisitor::AccessPublic:
             _checker.check(NSNamingChecker::RulesContainer::PublicMethodDeclaration, name, methodResult);
@@ -237,7 +237,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::Generic
 void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/)
 {
     IRule::Result attributeResult;
-    switch(access)
+    switch (access)
     {
         case  NSGppGeneric::IGenericVisitor::AccessPublic:
             _checker.check(NSNamingChecker::RulesContainer::PublicAttributeDeclaration, name, attributeResult);

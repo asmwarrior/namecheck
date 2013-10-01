@@ -34,7 +34,6 @@
 
 
 #include <vector>
-#include <list>
 #include <string>
 #include "Rule.h"
 #include "Exceptions.h"
@@ -135,10 +134,10 @@ private:
     /**
      * @brief Create a specific rule
      *
-     * @param rule corresponds a specific rule 
+     * @param rule corresponds a specific rule
      * @return specific rule
      */
-    static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);    
+    static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
@@ -159,7 +158,7 @@ private:
     std::vector<Rules> _rules;
 
     /**
-     * @brief To avoid magic numbers 
+     * @brief To avoid magic numbers
      */
     static const size_t REGEX_SIZE = 4;
     static const size_t DEFAULT_SIZE = 2;
