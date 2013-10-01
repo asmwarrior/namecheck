@@ -242,7 +242,7 @@ TEST(RulesTest, LowerUnderscore)
 
 TEST(RulesTest, Regex)
 {
-    NSNamingChecker::Regex regex(RegexType("^\\u.*?"), "errmsg");
+    NSNamingChecker::Regex regex(IRule::RegexType("^\\u.*?"), "errmsg");
     NSNamingChecker::IRule::Result res;
     regex.checkRule("regex", res);
     EXPECT_EQ(res._match, false);

@@ -40,6 +40,7 @@
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
 #include <string>
+#include <mili/mili.h>
 #include "Rule.h"
 #include "RulesContainer.h"
 #include "traverser/BasePlugin.h"
