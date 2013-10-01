@@ -36,7 +36,7 @@
 
 namespace NSNamingChecker
 {
-  
+
 /**
  * @brief Represents type of regex
  */

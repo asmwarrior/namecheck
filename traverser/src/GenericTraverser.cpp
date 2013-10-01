@@ -10,7 +10,7 @@
  *
  * Contents: Source file for traverser providing GenericTraverser implementation.
  *
- * System:   traverser 
+ * System:   traverser
  * Language: C++
  *
  * @date September 06, 2013

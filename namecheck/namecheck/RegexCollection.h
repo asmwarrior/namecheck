@@ -61,7 +61,7 @@ protected:
 
 private:
 
-    virtual void checkRule(const DeclName& declarationName, Result& result) const;   
+    virtual void checkRule(const DeclName& declarationName, Result& result) const;
 };
 
 } //end namespace

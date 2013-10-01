@@ -59,9 +59,9 @@ namespace NSCompilerApi
 {
 
 /**
-* @brief A tree node (is a pointer type).
-*
-*/
+ * @brief A tree node (is a pointer type).
+ *
+ */
 typedef tree GenericTree;
 
 }
