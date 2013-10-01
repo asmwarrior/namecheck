@@ -18,7 +18,7 @@ using namespace NSGppGeneric;
 using namespace NSNamingChecker;
 using namespace NSCompilerApi;
 
-class APIMock : public PluginApi
+class APIMock : public IPluginApi
 {
 public:
     MOCK_CONST_METHOD2(warning, void(const GenericTree& decl, const Message& message));

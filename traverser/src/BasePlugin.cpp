@@ -43,7 +43,7 @@ IGenericVisitor* BasePlugin::getVisitor()
     return this;
 }
 
-void BasePlugin::initialize(NSCompilerApi::PluginApi* api)
+void BasePlugin::initialize(NSCompilerApi::IPluginApi* api)
 {
     _api = api;
 }

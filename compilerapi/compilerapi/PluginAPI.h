@@ -45,7 +45,7 @@ namespace NSCompilerApi
  * @brief Interface of plugin that makes the warning messages.
  *
  */
-struct PluginApi
+struct IPluginApi
 {
     /**
      * @brief Represent a message to print

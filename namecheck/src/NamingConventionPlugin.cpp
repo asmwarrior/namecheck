@@ -97,7 +97,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const NSCompilerApi::Gener
     _checker.check(NSNamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Enum type declaration " + enumTypeResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Enum type declaration " + enumTypeResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -108,7 +108,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const NSCompilerApi::Gene
     _checker.check(NSNamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
     if (!enumValueResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Enum value declaration " + enumValueResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Enum value declaration " + enumValueResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -119,7 +119,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const NSCompilerApi::Gener
     _checker.check(NSNamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
     if (!variableResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Variable declaration " + variableResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Variable declaration " + variableResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -130,7 +130,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const NSCompilerApi::Ge
     _checker.check(NSNamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
     if (!globalConstResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Global const declaration " + globalConstResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Global const declaration " + globalConstResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -141,7 +141,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const NSCompilerApi::Gener
     _checker.check(NSNamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Function declaration " + functionResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Function declaration " + functionResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -152,7 +152,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const NSCompilerApi::Gene
     _checker.check(NSNamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Parameter declaration " + parameterResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Parameter declaration " + parameterResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -163,7 +163,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const NSCompilerApi::GenericTr
     _checker.check(NSNamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Type declaration " + typeResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Type declaration " + typeResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -174,7 +174,7 @@ void NamingConventionPlugin::visitClassDeclaration(const NSCompilerApi::GenericT
     _checker.check(NSNamingChecker::RulesContainer::ClassDeclaration, name, classResult);
     if (!classResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Class declaration " + classResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Class declaration " + classResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -185,7 +185,7 @@ void NamingConventionPlugin::visitStructDeclaration(const NSCompilerApi::Generic
     _checker.check(NSNamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Struct declaration " + structResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Struct declaration " + structResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -196,7 +196,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const NSCompilerApi::GenericT
     _checker.check(NSNamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
     if (!unionResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Union declaration " + unionResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Union declaration " + unionResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -207,7 +207,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const NSCompilerApi::Gen
     _checker.check(NSNamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
     if (!unionValueResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Union value declaration " + unionValueResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Union value declaration " + unionValueResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -229,7 +229,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::Generic
     }
     if (!methodResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
+        const NSCompilerApi::IPluginApi::Message message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
         logPluginWarning(decl, message);
     }
 }
@@ -251,7 +251,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::Gene
     }
     if (!attributeResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -262,7 +262,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const NSCompilerApi::Gene
     _checker.check(NSNamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Namespace declaration " + namespaceResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Namespace declaration " + namespaceResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
@@ -273,7 +273,7 @@ void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const NSCompi
     _checker.check(NSNamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const NSCompilerApi::PluginApi::Message message = "Template's parameters declaration " + namespaceResult._message + " in " + name;
+        const NSCompilerApi::IPluginApi::Message message = "Template's parameters declaration " + namespaceResult._message + " in " + name;
         logPluginWarning(decl, message);
     }
 }
