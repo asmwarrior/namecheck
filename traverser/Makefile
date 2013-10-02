@@ -13,16 +13,16 @@ PLUGIN_HEADERS= traverser/*.h \
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 
 INCPATH= -I$(GXXPLUGINS_DIR)/include/ \
-		 -I../api/
+		 -I../compilerapi/
 
-LD_LIBRARY_PATH= -L../api -Wl,-rpath=$(shell pwd)/../api
+LD_LIBRARY_PATH= -L../compilerapi -Wl,-rpath=$(shell pwd)/../compilerapi
 
 CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) -lapi
 
 compile: api libtraverser.so
 
 api: 
-	$(MAKE) -C ../api
+	$(MAKE) -C ../compilerapi
 
 libtraverser.so: $(PLUGIN_OBJECT_FILES)
 	$(GXX) -shared $^ -o $@ $(CXXFLAGS) 
@@ -36,4 +36,4 @@ libtraverser.so: $(PLUGIN_OBJECT_FILES)
 clean: 
 	rm -f src/*.o
 	rm -f libtraverser.so
-	rm -f ../api/libapi.so
+	rm -f ../compilerapi/libapi.so

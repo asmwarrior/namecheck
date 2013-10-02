@@ -7,7 +7,7 @@ GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
 
 PLUGIN_SOURCE_FILES= src/GCCPluginAPI.cpp 
 
-PLUGIN_HEADERS= api/*.h \
+PLUGIN_HEADERS= compilerapi/*.h \
                 $(GXXPLUGINS_DIR)/include/*.h
 
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))

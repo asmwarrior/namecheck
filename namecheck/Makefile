@@ -3,7 +3,7 @@ ifneq (,)
 endif
 
 # Output messages
-COMPILING_API="************ Compiling api ******************************"
+COMPILING_API="************ Compiling compilerapi **********************"
 COMPILING_TRAVERSER="************ Compiling traverser ************************"
 COMPILING_NAMECHECK="************ Compiling namecheck ************************"
 COMPILATION_FINISHED="************ Compilation finished successfully **********"
@@ -25,13 +25,13 @@ INCPATH= -I./ \
 		 -I$(GXXPLUGINS_DIR)/include/ \
          -I./mili/ \
 		 -I../traverser/ \
-		 -I../api/
+		 -I../compilerapi/
 
 LD_LIBRARY_PATH= -L. \
 			     -L../traverser \
 				 -Wl,-rpath=$(shell pwd)/../traverser \
-			     -L../api \
-				 -Wl,-rpath=$(shell pwd)/../api
+			     -L../compilerapi \
+				 -Wl,-rpath=$(shell pwd)/../compilerapi
 
 LDFLAGS= -lboost_regex \
 		 -ltraverser \
@@ -43,7 +43,7 @@ compile: api traverser libnamecheck.so finish
 
 api:
 	@echo $(COMPILING_API)
-	$(MAKE) -C ../api
+	$(MAKE) -C ../compilerapi
 
 traverser:
 	clear
@@ -75,6 +75,6 @@ clean:
 	rm -f libnamecheck.so
 	rm -f ../traverser/src/*.o
 	rm -f ../traverser/libtraverser.so
-	rm -f ../api/src/*.o
-	rm -f ../api/libapi.so
+	rm -f ../compilerapi/src/*.o
+	rm -f ../compilerapi/libapi.so
 	clear
