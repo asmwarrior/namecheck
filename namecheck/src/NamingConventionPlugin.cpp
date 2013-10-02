@@ -80,14 +80,14 @@ NamingConventionPlugin::NamingConventionPlugin(const std::string& pathFile)
 
 inline void NamingConventionPlugin::setPluginWarning(const Api::GenericTree decl, const GPPGeneric::DeclarationName& message)
 {
-    _plugin->warning(decl, message);
+    _api->warning(decl, message);
 }
 
 const std::string NamingConventionPlugin::_accessLabel[] = {"Public", "Protected", "Private"};
 
 void NamingConventionPlugin::visitStringLiteral(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name)
 {
-    _plugin->warning(decl, name);
+    _api->warning(decl, name);
 }
 
 void NamingConventionPlugin::visitEnumTypeDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name)
@@ -217,21 +217,14 @@ void NamingConventionPlugin::visitMethodDeclaration(const Api::GenericTree decl,
     switch(access)
     {
         case  GPPGeneric::AccessPublic:
-        {
             _checker.check(NamingChecker::RulesContainer::PublicMethodDeclaration, name, methodResult);
             break;
-        }
         case  GPPGeneric::AccessProtected:
-        {
             _checker.check(NamingChecker::RulesContainer::ProtectedMethodDeclaration, name, methodResult);
             break;
-        }
         case  GPPGeneric::AccessPrivate:
-        {
             _checker.check(NamingChecker::RulesContainer::PrivateMethodDeclaration, name, methodResult);
             break;
-        }
-        default: break;
     }
     if (!methodResult._match)
     {
@@ -246,21 +239,14 @@ void NamingConventionPlugin::visitAttributeDeclaration(const Api::GenericTree de
     switch(access)
     {
         case  GPPGeneric::AccessPublic:
-        {
             _checker.check(NamingChecker::RulesContainer::PublicAttributeDeclaration, name, attributeResult);
             break;
-        }
         case  GPPGeneric::AccessProtected:
-        {
             _checker.check(NamingChecker::RulesContainer::ProtectedAttributeDeclaration, name, attributeResult);
             break;
-        }
         case  GPPGeneric::AccessPrivate:
-        {
             _checker.check(NamingChecker::RulesContainer::PrivateAttributeDeclaration, name, attributeResult);
             break;
-        }
-        default: break;
     }
     if (!attributeResult._match)
     {

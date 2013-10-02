@@ -47,12 +47,12 @@
 namespace Api
 {
 
-void GCCPluginApi::warning(const GenericTree& decl, const std::string& message)
+void GCCPluginApi::warning(const GenericTree& decl, const Message& message) const
 {
     warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
 }
 
-void GCCPluginApi::error(const GenericTree& decl, const std::string& message)
+void GCCPluginApi::error(const GenericTree& decl, const Message& message) const
 {
     error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
 }
