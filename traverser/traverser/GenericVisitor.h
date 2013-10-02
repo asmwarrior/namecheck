@@ -65,6 +65,7 @@ typedef std::string DeclarationName;
 */
 struct GenericVisitor
 {
+    virtual GenericVisitor* getVisitor() = 0;
     virtual void visitStringLiteral(const Api::GenericTree decl, const DeclarationName& name) = 0;
     virtual void visitVariableDeclaration(const Api::GenericTree decl, const DeclarationName& name, bool isConst, const std::string& typeName) = 0;
     virtual void visitEnumTypeDeclaration(const Api::GenericTree decl, const DeclarationName& name) = 0;

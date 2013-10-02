@@ -2,6 +2,13 @@ ifneq (,)
     This makefile requires GNU Make.
 endif
 
+# Output messages
+COMPILING_API="************ Compiling api ******************************"
+COMPILING_TRAVERSER="************ Compiling traverser ************************"
+COMPILING_NAMECHECK="************ Compiling namecheck ************************"
+COMPILATION_FINISHED="************ Compilation finished successfully **********"
+
+# Compiling
 GXX=/usr/bin/g++
 GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
 
@@ -32,19 +39,34 @@ LDFLAGS= -lboost_regex \
 
 CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS) 
 
-compile: api traverser libnamecheck.so 
+compile: api traverser libnamecheck.so finish
 
 api:
+	@echo $(COMPILING_API)
 	$(MAKE) -C ../api
 
 traverser:
+	clear
+	@echo $(COMPILING_API)
+	@echo $(COMPILING_TRAVERSER)
 	$(MAKE) -C ../traverser
 
 libnamecheck.so: $(PLUGIN_OBJECT_FILES) 
+	clear
+	@echo $(COMPILING_API)
+	@echo $(COMPILING_TRAVERSER)
+	@echo $(COMPILING_NAMECHECK)
 	$(GXX) -shared $^ -o $@ $(CXXFLAGS) 
 
 %.o: %.cpp $(PLUGIN_HEADERS)
 	$(GXX) -c -o $@ $< $(CXXFLAGS) 
+
+finish:
+	clear
+	@echo $(COMPILING_API)
+	@echo $(COMPILING_TRAVERSER)
+	@echo $(COMPILING_NAMECHECK)
+	@echo $(COMPILATION_FINISHED)
 
 .PHONY: clean
 
