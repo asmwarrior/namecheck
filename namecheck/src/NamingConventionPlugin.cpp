@@ -141,7 +141,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const Api::GenericTree dec
     _checker.check(NamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
-        const std::string message = gettext("Function declaration ") + functionResult._message + (" in ") + name;
+        const std::string message = gettext("Function declaration ") + functionResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -163,7 +163,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const Api::GenericTree decl, c
     _checker.check(NamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
-        const std::string message = gettext("Type declaration ") + typeResult._message + (" in ") + name;
+        const std::string message = gettext("Type declaration ") + typeResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -185,7 +185,7 @@ void NamingConventionPlugin::visitStructDeclaration(const Api::GenericTree decl,
     _checker.check(NamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
-        const std::string message = gettext("Struct declaration ") + structResult._message + (" in ") + name;
+        const std::string message = gettext("Struct declaration ") + structResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -251,7 +251,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const Api::GenericTree de
     }
     if (!attributeResult._match)
     {
-        const std::string message = _accessLabel[access] + gettext(" Attribute declaration ") + attributeResult._message + (" in ") + name;
+        const std::string message = _accessLabel[access] + gettext(" Attribute declaration ") + attributeResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -273,7 +273,7 @@ void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const Api::Ge
     _checker.check(NamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const std::string message = gettext("Template's parameters declaration ") + namespaceResult._message + (" in ") + name;
+        const std::string message = gettext("Template's parameters declaration ") + namespaceResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
