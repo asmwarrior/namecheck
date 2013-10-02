@@ -1,20 +1,39 @@
-SHELL=/bin/sh
+ifneq (,)
+    This makefile requires GNU Make.
+endif
+
 GXX=/usr/bin/g++
 GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
 
-PLUGIN_SOURCE_FILES= src/BasePlugin.cpp src/GCCPluginAPI.cpp \
-					 src/GenericTraverser.cpp
+PLUGIN_SOURCE_FILES= src/BasePlugin.cpp src/GenericTraverser.cpp
 
-INCPATH= -I./ \
-         -I$(GXXPLUGINS_DIR)/include/
+PLUGIN_HEADERS= traverser/*.h \
+                $(GXXPLUGINS_DIR)/include/*.h
 
-CXXFLAGS = -fPIC -O0 -ggdb3 -Wall -Wextra -pedantic -ansi $(INCPATH)
+PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 
-traverser.so: $(PLUGIN_SOURCE_FILES)
-	 $(GXX) $^ -shared -o $@ $(CXXFLAGS)
+INCPATH= -I$(GXXPLUGINS_DIR)/include/ \
+		 -I../api/
+
+LD_LIBRARY_PATH= -L../api -Wl,-rpath=$(shell pwd)/../api
+
+CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) -lapi
+
+compile: api libtraverser.so
+
+api: 
+	$(MAKE) -C ../api
+
+libtraverser.so: $(PLUGIN_OBJECT_FILES)
+	$(GXX) -shared $^ -o $@ $(CXXFLAGS) 
+
+%.o: %.cpp $(PLUGIN_HEADERS)
+	$(GXX) -c -o $@ $< $(CXXFLAGS) -I./	
 
 .PHONY: 
 	clean
 
 clean: 
-	rm -f traverser.so
+	rm -f src/*.o
+	rm -f libtraverser.so
+	rm -f ../api/libapi.so
