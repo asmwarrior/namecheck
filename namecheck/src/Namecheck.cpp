@@ -29,6 +29,8 @@
  *
  */
 
+#include <libintl.h>
+#include <locale.h>
 #include "namecheck/NamingConventionPlugin.h"
 #include "api/GCCPluginAPI.h"
 #include <traverser/TraverserCppThree.h>
@@ -50,6 +52,9 @@
 
 int plugin_is_GPL_compatible; //don't rename
 
+/**
+ * @brief To load the configuration file name
+ */
 std::string pathFile;
 
 static struct plugin_info namingInfo =
@@ -66,6 +71,22 @@ enum PluginArguments
     ConfigurationFile,
     NumberOfArguments
 };
+
+// Then the English text is extracted from the source program and converted to a 
+// Portable Object Template for use by translators who create Machine Object message 
+// catalog files for use by the run-time program using utilities programs: xgettext, 
+// msginit and msgfmt. Finally, the Linux shell command for identifying the run-time 
+// language as Spanish is shown when the program is invoked.
+
+/**     
+ * @brief Set data for gettext. For more infomation, see Linux man page     
+ */     
+void initGettext()      
+{       
+    setlocale(LC_ALL, "");      
+    bindtextdomain("namecheck", ".");     ///usr/share/locale      
+    textdomain("namecheck");        
+}
 
 extern "C" void gate_callback_cpp_three(void*, void*)
 {
@@ -122,6 +143,8 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
     // else
     //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
+
+    initGettext();
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
     register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
 
