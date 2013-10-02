@@ -15,7 +15,7 @@ PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 INCPATH= -I$(GXXPLUGINS_DIR)/include/ \
 		 -I../api/
 
-LD_LIBRARY_PATH= -L../api
+LD_LIBRARY_PATH= -L../api -Wl,-rpath=$(shell pwd)/../api
 
 CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) -lapi
 

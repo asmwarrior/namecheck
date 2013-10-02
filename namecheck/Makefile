@@ -22,13 +22,15 @@ INCPATH= -I./ \
 
 LD_LIBRARY_PATH= -L. \
 			     -L../traverser \
-			     -L../api
+				 -Wl,-rpath=$(shell pwd)/../traverser \
+			     -L../api \
+				 -Wl,-rpath=$(shell pwd)/../api
 
 LDFLAGS= -lboost_regex \
 		 -ltraverser \
 		 -lapi  
 
-CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS)
+CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS) 
 
 compile: api traverser libnamecheck.so 
 
@@ -38,7 +40,7 @@ api:
 traverser:
 	$(MAKE) -C ../traverser
 
-libnamecheck.so: $(PLUGIN_OBJECT_FILES) ../api/src/*.o ../traverser/src/*.o
+libnamecheck.so: $(PLUGIN_OBJECT_FILES) 
 	$(GXX) -shared $^ -o $@ $(CXXFLAGS) 
 
 %.o: %.cpp $(PLUGIN_HEADERS)
@@ -53,20 +55,4 @@ clean:
 	rm -f ../traverser/libtraverser.so
 	rm -f ../api/src/*.o
 	rm -f ../api/libapi.so
-
-# usr/bin/g++ -shared src/LowerCamelCaseRule.o src/LowerUnderscoreRule.o src/Namecheck.o
-# src/NamingConventionPlugin.o src/RegexCollection.o src/Regex.o src/ReservedNameRule.o 
-# src/RulesContainer.o src/UpperCamelCaseRule.o src/UpperUnderscoreRule.o -o libnamecheck.so
-# -I./ -I/usr/lib/gcc/x86_64-linux-gnu/4.6/plugin/include/ -I./mili/ -I../traverser/ 
-# -I../api/ -O0 -Wall -Wextra -pedantic -ansi -fPIC 
-# -L. -L../traverser -L../api 
-# -lboost_regex -ltraverser -lapi 
-
-# g++ -o build/namecheck/namecheck/libnamecheck.so -shared -Wl,-rpath=/home/fgriberi/Desktop/fbuild/install/libs 
-# build/namecheck/namecheck/src/LowerCamelCaseRule.os build/namecheck/namecheck/src/LowerUnderscoreRule.os
-# build/namecheck/namecheck/src/Namecheck.os build/namecheck/namecheck/src/NamingConventionPlugin.os 
-# build/namecheck/namecheck/src/Regex.os build/namecheck/namecheck/src/RegexCollection.os 
-# build/namecheck/namecheck/src/ReservedNameRule.os build/namecheck/namecheck/src/RulesContainer.os 
-# build/namecheck/namecheck/src/UpperCamelCaseRule.os build/namecheck/namecheck/src/UpperUnderscoreRule.os 
-# -L/home/fgriberi/Desktop/fbuild/install/libs -L. -Lbuild/namecheck/traverser 
-# -Lbuild/namecheck/api -lboost_regex -ltraverser -lapi
+	clear
