@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: namecheck\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-02 15:53-0300\n"
-"PO-Revision-Date: 2013-10-02 15:53-0300\n"
+"POT-Creation-Date: 2013-10-02 16:17-0300\n"
+"PO-Revision-Date: 2013-10-02 16:17-0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: es_AR\n"
@@ -23,9 +23,12 @@ msgstr "Declaracion de tipo enumerado "
 
 #: NamingConventionPlugin.cpp:100 NamingConventionPlugin.cpp:111
 #: NamingConventionPlugin.cpp:122 NamingConventionPlugin.cpp:133
-#: NamingConventionPlugin.cpp:155 NamingConventionPlugin.cpp:177
-#: NamingConventionPlugin.cpp:199 NamingConventionPlugin.cpp:210
-#: NamingConventionPlugin.cpp:232 NamingConventionPlugin.cpp:265
+#: NamingConventionPlugin.cpp:144 NamingConventionPlugin.cpp:155
+#: NamingConventionPlugin.cpp:166 NamingConventionPlugin.cpp:177
+#: NamingConventionPlugin.cpp:188 NamingConventionPlugin.cpp:199
+#: NamingConventionPlugin.cpp:210 NamingConventionPlugin.cpp:232
+#: NamingConventionPlugin.cpp:254 NamingConventionPlugin.cpp:265
+#: NamingConventionPlugin.cpp:276
 msgid " in "
 msgstr " en "
 
@@ -39,7 +42,7 @@ msgstr "Declaracion de variable "
 
 #: NamingConventionPlugin.cpp:133
 msgid "Global const declaration "
-msgstr "Declaracion de const global "
+msgstr "Declaracion de cont global "
 
 #: NamingConventionPlugin.cpp:144
 msgid "Function declaration "
@@ -79,7 +82,7 @@ msgstr "Declaracion de atributo "
 
 #: NamingConventionPlugin.cpp:265
 msgid "Namespace declaration "
-msgstr "Declaracion de espacio de nombre "
+msgstr "Declaracion de espacio de nombres "
 
 #: NamingConventionPlugin.cpp:276
 msgid "Template's parameters declaration "

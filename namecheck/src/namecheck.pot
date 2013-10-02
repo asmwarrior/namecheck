@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: namecheck\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-02 15:53-0300\n"
+"POT-Creation-Date: 2013-10-02 16:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,9 +23,12 @@ msgstr ""
 
 #: NamingConventionPlugin.cpp:100 NamingConventionPlugin.cpp:111
 #: NamingConventionPlugin.cpp:122 NamingConventionPlugin.cpp:133
-#: NamingConventionPlugin.cpp:155 NamingConventionPlugin.cpp:177
-#: NamingConventionPlugin.cpp:199 NamingConventionPlugin.cpp:210
-#: NamingConventionPlugin.cpp:232 NamingConventionPlugin.cpp:265
+#: NamingConventionPlugin.cpp:144 NamingConventionPlugin.cpp:155
+#: NamingConventionPlugin.cpp:166 NamingConventionPlugin.cpp:177
+#: NamingConventionPlugin.cpp:188 NamingConventionPlugin.cpp:199
+#: NamingConventionPlugin.cpp:210 NamingConventionPlugin.cpp:232
+#: NamingConventionPlugin.cpp:254 NamingConventionPlugin.cpp:265
+#: NamingConventionPlugin.cpp:276
 msgid " in "
 msgstr ""
 
