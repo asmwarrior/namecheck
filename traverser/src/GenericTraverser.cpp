@@ -38,19 +38,11 @@
 #include "traverser/GenericTraverser.h"
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
-    {
-        #include "tree-iterator.h"
+    {        
         #include "cp/cp-tree.h"
-        #include "c-family/c-common.h"
-        #include "c-family/c-pragma.h"
-        #include "diagnostic-core.h"
     }
 #else
-    #include "tree-iterator.h"
     #include "cp/cp-tree.h"
-    #include "c-family/c-common.h"
-    #include "c-family/c-pragma.h"
-    #include "diagnostic-core.h"
 #endif
 
 namespace NSGppGeneric
