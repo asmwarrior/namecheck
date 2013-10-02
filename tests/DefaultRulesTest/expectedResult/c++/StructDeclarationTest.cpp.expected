@@ -1,0 +1,4 @@
+starting libnamecheck
+processing StructDeclarationTest.cpp
+StructDeclarationTest.cpp:73:16: warning: Struct declaration names should start with uppercase in test16t [enabled by default]
+StructDeclarationTest.cpp:18:8: warning: Struct declaration names should end with lowercase in Forward1 [enabled by default]
