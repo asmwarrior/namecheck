@@ -37,6 +37,7 @@
 
 #include <string>
 #include <iostream>
+#include <libintl.h>
 #include "namecheck/NamingConventionPlugin.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
@@ -96,7 +97,7 @@ void NamingConventionPlugin::visitEnumTypeDeclaration(const Api::GenericTree dec
     _checker.check(NamingChecker::RulesContainer::EnumTypeDeclaration, name, enumTypeResult);
     if (!enumTypeResult._match)
     {
-        const std::string message = "Enum type declaration " + enumTypeResult._message + " in " + name;
+        const std::string message = gettext("Enum type declaration ") + enumTypeResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -107,7 +108,7 @@ void NamingConventionPlugin::visitEnumValueDeclaration(const Api::GenericTree de
     _checker.check(NamingChecker::RulesContainer::EnumValueDeclaration, name, enumValueResult);
     if (!enumValueResult._match)
     {
-        const std::string message = "Enum value declaration " + enumValueResult._message + " in " + name;
+        const std::string message = gettext("Enum value declaration ") + enumValueResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -118,7 +119,7 @@ void NamingConventionPlugin::visitVariableDeclaration(const Api::GenericTree dec
     _checker.check(NamingChecker::RulesContainer::VariableDeclaration, name, variableResult);
     if (!variableResult._match)
     {
-        const std::string message = "Variable declaration " + variableResult._message + " in " + name;
+        const std::string message = gettext("Variable declaration ") + variableResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -129,7 +130,7 @@ void NamingConventionPlugin::visitGlobalConstDeclaration(const Api::GenericTree 
     _checker.check(NamingChecker::RulesContainer::GlobalConstDeclaration, name, globalConstResult);
     if (!globalConstResult._match)
     {
-        const std::string message = "Global const declaration " + globalConstResult._message + " in " + name;
+        const std::string message = gettext("Global const declaration ") + globalConstResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -140,7 +141,7 @@ void NamingConventionPlugin::visitFunctionDeclaration(const Api::GenericTree dec
     _checker.check(NamingChecker::RulesContainer::FunctionDeclaration, name, functionResult);
     if (!functionResult._match)
     {
-        const std::string message = "Function declaration " + functionResult._message + " in " + name;
+        const std::string message = gettext("Function declaration ") + functionResult._message + (" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -151,7 +152,7 @@ void NamingConventionPlugin::visitParameterDeclaration(const Api::GenericTree de
     _checker.check(NamingChecker::RulesContainer::ParameterDeclaration , name, parameterResult);
     if (!parameterResult._match)
     {
-        const std::string message = "Parameter declaration " + parameterResult._message + " in " + name;
+        const std::string message = gettext("Parameter declaration ") + parameterResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -162,7 +163,7 @@ void NamingConventionPlugin::visitTypeDeclaration(const Api::GenericTree decl, c
     _checker.check(NamingChecker::RulesContainer::TypeDeclaration, name, typeResult);
     if (!typeResult._match)
     {
-        const std::string message = "Type declaration " + typeResult._message + " in " + name;
+        const std::string message = gettext("Type declaration ") + typeResult._message + (" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -173,7 +174,7 @@ void NamingConventionPlugin::visitClassDeclaration(const Api::GenericTree decl, 
     _checker.check(NamingChecker::RulesContainer::ClassDeclaration, name, classResult);
     if (!classResult._match)
     {
-        const std::string message = "Class declaration " + classResult._message + " in " + name;
+        const std::string message = gettext("Class declaration ") + classResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -184,7 +185,7 @@ void NamingConventionPlugin::visitStructDeclaration(const Api::GenericTree decl,
     _checker.check(NamingChecker::RulesContainer::StructDeclaration, name, structResult);
     if (!structResult._match)
     {
-        const std::string message = "Struct declaration " + structResult._message + " in " + name;
+        const std::string message = gettext("Struct declaration ") + structResult._message + (" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -195,7 +196,7 @@ void NamingConventionPlugin::visitUnionDeclaration(const Api::GenericTree decl, 
     _checker.check(NamingChecker::RulesContainer::UnionDeclaration, name, unionResult);
     if (!unionResult._match)
     {
-        const std::string message = "Union declaration " + unionResult._message + " in " + name;
+        const std::string message = gettext("Union declaration ") + unionResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -206,7 +207,7 @@ void NamingConventionPlugin::visitUnionValueDeclaration(const Api::GenericTree d
     _checker.check(NamingChecker::RulesContainer::UnionValueDeclaration, name, unionValueResult);
     if (!unionValueResult._match)
     {
-        const std::string message = "Union value declaration " + unionValueResult._message + " in " + name;
+        const std::string message = gettext("Union value declaration ") + unionValueResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -228,7 +229,7 @@ void NamingConventionPlugin::visitMethodDeclaration(const Api::GenericTree decl,
     }
     if (!methodResult._match)
     {
-        const std::string message = _accessLabel[access] + " Method declaration " + methodResult._message + " in " + name ;
+        const std::string message = _accessLabel[access] + gettext(" Method declaration ") + methodResult._message + gettext(" in ") + name ;
         setPluginWarning(decl, message);
     }
 }
@@ -250,7 +251,7 @@ void NamingConventionPlugin::visitAttributeDeclaration(const Api::GenericTree de
     }
     if (!attributeResult._match)
     {
-        const std::string message = _accessLabel[access] + " Attribute declaration " + attributeResult._message + " in " + name;
+        const std::string message = _accessLabel[access] + gettext(" Attribute declaration ") + attributeResult._message + (" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -261,7 +262,7 @@ void NamingConventionPlugin::visitNamespaceDeclaration(const Api::GenericTree de
     _checker.check(NamingChecker::RulesContainer::NamespaceDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const std::string message = "Namespace declaration " + namespaceResult._message + " in " + name;
+        const std::string message = gettext("Namespace declaration ") + namespaceResult._message + gettext(" in ") + name;
         setPluginWarning(decl, message);
     }
 }
@@ -272,7 +273,7 @@ void NamingConventionPlugin::visitTemplateTypeParameterDeclaration(const Api::Ge
     _checker.check(NamingChecker::RulesContainer::TemplateTypeParameterDeclaration, name, namespaceResult);
     if (!namespaceResult._match)
     {
-        const std::string message = "Template's parameters declaration " + namespaceResult._message + " in " + name;
+        const std::string message = gettext("Template's parameters declaration ") + namespaceResult._message + (" in ") + name;
         setPluginWarning(decl, message);
     }
 }
