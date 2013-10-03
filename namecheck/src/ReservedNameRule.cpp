@@ -45,13 +45,13 @@ ReservedNameRule::ReservedNameRule() : RegexCollection(MatchAmount)
     _regexs[MatchNotStrMemWcsLower] = "^(str|mem|wcs)\\l.*?";
     _regexs[MatchNotUnderscoretEnding] = ".*?_t$";
 
-    _errmsgs[MatchNotUnderscoreUpper] = "Names should not start with _ and an Uppercase";
-    _errmsgs[MatchNotEDOrUpper] = "Names beginning with a capital ‘E’ followed by a digit or uppercase letter may be used for additional error code names";
-    _errmsgs[MatchNotIsOrToLower] = "Names that begin with either ‘is’ or ‘to’ followed by a lowercase letter may be used for additional character testing and conversion functions.";
-    _errmsgs[MatchNotLCUnderscore] = "Names that begin with ‘LC_’ followed by an uppercase letter may be used for additional macros specifying locale attributes.";
-    _errmsgs[MatchNotSIGUnderscore] = "Names that begin with ‘SIG’ or 'SIG_' followed by an uppercase letter are reserved for additional signal names or actions.";
-    _errmsgs[MatchNotStrMemWcsLower] = "Names beginning with ‘str’, ‘mem’, or ‘wcs’ followed by a lowercase letter are reserved for additional string and array functions.";
-    _errmsgs[MatchNotUnderscoretEnding] = "Names that end with ‘_t’ are reserved for additional type names.";
+    _errmsgs[MatchNotUnderscoreUpper] = gettext("should not start with _ and followed by a Uppercase");
+    _errmsgs[MatchNotEDOrUpper] = gettext("should not start with a capital ‘E’ followed by a digit or uppercase letter may be used for additional error code names");
+    _errmsgs[MatchNotIsOrToLower] = gettext("should not start with either ‘is’ or ‘to’ followed by a lowercase letter may be used for additional character testing and conversion functions.");
+    _errmsgs[MatchNotLCUnderscore] = gettext("should not start with ‘LC_’ followed by an uppercase letter may be used for additional macros specifying locale attributes.");
+    _errmsgs[MatchNotSIGUnderscore] = gettext("should not start with ‘SIG’ or 'SIG_' followed by an uppercase letter are reserved for additional signal names or actions.");
+    _errmsgs[MatchNotStrMemWcsLower] = gettext("should not start with ‘str’, ‘mem’, or ‘wcs’ followed by a lowercase letter are reserved for additional string and array functions.");
+    _errmsgs[MatchNotUnderscoretEnding] = gettext("should not end with ‘_t’ are reserved for additional type names.");
 }
 
 } //end namespace
