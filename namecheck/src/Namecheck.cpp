@@ -30,7 +30,6 @@
  */
 
 #include <libintl.h>
-#include <locale.h>
 #include "namecheck/NamingConventionPlugin.h"
 #include "api/GCCPluginAPI.h"
 #include <traverser/TraverserCppThree.h>
@@ -83,8 +82,8 @@ enum PluginArguments
  */     
 void initGettext()      
 {       
-    setlocale(LC_ALL, "");      
-    bindtextdomain("namecheck", ".");     ///usr/share/locale      
+    setlocale(LC_MESSAGES, "");      
+    bindtextdomain("namecheck", "/usr/share/locale");           
     textdomain("namecheck");        
 }
 

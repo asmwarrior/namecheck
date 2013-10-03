@@ -32,6 +32,7 @@
 #ifndef DEFAULT_RULES_H
 #define DEFAULT_RULES_H
 
+#include <libintl.h>
 #include "Rule.h"
 
 namespace NamingChecker

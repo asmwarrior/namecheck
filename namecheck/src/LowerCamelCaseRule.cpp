@@ -41,9 +41,9 @@ LowerCamelCaseRule::LowerCamelCaseRule() : RegexCollection(3)
     _regexs[1] = "^_?[\\l\\u\\d]*$";
     _regexs[2] = ".*?[^\\u_\\d]\\l?$";
 
-    _errmsgs[0] = "names should start with lowercase";
-    _errmsgs[1] = "names should not be written using underscore, only is supported one underscore at the beginning";
-    _errmsgs[2] = "names should end with lowercase";
+    _errmsgs[0] = gettext("should start with lowercase");
+    _errmsgs[1] = gettext("should not be written using underscore, only is supported one underscore at the beginning");
+    _errmsgs[2] = gettext("should end with lowercase");
 }
 
 } //end namespace

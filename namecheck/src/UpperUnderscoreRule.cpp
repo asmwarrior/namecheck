@@ -41,9 +41,9 @@ UpperUnderscoreRule::UpperUnderscoreRule() : RegexCollection(3)
     _regexs[1] = "[\\u_]*?";
     _regexs[2] = ".*?\\u$";
 
-    _errmsgs[0] = "names should start with uppercase";
-    _errmsgs[1] = "names should be written with uppercase and underscore";
-    _errmsgs[2] = "names should end with uppercase";
+    _errmsgs[0] = gettext("should start with uppercase");
+    _errmsgs[1] = gettext("should be written with uppercase and underscore");
+    _errmsgs[2] = gettext("should end with uppercase");
 }
 
 } //end namespace
