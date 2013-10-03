@@ -10,7 +10,13 @@ COMPILATION_FINISHED="************ Compilation finished successfully **********"
 
 # Compiling
 GXX=/usr/bin/g++
-GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
+
+ifeq "$(GCCVERSION)" "4.6.3"
+    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+else
+    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.7/plugin
+endif
 
 PLUGIN_SOURCE_FILES= src/LowerCamelCaseRule.cpp src/LowerUnderscoreRule.cpp src/Namecheck.cpp \
 					 src/NamingConventionPlugin.cpp src/RegexCollection.cpp src/Regex.cpp src/ReservedNameRule.cpp \
