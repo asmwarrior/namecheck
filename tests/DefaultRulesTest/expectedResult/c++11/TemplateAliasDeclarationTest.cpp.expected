@@ -1,5 +1,5 @@
 starting libnamecheck
 processing TemplateAliasDeclarationTest.cpp
 TemplateAliasDeclarationTest.cpp: In constructor ‘std::_Rb_tree_node<_Val>::_Rb_tree_node(_Args&& ...) [with _Args = {std::pair<std::basic_string<char, std::char_traits<char>, std::allocator<char> >, int>}; _Val = std::pair<const std::basic_string<char>, int>]’:
-TemplateAliasDeclarationTest.cpp:5:46: warning: Type declaration names should start with uppercase in dictionary [enabled by default]
-TemplateAliasDeclarationTest.cpp:4:11: warning: Template's parameters declaration names should end with lowercase in T [enabled by default]
+TemplateAliasDeclarationTest.cpp:5:46: warning: Type declaration should start with uppercase in dictionary [enabled by default]
+TemplateAliasDeclarationTest.cpp:4:11: warning: Template's parameters declaration should end with lowercase in T [enabled by default]
