@@ -46,34 +46,37 @@
     #include "plugin-version.h"
 #endif
 
-/**
- * Please, don't delete or rename. Assert that this plugin is a
- * GPL-compatible license. If this symbol does not exist, the
- * compiler will emit a fatal error.
- */
-int plugin_is_GPL_compatible;
-
 namespace NSNamingChecker
 {
 
-std::string pathFile;
-
-static struct plugin_info namingInfo =
+/**
+ * @brief PluginData allows encapsulate all the information required by the plugin
+ */
+struct PluginData
 {
+    std::string _pathFile;
+
+    /**
+     * @brief Represents the arguments of the plugin
+     */
+    enum PluginArguments
+    {
+        ConfigurationFile,
+        NumberOfArguments
+    };
+
+    static struct plugin_info _namingInfo;
+};
+
+plugin_info PluginData::_namingInfo =
+{   
     "0.1",                        // version
     "Naming Convention Plugin"    // help
 };
 
-/**
- * @brief Represents the arguments of the plugin
- */
-enum PluginArguments
-{
-    ConfigurationFile,
-    NumberOfArguments
-};
+static PluginData data;
 
-extern "C" void gate_callback_cpp_three(void*, void*)
+static void gate_callback_cpp_three(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
@@ -81,32 +84,40 @@ extern "C" void gate_callback_cpp_three(void*, void*)
     if (errorcount == 0 && sorrycount == 0)
     {
         NSGppGeneric::TraverserCppThree traverser;
-        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(pathFile.c_str()));
+        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
         const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
-        traverser.traverse(global_namespace, plugin->getVisitor());
+        traverser.traverse(global_namespace, plugin.get());
     }
     exit(EXIT_SUCCESS);
 }
 
-extern "C" void gate_callback_cpp_eleven(void*, void*)
+static void gate_callback_cpp_eleven(void*, void*)
 {
-
     // If there were errors during compilation,
     // let GCC handle the exit.
     //
     if (errorcount == 0 && sorrycount == 0)
     {
         NSGppGeneric::TraverserCppEleven traverser;
-        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(pathFile.c_str()));
+        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
         const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing with c++11 " << main_input_filename << std::endl;
-        traverser.traverse(global_namespace, plugin->getVisitor());
+        traverser.traverse(global_namespace, plugin.get());
     }
     exit(EXIT_SUCCESS);
 }
+
+} //end namespace
+
+/**
+ * Please, don't delete or rename. Assert that this plugin is a
+ * GPL-compatible license. If this symbol does not exist, the
+ * compiler will emit a fatal error.
+ */
+int plugin_is_GPL_compatible;
 
 /**
  * @brief This fucion is called right after the plugin is loaded.
@@ -119,6 +130,8 @@ extern "C" void gate_callback_cpp_eleven(void*, void*)
  */
 extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 {
+    using namespace NSNamingChecker;
+
     size_t ret = EXIT_SUCCESS;
     std::cout << "starting " << info->base_name << std::endl;
 
@@ -128,13 +141,11 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     if (!plugin_default_version_check(version, &gcc_version))
         ret = EXIT_FAILURE;
 
-    if ((info->argc == 1) && (strcmp(info->argv[ConfigurationFile].key, "path")) == 0)
-        pathFile = info->argv[ConfigurationFile].value;
+    if ((info->argc == 1) && (strcmp(info->argv[PluginData::ConfigurationFile].key, "path")) == 0)
+        data._pathFile = info->argv[PluginData::ConfigurationFile].value;
 
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
-    register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
+    register_callback(info->base_name, PLUGIN_INFO, NULL, &data._namingInfo);
 
     return ret;
 }
-
-} //end namespace

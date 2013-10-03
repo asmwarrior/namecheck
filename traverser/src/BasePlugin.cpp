@@ -38,11 +38,6 @@
 namespace NSGppGeneric
 {
 
-IGenericVisitor* BasePlugin::getVisitor()
-{
-    return this;
-}
-
 void BasePlugin::initialize(NSCompilerApi::IPluginApi* api)
 {
     _api = api;
