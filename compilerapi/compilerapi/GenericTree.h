@@ -39,10 +39,16 @@
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
 	extern "C"
 	{
+		#include "config.h"		
+		#undef HAVE_DECL_GETOPT		
+		#define HAVE_DECL_GETOPT 1
 		#include "gcc-plugin.h"
 		#include "tree.h"
 	}
 #else	
+	#include "config.h"		
+	#undef HAVE_DECL_GETOPT		
+	#define HAVE_DECL_GETOPT 1
 	#include "gcc-plugin.h"
 	#include "tree.h"
 #endif
