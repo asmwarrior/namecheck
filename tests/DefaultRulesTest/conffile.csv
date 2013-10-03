@@ -14,6 +14,8 @@ ProtectedMethodDeclaration,2
 PublicAttributeDeclaration,4
 PrivateAttributeDeclaration,4
 ProtectedAttributeDeclaration,4
-NamespaceDeclaration,1
+NamespaceDeclaration,0,^NS\u\l.*?,names should start with NS following by a uppercase and lowercase
+NamespaceDeclaration,0,^NS\u\l[\l\u]*?$,names should not be written using underscore or digit
+NamespaceDeclaration,0,.*?\l+$,names should end with lowercase
 GlobalConstDeclaration,3
 TemplateTypeParameterDeclaration,1
