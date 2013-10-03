@@ -1,6 +1,6 @@
 const int CORRECT_GLOBAL(1);
 const int Incorrect_global(1);
-namespace Prueba
+namespace NSPrueba
 {
 	const int incorrectns(1);
 	const int CORRECT_NS(2);
