@@ -30,10 +30,11 @@
  */
 
 #include <libintl.h>
+#include <memory>
+#include <iostream>
 #include "namecheck/NamingConventionPlugin.h"
-#include "api/GCCPluginAPI.h"
-#include <traverser/TraverserCppThree.h>
-#include <traverser/TraverserCppEleven.h>
+#include "compilerapi/GCCPluginAPI.h"
+#include "traverser/GenericTraverser.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
@@ -46,36 +47,38 @@
     #include "plugin-version.h"
 #endif
 
-#include <memory>
-#include <iostream>
-
-int plugin_is_GPL_compatible; //don't rename
+namespace NSNamingChecker
+{
 
 /**
- * @brief To load the configuration file name
+ * @brief PluginData allows encapsulate all the information required by the plugin
  */
-std::string pathFile;
-
-static struct plugin_info namingInfo =
+struct PluginData
 {
+    /**
+     * @brief To load a configuration file name
+     */
+    std::string _pathFile;
+
+    /**
+     * @brief Represents the arguments of the plugin
+     */
+    enum PluginArguments
+    {
+        ConfigurationFile,
+        NumberOfArguments
+    };
+
+    static struct plugin_info _namingInfo;
+};
+
+plugin_info PluginData::_namingInfo =
+{   
     "0.1",                        // version
     "Naming Convention Plugin"    // help
 };
 
-/**
- * @brief Represents the arguments of the plugin
- */
-enum PluginArguments
-{
-    ConfigurationFile,
-    NumberOfArguments
-};
-
-// Then the English text is extracted from the source program and converted to a 
-// Portable Object Template for use by translators who create Machine Object message 
-// catalog files for use by the run-time program using utilities programs: xgettext, 
-// msginit and msgfmt. Finally, the Linux shell command for identifying the run-time 
-// language as Spanish is shown when the program is invoked.
+static PluginData data;
 
 /**     
  * @brief Set data for gettext. For more infomation, see Linux man page     
@@ -91,61 +94,73 @@ extern "C" void gate_callback_cpp_three(void*, void*)
 {
     // If there were errors during compilation,
     // let GCC handle the exit.
-    //    
-    if ((errorcount == 0) && (sorrycount == 0))
+    //
+    if (errorcount == 0 && sorrycount == 0)
     {
-        GPPGeneric::TraverserCppThree traverser;
-        const std::auto_ptr<GPPGeneric::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
-        const std::auto_ptr<Api::PluginApi> api(new Api::GCCPluginApi());
+        NSGppGeneric::TraverserCppThree traverser;
+        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
+        const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
-        traverser.traverse(global_namespace, plugin->getVisitor());
+        traverser.traverse(global_namespace, plugin.get());
     }
     exit(EXIT_SUCCESS);
 }
 
-extern "C" void gate_callback_cpp_eleven(void*, void*)
+static void gate_callback_cpp_eleven(void*, void*)
 {
-
     // If there were errors during compilation,
     // let GCC handle the exit.
-    //        
-    if ((errorcount == 0) && (sorrycount == 0))
+    //
+    if (errorcount == 0 && sorrycount == 0)
     {
-        GPPGeneric::TraverserCppEleven traverser;
-        const std::auto_ptr<GPPGeneric::BasePlugin> plugin(new NamingChecker::NamingConventionPlugin(pathFile.c_str()));
-        const std::auto_ptr<Api::PluginApi> api(new Api::GCCPluginApi());
+        NSGppGeneric::TraverserCppEleven traverser;
+        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
+        const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
         plugin->initialize(api.get());
         std::clog << "processing with c++11 " << main_input_filename << std::endl;
-        traverser.traverse(global_namespace, plugin->getVisitor());
+        traverser.traverse(global_namespace, plugin.get());
     }
     exit(EXIT_SUCCESS);
 }
 
-static const size_t EXPECTED = 0;
+} //end namespace
 
+/**
+ * Please, don't delete or rename. Assert that this plugin is a
+ * GPL-compatible license. If this symbol does not exist, the
+ * compiler will emit a fatal error.
+ */
+int plugin_is_GPL_compatible;
+
+/**
+ * @brief This fucion is called right after the plugin is loaded.
+ *
+ * Is responsible for registering all the callbacks required by the
+ * plugin and do any other required initialization.
+ *
+ * @param info plugin invocation information
+ * @param version GCC version
+ */
 extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 {
-    std::cerr << "starting " << info->base_name << std::endl;
+    using namespace NSNamingChecker;
+
+    size_t ret = EXIT_SUCCESS;
+    std::cout << "starting " << info->base_name << std::endl;
 
     // Disable assembly output.
     asm_file_name = HOST_BIT_BUCKET;
 
     if (!plugin_default_version_check(version, &gcc_version))
-        return EXIT_FAILURE;
+        ret = EXIT_FAILURE;
 
-    if ((info->argc == 1) && (strcmp(info->argv[ConfigurationFile].key, "path")) == EXPECTED)
-        pathFile = info->argv[ConfigurationFile].value;
-
-    //implement this when trying to execute the plugin with c++0x or c++03
-    // if(info->argc == 1 && (strcmp(info->argv->key,"c++0x") || strcmp(info->argv->key, "c++11")))
-    //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_eleven, 0);
-    // else
-    //     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
+    if ((info->argc == 1) && (strcmp(info->argv[PluginData::ConfigurationFile].key, "path")) == 0)
+        data._pathFile = info->argv[PluginData::ConfigurationFile].value;
 
     initGettext();
     register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
-    register_callback(info->base_name, PLUGIN_INFO, NULL, &namingInfo);
+    register_callback(info->base_name, PLUGIN_INFO, NULL, &data._namingInfo);
 
-    return EXIT_SUCCESS;
+    return ret;
 }

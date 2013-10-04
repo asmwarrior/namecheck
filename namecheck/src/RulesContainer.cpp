@@ -42,8 +42,10 @@
 
 using mili::operator>>;
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
+
+const std::string RulesContainer::REGEX = "0";
 
 RulesContainer::RulesContainer() : _rules(CheckCount)
 {
@@ -76,7 +78,7 @@ RulesContainer::~RulesContainer()
     }
 }
 
-void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& declarationName, Rule::Result& result) const
+void RulesContainer::check(const DeclarationToCheck& decl, const IRule::DeclName& declarationName, IRule::Result& result) const
 {
     if (!_rules[decl].empty())
     {
@@ -90,69 +92,50 @@ void RulesContainer::check(const DeclarationToCheck& decl, const DeclName& decla
     }
 }
 
-static const size_t REGEX_SIZE = 4;
-static const size_t DEFAULT_SIZE = 2;
-static const size_t DECLARATION_NAME = 0;
-static const size_t RULE_TYPE = 1;
-static const size_t SPECIFIC_REGEX = 2;
-static const size_t ERROR_MESSAGE = 3;
-static const std::string REGEX = "0";
-
 void RulesContainer::checkLine(const StringVector& line)
 {
     if (line[RULE_TYPE] == REGEX)
         mili::assert_throw<InvalidFormatFile>(line.size() == REGEX_SIZE);
     else
         mili::assert_throw<InvalidFormatFile>(line.size() == DEFAULT_SIZE);
-    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());   
+    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[DECLARATION_NAME]) != _declarationMap.end());
 }
 
-Rule* RulesContainer::rulesFactory(const RuleType& rule, const StringVector& fileLine)
+IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& fileLine)
 {
-    Rule* ret;
+    IRule* ret;
     switch (rule)
     {
-        case SpecificRegex:
-        {
-            ret = new Regex(fileLine[SPECIFIC_REGEX], fileLine[ERROR_MESSAGE]);            
+        case SpecificRegex:        
+            ret = new Regex(IRule::RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);
             break;
-        }
         case UpCamelCaseRule:
-        {
             ret = new UpperCamelCaseRule();
             break;
-        }
         case LowCamelCaseRule:
-        {
             ret = new LowerCamelCaseRule();
             break;
-        }
         case UpUnderscoreRule:
-        {
-            ret = new UpperUnderscoreRule();            
+            ret = new UpperUnderscoreRule();
             break;
-        }
         case LowUnderscoreRule:
-        {
             ret = new LowerUnderscoreRule();
             break;
-        }
         case ReservNameRule:
-        {
             ret = new ReservedNameRule();
             break;
-        }
-        default :
-            throw InvalidRuleType();
+        default:
+            throw InvalidRuleType("The rule invalid is: " + rule);
     }
     return ret;
 }
 
 void RulesContainer::process(const StringVector& fileLine)
-{    
-    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);    
+{
+    const size_t ruleType = mili::from_string<size_t>(fileLine[RULE_TYPE]);
     const RuleType specificRule = RuleType(ruleType);
-    Rule* const rule = rulesFactory(specificRule, fileLine);
+
+    IRule* const rule = createNewRule(specificRule, fileLine);
     _rules[_declarationMap[fileLine[DECLARATION_NAME]]].push_back(rule);
 }
 

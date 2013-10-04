@@ -36,9 +36,9 @@
 #define GPP_BASE_PLUGIN_H
 
 #include "GenericVisitor.h"
-#include "api/PluginAPI.h"
+#include "compilerapi/PluginAPI.h"
 
-namespace GPPGeneric
+namespace NSGppGeneric
 {
 
 /**
@@ -47,7 +47,7 @@ namespace GPPGeneric
  * This class add to the vistor's interface the initialization method, the _plugin attribute and a method to get
  * the visitor.
  */
-class BasePlugin: private GenericVisitor
+class BasePlugin: public IGenericVisitor
 {
 public:
 
@@ -56,23 +56,15 @@ public:
      *
      * @param api this is the pointer to the pluginAPI that is going to be set.
      */
-    void initialize(Api::PluginApi* api);
-
-    /**
-     * @brief this gets the visitor.
-     *
-     * The visitor is this class. But it could change.
-     * @return The visitor (in this case a pointer to this).
-     */
-    virtual GenericVisitor* getVisitor();
+    virtual void initialize(NSCompilerApi::IPluginApi* api);
 
 protected:
-
+    
     /**
      * @brief This is the api for the warnings and error messages.
      *
      */
-    Api::PluginApi* _api;
+    NSCompilerApi::IPluginApi* _api;
 
 };
 

@@ -34,7 +34,7 @@
 
 #include "RegexCollection.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**

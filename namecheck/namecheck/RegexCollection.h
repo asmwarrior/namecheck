@@ -35,7 +35,7 @@
 #include <libintl.h>
 #include "Rule.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**
@@ -43,12 +43,8 @@ namespace NamingChecker
  *
  * This class represents a default rules
  */
-class RegexCollection : public Rule
+class RegexCollection : public IRule
 {
-private:
-
-    virtual void checkRule(const std::string& declarationName, Result& result) const;
-
 protected:
 
     /**
@@ -59,10 +55,14 @@ protected:
     RegexCollection(const size_t length);
 
     typedef std::vector<RegexType> Regexs;
-    typedef std::vector<Message> ErrorMsgs;
+    typedef std::vector<NSCompilerApi::IPluginApi::Message> ErrorMsgs;
 
     Regexs _regexs;
     ErrorMsgs _errmsgs;
+
+private:
+
+    virtual void checkRule(const DeclName& declarationName, Result& result) const;
 };
 
 } //end namespace

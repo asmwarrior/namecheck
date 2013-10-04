@@ -1,6 +1,6 @@
-/*
- * @file     GCCPluginAPI.cpp
- * @brief    This is the implementation of GCCPluginAPI interface.
+/**
+ * @file     GCCPluginAPI.h
+ * @brief    Provides the API for communication from the plugin to gcc.
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -8,12 +8,12 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Source file for api providing GCCPluginAPI implementation.
+ * Contents: Header file for api providing GCCPluginAPI interface.
  *
- * System:   api
- * Language: C++
+ * System:    api
+ * Language:  C++
  *
- * @date September 06, 2013
+ * @date      September 06, 2013
  *
  * This file is part of api.
  *
@@ -32,29 +32,26 @@
  *
  */
 
-#include <iostream>
-#include "api/GCCPluginAPI.h"
+#ifndef GCC_PLUGIN_API_H
+#define GCC_PLUGIN_API_H
 
-#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
-	extern "C"
-	{
-		#include "diagnostic-core.h"
-	}
-#else
-	#include "diagnostic-core.h"
-#endif
+#include "PluginAPI.h"
 
-namespace Api
+namespace NSCompilerApi
 {
 
-void GCCPluginApi::warning(const GenericTree& decl, const Message& message) const
+/**
+ * @brief The API for communication from the plugin to gcc.
+ *
+ */
+class GCCPluginApi: public IPluginApi
 {
-    warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
-}
-
-void GCCPluginApi::error(const GenericTree& decl, const Message& message) const
-{
-    error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
-}
+    
+    virtual void warning(const GenericTree& decl, const Message& message) const;
+    
+    virtual void error(const GenericTree& decl, const Message& message) const;
+};
 
 } // end namespace
+
+#endif
