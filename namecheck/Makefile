@@ -3,14 +3,20 @@ ifneq (,)
 endif
 
 # Output messages
-COMPILING_API="************ Compiling api ******************************"
+COMPILING_API="************ Compiling compilerapi **********************"
 COMPILING_TRAVERSER="************ Compiling traverser ************************"
 COMPILING_NAMECHECK="************ Compiling namecheck ************************"
 COMPILATION_FINISHED="************ Compilation finished successfully **********"
 
 # Compiling
 GXX=/usr/bin/g++
-GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
+
+ifeq "$(GCCVERSION)" "4.6.3"
+    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+else
+    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.7/plugin
+endif
 
 PLUGIN_SOURCE_FILES= src/LowerCamelCaseRule.cpp src/LowerUnderscoreRule.cpp src/Namecheck.cpp \
 					 src/NamingConventionPlugin.cpp src/RegexCollection.cpp src/Regex.cpp src/ReservedNameRule.cpp \
@@ -25,13 +31,13 @@ INCPATH= -I./ \
 		 -I$(GXXPLUGINS_DIR)/include/ \
          -I./mili/ \
 		 -I../traverser/ \
-		 -I../api/
+		 -I../compilerapi/
 
 LD_LIBRARY_PATH= -L. \
 			     -L../traverser \
 				 -Wl,-rpath=$(shell pwd)/../traverser \
-			     -L../api \
-				 -Wl,-rpath=$(shell pwd)/../api
+			     -L../compilerapi \
+				 -Wl,-rpath=$(shell pwd)/../compilerapi
 
 LDFLAGS= -lboost_regex \
 		 -ltraverser \
@@ -43,7 +49,7 @@ compile: api traverser libnamecheck.so finish
 
 api:
 	@echo $(COMPILING_API)
-	$(MAKE) -C ../api
+	$(MAKE) -C ../compilerapi
 
 traverser:
 	clear
@@ -75,6 +81,6 @@ clean:
 	rm -f libnamecheck.so
 	rm -f ../traverser/src/*.o
 	rm -f ../traverser/libtraverser.so
-	rm -f ../api/src/*.o
-	rm -f ../api/libapi.so
+	rm -f ../compilerapi/src/*.o
+	rm -f ../compilerapi/libapi.so
 	clear

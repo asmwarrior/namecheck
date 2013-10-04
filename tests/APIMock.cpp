@@ -11,14 +11,14 @@
 #include "namecheck/LowerUnderscoreRule.h"
 #include "namecheck/RulesContainer.h"
 #include "namecheck/Regex.h"
-#include "api/PluginAPI.h"
+#include "compilerapi/PluginAPI.h"
 
 using ::testing::_;
-using namespace GPPGeneric;
-using namespace NamingChecker;
-using namespace Api;
+using namespace NSGppGeneric;
+using namespace NSNamingChecker;
+using namespace NSCompilerApi;
 
-class APIMock : public PluginApi
+class APIMock : public IPluginApi
 {
 public:
     MOCK_CONST_METHOD2(warning, void(const GenericTree& decl, const Message& message));
@@ -92,7 +92,7 @@ TEST(PluginAPITests, AttributeNameTest)
     GenericTree decl = NULL;
     const bool isConst = false;
     const std::string typeName = "std::string";
-    const AccessModifier access = AccessPublic;
+    const IGenericVisitor::AccessModifier access = IGenericVisitor::AccessPublic;
     plugin.initialize(&api);
     EXPECT_CALL(api, warning(_,_))
     .Times(7);
@@ -202,8 +202,8 @@ TEST(PluginAPITests, OtherTest)
 
 TEST(RulesTest, UpperCamelCase)
 {
-    NamingChecker::UpperCamelCaseRule upperCamelCase;
-    NamingChecker::Rule::Result res;
+    NSNamingChecker::UpperCamelCaseRule upperCamelCase;
+    NSNamingChecker::IRule::Result res;
     upperCamelCase.checkRule("MyClassExample", res);
     EXPECT_EQ(res._match, true);
     upperCamelCase.checkRule("myClass", res);
@@ -212,8 +212,8 @@ TEST(RulesTest, UpperCamelCase)
 
 TEST(RulesTest, LowerCamelCase)
 {
-    NamingChecker::LowerCamelCaseRule lowerCamelCase;
-    NamingChecker::Rule::Result res;
+    NSNamingChecker::LowerCamelCaseRule lowerCamelCase;
+    NSNamingChecker::IRule::Result res;
     lowerCamelCase.checkRule("pushInside", res);
     EXPECT_EQ(res._match, true);
     lowerCamelCase.checkRule("push_inside", res);
@@ -222,8 +222,8 @@ TEST(RulesTest, LowerCamelCase)
 
 TEST(RulesTest, UpperUnderscore)
 {
-    NamingChecker::UpperUnderscoreRule upperUnderscore;
-    NamingChecker::Rule::Result res;
+    NSNamingChecker::UpperUnderscoreRule upperUnderscore;
+    NSNamingChecker::IRule::Result res;
     upperUnderscore.checkRule("THIS_IS_MY_CONST", res);
     EXPECT_EQ(res._match, true);
     upperUnderscore.checkRule("this_is_my_const", res);
@@ -232,8 +232,8 @@ TEST(RulesTest, UpperUnderscore)
 
 TEST(RulesTest, LowerUnderscore)
 {
-    NamingChecker::LowerUnderscoreRule lowerUnderscore;
-    NamingChecker::Rule::Result res;
+    NSNamingChecker::LowerUnderscoreRule lowerUnderscore;
+    NSNamingChecker::IRule::Result res;
     lowerUnderscore.checkRule("_regex", res);
     EXPECT_EQ(res._match, true);
     lowerUnderscore.checkRule("specificRegex", res);
@@ -242,8 +242,8 @@ TEST(RulesTest, LowerUnderscore)
 
 TEST(RulesTest, Regex)
 {
-    NamingChecker::Regex regex("^\\u.*?", "errmsg");
-    NamingChecker::Rule::Result res;
+    NSNamingChecker::Regex regex(IRule::RegexType("^\\u.*?"), "errmsg");
+    NSNamingChecker::IRule::Result res;
     regex.checkRule("regex", res);
     EXPECT_EQ(res._match, false);
     EXPECT_EQ(res._message, "errmsg");
@@ -253,7 +253,7 @@ TEST(RulesTest, Regex)
 
 TEST(ConfigurationTest, invalidPathFile)
 {
-    NamingChecker::RulesContainer rulesContainer;
+    NSNamingChecker::RulesContainer rulesContainer;
     const std::string invalifPathFile = "../../configurate.csv";
     EXPECT_THROW(rulesContainer.load(invalifPathFile.c_str()), FileNotFound);  
 }
@@ -264,7 +264,7 @@ TEST(ConfigurationTest, invalidFormatFile)
     std::ofstream file(confFile.c_str());
     file << "This is a error file \n";    
     file.close();
-    NamingChecker::RulesContainer rulesContainer;
+    NSNamingChecker::RulesContainer rulesContainer;
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
     unlink(confFile.c_str());
 }
@@ -276,7 +276,7 @@ TEST(ConfigurationTest, notDefinedRegex)
     file << "ClassDeclaration,1\n";    
     file << "StructDeclaration,0\n";    
     file.close();
-    NamingChecker::RulesContainer rulesContainer;
+    NSNamingChecker::RulesContainer rulesContainer;
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
     unlink(confFile.c_str());
 }
@@ -288,7 +288,7 @@ TEST(ConfigurationTest, notDefinedErrorMessage)
     file << "ClassDeclaration,1\n";    
     file << "StructDeclaration,0,^\\u.*\n";    
     file.close();
-    NamingChecker::RulesContainer rulesContainer;
+    NSNamingChecker::RulesContainer rulesContainer;
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidFormatFile);
     unlink(confFile.c_str());
 }
@@ -299,7 +299,7 @@ TEST(ConfigurationTest, InvalidDeclaration)
     std::ofstream file(confFile.c_str());
     file << "class declaration,1\n";        
     file.close();
-    NamingChecker::RulesContainer rulesContainer; 
+    NSNamingChecker::RulesContainer rulesContainer; 
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidDeclaration);
     unlink(confFile.c_str());
 }
@@ -310,7 +310,7 @@ TEST(ConfigurationTest, InvalidRuleType)
     std::ofstream file(confFile.c_str());
     file << "ClassDeclaration,6\n";        
     file.close();
-    NamingChecker::RulesContainer rulesContainer;
+    NSNamingChecker::RulesContainer rulesContainer;
     EXPECT_THROW(rulesContainer.load(confFile.c_str()), InvalidRuleType);
     unlink(confFile.c_str());
 }

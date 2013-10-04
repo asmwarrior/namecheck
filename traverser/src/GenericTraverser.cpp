@@ -10,7 +10,7 @@
  *
  * Contents: Source file for traverser providing GenericTraverser implementation.
  *
- * System:   traverser 
+ * System:   traverser
  * Language: C++
  *
  * @date September 06, 2013
@@ -34,59 +34,51 @@
 
 #include <cassert>
 #include <iostream>
-#include "api/GenericTree.h"
+#include "compilerapi/GenericTree.h"
 #include "traverser/GenericTraverser.h"
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
-    {
-        #include "tree-iterator.h"
+    {        
         #include "cp/cp-tree.h"
-        #include "c-family/c-common.h"
-        #include "c-family/c-pragma.h"
-        #include "diagnostic-core.h"
     }
 #else
-    #include "tree-iterator.h"
     #include "cp/cp-tree.h"
-    #include "c-family/c-common.h"
-    #include "c-family/c-pragma.h"
-    #include "diagnostic-core.h"
 #endif
 
-namespace GPPGeneric
+namespace NSGppGeneric
 {
 
-inline bool GenericTraverser::isReservedDeclaration(const Api::GenericTree decl)
+inline bool GenericTraverser::isReservedDeclaration(const NSCompilerApi::GenericTree decl)
 {
     std::string name;
     getName(decl, name);
     return (name.substr(0, 2) == "._");
 }
 
-inline AccessModifier GenericTraverser::getAccess(const Api::GenericTree decl)
+inline IGenericVisitor::AccessModifier GenericTraverser::getAccess(const NSCompilerApi::GenericTree decl)
 {
-    AccessModifier ret;
+    IGenericVisitor::AccessModifier ret;
     if (TREE_PRIVATE(decl))
-        ret = AccessPrivate;
+        ret = IGenericVisitor::AccessPrivate;
     else if (TREE_PROTECTED(decl))
-        ret = AccessProtected;
+        ret = IGenericVisitor::AccessProtected;
     else
-        ret = AccessPublic;
+        ret = IGenericVisitor::AccessPublic;
     return ret;
 }
 
-inline bool GenericTraverser::isConstant(const Api::GenericTree decl)
+inline bool GenericTraverser::isConstant(const NSCompilerApi::GenericTree decl)
 {
     return CP_TYPE_CONST_P(TREE_TYPE(decl));
 }
 
-inline void GenericTraverser::getName(const Api::GenericTree decl, std::string& name)
+inline void GenericTraverser::getName(const NSCompilerApi::GenericTree decl, std::string& name)
 {
-    const Api::GenericTree id(DECL_NAME(decl));
+    const NSCompilerApi::GenericTree id(DECL_NAME(decl));
     name = id ? IDENTIFIER_POINTER(id) : "<unnamed>";
 }
 
-inline void GenericTraverser::checkArrayTypeName(Api::GenericTree decl, std::string& typeName)
+inline void GenericTraverser::checkArrayTypeName(NSCompilerApi::GenericTree decl, std::string& typeName)
 {
     while (TREE_CODE(TREE_TYPE(decl)) == ARRAY_TYPE)
     {
@@ -95,7 +87,7 @@ inline void GenericTraverser::checkArrayTypeName(Api::GenericTree decl, std::str
     }
 }
 
-inline void GenericTraverser::checkReferenceTypeName(Api::GenericTree decl, std::string& typeName)
+inline void GenericTraverser::checkReferenceTypeName(NSCompilerApi::GenericTree decl, std::string& typeName)
 {
     while (TREE_CODE(TREE_TYPE(decl)) == REFERENCE_TYPE)
     {
@@ -104,7 +96,7 @@ inline void GenericTraverser::checkReferenceTypeName(Api::GenericTree decl, std:
     }
 }
 
-inline void GenericTraverser::checkPointerTypeName(Api::GenericTree decl, std::string& typeName)
+inline void GenericTraverser::checkPointerTypeName(NSCompilerApi::GenericTree decl, std::string& typeName)
 {
     while (TREE_CODE(TREE_TYPE(decl)) == POINTER_TYPE)
     {
@@ -113,10 +105,10 @@ inline void GenericTraverser::checkPointerTypeName(Api::GenericTree decl, std::s
     }
 }
 
-inline void GenericTraverser::getTypeName(const Api::GenericTree decl, std::string& returnName)
+inline void GenericTraverser::getTypeName(const NSCompilerApi::GenericTree decl, std::string& returnName)
 {
     std::string typeName;
-    Api::GenericTree aux(decl);
+    NSCompilerApi::GenericTree aux(decl);
 
     checkArrayTypeName(aux, typeName);
     checkReferenceTypeName(aux, typeName);
@@ -133,7 +125,7 @@ inline void GenericTraverser::getTypeName(const Api::GenericTree decl, std::stri
     returnName += typeName;
 }
 
-inline void GenericTraverser::processVariableDeclaration(const Api::GenericTree decl) const
+inline void GenericTraverser::processVariableDeclaration(const NSCompilerApi::GenericTree decl) const
 {
     std::string name;
     std::string typeName;
@@ -162,11 +154,11 @@ inline void GenericTraverser::processVariableDeclaration(const Api::GenericTree 
     }
 }
 
-inline void GenericTraverser::processTemplateDeclaration(const Api::GenericTree decl) const
+inline void GenericTraverser::processTemplateDeclaration(const NSCompilerApi::GenericTree decl) const
 {
     processDeclaration(DECL_TEMPLATE_RESULT(decl));
 
-    Api::GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
+    NSCompilerApi::GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
     for (int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
     {
         processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
@@ -174,9 +166,9 @@ inline void GenericTraverser::processTemplateDeclaration(const Api::GenericTree 
 
 }
 
-inline void GenericTraverser::processMethods(const Api::GenericTree type) const
+inline void GenericTraverser::processMethods(const NSCompilerApi::GenericTree type) const
 {
-    for (Api::GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
+    for (NSCompilerApi::GenericTree d(TYPE_METHODS(type)); d != 0; d = TREE_CHAIN(d))
     {
         if (!DECL_ARTIFICIAL(d))
         {
@@ -185,9 +177,9 @@ inline void GenericTraverser::processMethods(const Api::GenericTree type) const
     }
 }
 
-inline void GenericTraverser::processAttributes(const Api::GenericTree type) const
+inline void GenericTraverser::processAttributes(const NSCompilerApi::GenericTree type) const
 {
-    for (Api::GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
+    for (NSCompilerApi::GenericTree d(TYPE_FIELDS(type)); d != 0; d = TREE_CHAIN(d))
     {
         /*one of the nodes in TYPE_FIELDS is the self reference*/
         if (!DECL_SELF_REFERENCE_P(d))
@@ -195,7 +187,7 @@ inline void GenericTraverser::processAttributes(const Api::GenericTree type) con
     }
 }
 
-inline void GenericTraverser::processRecordDeclaration(const Api::GenericTree decl) const
+inline void GenericTraverser::processRecordDeclaration(const NSCompilerApi::GenericTree decl) const
 {
     std::string name;
     getName(decl, name);
@@ -205,7 +197,7 @@ inline void GenericTraverser::processRecordDeclaration(const Api::GenericTree de
         _visitor->visitStructDeclaration(decl, name);
 }
 
-inline void GenericTraverser::unionOrRecord(const Api::GenericTree decl, const Api::GenericTree type, std::string& name) const
+inline void GenericTraverser::unionOrRecord(const NSCompilerApi::GenericTree decl, const NSCompilerApi::GenericTree type, std::string& name) const
 {
     if (TREE_CODE(type) == RECORD_TYPE)
     {
@@ -215,11 +207,11 @@ inline void GenericTraverser::unionOrRecord(const Api::GenericTree decl, const A
         _visitor->visitUnionDeclaration(decl, name);
 }
 
-inline void GenericTraverser::processTypeDeclArtificial(const Api::GenericTree decl) const
+inline void GenericTraverser::processTypeDeclArtificial(const NSCompilerApi::GenericTree decl) const
 {
     assert((TREE_CODE(decl) == TYPE_DECL) && DECL_ARTIFICIAL(decl));
 
-    Api::GenericTree type(TREE_TYPE(decl));
+    NSCompilerApi::GenericTree type(TREE_TYPE(decl));
     std::string name;
     getName(decl, name);
 
@@ -238,17 +230,17 @@ inline void GenericTraverser::processTypeDeclArtificial(const Api::GenericTree d
     }
 }
 
-inline void GenericTraverser::processEnumValues(const Api::GenericTree decl) const
+inline void GenericTraverser::processEnumValues(const NSCompilerApi::GenericTree decl) const
 {
     std::string name;
-    for (Api::GenericTree d(TYPE_VALUES(TREE_TYPE(decl))); d != 0; d = TREE_CHAIN(d))
+    for (NSCompilerApi::GenericTree d(TYPE_VALUES(TREE_TYPE(decl))); d != 0; d = TREE_CHAIN(d))
     {
         getName(TREE_VALUE(d), name);
         _visitor->visitEnumValueDeclaration(TREE_VALUE(d), name);
     }
 }
 
-inline void GenericTraverser::processEnumType(const Api::GenericTree decl) const
+inline void GenericTraverser::processEnumType(const NSCompilerApi::GenericTree decl) const
 {
     std::string name;
     getName(decl, name);
@@ -259,7 +251,7 @@ inline void GenericTraverser::processEnumType(const Api::GenericTree decl) const
     processEnumValues(decl);
 }
 
-inline void GenericTraverser::processType(const Api::GenericTree decl) const
+inline void GenericTraverser::processType(const NSCompilerApi::GenericTree decl) const
 {
     assert(TREE_CODE(decl) == TYPE_DECL);
     std::string name;
@@ -277,27 +269,27 @@ inline void GenericTraverser::processType(const Api::GenericTree decl) const
     }
 }
 
-inline void GenericTraverser::processSubblocks(const Api::GenericTree block) const
+inline void GenericTraverser::processSubblocks(const NSCompilerApi::GenericTree block) const
 {
-    Api::GenericTree subblocks(BLOCK_SUBBLOCKS(block));
+    NSCompilerApi::GenericTree subblocks(BLOCK_SUBBLOCKS(block));
     if (subblocks != NULL_TREE)
     {
         processBlock(subblocks);
     }
 }
 
-inline void GenericTraverser::processBlockVariables(const Api::GenericTree block) const
+inline void GenericTraverser::processBlockVariables(const NSCompilerApi::GenericTree block) const
 {
-    for (Api::GenericTree d(BLOCK_VARS(block)); d != 0; d = TREE_CHAIN(d))
+    for (NSCompilerApi::GenericTree d(BLOCK_VARS(block)); d != 0; d = TREE_CHAIN(d))
     {
         processDeclaration(d);
     }
 }
 
-inline void GenericTraverser::processBlock(const Api::GenericTree decl) const
+inline void GenericTraverser::processBlock(const NSCompilerApi::GenericTree decl) const
 {
     assert(TREE_CODE(decl) == BLOCK);
-    for (Api::GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
+    for (NSCompilerApi::GenericTree block(decl); block != 0; block = BLOCK_CHAIN(block))
     {
         processBlockVariables(block);
 
@@ -305,7 +297,7 @@ inline void GenericTraverser::processBlock(const Api::GenericTree decl) const
     }
 }
 
-inline void GenericTraverser::functionOrMethod(const Api::GenericTree decl, std::string& name) const
+inline void GenericTraverser::functionOrMethod(const NSCompilerApi::GenericTree decl, std::string& name) const
 {
     if (TREE_CODE(TREE_TYPE(decl)) == METHOD_TYPE)
     {
@@ -323,18 +315,18 @@ inline void GenericTraverser::functionOrMethod(const Api::GenericTree decl, std:
 
 }
 
-inline void GenericTraverser::processFunctionBody(const Api::GenericTree decl) const
+inline void GenericTraverser::processFunctionBody(const NSCompilerApi::GenericTree decl) const
 {
-    const Api::GenericTree declInitial = DECL_INITIAL(decl);
+    const NSCompilerApi::GenericTree declInitial = DECL_INITIAL(decl);
     if (declInitial != NULL_TREE && TREE_CODE(declInitial) != ERROR_MARK)
         processBlock(declInitial);
 }
 
-inline void GenericTraverser::processParameters(const Api::GenericTree decl) const
+inline void GenericTraverser::processParameters(const NSCompilerApi::GenericTree decl) const
 {
     std::string name;
     getName(decl, name);
-    for (Api::GenericTree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
+    for (NSCompilerApi::GenericTree d(DECL_ARGUMENTS(decl)); d != 0; d = TREE_CHAIN(d))
     {
         getName(d, name);
         if (!DECL_SELF_REFERENCE_P(d)
@@ -347,7 +339,7 @@ inline void GenericTraverser::processParameters(const Api::GenericTree decl) con
     }
 }
 
-inline void GenericTraverser::processFunction(const Api::GenericTree decl) const
+inline void GenericTraverser::processFunction(const NSCompilerApi::GenericTree decl) const
 {
     assert(TREE_CODE(decl) == FUNCTION_DECL);
     std::string name;
@@ -360,7 +352,7 @@ inline void GenericTraverser::processFunction(const Api::GenericTree decl) const
     }
 }
 
-inline void GenericTraverser::processDeclaration(const Api::GenericTree decl) const
+inline void GenericTraverser::processDeclaration(const NSCompilerApi::GenericTree decl) const
 {
     if (!DECL_IS_BUILTIN(decl))
     {
@@ -389,19 +381,19 @@ inline void GenericTraverser::processDeclaration(const Api::GenericTree decl) co
     }
 }
 
-inline void GenericTraverser::traverseDeclarations(const Api::GenericTree ns) const
+inline void GenericTraverser::traverseDeclarations(const NSCompilerApi::GenericTree ns) const
 {
     const cp_binding_level* level(NAMESPACE_LEVEL(ns));
-    for (Api::GenericTree decl(level->names); decl != 0; decl = TREE_CHAIN(decl))
+    for (NSCompilerApi::GenericTree decl(level->names); decl != 0; decl = TREE_CHAIN(decl))
     {
         processDeclaration(decl);
     }
 }
 
-inline void GenericTraverser::traverseNamespaces(const Api::GenericTree ns) const
+inline void GenericTraverser::traverseNamespaces(const NSCompilerApi::GenericTree ns) const
 {
     const cp_binding_level* const level(NAMESPACE_LEVEL(ns));
-    for (Api::GenericTree decl = level->namespaces; decl != 0; decl = TREE_CHAIN(decl))
+    for (NSCompilerApi::GenericTree decl = level->namespaces; decl != 0; decl = TREE_CHAIN(decl))
     {
         std::string namespaceName;
         getName(decl, namespaceName);
@@ -413,7 +405,7 @@ inline void GenericTraverser::traverseNamespaces(const Api::GenericTree ns) cons
     }
 }
 
-void GenericTraverser::traverse(const Api::GenericTree ns) const
+void GenericTraverser::traverse(const NSCompilerApi::GenericTree ns) const
 {
     // Traverse declarations.
     traverseDeclarations(ns);
@@ -422,4 +414,4 @@ void GenericTraverser::traverse(const Api::GenericTree ns) const
     traverseNamespaces(ns);
 }
 
-} // end GPPGeneric
+} // end namespace

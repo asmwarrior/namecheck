@@ -3,11 +3,17 @@ ifneq (,)
 endif
 
 GXX=/usr/bin/g++
-GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
+
+ifeq "$(GCCVERSION)" "4.6.3"
+    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+else
+    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.7/plugin
+endif
 
 PLUGIN_SOURCE_FILES= src/GCCPluginAPI.cpp 
 
-PLUGIN_HEADERS= api/*.h \
+PLUGIN_HEADERS= compilerapi/*.h \
                 $(GXXPLUGINS_DIR)/include/*.h
 
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))

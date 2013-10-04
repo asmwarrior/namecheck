@@ -40,14 +40,15 @@
 #define GPP_NAMING_CONVENTION_PLUGIN_H
 
 #include <string>
+#include <mili/mili.h>
 #include "Rule.h"
 #include "RulesContainer.h"
 #include "traverser/BasePlugin.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
-class NamingConventionPlugin : public GPPGeneric::BasePlugin
+class NamingConventionPlugin : public NSGppGeneric::BasePlugin
 {
 public:
 
@@ -67,7 +68,7 @@ private:
      * @param decl is the tree of the string literal it is used for the warning message to print the location of the SL
      * @param name the name to check
      */
-    virtual void visitStringLiteral(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitStringLiteral(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks variable  name
@@ -76,7 +77,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitVariableDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
+    virtual void visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
 
     /**
      * @brief checks global constant name
@@ -85,7 +86,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitGlobalConstDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitGlobalConstDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks enum name
@@ -94,7 +95,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitEnumTypeDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks enum value name
@@ -103,7 +104,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitEnumValueDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitEnumValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks function name
@@ -112,7 +113,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitFunctionDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitFunctionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks parameter name
@@ -121,7 +122,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitParameterDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/);
+    virtual void visitParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/);
 
     /**
      * @brief checks typedef name
@@ -130,7 +131,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitTypeDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
     * @brief checks class name
@@ -139,7 +140,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitClassDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitClassDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks union name
@@ -148,7 +149,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitUnionDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitUnionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks union member name
@@ -157,7 +158,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitUnionValueDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
+    virtual void visitUnionValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
 
     /**
      * @brief checks struct name
@@ -166,7 +167,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitStructDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitStructDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks Variable Declarations
@@ -175,7 +176,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitMethodDeclaration(const Api::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/);
+    virtual void visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/);
 
     /**
      * @brief checks Variable Declarations
@@ -184,7 +185,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitAttributeDeclaration(const Api::GenericTree decl, const GPPGeneric::AccessModifier access, const GPPGeneric::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
+    virtual void visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
 
     /**
      * @brief checks Variable Declarations
@@ -193,7 +194,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitNamespaceDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief checks Template Type Parameter Declarations
@@ -202,7 +203,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param name the name to check
      */
-    virtual void visitTemplateTypeParameterDeclaration(const Api::GenericTree decl, const GPPGeneric::DeclarationName& name);
+    virtual void visitTemplateTypeParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
      * @brief calls the warning message maker of the plugin
@@ -210,7 +211,7 @@ private:
      * @param decl is the tree of the name it is used for the warning message to print the location of the name
      * @param message the message to print in the warning
      */
-    void setPluginWarning(const Api::GenericTree decl, const std::string& message);
+    void logPluginWarning(const NSCompilerApi::GenericTree decl, const std::string& message) const;
 
     /**
      * @brief Checker of naming conventions

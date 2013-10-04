@@ -13,18 +13,18 @@ namespace Mytest2
 	int variable = 1;
 }
 
-namespace MyTest
+namespace NSMyTest
 {
-	namespace Test1t
+	namespace NSTest1t
 	{
-		namespace Test2t
+		namespace NSTest2t
 		{
 			int i = 1;
 		};
 	};
 };
 
-namespace MyTest1t
+namespace NSMyTest1t
 {
 	namespace test2t
 	{
@@ -37,7 +37,7 @@ namespace TEST
 	bool free = true;
 };
 
-namespace MyTest2t
+namespace NSMyTest2t
 {
 	bool isFree = false;
 

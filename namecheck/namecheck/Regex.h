@@ -35,7 +35,7 @@
 
 #include "Rule.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**
@@ -43,7 +43,7 @@ namespace NamingChecker
  *
  * This class represents a regex which is a specific rule
  */
-class Regex : public Rule
+class Regex : public IRule
 {
 public:
 
@@ -51,14 +51,12 @@ public:
      * @brief Constructor of class
      *
      */
-    Regex(const std::string& reg, const std::string& msg);
+    Regex(const RegexType& regexType, const NSCompilerApi::IPluginApi::Message& msg);
 
 private:
 
-    virtual void checkRule(const std::string& declarationName, Result& result) const;
+    virtual void checkRule(const DeclName& declarationName, Result& result) const;
 
-    virtual ~Regex() {}
-    
     /**
      * @brief Represent a specific regex
      */
@@ -67,7 +65,7 @@ private:
     /**
      * @brief Represent a error message
      */
-    const Message _errmsg;
+    const NSCompilerApi::IPluginApi::Message _errmsg;
 };
 
 } //end namespace

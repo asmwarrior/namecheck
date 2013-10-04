@@ -34,12 +34,11 @@
 
 
 #include <vector>
-#include <list>
 #include <string>
 #include "Rule.h"
 #include "Exceptions.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
 /**
@@ -77,12 +76,15 @@ public:
         CheckCount
     };
 
+    /**
+     * @brief Match between string and declaration to check
+     */
     typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
 
     /**
-    * @brief Represents a configuration file
-    *
-    */
+     * @brief Represents a configuration file
+     *
+     */
     typedef std::string FileName;
     typedef std::vector<std::string> StringVector;
 
@@ -105,7 +107,7 @@ public:
      * @param declarationName name to check
      * @param result to fill with the result
      */
-    void check(const DeclarationToCheck& decl, const DeclName& declarationName, Rule::Result& result) const;
+    void check(const DeclarationToCheck& decl, const IRule::DeclName& declarationName, IRule::Result& result) const;
 
     /**
      * @brief This initializes the vector of rules corresponding to each declaration types.
@@ -132,10 +134,10 @@ private:
     /**
      * @brief Create a specific rule
      *
-     * @param rule corresponds a specific rule 
+     * @param rule corresponds a specific rule
      * @return specific rule
      */
-    Rule* rulesFactory(const RuleType& rule, const StringVector& fileLine);    
+    static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);
 
     /**
      * @brief This initializes process the vector corresponding to a line in the config file.
@@ -152,9 +154,19 @@ private:
     void checkLine(const StringVector& line);
 
     DeclarationMap _declarationMap;
-    typedef std::list<Rule*> Rules;
+    typedef std::list<IRule*> Rules;
     std::vector<Rules> _rules;
 
+    /**
+     * @brief To avoid magic numbers
+     */
+    static const size_t REGEX_SIZE = 4;
+    static const size_t DEFAULT_SIZE = 2;
+    static const size_t DECLARATION_NAME = 0;
+    static const size_t RULE_TYPE = 1;
+    static const size_t SPECIFIC_REGEX = 2;
+    static const size_t ERROR_MESSAGE = 3;
+    static const std::string REGEX;
 };
 
 } // end namespace

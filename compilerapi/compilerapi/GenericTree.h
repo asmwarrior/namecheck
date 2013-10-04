@@ -1,6 +1,6 @@
 /**
- * @file     GCCPluginAPI.h
- * @brief    Provides the API for communication from the plugin to gcc.
+ * @file     GenericTree.h
+ * @brief    This file contains all the definitions needed in api
  *
  * @author   Francisco Herrero
  * @email    francisco.herrero AT tallertechnologies.com
@@ -8,12 +8,12 @@
  * @author   Marcos Diaz
  * @email    marcos.diaz AT tallertechnologies.com
  *
- * Contents: Header file for api providing GCCPluginAPI interface.
+ * Contents: Header file for api providing GenericTree type.
  *
  * System:    api
  * Language:  C++
  *
- * @date      September 06, 2013
+ * @date      September 13, 2013
  *
  * This file is part of api.
  *
@@ -32,26 +32,37 @@
  *
  */
 
-#ifndef GCC_PLUGIN_API_H
-#define GCC_PLUGIN_API_H
+#ifndef GCC_GENERIC_TREE_H
+#define GCC_GENERIC_TREE_H
 
-#include "PluginAPI.h"
+#include <gmp.h>
+#if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
+	extern "C"
+	{
+		#include "config.h"		
+		#undef HAVE_DECL_GETOPT		
+		#define HAVE_DECL_GETOPT 1
+		#include "gcc-plugin.h"
+		#include "tree.h"
+	}
+#else	
+	#include "config.h"		
+	#undef HAVE_DECL_GETOPT		
+	#define HAVE_DECL_GETOPT 1
+	#include "gcc-plugin.h"
+	#include "tree.h"
+#endif
 
-namespace Api
+
+namespace NSCompilerApi
 {
 
 /**
- * @brief The API for communication from the plugin to gcc.
+ * @brief A tree node (is a pointer type).
  *
  */
-class GCCPluginApi: public PluginApi
-{
+typedef tree GenericTree;
 
-    virtual void warning(const GenericTree& decl, const Message& message) const;
-
-    virtual void error(const GenericTree& decl, const Message& message) const;
-};
-
-} // end namespace
+}
 
 #endif

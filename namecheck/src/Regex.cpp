@@ -33,13 +33,13 @@
 #include <iostream>
 #include "namecheck/Regex.h"
 
-namespace NamingChecker
+namespace NSNamingChecker
 {
 
-Regex::Regex(const std::string& reg, const std::string& msg): _regex(reg), _errmsg(msg)
+Regex::Regex(const RegexType& regexType, const NSCompilerApi::IPluginApi::Message& msg): _regex(regexType), _errmsg(msg)
 {}
 
-void Regex::checkRule(const std::string& declarationName, Result& result) const
+void Regex::checkRule(const DeclName& declarationName, Result& result) const
 {
     result._match = boost::regex_match(declarationName, _regex);
     if (!result._match)
