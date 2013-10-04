@@ -1,25 +1,25 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Spanish translations for namecheck package.
+# Copyright (C) 2013 THE namecheck'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the namecheck package.
+# Automatically generated, 2013.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: namecheck\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-03 21:14-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2013-10-03 21:14-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=ASCII\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: NamingConventionPlugin.cpp:100
 msgid "Enum type declaration "
-msgstr ""
+msgstr "Declaracion de tipo enumerado "
 
 #: NamingConventionPlugin.cpp:100 NamingConventionPlugin.cpp:111
 #: NamingConventionPlugin.cpp:122 NamingConventionPlugin.cpp:133
@@ -30,130 +30,130 @@ msgstr ""
 #: NamingConventionPlugin.cpp:254 NamingConventionPlugin.cpp:265
 #: NamingConventionPlugin.cpp:276
 msgid " in "
-msgstr ""
+msgstr " en "
 
 #: NamingConventionPlugin.cpp:111
 msgid "Enum value declaration "
-msgstr ""
+msgstr "Declaracion de valor de enumerado "
 
 #: NamingConventionPlugin.cpp:122
 msgid "Variable declaration "
-msgstr ""
+msgstr "Declaracion de variable "
 
 #: NamingConventionPlugin.cpp:133
 msgid "Global const declaration "
-msgstr ""
+msgstr "Declaracion de cont global "
 
 #: NamingConventionPlugin.cpp:144
 msgid "Function declaration "
-msgstr ""
+msgstr "Declaracion de funcion "
 
 #: NamingConventionPlugin.cpp:155
 msgid "Parameter declaration "
-msgstr ""
+msgstr "Declaracion de parametro "
 
 #: NamingConventionPlugin.cpp:166
 msgid "Type declaration "
-msgstr ""
+msgstr "Declaracion de tipo "
 
 #: NamingConventionPlugin.cpp:177
 msgid "Class declaration "
-msgstr ""
+msgstr "Declaracion de clase "
 
 #: NamingConventionPlugin.cpp:188
 msgid "Struct declaration "
-msgstr ""
+msgstr "Declaracion de estructura "
 
 #: NamingConventionPlugin.cpp:199
 msgid "Union declaration "
-msgstr ""
+msgstr "Declaracion de union "
 
 #: NamingConventionPlugin.cpp:210
 msgid "Union value declaration "
-msgstr ""
+msgstr "Declaracion de valor de union "
 
 #: NamingConventionPlugin.cpp:232
 msgid " Method declaration "
-msgstr ""
+msgstr "Declaracion de metodo "
 
 #: NamingConventionPlugin.cpp:254
 msgid " Attribute declaration "
-msgstr ""
+msgstr "Declaracion de atributo "
 
 #: NamingConventionPlugin.cpp:265
 msgid "Namespace declaration "
-msgstr ""
+msgstr "Declaracion de espacio de nombres "
 
 #: NamingConventionPlugin.cpp:276
 msgid "Template's parameters declaration "
-msgstr ""
+msgstr "Declaracion de parametro de plantilla "
 
 #: LowerCamelCaseRule.cpp:44
 msgid "should start with lowercase"
-msgstr ""
+msgstr "debe comenzar con letra minuscula"
 
 #: LowerCamelCaseRule.cpp:45 LowerUnderscoreRule.cpp:45
 #: UpperCamelCaseRule.cpp:45
 msgid ""
 "should not be written using underscore, only is supported one underscore at "
 "the beginning"
-msgstr ""
+msgstr "no debe ser escrito usando guion bajo, solamente es soportado un guio bajo al comienzo"
 
 #: LowerCamelCaseRule.cpp:46 LowerUnderscoreRule.cpp:46
 #: UpperCamelCaseRule.cpp:46
 msgid "should end with lowercase"
-msgstr ""
+msgstr "debe terminar con letra minuscula"
 
 #: LowerUnderscoreRule.cpp:44
 msgid "should start with underscore followed by a lowercase"
-msgstr ""
+msgstr "debe comenzar con guion bajo seguido por un letra minuscula"
 
 #: ReservedNameRule.cpp:48
 msgid "should not start with _ and followed by a Uppercase"
-msgstr ""
+msgstr "no debe comenzar con guio bajo seguido por una letra en mayuscula"
 
 #: ReservedNameRule.cpp:49
 msgid ""
 "should not start with a capital E followed by a digit or uppercase letter "
 "may be used for additional error code names"
-msgstr ""
+msgstr "no debe comenzar con un letra E seguido por un digito o una letra mayuscula, quizas se usada para nombres de codigo de error"
 
 #: ReservedNameRule.cpp:50
 msgid ""
 "should not start with either 'is' or 'to' followed by a lowercase letter may "
 "be used for additional character testing and conversion functions."
-msgstr ""
+msgstr "no debe comenzar con 'is' o 'to' seguido por una letra minuscula, quizas sean usadas para caracteres de prueba o conevrsion de funciones"
 
 #: ReservedNameRule.cpp:51
 msgid ""
 "should not start with LC_  followed by an uppercase letter may be used for "
 "additional macros specifying locale attributes."
-msgstr ""
+msgstr "no debe comenzar con LC_ seguido por una letra mayuscula, quizas sea usada para macros"
 
 #: ReservedNameRule.cpp:52
 msgid ""
 "should not start with SIG or SIG_ followed by an uppercase letter are "
 "reserved for additional signal names or actions."
-msgstr ""
+msgstr "no debe comenzar con SIG o SIG_ seguido por una letra mayuscula, son reservadas para nombres de seniales o acciones"
 
 #: ReservedNameRule.cpp:53
 msgid ""
 "should not start with 'str', 'mem', or 'wcs' followed by a lowercase letter "
 "are reserved for additional string and array functions."
-msgstr ""
+msgstr "no debe comenzar con 'str', 'mem', o 'wcs' seguido por una letra minuscula, son reservadas para cadenas y funciones"
 
 #: ReservedNameRule.cpp:54
 msgid "should not end with '_t' are reserved for additional type names."
-msgstr ""
+msgstr "no debe terminar con _t, es reservadi para tipos de nombres"
 
 #: UpperCamelCaseRule.cpp:44 UpperUnderscoreRule.cpp:44
 msgid "should start with uppercase"
-msgstr ""
+msgstr "debe comenzar con letra mayuscula"
 
 #: UpperUnderscoreRule.cpp:45
 msgid "should be written with uppercase and underscore"
-msgstr ""
+msgstr "debe ser escrito con letra mayuscula y guin bajo"
 
 #: UpperUnderscoreRule.cpp:46
 msgid "should end with uppercase"
-msgstr ""
+msgstr "debe terminar con letra mayuscula"
