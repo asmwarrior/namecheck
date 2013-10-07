@@ -8,24 +8,18 @@ COMPILING_TRAVERSER="************ Compiling traverser ************************"
 COMPILING_NAMECHECK="************ Compiling namecheck ************************"
 COMPILATION_FINISHED="************ Compilation finished successfully **********"
 
-#Necessary boost package
-BOOST = if ! dpkg -l | grep libboost-regex-dev -c >>/dev/null; then sudo apt-get install libboost-regex-dev; fi
-
-#Necessary plugin package
-PLUGINGCC = if ! dpkg -l | grep gcc-4.6-plugin-dev -c >>/dev/null; then sudo apt-get install gcc-4.6-plugin-dev; fi 
-
 GXX=/usr/bin/g++
 #get the gcc version used
 GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
 
 #get architecture
-COMMAND= $(shell find /usr/lib/gcc/ -iname plugin.h | awk -F "/" '{ print $$5 }' OFS="/" | awk '!_[$$1]++')
+COMMAND= $(shell uname -a | awk -F " " '{ print $$12 }' OFS=" ")
 
 #set plugin directory
 ifeq "$(GCCVERSION)" "4.6.3"
-    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.6/plugin
+    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/4.6/plugin
 else
-    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.7/plugin
+    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/4.7/plugin
 endif
 
 PLUGIN_SOURCE_FILES= src/LowerCamelCaseRule.cpp src/LowerUnderscoreRule.cpp src/Namecheck.cpp \
@@ -55,10 +49,7 @@ LDFLAGS= -lboost_regex \
 
 CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS) 
 
-compile: packages api traverser libnamecheck.so finish
-
-packages: 		
-	$(BOOST); $(PLUGINGCC)
+compile: api traverser libnamecheck.so finish
 
 api:
 	@echo $(COMPILING_API)

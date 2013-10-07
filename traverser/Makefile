@@ -8,13 +8,13 @@ GXX=/usr/bin/g++
 GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
 
 #get architecture
-COMMAND= $(shell find /usr/lib/gcc/ -iname plugin.h | awk -F "/" '{ print $$5 }' OFS="/" | awk '!_[$$1]++')
+COMMAND= $(shell uname -a | awk -F " " '{ print $$12 }' OFS=" ")
 
 #set plugin directory
 ifeq "$(GCCVERSION)" "4.6.3"
-    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.6/plugin
+    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/4.6/plugin
 else
-    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.7/plugin
+    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/4.7/plugin
 endif
 
 #set source code
@@ -36,7 +36,7 @@ INCPATH= -I$(GXXPLUGINS_DIR)/include/ \
 LD_LIBRARY_PATH= -L../compilerapi -Wl,-rpath=$(shell pwd)/../compilerapi
 
 #set compilation flags
-CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) -lapi
+CXXFLAGS = $(INCPATH) -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) -lapi
 
 compile: api libtraverser.so
 
