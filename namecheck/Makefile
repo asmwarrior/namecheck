@@ -28,37 +28,31 @@ else
     GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.7/plugin
 endif
 
-#set source code
 PLUGIN_SOURCE_FILES= src/LowerCamelCaseRule.cpp src/LowerUnderscoreRule.cpp src/Namecheck.cpp \
 					 src/NamingConventionPlugin.cpp src/RegexCollection.cpp src/Regex.cpp src/ReservedNameRule.cpp \
 					 src/RulesContainer.cpp src/UpperCamelCaseRule.cpp src/UpperUnderscoreRule.cpp
 
-#set headers
-PLUGIN_HEADERS= ../traverser/*.h \
+PLUGIN_HEADERS= traverser/*.h \
                 $(GXXPLUGINS_DIR)/include/*.h
 
-#object files
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 
-#set necessary includes
 INCPATH= -I./ \
 		 -I$(GXXPLUGINS_DIR)/include/ \
          -I./mili/ \
-		 -I../compilerapi/ \
-		 -I../traverser/ 
-		 
-#set necessary path library
-LD_LIBRARY_PATH= -L../compilerapi/ \
-				 -Wl,-rpath=$(shell pwd)/compilerapi \
-				 -L../traverser/ \
-				 -Wl,-rpath=$(shell pwd)/traverser 			 
+		 -I../traverser/ \
+		 -I../compilerapi/
 
-#set necessary library
+LD_LIBRARY_PATH= -L. \
+			     -L../traverser \
+				 -Wl,-rpath=$(shell pwd)/../traverser \
+			     -L../compilerapi \
+				 -Wl,-rpath=$(shell pwd)/../compilerapi
+
 LDFLAGS= -lboost_regex \
-		 -lapi \
-		 -ltraverser  
+		 -ltraverser \
+		 -lapi  
 
-#set compilation flags
 CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS) 
 
 compile: packages api traverser libnamecheck.so finish
@@ -73,7 +67,7 @@ api:
 traverser:
 	clear
 	@echo $(COMPILING_API)
-	@echo $(COMPILING_TRAVERSER)	
+	@echo $(COMPILING_TRAVERSER)
 	$(MAKE) -C ../traverser
 
 libnamecheck.so: $(PLUGIN_OBJECT_FILES) 
