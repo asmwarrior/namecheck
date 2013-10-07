@@ -8,44 +8,63 @@ COMPILING_TRAVERSER="************ Compiling traverser ************************"
 COMPILING_NAMECHECK="************ Compiling namecheck ************************"
 COMPILATION_FINISHED="************ Compilation finished successfully **********"
 
-# Compiling
+#Necessary boost package
+BOOST = if ! dpkg -l | grep libboost-regex-dev -c >>/dev/null; then sudo apt-get install libboost-regex-dev; fi
+
+#Necessary plugin package
+PLUGINGCC = if ! dpkg -l | grep gcc-4.6-plugin-dev -c >>/dev/null; then sudo apt-get install gcc-4.6-plugin-dev; fi 
+
 GXX=/usr/bin/g++
+#get the gcc version used
 GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
 
+#get architecture
+COMMAND= $(shell find /usr/lib/gcc/ -iname plugin.h | awk -F "/" '{ print $$5 }' OFS="/" | awk '!_[$$1]++')
+
+#set plugin directory
 ifeq "$(GCCVERSION)" "4.6.3"
-    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.6/plugin
+    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.6/plugin
 else
-    GXXPLUGINS_DIR= /usr/lib/gcc/x86_64-linux-gnu/4.7/plugin
+    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)/4.7/plugin
 endif
 
+#set source code
 PLUGIN_SOURCE_FILES= src/LowerCamelCaseRule.cpp src/LowerUnderscoreRule.cpp src/Namecheck.cpp \
 					 src/NamingConventionPlugin.cpp src/RegexCollection.cpp src/Regex.cpp src/ReservedNameRule.cpp \
 					 src/RulesContainer.cpp src/UpperCamelCaseRule.cpp src/UpperUnderscoreRule.cpp
 
-PLUGIN_HEADERS= traverser/*.h \
+#set headers
+PLUGIN_HEADERS= ../traverser/*.h \
                 $(GXXPLUGINS_DIR)/include/*.h
 
+#object files
 PLUGIN_OBJECT_FILES= $(patsubst %.cpp,%.o,$(PLUGIN_SOURCE_FILES))
 
+#set necessary includes
 INCPATH= -I./ \
 		 -I$(GXXPLUGINS_DIR)/include/ \
          -I./mili/ \
-		 -I../traverser/ \
-		 -I../compilerapi/
+		 -I../compilerapi/ \
+		 -I../traverser/ 
+		 
+#set necessary path library
+LD_LIBRARY_PATH= -L../compilerapi/ \
+				 -Wl,-rpath=$(shell pwd)/compilerapi \
+				 -L../traverser/ \
+				 -Wl,-rpath=$(shell pwd)/traverser 			 
 
-LD_LIBRARY_PATH= -L. \
-			     -L../traverser \
-				 -Wl,-rpath=$(shell pwd)/../traverser \
-			     -L../compilerapi \
-				 -Wl,-rpath=$(shell pwd)/../compilerapi
-
+#set necessary library
 LDFLAGS= -lboost_regex \
-		 -ltraverser \
-		 -lapi  
+		 -lapi \
+		 -ltraverser  
 
+#set compilation flags
 CXXFLAGS = $(INCPATH) -O0 -Wall -Wextra -pedantic -ansi -fPIC $(LD_LIBRARY_PATH) $(LDFLAGS) 
 
-compile: api traverser libnamecheck.so finish
+compile: packages api traverser libnamecheck.so finish
+
+packages: 		
+	$(BOOST); $(PLUGINGCC)
 
 api:
 	@echo $(COMPILING_API)
@@ -54,7 +73,7 @@ api:
 traverser:
 	clear
 	@echo $(COMPILING_API)
-	@echo $(COMPILING_TRAVERSER)
+	@echo $(COMPILING_TRAVERSER)	
 	$(MAKE) -C ../traverser
 
 libnamecheck.so: $(PLUGIN_OBJECT_FILES) 
