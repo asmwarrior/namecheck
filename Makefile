@@ -5,15 +5,20 @@ endif
 COMPILING_API="************ Compiling plugin **********************"
 COMPILING_FINISHED="************ Compiling plugin finished *************"
 
+compile: compileNamecheck cpLib
+
 compileNamecheck:
 	@echo $(COMPILING_PLUGIN)
-	$(MAKE) -C namecheck
-	$(shell cd namecheck; cp libnamecheck.so ..; cd ..)
+	$(MAKE) -C namecheck	
 	@echo $(COMPILING_FINISHED)
+
+cpLib:
+	$(shell cd namecheck; cp libnamecheck.so ..; cd ..)
 
 .PHONY: clean
 
 clean: 
+	rm -f libnamecheck.so
 	rm -f namecheck/libnamecheck.so
 	rm -f namecheck/src/*.o
 	rm -f traverser/libtraverser.so
