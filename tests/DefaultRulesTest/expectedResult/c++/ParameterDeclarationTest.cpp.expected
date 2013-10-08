@@ -18,4 +18,3 @@ ParameterDeclarationTest.cpp:12:60: warning: Parameter declaration should start 
 ParameterDeclarationTest.cpp:6:22: warning: Parameter declaration should start with lowercase in Test1t [enabled by default]
 ParameterDeclarationTest.cpp:6:41: warning: Parameter declaration should start with lowercase in Test2t [enabled by default]
 ParameterDeclarationTest.cpp:6:53: warning: Parameter declaration should start with lowercase in Test3t [enabled by default]
-ParameterDeclarationTest.cpp:1:22: warning: Parameter declaration should end with lowercase in test0 [enabled by default]

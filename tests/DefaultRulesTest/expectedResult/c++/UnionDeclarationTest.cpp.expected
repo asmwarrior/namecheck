@@ -4,4 +4,3 @@ UnionDeclarationTest.cpp:15:7: warning: Union declaration should start with uppe
 UnionDeclarationTest.cpp:17:6: warning: Union value declaration should start with uppercase in aa [enabled by default]
 UnionDeclarationTest.cpp:18:8: warning: Union value declaration should start with uppercase in bb [enabled by default]
 UnionDeclarationTest.cpp:10:7: warning: Union declaration should start with uppercase in test2t [enabled by default]
-UnionDeclarationTest.cpp:1:7: warning: Union declaration should end with lowercase in Test0 [enabled by default]
