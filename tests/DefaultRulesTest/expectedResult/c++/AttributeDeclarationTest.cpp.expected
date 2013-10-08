@@ -1,5 +1,5 @@
 starting libnamecheck
 processing AttributeDeclarationTest.cpp
-AttributeDeclarationTest.cpp:29:7: warning: Attribute declaration names should start with underscore followed by a lowercase in _Lenth (PUBLIC) [enabled by default]
-AttributeDeclarationTest.cpp:30:8: warning: Attribute declaration names should start with underscore followed by a lowercase in _FREE (PUBLIC) [enabled by default]
-AttributeDeclarationTest.cpp:12:7: warning: Attribute declaration names should start with underscore followed by a lowercase in __asdasdasd (PUBLIC) [enabled by default]
+AttributeDeclarationTest.cpp:29:7: warning: Public Attribute declaration should start with underscore followed by a lowercase in _Lenth [enabled by default]
+AttributeDeclarationTest.cpp:30:8: warning: Public Attribute declaration should start with underscore followed by a lowercase in _FREE [enabled by default]
+AttributeDeclarationTest.cpp:12:7: warning: Public Attribute declaration should start with underscore followed by a lowercase in __asdasdasd [enabled by default]
