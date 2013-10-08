@@ -41,7 +41,7 @@ namespace NSNamingChecker
 /**
  * @brief Specific Rules
  *
- * This class represents a default rules
+ * This class represents a default rule, composed by many regexes.
  */
 class RegexCollection : public IRule
 {
@@ -50,7 +50,7 @@ protected:
     /**
      * @brief Constructor of class
      *
-     * @param length amount default rules
+     * @param length amount of regexes in the rule.
      */
     RegexCollection(const size_t length);
 

@@ -46,7 +46,7 @@ class ReservedNameRule : public RegexCollection
 public:
 
     /**
-     * @brief Represents a reserved name rules
+     * @brief Represents a reserved name rule
      */
     enum MatchReserved
     {

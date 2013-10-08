@@ -1,11 +1,11 @@
 starting libnamecheck
 processing TemplateDeclarationTest.cpp
-TemplateDeclarationTest.cpp:59:11: warning: Private Attribute declaration should start with underscore followed by a lowercase in weights [enabled by default]
-TemplateDeclarationTest.cpp:60:13: warning: Private Attribute declaration should not be written using underscore, only is supported one underscore at the beginning in _connection_matrix [enabled by default]
+TemplateDeclarationTest.cpp:59:11: warning: Private Attribute declaration should start with an underscore followed by lowercase in weights [enabled by default]
+TemplateDeclarationTest.cpp:60:13: warning: Private Attribute declaration should not be written using underscores, only one underscore at the beginning is supported in _connection_matrix [enabled by default]
 TemplateDeclarationTest.cpp:56:33: warning: Template's parameters declaration should end with lowercase or digit in TT [enabled by default]
 TemplateDeclarationTest.cpp:56:37: warning: Template's parameters declaration should end with lowercase or digit in T [enabled by default]
 TemplateDeclarationTest.cpp:50:7: warning: Class declaration should start with uppercase in incorrectclassname [enabled by default]
-TemplateDeclarationTest.cpp:52:13: warning: Private Attribute declaration should start with underscore followed by a lowercase in IncorrectArgument [enabled by default]
+TemplateDeclarationTest.cpp:52:13: warning: Private Attribute declaration should start with an underscore followed by lowercase in IncorrectArgument [enabled by default]
 TemplateDeclarationTest.cpp:53:13: warning: Private Method declaration should start with lowercase in IncorrectMethod [enabled by default]
 TemplateDeclarationTest.cpp:49:15: warning: Variable declaration should start with lowercase in AA [enabled by default]
 TemplateDeclarationTest.cpp:44:8: warning: Function declaration should start with lowercase in GetMax [enabled by default]

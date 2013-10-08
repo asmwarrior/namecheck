@@ -41,7 +41,7 @@ namespace NSNamingChecker
 /**
  * @brief Specific Rule
  *
- * This class represents a regex which is a specific rule
+ * This class represents a regex, which is a specific rule that has only one regular expression.
  */
 class Regex : public IRule
 {
@@ -58,12 +58,12 @@ private:
     virtual void checkRule(const DeclName& declarationName, Result& result) const;
 
     /**
-     * @brief Represent a specific regex
+     * @brief Represents a specific regex
      */
     const RegexType _regex;
 
     /**
-     * @brief Represent a error message
+     * @brief Represents an error message
      */
     const NSCompilerApi::IPluginApi::Message _errmsg;
 };

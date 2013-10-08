@@ -38,7 +38,7 @@ namespace NSNamingChecker
 {
 
 /**
- * @brief This class represents a lower came case rule
+ * @brief This class represents a lower camel case rule
  *
  */
 class LowerCamelCaseRule : public RegexCollection
@@ -46,7 +46,7 @@ class LowerCamelCaseRule : public RegexCollection
 public:
 
     /**
-     * @brief Constructor of class
+     * @brief Constructor of class; initializes _regexs and _errmsgs.
      *
      */
     LowerCamelCaseRule();
