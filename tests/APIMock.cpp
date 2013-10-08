@@ -269,7 +269,7 @@ TEST(ConfigurationTest, invalidFormatFile)
     unlink(confFile.c_str());
 }
 
-TEST(ConfigurationTest, notDefinedRegex)
+TEST(ConfigurationTest, invalidFormatFile2)
 {
     const std::string confFile = "obsoleteConfFile.csv";
     std::ofstream file(confFile.c_str());
@@ -281,7 +281,7 @@ TEST(ConfigurationTest, notDefinedRegex)
     unlink(confFile.c_str());
 }
 
-TEST(ConfigurationTest, notDefinedErrorMessage)
+TEST(ConfigurationTest, invalidFormatFile3)
 {
     const std::string confFile = "obsoleteConfFile.csv";
     std::ofstream file(confFile.c_str());
