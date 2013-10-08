@@ -103,25 +103,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
         plugin->initialize(api.get());
         std::clog << "processing " << main_input_filename << std::endl;
         traverser.traverse(global_namespace, plugin.get());
-    }
-    exit(EXIT_SUCCESS);
-}
-
-static void gate_callback_cpp_eleven(void*, void*)
-{
-    // If there were errors during compilation,
-    // let GCC handle the exit.
-    //
-    if (errorcount == 0 && sorrycount == 0)
-    {
-        NSGppGeneric::TraverserCppEleven traverser;
-        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
-        const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
-        plugin->initialize(api.get());
-        std::clog << "processing with c++11 " << main_input_filename << std::endl;
-        traverser.traverse(global_namespace, plugin.get());
-    }
-    exit(EXIT_SUCCESS);
+    }    
 }
 
 } //end namespace
@@ -149,9 +131,6 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
     size_t ret = EXIT_SUCCESS;
     std::cout << "starting " << info->base_name << std::endl;
 
-    // Disable assembly output.
-    asm_file_name = HOST_BIT_BUCKET;
-
     if (!plugin_default_version_check(version, &gcc_version))
         ret = EXIT_FAILURE;
 
@@ -159,7 +138,7 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
         data._pathFile = info->argv[PluginData::ConfigurationFile].value;
 
     initGettext();
-    register_callback(info->base_name, PLUGIN_OVERRIDE_GATE, &gate_callback_cpp_three, 0);
+    register_callback(info->base_name, PLUGIN_EARLY_GIMPLE_PASSES_START, &gate_callback_cpp_three, 0);
     register_callback(info->base_name, PLUGIN_INFO, NULL, &data._namingInfo);
 
     return ret;
