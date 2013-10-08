@@ -132,15 +132,16 @@ private:
     };
 
     /**
-     * @brief Creates a specific rule
+     * @brief Creates a new rule using a regex read from the config file.
      *
-     * @param rule corresponds a specific rule
-     * @return specific rule
+     * @param rule The new rule to be created.
+     * @param fileLine The file's line from which we read the rule.
+     * @return The new rule.
      */
     static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);
 
     /**
-     * @brief This initializes process the vector corresponding to a line in the config file.
+     * @brief Loads a rule read from the configuration file into the rule map.
      *
      * @param fileLine the vector representing the line of the file to process
      */
