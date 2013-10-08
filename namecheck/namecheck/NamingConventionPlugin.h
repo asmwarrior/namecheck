@@ -64,7 +64,7 @@ private:
     /**
      * @brief Checks String Literals.
      *
-     * Checks if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the value according to the checker's rules, prints a warning (using the plugin) if it's not.
      *
      * @param decl is the tree of the string literal used for the warning message to print the location of the SL
      * @param name the name to check
@@ -74,7 +74,7 @@ private:
     /**
      * @brief Checks variable name.
      *
-     * Checks if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the name according to the checker's rules, prints a warning (using the plugin) if it's not.
      *
      * @param decl is the tree node of the name used for the warning message; it is passed to print the location of the name
      * @param name the name to check
@@ -84,7 +84,7 @@ private:
     /**
      * @brief checks global constant name
      *
-     * Checks if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the declaration according to the checker's rules, prints a warning (using the plugin) if it's not.
      *
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
@@ -94,7 +94,7 @@ private:
     /**
      * @brief checks enum name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the enum declaration according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -103,7 +103,7 @@ private:
     /**
      * @brief checks enum value name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the enum value according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -112,7 +112,7 @@ private:
     /**
      * @brief checks function name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the function name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -121,7 +121,7 @@ private:
     /**
      * @brief checks parameter name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the parameter name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -130,7 +130,7 @@ private:
     /**
      * @brief checks typedef name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the typedef name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -139,7 +139,7 @@ private:
     /**
     * @brief checks class name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the class declaration according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -148,7 +148,7 @@ private:
     /**
      * @brief checks union name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the union name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -157,7 +157,7 @@ private:
     /**
      * @brief checks union member name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the union member name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
@@ -166,43 +166,43 @@ private:
     /**
      * @brief checks struct name
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the struct member name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitStructDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
-     * @brief checks Variable Declarations
+     * @brief checks a method declaration
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the method name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/);
 
     /**
-     * @brief checks Variable Declarations
+     * @brief checks an attribute declaration
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the attribute name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
 
     /**
-     * @brief checks Variable Declarations
+     * @brief checks a variable declaration
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the variable name according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
 
     /**
-     * @brief checks Template Type Parameter Declarations
+     * @brief checks a template type parameter declaration
      *
-     * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
+     * Checks the template parameter according to the checker's rules, prints a warning (using the plugin) if it's not.
      * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
