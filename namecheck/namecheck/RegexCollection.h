@@ -54,10 +54,24 @@ protected:
      */
     RegexCollection(const size_t length);
 
+    /**
+     * @brief Represents a collection of regex
+     */
     typedef std::vector<RegexType> Regexs;
+
+    /**
+     * @brief Represents a message to show
+     */
     typedef std::vector<NSCompilerApi::IPluginApi::Message> ErrorMsgs;
 
+    /**
+     * @brief To load the regex
+     */
     Regexs _regexs;
+
+    /**
+     * @brief To load the message error. One message for each regex
+     */
     ErrorMsgs _errmsgs;
 
 private:
