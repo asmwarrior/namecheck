@@ -54,21 +54,21 @@ TEST(PluginAPITests, VariableAndMethodsNamesTest)
     const bool isConst = false;
     const std::string typeName = "int";
     EXPECT_CALL(api, warning(_,_))
-    .Times(13);
+    .Times(12);
 
     //correct variable names
     plugin.visitVariableDeclaration(decl, "amount", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "i", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amountVisible", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "isVisible", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "amountVisible2", isConst, typeName);
 
     //incorrect variable names
     plugin.visitVariableDeclaration(decl, "Amount", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "_amount", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "AMOUNT", isConst, typeName);
     plugin.visitVariableDeclaration(decl, "amountAvailablE", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "22amount", isConst, typeName);
-    plugin.visitVariableDeclaration(decl, "amountVisible2", isConst, typeName);
+    plugin.visitVariableDeclaration(decl, "22amount", isConst, typeName);    
     plugin.visitVariableDeclaration(decl, "amount_visible", isConst, typeName);
 
     //correct method names
