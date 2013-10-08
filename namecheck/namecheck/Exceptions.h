@@ -51,7 +51,7 @@ public:
 DEFINE_SPECIFIC_EXCEPTION_TEXT(FileNotFound, NamecheckExceptionHierarchy, "Configuration file not found.");
 DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidFormatFile, NamecheckExceptionHierarchy, "The configuration file does not have the appropriate format.");
 DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidDeclaration, NamecheckExceptionHierarchy, "Invalid name declaration.");
-DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidRuleType, NamecheckExceptionHierarchy, "Rule type invalid.");
+DEFINE_SPECIFIC_EXCEPTION_TEXT(InvalidRuleType, NamecheckExceptionHierarchy, "Invalid rule type.");
 
 } // end namespace
 #endif
