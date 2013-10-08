@@ -35,6 +35,7 @@
 #include "namecheck/NamingConventionPlugin.h"
 #include "compilerapi/GCCPluginAPI.h"
 #include "traverser/GenericTraverser.h"
+#include "namecheck/Exceptions.h"
 
 #if (__GNUC__ == 4) && (__GNUC_MINOR__ == 6)
     extern "C"
@@ -97,12 +98,23 @@ extern "C" void gate_callback_cpp_three(void*, void*)
     //
     if (errorcount == 0 && sorrycount == 0)
     {
-        NSGppGeneric::TraverserCppThree traverser;
-        const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
-        const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
-        plugin->initialize(api.get());
-        std::clog << "processing " << main_input_filename << std::endl;
-        traverser.traverse(global_namespace, plugin.get());
+        try
+        {
+            NSGppGeneric::TraverserCppThree traverser;
+            const std::auto_ptr<NSGppGeneric::BasePlugin> plugin(new NSNamingChecker::NamingConventionPlugin(data._pathFile.c_str()));
+            const std::auto_ptr<NSCompilerApi::IPluginApi> api(new NSCompilerApi::GCCPluginApi());
+            plugin->initialize(api.get());
+            std::clog << "processing " << main_input_filename << std::endl;
+            traverser.traverse(global_namespace, plugin.get());
+        }
+        catch(NSNamingChecker::NamecheckException e)
+        {
+            std::cout << e.what() << std::endl;   
+        }
+        catch (...)
+        {
+            std::cout << "Unknown error, please report this" << std::endl;   
+        }       
     }    
 }
 
@@ -133,13 +145,19 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
 
     if (!plugin_default_version_check(version, &gcc_version))
         ret = EXIT_FAILURE;
-
+    
     if ((info->argc == 1) && (strcmp(info->argv[PluginData::ConfigurationFile].key, "path")) == 0)
         data._pathFile = info->argv[PluginData::ConfigurationFile].value;
-
-    initGettext();
-    register_callback(info->base_name, PLUGIN_EARLY_GIMPLE_PASSES_START, &gate_callback_cpp_three, 0);
-    register_callback(info->base_name, PLUGIN_INFO, NULL, &data._namingInfo);
-
+    else
+    {
+        std::cerr << "Forgot set -fplugin-arg-libnamecheck-path argument." << std::endl;
+        ret = EXIT_FAILURE;
+    }
+    if(ret != EXIT_FAILURE)
+    {
+        initGettext();
+        register_callback(info->base_name, PLUGIN_EARLY_GIMPLE_PASSES_START, &gate_callback_cpp_three, 0);
+        register_callback(info->base_name, PLUGIN_INFO, NULL, &data._namingInfo);
+    }
     return ret;
 }
