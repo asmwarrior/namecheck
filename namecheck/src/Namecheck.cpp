@@ -107,7 +107,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
             std::clog << "processing " << main_input_filename << std::endl;
             traverser.traverse(global_namespace, plugin.get());
         }
-        catch(NSNamingChecker::NamecheckException e)
+        catch(const NSNamingChecker::NamecheckException &e)
         {
             std::cout << e.what() << std::endl;   
         }
@@ -150,7 +150,7 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
         data._pathFile = info->argv[PluginData::ConfigurationFile].value;
     else
     {
-        std::cerr << "Forgot set -fplugin-arg-libnamecheck-path argument." << std::endl;
+        std::cerr << "Please, set -fplugin-arg-libnamecheck-path argument." << std::endl;
         ret = EXIT_FAILURE;
     }
     if(ret != EXIT_FAILURE)
