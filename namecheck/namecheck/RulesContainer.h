@@ -77,7 +77,7 @@ public:
     };
 
     /**
-     * @brief Matches strings and declarations to be checked
+     * @brief Match between string and declaration to check
      */
     typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
 
@@ -110,7 +110,7 @@ public:
     void check(const DeclarationToCheck& decl, const IRule::DeclName& declarationName, IRule::Result& result) const;
 
     /**
-     * @brief Initializes the vector of rules corresponding to each declaration types.
+     * @brief This initializes the vector of rules corresponding to each declaration types.
      *
      * @param fileName configuration name file
      */
@@ -132,16 +132,15 @@ private:
     };
 
     /**
-     * @brief Creates a new rule using a regex read from the config file.
+     * @brief Create a specific rule
      *
-     * @param rule The new rule to be created.
-     * @param fileLine The file's line from which we read the rule.
-     * @return The new rule.
+     * @param rule corresponds a specific rule
+     * @return specific rule
      */
     static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);
 
     /**
-     * @brief Loads a rule read from the configuration file into the rule map.
+     * @brief This initializes process the vector corresponding to a line in the config file.
      *
      * @param fileLine the vector representing the line of the file to process
      */
@@ -164,27 +163,27 @@ private:
     std::vector<Rules> _rules;
 
     /**
-     * @brief Represents the minimum amount of fields that a configuration file line has.
+     * @brief Represents the minimum and maximum amount of fields that have a line in configuration file
      */
     static const size_t MINIMUM_AMOUNT_FIELDS = 2;
-
-    /**
-     * @brief Represents the maximum amount of fields that a configuration file line has.
-     */
     static const size_t MAXIMUM_AMOUNT_FIELDS = 4;
-
-    /**
-     * @brief Constants to avoid magic numbers. Each one represents a field of the configuration file
-     */
-    static const size_t FIELD_DECLARATION_NAME = 0;
-    static const size_t FIELD_RULE_TYPE = 1;
-    static const size_t FIELD_REGEX = 2;
-    static const size_t FIELD_ERROR_MESSAGE = 3;
 
     /**
      * @brief Represents the type of rule Regex (char '0' in the configuration file)
      */
     static const std::string REGEX_TYPE;
+
+    /**
+     * @brief Represents the fields of a line of configuration file
+     */
+    enum FieldLineOfConfFile
+    {
+        FieldDeclarationName,
+        FieldRuleType,
+        FieldRegex,
+        FieldErrorMessage,
+        FieldCount
+    };
 };
 
 } // end namespace

@@ -95,11 +95,11 @@ void RulesContainer::check(const DeclarationToCheck& decl, const IRule::DeclName
 void RulesContainer::checkLine(const StringVector& line)
 {
     mili::assert_throw<InvalidFormatFile>(line.size() >= MINIMUM_AMOUNT_FIELDS && line.size() <= MAXIMUM_AMOUNT_FIELDS);
-    if (line[FIELD_RULE_TYPE] == REGEX_TYPE)
+    if (line[FieldRuleType] == REGEX_TYPE)
         mili::assert_throw<InvalidFormatFile>(line.size() == MAXIMUM_AMOUNT_FIELDS);
     else
         mili::assert_throw<InvalidFormatFile>(line.size() == MINIMUM_AMOUNT_FIELDS);
-    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[FIELD_DECLARATION_NAME]) != _declarationMap.end());
+    mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[FieldDeclarationName]) != _declarationMap.end());
 }
 
 IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& fileLine)
@@ -108,7 +108,7 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
     switch (rule)
     {
         case SpecificRegex:
-            ret = new Regex(IRule::RegexType(fileLine[FIELD_REGEX]), fileLine[FIELD_ERROR_MESSAGE]);
+            ret = new Regex(IRule::RegexType(fileLine[FieldRegex]), fileLine[FieldErrorMessage]);
             break;
         case UpCamelCaseRule:
             ret = new UpperCamelCaseRule();
@@ -133,11 +133,11 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
 
 void RulesContainer::process(const StringVector& fileLine)
 {
-    const size_t ruleType = mili::from_string<size_t>(fileLine[FIELD_RULE_TYPE]);
+    const size_t ruleType = mili::from_string<size_t>(fileLine[FieldRuleType]);
     const RuleType specificRule = RuleType(ruleType);
 
     IRule* const rule = createNewRule(specificRule, fileLine);
-    _rules[_declarationMap[fileLine[FIELD_DECLARATION_NAME]]].push_back(rule);
+    _rules[_declarationMap[fileLine[FieldDeclarationName]]].push_back(rule);
 }
 
 void RulesContainer::load(const FileName& fileName)
