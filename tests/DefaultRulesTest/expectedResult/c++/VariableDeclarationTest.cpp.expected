@@ -1,0 +1,10 @@
+starting libnamecheck
+processing VariableDeclarationTest.cpp
+VariableDeclarationTest.cpp: In function ‘void testFunct()’:
+VariableDeclarationTest.cpp:7:6: warning: Variable declaration should start with lowercase in Incorrectfunction [enabled by default]
+VariableDeclarationTest.cpp:12:11: warning: Variable declaration should start with lowercase in Incorrectfor [enabled by default]
+VariableDeclarationTest.cpp:14:7: warning: Variable declaration should start with lowercase in Incorrectforblock [enabled by default]
+VariableDeclarationTest.cpp:20:10: warning: Variable declaration should start with lowercase in Incorrectif [enabled by default]
+VariableDeclarationTest.cpp:22:7: warning: Variable declaration should start with lowercase in Incorrectifblock [enabled by default]
+VariableDeclarationTest.cpp:26:7: warning: Variable declaration should start with lowercase in Incorrectblock [enabled by default]
+VariableDeclarationTest.cpp:2:5: warning: Variable declaration should start with lowercase in Incorrectglobal [enabled by default]

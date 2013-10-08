@@ -1,0 +1,8 @@
+starting libnamecheck
+processing ClassDeclarationTest.cpp
+ClassDeclarationTest.cpp:43:9: warning: Class declaration should start with uppercase in test7t [enabled by default]
+ClassDeclarationTest.cpp:30:8: warning: Class declaration should start with uppercase in test5t [enabled by default]
+ClassDeclarationTest.cpp:32:9: warning: Class declaration should start with uppercase in test6t [enabled by default]
+ClassDeclarationTest.cpp:22:7: warning: Class declaration should start with uppercase in tEST4T [enabled by default]
+ClassDeclarationTest.cpp:17:7: warning: Class declaration should start with uppercase in tEST3t [enabled by default]
+ClassDeclarationTest.cpp:8:7: warning: Class declaration should end with lowercase in Test0 [enabled by default]
