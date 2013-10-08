@@ -38,7 +38,7 @@ namespace NSNamingChecker
 {
 
 /**
- * @brief This class represents a lower underscore rule
+ * @brief This class represents a lower underscore rule.
  *
  */
 class LowerUnderscoreRule : public RegexCollection
@@ -46,7 +46,7 @@ class LowerUnderscoreRule : public RegexCollection
 public:
 
     /**
-     * @brief Constructor of class
+     * @brief Constructor of class; initializes _regexs and _errmsgs.
      *
      */
     LowerUnderscoreRule();

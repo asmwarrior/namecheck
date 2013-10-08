@@ -42,7 +42,7 @@ UpperCamelCaseRule::UpperCamelCaseRule() : RegexCollection(3)
     _regexs[2] = ".*?[\\l\\d]$";
 
     _errmsgs[0] = gettext("should start with uppercase");
-    _errmsgs[1] = gettext("should not be written using underscore, only is supported one underscore at the beginning");
+    _errmsgs[1] = gettext("should not be written using underscores, only one underscore is supported at the beginning");
     _errmsgs[2] = gettext("should end with lowercase or digit");
 }
 

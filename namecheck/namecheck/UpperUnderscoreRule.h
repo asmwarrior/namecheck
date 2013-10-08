@@ -38,7 +38,7 @@ namespace NSNamingChecker
 {
 
 /**
- * @brief This class represents a upper underscore rule
+ * @brief This class represents an upper underscore rule
  *
  */
 class UpperUnderscoreRule : public RegexCollection

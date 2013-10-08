@@ -38,7 +38,7 @@ namespace NSNamingChecker
 {
 
 /**
- * @brief This class represents a upper camel case rule
+ * @brief This class represents an upper camel case rule
  */
 class UpperCamelCaseRule : public RegexCollection
 {

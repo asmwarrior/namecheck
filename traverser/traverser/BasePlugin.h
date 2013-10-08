@@ -44,7 +44,7 @@ namespace NSGppGeneric
 /**
  *  @brief Base class for the visitor.
  *
- * This class add to the vistor's interface the initialization method, the _plugin attribute and a method to get
+ * This class extends the vistor's interface with an initialization method, a _plugin attribute and a method to get
  * the visitor.
  */
 class BasePlugin: public IGenericVisitor
@@ -52,16 +52,16 @@ class BasePlugin: public IGenericVisitor
 public:
 
     /**
-     * @brief this sets the _plugin .
+     * @brief Sets _api to point to the api attribute.
      *
-     * @param api this is the pointer to the pluginAPI that is going to be set.
+     * @param api The pointer to the pluginAPI that is going to be set.
      */
     virtual void initialize(NSCompilerApi::IPluginApi* api);
 
 protected:
-    
+
     /**
-     * @brief This is the api for the warnings and error messages.
+     * @brief The api for the warnings and error messages.
      *
      */
     NSCompilerApi::IPluginApi* _api;

@@ -106,7 +106,7 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
     IRule* ret;
     switch (rule)
     {
-        case SpecificRegex:        
+        case SpecificRegex:
             ret = new Regex(IRule::RegexType(fileLine[SPECIFIC_REGEX]), fileLine[ERROR_MESSAGE]);
             break;
         case UpCamelCaseRule:
@@ -125,7 +125,7 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
             ret = new ReservedNameRule();
             break;
         default:
-            throw InvalidRuleType("The rule invalid is: " + rule);
+            throw InvalidRuleType("The invalid rule is: " + rule);
     }
     return ret;
 }

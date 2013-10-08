@@ -48,23 +48,23 @@ namespace NSCompilerApi
 struct IPluginApi
 {
     /**
-     * @brief Represent a message to print
+     * @brief Represents a message to print
      */
     typedef std::string Message;
 
     /**
-     * @brief gives the warning message.
+     * @brief Gives the warning message.
      *
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
-     * @param message the message to print
+     * @param decl Is the name of the tree node with the message we want to print.
+     * @param message the message to print.
      */
     virtual void warning(const GenericTree& decl, const Message& message) const = 0;
 
     /**
-     * @brief gives the error message.
+     * @brief Gives the error message.
      *
-     * @param decl is the tree of the name it is used for the error message to print the location of the name
-     * @param message the message to print
+     * @param decl Is the name of the tree node with the message we want to print.
+     * @param message the message to print.
      */
     virtual void error(const GenericTree& decl, const Message& message) const = 0;
 };

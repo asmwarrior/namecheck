@@ -1,11 +1,11 @@
 starting libnamecheck
 processing testplugin.cpp
-testplugin.cpp:83:12: warning: Public Attribute declaration should start with underscore followed by a lowercase in hola [enabled by default]
-testplugin.cpp:84:9: warning: Public Attribute declaration should start with underscore followed by a lowercase in quetal [enabled by default]
+testplugin.cpp:83:12: warning: Public Attribute declaration should start with an underscore followed by lowercase in hola [enabled by default]
+testplugin.cpp:84:9: warning: Public Attribute declaration should start with an underscore followed by lowercase in quetal [enabled by default]
 testplugin.cpp:71:6: warning: Union value declaration should start with uppercase in asd [enabled by default]
 testplugin.cpp:72:10: warning: Union value declaration should start with uppercase in asdf [enabled by default]
-testplugin.cpp:61:13: warning: Public Attribute declaration should start with underscore followed by a lowercase in bb [enabled by default]
-testplugin.cpp:63:7: warning: Protected Attribute declaration should start with underscore followed by a lowercase in cc [enabled by default]
-testplugin.cpp:65:6: warning: Private Attribute declaration should start with underscore followed by a lowercase in aa [enabled by default]
+testplugin.cpp:61:13: warning: Public Attribute declaration should start with an underscore followed by lowercase in bb [enabled by default]
+testplugin.cpp:63:7: warning: Protected Attribute declaration should start with an underscore followed by lowercase in cc [enabled by default]
+testplugin.cpp:65:6: warning: Private Attribute declaration should start with an underscore followed by lowercase in aa [enabled by default]
 testplugin.cpp:87:19: warning: Namespace declaration should start with NS following by a uppercase and lowercase in ASSDASD [enabled by default]
 testplugin.cpp:88:15: warning: Namespace declaration should start with NS following by a uppercase and lowercase in AAAA [enabled by default]
