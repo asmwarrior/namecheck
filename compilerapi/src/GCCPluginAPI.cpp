@@ -49,12 +49,12 @@ namespace NSCompilerApi
 
 void GCCPluginApi::warning(const GenericTree& decl, const Message& message) const
 {
-    warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str());
+    warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str(), "%s");
 }
 
 void GCCPluginApi::error(const GenericTree& decl, const Message& message) const
 {
-    error_at(DECL_SOURCE_LOCATION(decl), 0,  message.c_str());
+    error_at(DECL_SOURCE_LOCATION(decl), message.c_str(), "%s");
 }
 
 } // end namespace
