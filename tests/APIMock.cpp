@@ -238,6 +238,8 @@ TEST(RulesTest, LowerUnderscore)
     EXPECT_EQ(res._match, true);
     lowerUnderscore.checkRule("specificRegex", res);
     EXPECT_EQ(res._match, false);
+    lowerUnderscore.checkRule("_specific_regex", res);
+    EXPECT_EQ(res._match, false);
 }
 
 TEST(RulesTest, Regex)

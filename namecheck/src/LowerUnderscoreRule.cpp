@@ -38,7 +38,7 @@ namespace NSNamingChecker
 LowerUnderscoreRule::LowerUnderscoreRule() : RegexCollection(3)
 {
     _regexs[0] = "^_\\l.*?";
-    _regexs[1] = "^_?[\\l\\u\\d]*$";
+    _regexs[1] = "^_?[^_]*$";
     _regexs[2] = ".*?[\\l\\d]$";
 
     _errmsgs[0] = gettext("should start with an underscore followed by lowercase");
