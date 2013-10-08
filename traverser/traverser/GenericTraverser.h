@@ -66,7 +66,6 @@ public:
     /**
      * @brief Sets the visitor and traverses the given namespace.
      *
-     *
      * @param ns this should be the global namespace to process.
      * @param visitor the visitor to set.
      */

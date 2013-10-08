@@ -154,19 +154,32 @@ private:
     void checkLine(const StringVector& line);
 
     DeclarationMap _declarationMap;
+
+    /**
+     * @brief Represents a collection of rules
+     */
     typedef std::list<IRule*> Rules;
+
     std::vector<Rules> _rules;
 
     /**
-     * @brief To avoid magic numbers
+     * @brief Represents the minimum and maximum amount of fields that have a line in configuration file
      */
-    static const size_t REGEX_SIZE = 4;
-    static const size_t DEFAULT_SIZE = 2;
-    static const size_t DECLARATION_NAME = 0;
-    static const size_t RULE_TYPE = 1;
-    static const size_t SPECIFIC_REGEX = 2;
-    static const size_t ERROR_MESSAGE = 3;
-    static const std::string REGEX;
+    static const size_t MINIMUM_AMOUNT_FIELDS = 2;
+    static const size_t MAXIMUM_AMOUNT_FIELDS = 4;
+
+    /**
+     * @brief Constants to avoid magic numbers. Each represents a field of configuration file
+     */
+    static const size_t FIELD_DECLARATION_NAME = 0;
+    static const size_t FIELD_RULE_TYPE = 1;
+    static const size_t FIELD_REGEX = 2;
+    static const size_t FIELD_ERROR_MESSAGE = 3;
+
+    /**
+     * @brief Represents the type of rule Regex (char '0' in the configuration file)
+     */
+    static const std::string REGEX_TYPE;
 };
 
 } // end namespace
