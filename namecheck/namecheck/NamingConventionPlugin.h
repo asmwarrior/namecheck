@@ -76,7 +76,7 @@ private:
      *
      * Checks if it is correct according to the checker, prints a warning otherwise (using the plugin).
      *
-     * @param decl is the tree of the name used for the warning message to print the location of the name
+     * @param decl is the tree node of the name used for the warning message; it is passed to print the location of the name
      * @param name the name to check
      */
     virtual void visitVariableDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
@@ -86,7 +86,7 @@ private:
      *
      * Checks if it is correct according to the checker, prints a warning otherwise (using the plugin).
      *
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitGlobalConstDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -95,7 +95,7 @@ private:
      * @brief checks enum name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitEnumTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -104,7 +104,7 @@ private:
      * @brief checks enum value name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitEnumValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -113,7 +113,7 @@ private:
      * @brief checks function name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitFunctionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -122,7 +122,7 @@ private:
      * @brief checks parameter name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/);
@@ -131,7 +131,7 @@ private:
      * @brief checks typedef name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitTypeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -140,7 +140,7 @@ private:
     * @brief checks class name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitClassDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -149,7 +149,7 @@ private:
      * @brief checks union name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitUnionDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -158,7 +158,7 @@ private:
      * @brief checks union member name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitUnionValueDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
@@ -167,7 +167,7 @@ private:
      * @brief checks struct name
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitStructDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -176,7 +176,7 @@ private:
      * @brief checks Variable Declarations
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitMethodDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/);
@@ -185,7 +185,7 @@ private:
      * @brief checks Variable Declarations
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitAttributeDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::AccessModifier access, const NSGppGeneric::IGenericVisitor::DeclarationName& name, bool /*isConst*/, const std::string& /*typeName*/);
@@ -194,7 +194,7 @@ private:
      * @brief checks Variable Declarations
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitNamespaceDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -203,7 +203,7 @@ private:
      * @brief checks Template Type Parameter Declarations
      *
      * check if it is correct according to the checker, prints a warning otherwise (using the plugin).
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param name the name to check
      */
     virtual void visitTemplateTypeParameterDeclaration(const NSCompilerApi::GenericTree decl, const NSGppGeneric::IGenericVisitor::DeclarationName& name);
@@ -211,7 +211,7 @@ private:
     /**
      * @brief calls the warning message maker of the plugin
      *
-     * @param decl is the tree of the name it is used for the warning message to print the location of the name
+     * @param decl is the tree node that contains the name used by the warning message to print the location of the name
      * @param message the message to print in the warning
      */
     void logPluginWarning(const NSCompilerApi::GenericTree decl, const std::string& message) const;
