@@ -187,9 +187,9 @@ void NamingConventionPlugin::visitMethodDeclaration(const NSCompilerApi::Generic
     IRule::Result methodResult;
     switch (access)
     {
-        case NSGppGeneric::IGenericVisitor::AccessPublic:        
+        case NSGppGeneric::IGenericVisitor::AccessPublic:
             _checker.check(NSNamingChecker::RulesContainer::PublicMethodDeclaration, name, methodResult);
-            break;    
+            break;
         case NSGppGeneric::IGenericVisitor::AccessProtected:
             _checker.check(NSNamingChecker::RulesContainer::ProtectedMethodDeclaration, name, methodResult);
             break;
@@ -209,15 +209,15 @@ void NamingConventionPlugin::visitAttributeDeclaration(const NSCompilerApi::Gene
     IRule::Result attributeResult;
     switch (access)
     {
-        case NSGppGeneric::IGenericVisitor::AccessPublic:        
+        case NSGppGeneric::IGenericVisitor::AccessPublic:
             _checker.check(NSNamingChecker::RulesContainer::PublicAttributeDeclaration, name, attributeResult);
             break;
-        case NSGppGeneric::IGenericVisitor::AccessProtected:        
+        case NSGppGeneric::IGenericVisitor::AccessProtected:
             _checker.check(NSNamingChecker::RulesContainer::ProtectedAttributeDeclaration, name, attributeResult);
-            break;        
-        case NSGppGeneric::IGenericVisitor::AccessPrivate:        
+            break;
+        case NSGppGeneric::IGenericVisitor::AccessPrivate:
             _checker.check(NSNamingChecker::RulesContainer::PrivateAttributeDeclaration, name, attributeResult);
-            break;        
+            break;
     }
     if (!attributeResult._match)
     {

@@ -95,8 +95,8 @@ msgstr ""
 #: LowerCamelCaseRule.cpp:45 LowerUnderscoreRule.cpp:45
 #: UpperCamelCaseRule.cpp:45
 msgid ""
-"should not be written using underscore, only is supported one underscore at "
-"the beginning"
+"should not be written using underscore, only one underscore at "
+"the beginning is supported"
 msgstr ""
 
 #: LowerCamelCaseRule.cpp:46 LowerUnderscoreRule.cpp:46
