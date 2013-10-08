@@ -1,0 +1,6 @@
+starting libnamecheck
+processing GlobalConstDeclarationTest.cpp
+GlobalConstDeclarationTest.cpp:17:12: warning: Private Attribute declaration should start with underscore followed by a lowercase in INCORRECT_CLASS [enabled by default]
+GlobalConstDeclarationTest.cpp:11:12: warning: Variable declaration should start with lowercase in INCORRECTFUNC [enabled by default]
+GlobalConstDeclarationTest.cpp:2:11: warning: Global const declaration should be written with uppercase and underscore in Incorrect_global [enabled by default]
+GlobalConstDeclarationTest.cpp:5:12: warning: Global const declaration should start with uppercase in incorrectns [enabled by default]
