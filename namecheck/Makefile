@@ -55,30 +55,22 @@ api:
 	@echo $(COMPILING_API)
 	$(MAKE) -C ../compilerapi
 
-traverser:
-	clear
-	@echo $(COMPILING_API)
+traverser:	
 	@echo $(COMPILING_TRAVERSER)
 	$(MAKE) -C ../traverser
 
-libnamecheck.so: $(PLUGIN_OBJECT_FILES) 
-	clear
-	@echo $(COMPILING_API)
-	@echo $(COMPILING_TRAVERSER)
+libnamecheck.so: $(PLUGIN_OBJECT_FILES) 	
 	@echo $(COMPILING_NAMECHECK)
 	$(GXX) -shared $^ -o $@ $(CXXFLAGS) 
 
 %.o: %.cpp $(PLUGIN_HEADERS)
 	$(GXX) -c -o $@ $< $(CXXFLAGS) 
 
-finish:
-	clear
-	@echo $(COMPILING_API)
-	@echo $(COMPILING_TRAVERSER)
-	@echo $(COMPILING_NAMECHECK)
+finish:		
 	@echo $(COMPILATION_FINISHED)
 
-.PHONY: clean
+.PHONY: 
+	clean
 
 clean: 
 	rm -f src/*.o
@@ -87,4 +79,4 @@ clean:
 	rm -f ../traverser/libtraverser.so
 	rm -f ../compilerapi/src/*.o
 	rm -f ../compilerapi/libapi.so
-	clear
+	

@@ -25,4 +25,4 @@ clean:
 	rm -f traverser/src/*.o	
 	rm -f compilerapi/libapi.so
 	rm -f compilerapi/src/*.o	
-	clear
+	
