@@ -1,0 +1,7 @@
+starting libnamecheck
+processing TypeDeclarationTest.cpp
+TypeDeclarationTest.cpp:19:14: warning: Type declaration should start with uppercase in test6t [enabled by default]
+TypeDeclarationTest.cpp:13:3: warning: Type declaration should start with uppercase in test3t [enabled by default]
+TypeDeclarationTest.cpp:9:3: warning: Type declaration should start with uppercase in test2t [enabled by default]
+TypeDeclarationTest.cpp:3:15: warning: Type declaration should start with uppercase in test1t [enabled by default]
+TypeDeclarationTest.cpp:1:13: warning: Type declaration should start with uppercase in test0 [enabled by default]

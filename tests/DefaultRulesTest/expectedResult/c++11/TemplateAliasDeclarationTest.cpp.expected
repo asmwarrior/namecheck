@@ -1,0 +1,4 @@
+starting libnamecheck
+processing TemplateAliasDeclarationTest.cpp
+TemplateAliasDeclarationTest.cpp:5:46: warning: Type declaration should start with uppercase in dictionary [enabled by default]
+TemplateAliasDeclarationTest.cpp:4:11: warning: Template's parameters declaration should end with lowercase or digit in T [enabled by default]
