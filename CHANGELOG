@@ -1,0 +1,12 @@
+Version 1.1
+===========
+    * Added GCC 4.6 and GCC 4.7 dynamic support in build time.
+    * Rules are now configured using configuration file.
+    * Added Inclass Inicialization and Template Alias support.
+    * Added Doxygen.
+    * Code refactor to ease maintenance. 
+
+Version 1.0
+===========
+    * Initial version.  
+    * Rules harcoded support.
