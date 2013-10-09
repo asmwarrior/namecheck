@@ -26,13 +26,13 @@ The following libraries are needed to install namecheck:
     * gettext: https://www.gnu.org/software/gettext/
                     
 
-2. BUILDING NAMECHECK
+3. BUILDING NAMECHECK
 =====================
 
 Once the dependencies are installed, just run make.
 
 
-3. RUNNING NAMECHECK
+4. RUNNING NAMECHECK
 ====================
 
 Namecheck can be used either as a static checker only (without
@@ -47,14 +47,14 @@ To use namecheck while compiling, just remove the -c option:
     g++ -fplugin=/path/to/namecheck/libnamecheck.so -fplugin-arg-libnamecheck-path=/path/to/rules.cfg myfile.cpp -o myfile
 
 
-4. COMPLETE DOCUMENTATION
+5. COMPLETE DOCUMENTATION
 =========================
 
 For a complete documentation, including how write your naming convention rules,
 please visit the wiki sections of the home page (https://namecheck.googlecode.com).
 
 
-5. ISSUE REPORTING
+6. ISSUE REPORTING
 ==================
 
 Namecheck has been tested with gcc 4.6 and 4.7 in Ubuntu-based distros.
