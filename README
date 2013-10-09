@@ -1,1 +1,62 @@
-See: https://code.google.com/p/namecheck/
+1. INSTALLING NAMECHECK IN AN UBUNTU-BASED DISTRO
+=================================================
+
+Just run the ./installUbuntu script.
+
+
+2. INSTALLING NAMECHECK IN A NON UBUNTU-BASED DISTRO
+====================================================
+
+If you don't have an Ubuntu-based distro, you'll have to
+install the dependencies manually.
+Feel free to contribute an installacion script for your
+distro, by creating an issue in the Issue Tracker
+(https://code.google.com/p/namecheck/issues/list),
+attach the script, add instructions, and we will add it
+to the repo.
+
+The following libraries are needed to install namecheck:
+    * Boost Regex: http://www.boost.org/doc/libs/1_54_0/libs/regex/doc/html/index.html
+
+    * Gcc Plugin Dev: find a package in your distro, it
+      should look like gcc-4.x-plugin-dev (where 'x' is the
+      minor version number of your gcc; type gcc --version
+      in your terminal to get the number).
+
+    * gettext: https://www.gnu.org/software/gettext/
+                    
+
+2. BUILDING NAMECHECK
+=====================
+
+Once the dependencies are installed, just run make.
+
+
+3. RUNNING NAMECHECK
+====================
+
+Namecheck can be used either as a static checker only (without
+actually generating a binary of the source) or while
+compiling (emitting warnings).
+
+To use namecheck as a static checker only, you can invoke
+gcc (or g++) like this:
+    g++ -fplugin=/path/to/namecheck/libnamecheck.so -fplugin-arg-libnamecheck-path=/path/to/rules.cfg -c myfile.cpp -o /dev/null
+
+To use namecheck while compiling, just remove the -c option:
+    g++ -fplugin=/path/to/namecheck/libnamecheck.so -fplugin-arg-libnamecheck-path=/path/to/rules.cfg myfile.cpp -o myfile
+
+
+4. COMPLETE DOCUMENTATION
+=========================
+
+For a complete documentation, including how write your naming convention rules,
+please visit the wiki sections of the home page (https://namecheck.googlecode.com).
+
+
+5. ISSUE REPORTING
+==================
+
+Namecheck has been tested with gcc 4.6 and 4.7 in Ubuntu-based distros.
+Please report any issue in the tracker: https://code.google.com/p/namecheck/issues/list
+
