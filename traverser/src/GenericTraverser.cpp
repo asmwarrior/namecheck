@@ -48,11 +48,13 @@ extern "C"
 namespace NSGppGeneric
 {
 
+const std::string GenericTraverser::RESERVED_DECLARATION = "._";
+
 inline bool GenericTraverser::isReservedDeclaration(const NSCompilerApi::GenericTree decl)
 {
     std::string name;
     getName(decl, name);
-    return (name.substr(0, 2) == "._");
+    return (name.substr(0, 2) == RESERVED_DECLARATION);
 }
 
 inline IGenericVisitor::AccessModifier GenericTraverser::getAccess(const NSCompilerApi::GenericTree decl)
@@ -115,9 +117,13 @@ inline void GenericTraverser::getTypeName(const NSCompilerApi::GenericTree decl,
     checkPointerTypeName(aux, typeName);
 
     if (TREE_CODE(TREE_TYPE(aux)) == FUNCTION_TYPE)
+    {
         typeName = "func" + typeName;
+    }
     else if (TYPE_NAME(TREE_TYPE(aux)) == 0)
+    {
         typeName = "internal" + typeName;
+    }
     else
     {
         getName(TYPE_NAME(TREE_TYPE(aux)), returnName);
@@ -159,7 +165,7 @@ inline void GenericTraverser::processTemplateDeclaration(const NSCompilerApi::Ge
     processDeclaration(DECL_TEMPLATE_RESULT(decl));
 
     NSCompilerApi::GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
-    for (int i = 0; i < TREE_VEC_LENGTH(templateparms); ++i)
+    for (size_t i(0); i < TREE_VEC_LENGTH(templateparms); ++i)
     {
         processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
     }
@@ -204,7 +210,9 @@ inline void GenericTraverser::unionOrRecord(const NSCompilerApi::GenericTree dec
         processRecordDeclaration(decl);
     }
     else if (TREE_CODE(type) == UNION_TYPE)
+    {
         _visitor->visitUnionDeclaration(decl, name);
+    }
 }
 
 inline void GenericTraverser::processTypeDeclArtificial(const NSCompilerApi::GenericTree decl) const
@@ -220,7 +228,9 @@ inline void GenericTraverser::processTypeDeclArtificial(const NSCompilerApi::Gen
     if (TREE_CODE(type) == TEMPLATE_TYPE_PARM || TREE_CODE(type) == TEMPLATE_TEMPLATE_PARM)
     {
         if (name != "<unnamed>")
+        {
             _visitor->visitTemplateTypeParameterDeclaration(decl, name);
+        }
     }
     else
     {
@@ -263,9 +273,13 @@ inline void GenericTraverser::processType(const NSCompilerApi::GenericTree decl)
             processEnumType(decl);
         }
         else if (DECL_ARTIFICIAL(decl))
+        {
             processTypeDeclArtificial(decl);
+        }
         else
+        {
             _visitor->visitTypeDeclaration(decl, name);
+        }
     }
 }
 

@@ -57,7 +57,7 @@ struct IRule
     /**
      *  @brief The result of a check.
      *
-     *  This has the result of a name check in a bool, it also has the error message in case the name is wrong
+     *  Contains a boolean telling the result of the name check, and the error message if the check found an error.
      */
     struct Result
     {

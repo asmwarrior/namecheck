@@ -36,8 +36,8 @@
 namespace NSNamingChecker
 {
 
-Regex::Regex(const RegexType& regexType, const NSCompilerApi::IPluginApi::Message& msg): _regex(regexType), _errmsg(msg)
-{}
+Regex::Regex(const RegexType& regexType, const NSCompilerApi::IPluginApi::Message& msg) :
+    _regex(regexType), _errmsg(msg) {}
 
 void Regex::checkRule(const DeclName& declarationName, Result& result) const
 {
