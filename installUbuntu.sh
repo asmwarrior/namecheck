@@ -17,6 +17,7 @@ fi
 checkInstalled dpkg
 checkInstalled apt-cache
 checkInstalled apt-get
+checkInstalled gettext
 
 if !(dpkg -l | grep libboost-regex-dev -c >>/dev/null); then 
     echo boost not installed. Installing it...
@@ -40,6 +41,12 @@ if !(dpkg -l | grep gcc| grep plugin-dev >/dev/null); then
     fi
 else
     echo gcc plugins library already installed.
+fi
+
+if !(dpkg -l | grep gettext -c >>/dev/null); then 
+    sudo apt-get install gettext
+else
+    echo gettext library already installed.
 fi
 
 echo All dependencies are installed. Build namecheck by running make.
