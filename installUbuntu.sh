@@ -17,7 +17,6 @@ fi
 checkInstalled dpkg
 checkInstalled apt-cache
 checkInstalled apt-get
-checkInstalled gettext
 
 if !(dpkg -l | grep libboost-regex-dev -c >>/dev/null); then 
     echo boost not installed. Installing it...
@@ -50,4 +49,3 @@ else
 fi
 
 echo All dependencies are installed. Build namecheck by running make.
-
