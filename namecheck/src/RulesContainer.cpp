@@ -92,7 +92,7 @@ void RulesContainer::check(const DeclarationToCheck& decl, const IRule::DeclName
     }
 }
 
-void RulesContainer::checkLine(const StringVector& line)
+void RulesContainer::checkLine(const LineContainer& line)
 {
     mili::assert_throw<InvalidFormatFile>(line.size() >= MINIMUM_AMOUNT_FIELDS && line.size() <= MAXIMUM_AMOUNT_FIELDS);
     if (line[FieldRuleType] == REGEX_TYPE)
@@ -102,7 +102,7 @@ void RulesContainer::checkLine(const StringVector& line)
     mili::assert_throw<InvalidDeclaration>(_declarationMap.find(line[FieldDeclarationName]) != _declarationMap.end());
 }
 
-IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& fileLine)
+IRule* RulesContainer::createNewRule(const RuleType& rule, const LineContainer& fileLine)
 {
     IRule* ret;
     switch (rule)
@@ -131,13 +131,15 @@ IRule* RulesContainer::createNewRule(const RuleType& rule, const StringVector& f
     return ret;
 }
 
-void RulesContainer::process(const StringVector& fileLine)
+void RulesContainer::process(const LineContainer& fileLine)
 {
     const size_t ruleType = mili::from_string<size_t>(fileLine[FieldRuleType]);
     const RuleType specificRule = RuleType(ruleType);
 
     IRule* const rule = createNewRule(specificRule, fileLine);
-    _rules[_declarationMap[fileLine[FieldDeclarationName]]].push_back(rule);
+    const std::string specificDeclaration = fileLine[FieldDeclarationName];
+    const DeclarationToCheck declToCheck = _declarationMap[specificDeclaration];
+    _rules[declToCheck].push_back(rule);
 }
 
 void RulesContainer::load(const FileName& fileName)
@@ -146,7 +148,7 @@ void RulesContainer::load(const FileName& fileName)
     ifs.open(fileName.c_str());
     mili::assert_throw<FileNotFound>(ifs);
 
-    StringVector fileLine;
+    LineContainer fileLine;
     while (ifs >> mili::Separator(fileLine, ','))
     {
         checkLine(fileLine);

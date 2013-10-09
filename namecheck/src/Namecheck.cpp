@@ -52,7 +52,7 @@ namespace NSNamingChecker
 {
 
 /**
- * @brief PluginData allows encapsulate all the information required by the plugin
+ * @brief PluginData contains all the information required by the plugin.
  */
 struct PluginData
 {
@@ -62,7 +62,7 @@ struct PluginData
     std::string _pathFile;
 
     /**
-     * @brief Represents the arguments of the plugin
+     * @brief Represents the plugin arguments
      */
     enum PluginArguments
     {
@@ -147,7 +147,9 @@ extern "C" int plugin_init(plugin_name_args* info, plugin_gcc_version* version)
         ret = EXIT_FAILURE;
 
     if ((info->argc == 1) && (strcmp(info->argv[PluginData::ConfigurationFile].key, "path")) == 0)
+    {
         data._pathFile = info->argv[PluginData::ConfigurationFile].value;
+    }
     else
     {
         std::cerr << "Please, set -fplugin-arg-libnamecheck-path argument." << std::endl;

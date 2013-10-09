@@ -55,22 +55,22 @@ protected:
     RegexCollection(const size_t length);
 
     /**
-     * @brief Represents a collection of regex
+     * @brief Represents a collection of regexes
      */
     typedef std::vector<RegexType> Regexs;
 
     /**
-     * @brief Represents a message to show
+     * @brief Represents the messages that can be shown.
      */
     typedef std::vector<NSCompilerApi::IPluginApi::Message> ErrorMsgs;
 
     /**
-     * @brief To load the regex
+     * @brief Container to load the regexes
      */
     Regexs _regexs;
 
     /**
-     * @brief To load the message error. One message for each regex
+     * @brief Container of error messages, one for each regex.
      */
     ErrorMsgs _errmsgs;
 

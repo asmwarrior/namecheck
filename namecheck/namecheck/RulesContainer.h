@@ -86,7 +86,11 @@ public:
      *
      */
     typedef std::string FileName;
-    typedef std::vector<std::string> StringVector;
+
+    /**
+     * @brief Represents a line of configuration file
+     */
+    typedef std::vector<std::string> LineContainer;
 
     /**
      * @brief Constructor of class
@@ -101,7 +105,7 @@ public:
     ~RulesContainer();
 
     /**
-     * @brief This checks a declarationName with all the rules corresponding to statement
+     * @brief Checks a declarationName with all the rules corresponding to statement
      *
      * @param decl statement to check
      * @param declarationName name to check
@@ -134,26 +138,29 @@ private:
     /**
      * @brief Creates a new rule using a regex read from the config file.
      *
-     * @param ule The new rule to be created.
+     * @param rule The new rule to be created.
      * @param fileLine The file's line from which we read the rule.
      * @return The new rule.
      */
-    static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);
+    static IRule* createNewRule(const RuleType& rule, const LineContainer& fileLine);
 
     /**
      * @brief  Loads a rule read from the configuration file into the rule map.
      *
      * @param fileLine the vector representing the line of the file to process
      */
-    void process(const StringVector& fileLine);
+    void process(const LineContainer& fileLine);
 
     /**
-     * @brief Check line data
+     * @brief Checks the line's format and contents.
      *
      * @param line input line from file
      */
-    void checkLine(const StringVector& line);
+    void checkLine(const LineContainer& line);
 
+    /**
+     * brief Container to load strings and declarations to be checked
+     */
     DeclarationMap _declarationMap;
 
     /**
@@ -161,6 +168,9 @@ private:
      */
     typedef std::list<IRule*> Rules;
 
+    /**
+     * @brief Container to load the rules
+     */
     std::vector<Rules> _rules;
 
     /**

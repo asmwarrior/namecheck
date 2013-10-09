@@ -46,12 +46,12 @@ namespace NSGppGeneric
 class GenericTraverser;
 
 /**
- * @Represents a traverser of the AST (Abstract Syntax Tree) for C++03.
+ * @brief Represents a traverser of the AST (Abstract Syntax Tree) for C++03.
  */
 typedef GenericTraverser TraverserCppThree;
 
 /**
- * @Represents a traverser of the AST for C++0x.
+ * @brief Represents a traverser of the AST for C++0x.
  */
 typedef GenericTraverser TraverserCppEleven;
 
@@ -72,6 +72,7 @@ public:
     void traverse(const NSCompilerApi::GenericTree ns, IGenericVisitor* visitor);
 
 private:
+    
     /**
      *  @brief the visitor which will visit every type.
      *
@@ -90,6 +91,7 @@ private:
      * @brief this will return true if the node represents something declared as constant.
      *
      * @param decl the tree node corresponding to the declaration from which we will get if it is declared constant or not.
+     * @return true if decl is a constant, otherwise false
      */
     static bool isConstant(const NSCompilerApi::GenericTree decl);
 
@@ -97,7 +99,7 @@ private:
      * @brief Gets the name of the type declared for a variable.
      *
      * @param decl the tree node corresponding to the declaration from which we will get the type name.
-     * @param returnName the name of the type returned
+     * @param return Name the name of the returned type 
      */
     static void getTypeName(const NSCompilerApi::GenericTree decl, std::string& returnName);
 
@@ -105,6 +107,7 @@ private:
      * @brief Returns true if the node has a name that we dont want to process.
      *
      * @param decl the tree node corresponding to the declaration from which we will get the name to check.
+     * @return true if decl is a reserved declaration, otherwise false
      */
     static bool isReservedDeclaration(const NSCompilerApi::GenericTree decl);
 
@@ -112,6 +115,7 @@ private:
      * @brief Returns the visibility of a method or attribute (public, private or protected).
      *
      * @param decl the tree node corresponding to the declaration from which we will get the visibility.
+     * @return the visibility of decl
      */
     static IGenericVisitor::AccessModifier getAccess(const NSCompilerApi::GenericTree decl);
 
@@ -123,7 +127,7 @@ private:
     void processParameters(const NSCompilerApi::GenericTree decl) const;
 
     /**
-     * @brief Processes and traverses the attributes of a class ,struct or union
+     * @brief Processes and traverses the attributes of a class, struct or union
      *
      * @param decl the tree node corresponding to the class, struct or union declaration we want to process.
      */
@@ -170,7 +174,7 @@ private:
     /**
     * @brief Processes and traverses any Variable declaration
     *
-    * Checks that this isnt an enum value(those are checked in the enum part), and then
+    * Checks that this isn't an enum value(those are checked in the enum part), and then
     * separates between attributes(members of a class or a struct), union members, global constants, or common
     * variables.
     * @param decl the tree node corresponding to the variable declaration we want to process.
@@ -180,7 +184,7 @@ private:
     /**
      * @brief Processes and traverses a Template declaration
      *
-     * First, this check the class or function templatized, and then checks the templates parameters.
+     * First, it checks the templetized class or function, and then checks the templates parameters.
      * @param decl the tree node corresponding to the template declaration we want to process.
      */
     void processTemplateDeclaration(const NSCompilerApi::GenericTree decl) const;
@@ -205,9 +209,9 @@ private:
     /**
      * @brief Processes and traverses an artificial Type declaration
      *
-     * this first take the declaration(and see if it is a union, struct or class), then we check, if its a
-     * template parameter, the function treat the declaration as a typedef, if not we process the attributes
-     * and methods
+     * First, it takes the declaration (to see if it is a union, a struct or a class), then checks if it is a
+     * template parameter; if so, it treats the declaration as a typedef, it processes the attributes and methods otherwise.
+     *
      * @param decl the tree node corresponding to the union or record we want to process.
      */
     void processTypeDeclArtificial(const NSCompilerApi::GenericTree decl) const;
@@ -243,9 +247,9 @@ private:
     void processFunctionBody(const NSCompilerApi::GenericTree decl) const;
 
     /**
-     * @brief this takes the subblocks of a block and process them.
+     * @brief Takes the subblocks of a block and processes them.
      *
-     * @param block the tree node corresponding to the block we want to process.
+     * @param Blocks the tree node corresponding to the block we want to process.
      */
     void processSubblocks(const NSCompilerApi::GenericTree block) const;
 
@@ -266,21 +270,21 @@ private:
     /**
      * @brief Traverses the given namespace and separates the declaration of namespaces and the other declarations inside it
      *
-     * @param decl the tree node corresponding to the namespace we want to process.
+     * @param ns the tree node we want to process.
      */
     void traverse(const NSCompilerApi::GenericTree ns) const;
 
     /**
      * @brief Processes the namespace's name and traverses it.
      *
-     * @param decl the tree node corresponding to the namespace we want to process.
+     * @param level the tree node corresponding to the namespace we want to process.
      */
     void traverseNamespaces(const NSCompilerApi::GenericTree level) const;
 
     /**
-     * @brief this takes the declarations in a namespace and process them.
+     * @brief Takes the declarations in a namespace and processes them.
      *
-     * @param decl the tree node corresponding to the namespace we want to process.
+     * @param level the tree node corresponding to the namespace we want to process.
      */
     void traverseDeclarations(const NSCompilerApi::GenericTree level) const;
 
@@ -309,6 +313,8 @@ private:
      * @param typeName the type name it could modify.
      */
     static void checkPointerTypeName(NSCompilerApi::GenericTree decl, std::string& typeName);
+    
+    static const std::string RESERVED_DECLARATION; 
 };
 
 #define GENERIC_TRAVERSER_INLINE_H
