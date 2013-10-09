@@ -60,3 +60,13 @@ please visit the wiki sections of the home page (https://namecheck.googlecode.co
 Namecheck has been tested with gcc 4.6 and 4.7 in Ubuntu-based distros.
 Please report any issue in the tracker: https://code.google.com/p/namecheck/issues/list
 
+7. CONTRIBUTE
+=============
+
+Please help us by submitting issues, contributing with installation scripts
+for other Linux distros, or by translating namecheck to other languages.
+(Currently, namecheck is provided in English and Spanish).
+
+
+Thanks for downloading Namecheck!
+    The namecheck team @ Taller Technologies.
