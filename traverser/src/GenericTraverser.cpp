@@ -165,7 +165,7 @@ inline void GenericTraverser::processTemplateDeclaration(const NSCompilerApi::Ge
     processDeclaration(DECL_TEMPLATE_RESULT(decl));
 
     NSCompilerApi::GenericTree templateparms(TREE_VALUE(DECL_TEMPLATE_PARMS(decl)));
-    for (size_t i(0); i < TREE_VEC_LENGTH(templateparms); ++i)
+    for (size_t i(0); i < size_t(TREE_VEC_LENGTH(templateparms)); ++i)
     {
         processDeclaration(TREE_VALUE(TREE_VEC_ELT(templateparms, i)));
     }
