@@ -77,7 +77,7 @@ public:
     };
 
     /**
-     * @brief Match between string and declaration to check
+     * @brief Matches strings and declarations to be checked
      */
     typedef std::map<std::string, DeclarationToCheck> DeclarationMap;
 
@@ -110,7 +110,7 @@ public:
     void check(const DeclarationToCheck& decl, const IRule::DeclName& declarationName, IRule::Result& result) const;
 
     /**
-     * @brief This initializes the vector of rules corresponding to each declaration types.
+     * @brief Initializes the vector of rules corresponding to each declaration types.
      *
      * @param fileName configuration name file
      */
@@ -132,15 +132,16 @@ private:
     };
 
     /**
-     * @brief Create a specific rule
+     * @brief Creates a new rule using a regex read from the config file.
      *
-     * @param rule corresponds a specific rule
-     * @return specific rule
+     * @param ule The new rule to be created.
+     * @param fileLine The file's line from which we read the rule.
+     * @return The new rule.
      */
     static IRule* createNewRule(const RuleType& rule, const StringVector& fileLine);
 
     /**
-     * @brief This initializes process the vector corresponding to a line in the config file.
+     * @brief  Loads a rule read from the configuration file into the rule map.
      *
      * @param fileLine the vector representing the line of the file to process
      */
@@ -163,9 +164,13 @@ private:
     std::vector<Rules> _rules;
 
     /**
-     * @brief Represents the minimum and maximum amount of fields that have a line in configuration file
+     * @brief Represents the minimum amount of fields that a configuration file line has.
      */
     static const size_t MINIMUM_AMOUNT_FIELDS = 2;
+
+    /**
+     * @brief  Represents the maximum amount of fields that a configuration file line has.
+     */
     static const size_t MAXIMUM_AMOUNT_FIELDS = 4;
 
     /**
