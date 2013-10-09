@@ -1,4 +1,0 @@
-Required:
-	* libboost-regex-dev
-	* gcc-4.6-plugin-dev
-	* gettext
