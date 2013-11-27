@@ -50,6 +50,12 @@ namespace NSGppGeneric
 
 const std::string GenericTraverser::RESERVED_DECLARATION = "._";
 
+inline void GenericTraverser::getName(const NSCompilerApi::GenericTree decl, std::string& name)
+{
+    const NSCompilerApi::GenericTree id(DECL_NAME(decl));
+    name = id ? IDENTIFIER_POINTER(id) : "<unnamed>";
+}
+
 inline bool GenericTraverser::isReservedDeclaration(const NSCompilerApi::GenericTree decl)
 {
     std::string name;
@@ -72,12 +78,6 @@ inline IGenericVisitor::AccessModifier GenericTraverser::getAccess(const NSCompi
 inline bool GenericTraverser::isConstant(const NSCompilerApi::GenericTree decl)
 {
     return CP_TYPE_CONST_P(TREE_TYPE(decl));
-}
-
-inline void GenericTraverser::getName(const NSCompilerApi::GenericTree decl, std::string& name)
-{
-    const NSCompilerApi::GenericTree id(DECL_NAME(decl));
-    name = id ? IDENTIFIER_POINTER(id) : "<unnamed>";
 }
 
 inline void GenericTraverser::checkArrayTypeName(NSCompilerApi::GenericTree decl, std::string& typeName)
