@@ -47,14 +47,16 @@ extern "C"
 namespace NSCompilerApi
 {
 
+static const std::string projectId = "[namecheck] ";
+
 void GCCPluginApi::warning(const GenericTree& decl, const Message& message) const
 {
-    warning_at(DECL_SOURCE_LOCATION(decl), 0, message.c_str(), "%s");
+    warning_at(DECL_SOURCE_LOCATION(decl), 0, (projectId + message).c_str(), "%s");
 }
 
 void GCCPluginApi::error(const GenericTree& decl, const Message& message) const
 {
-    error_at(DECL_SOURCE_LOCATION(decl), message.c_str(), "%s");
+    error_at(DECL_SOURCE_LOCATION(decl), (projectId + message).c_str(), "%s");
 }
 
 } // end namespace
