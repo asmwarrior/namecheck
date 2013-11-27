@@ -1,3 +1,3 @@
 starting libnamecheck
 processing FunctionDeclarationTest.cpp
-FunctionDeclarationTest.cpp:2:5: warning: Function declaration should start with lowercase in Incorrect [enabled by default]
+FunctionDeclarationTest.cpp:2:5: warning: [namecheck] Function declaration should start with lowercase in Incorrect [enabled by default]
