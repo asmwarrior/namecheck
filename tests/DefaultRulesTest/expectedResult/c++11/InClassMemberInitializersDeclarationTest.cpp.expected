@@ -1,8 +1,8 @@
 starting libnamecheck
 processing InClassMemberInitializersDeclarationTest.cpp
-InClassMemberInitializersDeclarationTest.cpp:45:11: warning: Public Attribute declaration should start with an underscore followed by lowercase in a [enabled by default]
-InClassMemberInitializersDeclarationTest.cpp:46:11: warning: Public Attribute declaration should start with an underscore followed by lowercase in b [enabled by default]
-InClassMemberInitializersDeclarationTest.cpp:19:6: warning: Public Attribute declaration should start with an underscore followed by lowercase in a [enabled by default]
-InClassMemberInitializersDeclarationTest.cpp:22:14: warning: Private Attribute declaration should start with an underscore followed by lowercase in hashAlgorithm [enabled by default]
-InClassMemberInitializersDeclarationTest.cpp:6:6: warning: Public Attribute declaration should start with an underscore followed by lowercase in a [enabled by default]
-InClassMemberInitializersDeclarationTest.cpp:10:23: warning: Private Attribute declaration should start with an underscore followed by lowercase in m [enabled by default]
+InClassMemberInitializersDeclarationTest.cpp:45:11: warning: [namecheck] Public Attribute declaration should start with an underscore followed by lowercase in a [enabled by default]
+InClassMemberInitializersDeclarationTest.cpp:46:11: warning: [namecheck] Public Attribute declaration should start with an underscore followed by lowercase in b [enabled by default]
+InClassMemberInitializersDeclarationTest.cpp:19:6: warning: [namecheck] Public Attribute declaration should start with an underscore followed by lowercase in a [enabled by default]
+InClassMemberInitializersDeclarationTest.cpp:22:14: warning: [namecheck] Private Attribute declaration should start with an underscore followed by lowercase in hashAlgorithm [enabled by default]
+InClassMemberInitializersDeclarationTest.cpp:6:6: warning: [namecheck] Public Attribute declaration should start with an underscore followed by lowercase in a [enabled by default]
+InClassMemberInitializersDeclarationTest.cpp:10:23: warning: [namecheck] Private Attribute declaration should start with an underscore followed by lowercase in m [enabled by default]

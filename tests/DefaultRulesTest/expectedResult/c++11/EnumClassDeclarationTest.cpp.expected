@@ -1,5 +1,5 @@
 starting libnamecheck
 processing EnumClassDeclarationTest.cpp
-EnumClassDeclarationTest.cpp:10:5: warning: Enum value declaration should start with uppercase in incorrectcharenum [enabled by default]
-EnumClassDeclarationTest.cpp:1:12: warning: Enum type declaration should start with uppercase in incorrectenumname [enabled by default]
-EnumClassDeclarationTest.cpp:4:5: warning: Enum value declaration should start with uppercase in incorrectenumvalue [enabled by default]
+EnumClassDeclarationTest.cpp:10:5: warning: [namecheck] Enum value declaration should start with uppercase in incorrectcharenum [enabled by default]
+EnumClassDeclarationTest.cpp:1:12: warning: [namecheck] Enum type declaration should start with uppercase in incorrectenumname [enabled by default]
+EnumClassDeclarationTest.cpp:4:5: warning: [namecheck] Enum value declaration should start with uppercase in incorrectenumvalue [enabled by default]
