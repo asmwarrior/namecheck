@@ -128,7 +128,7 @@ extern "C" void gate_callback_cpp_three(void*, void*)
 int plugin_is_GPL_compatible;
 
 /**
- * @brief This fucion is called right after the plugin is loaded.
+ * @brief This function is called right after the plugin is loaded.
  *
  * Is responsible for registering all the callbacks required by the
  * plugin and do any other required initialization.
