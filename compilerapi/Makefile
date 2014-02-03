@@ -5,17 +5,13 @@ endif
 GXX=/usr/bin/g++
 
 #get the gcc version used
-GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g')
+GCCVERSION = $(shell gcc --version | grep ^gcc | sed 's/^.* //g' | cut -d. -f-2)
 
 #get architecture
 COMMAND= $(shell uname -a | awk -F " " '{ print $$12 }' OFS=" ")
 
 #set plugin directory
-ifeq "$(GCCVERSION)" "4.6.3"
-    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/4.6/plugin
-else
-    GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/4.7/plugin
-endif
+GXXPLUGINS_DIR= /usr/lib/gcc/$(COMMAND)-linux-gnu/$(GCCVERSION)/plugin
 
 #set source code
 PLUGIN_SOURCE_FILES= src/GCCPluginAPI.cpp 
